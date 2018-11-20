@@ -1,0 +1,12 @@
+<h1 class="title-page">
+  This is a page for <%= getCyberReportType(@cyberReport) %> CyberReport from <%= getCyberReportDate(@cyberReport) %>
+</h1>
+<div class="about-page">
+  <p>It will hold data about specific CyberReport.</p>
+</div>
+<div class="navigate-resources">
+  <p>Navigation links:</p>
+  <ul>
+    <li><%= link_to "Back to FriendlyResource",  demo_friendly_resource_path("None") %></li>
+  </ul>
+</div>

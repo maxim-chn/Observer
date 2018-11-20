@@ -1,0 +1,2 @@
+module Demo::WelcomeHelper
+end
