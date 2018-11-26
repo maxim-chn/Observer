@@ -1,13 +1,19 @@
-<h1 class="title-page">
-  This is main page for FriendlyResource <%= getFriendlyResourceName(@friendlyResource)%>
-</h1>
+<h1 class="title-page"><%= getpageTitleForFriendlyResource(getFriendlyResourceName(@friendlyResource)) %></h1>
 <div class="about-page">
-  <p>It will hold links to all CyberReports and edit details.</p>
+  <p><b>Name:</b> <%= getFriendlyResourceName(@friendlyResource) %>
+  <p><b>IP address</b>: <%= getFriendlyResourceIpAddress(@friendlyResource) %></p>
+  <p>Details of <i>"<%= getFriendlyResourceName(@friendlyResource) %>"</i> can be edited via
+    <%= link_to "#{@friendlyResource.name()} edit", edit_demo_friendly_resource_path(@friendlyResource) %>
+  </p>
 </div>
 <div class="navigate-resources">
-  <p>Navigation links:</p>
   <ul>
-    <li>Link to CyberReports</li>
-    <li>Link to edit</li>
+    <li>
+      <%= link_to "Go to CyberReports for #{getFriendlyResourceName(@friendlyResource)}",
+        demo_friendly_resource_cyber_reports_path(@friendlyResource) %>
+    </li>
+    <li>
+      <%= link_to "Back to all FriendlyResources", demo_friendly_resources_path() %>
+    </li>
   </ul>
 </div>

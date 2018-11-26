@@ -1,13 +1,21 @@
 module Demo::CyberReportsHelper
+  def getPageTitleForCyberReport(pageDetails)
+    return "CyberReports | #{pageDetails}"
+  end
   def getCyberReportType(cyberReport)
     type = "None"
-    type = cyberReport.type() unless cyberReport.nil?
+    unless cyberReport.nil?
+      type = cyberReport.class
+    end
     return type
   end
-
-  def getCyberReportDate(cyberReport)
-    date = DateTime.now()
-    date = cyberReport.created_at() unless cyberReport.nil?
-    return date
+  def getCyberReportName(cyberReport)
+    name = "None"
+    unless cyberReport.nil?
+      cyberReportType         = cyberReport.class()
+      cyberReportCreationDate = cyberReport.created_at().strftime("%Y-%m-%dT%H:%M:%S")
+      name = "#{cyberReportType} from #{cyberReportCreationDate}"
+    end
+    return name
   end
 end # Demo::CyberReportsHelper

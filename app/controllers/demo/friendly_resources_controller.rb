@@ -1,5 +1,6 @@
 class Demo::FriendlyResourcesController < ApplicationController
   def index
+    @friendlyResources = FriendlyResource.all()
     # render demo/friendly_resources/index.html.erb
   end
 
@@ -8,7 +9,14 @@ class Demo::FriendlyResourcesController < ApplicationController
   end
 
   def show
-    # @friendlyResource = Demo::FriendlyResource.find(params[:id])
+    friendlyResourceId = params[:id]
+    @friendlyResource = FriendlyResource.find(friendlyResourceId)
     # render demo/friendly_resources/show.html.erb
+  end
+
+  def edit
+    friendlyResourceId = params[:id]
+    @friendlyResource = FriendlyResource.find(friendlyResourceId)
+    # render demo/friendly_resources/edit.html.erb
   end
 end # Demo::FriendlyResourcesController

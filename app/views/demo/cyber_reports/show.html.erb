@@ -1,12 +1,17 @@
 <h1 class="title-page">
-  This is a page for <%= getCyberReportType(@cyberReport) %> CyberReport from <%= getCyberReportDate(@cyberReport) %>
+  <%= getPageTitleForCyberReport(
+    "FriendlyResource \"#{getFriendlyResourceName(@friendlyResource)}\" | #{getCyberReportType(@cyberReport)}") %>
 </h1>
 <div class="about-page">
-  <p>It will hold data about specific CyberReport.</p>
+  <p>You are looking at <%= getCyberReportName(@cyberReport) %>.</p>
+  <% @cyberReportDetails.each do |field, value| %>
+    <p><b><%= field %></b>: <%= value %></p>
+  <% end %>
 </div>
 <div class="navigate-resources">
   <p>Navigation links:</p>
   <ul>
-    <li><%= link_to "Back to FriendlyResource",  demo_friendly_resource_path("None") %></li>
+    <li><%= link_to "Back to CyberReports for #{getFriendlyResourceName(@friendlyResource)}",
+      demo_friendly_resource_cyber_reports_path(@friendlyResource) %></li>
   </ul>
 </div>

@@ -1,20 +1,25 @@
 <h1 class="title-page">
-  This is CyberReports main page for FriendlyResource <%= getFriendlyResourceName(@friendlyResource)%>
+  <%= getPageTitleForCyberReport("FriendlyResource \"#{getFriendlyResourceName(@friendlyResource)}\"") %>
 </h1>
 <div class="about-page">
-  <p>It will hold links to latest cyber reports for the FriendlyResource.</p>
+  <p>You can navigate to any relevant CyberReport from here.</p>
 </div>
 <div class="navigate-resources">
-  <p>Navigation links to all CyberReports:</p>
+  <p>Navigation links to CyberReports:</p>
   <ul>
-    <li>Link to CyberReport1</li>
-    <li>Link to CyberReport2</li>
+    <% @cyberReports.each do |cyberReport| %>
+      <li>
+        <%= link_to getCyberReportName(cyberReport),
+          "#{demo_cyber_report_path(cyberReport)}?type=#{cyberReport.class.to_s}" %>
+      </li>
+    <% end %>
   </ul>
-  <button>Previous Page</button><span><button>Next Page</button></span>
-  <p>Navigation links to latest CyberReports with spotted attack:</p>
+  <span><button>Previous Page</button><button>Next Page</button></span>
+  <p>Navigation links to CyberReports with positive results:</p>
   <ul>
     <li>Link to CyberReportWithAttack1</li>
     <li>Link to CyberReportWithAttack2</li>
   </ul>
-  <button>Previous Page</button><span><button>Next Page</button></span>
+  <span><button>Previous Page</button><button>Next Page</button></span>
+  <p><%= link_to "Back to \"#{getFriendlyResourceName(@friendlyResource)}\"", demo_friendly_resource_path(@friendlyResource) %></p>
 </div>

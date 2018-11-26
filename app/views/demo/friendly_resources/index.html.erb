@@ -1,11 +1,15 @@
-<h1 class="title-page">This is FriendlyResources main page</h1>
+<h1 class="title-page"><%= getpageTitleForFriendlyResource("Main Page") %></h1>
 <div class="about-page">
-  <p>It will hold links to all signed up resources</p>
+  <p>You can navigate to any signed up FriendlyResource from here.</p>
 </div>
 <div class="navigate-resources">
-  <p>Navigation links:</p>
-  <ul>
-    <li>Link to FriendlyResource1</li>
-    <li>Link to FriendlyResource2</li>
+  <p>Links to signed up FriendlyResources:</p>
+  <ul class="navigate-links">
+    <% @friendlyResources.each do |friendlyResource| %>
+      <li>
+        <%= link_to "#{friendlyResource.name()}", demo_friendly_resource_path(friendlyResource) %>
+      </li>
+    <% end %>
   </ul>
+  <%= link_to "Back to Observer sub-system homepage", root_path %>
 </div>
