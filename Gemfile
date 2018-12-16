@@ -44,6 +44,7 @@ end
 # ##########Custom dependencies##########
 gem 'sidekiq', '~> 5.2', '>= 5.2.3'
 gem 'sinatra', github: 'sinatra/sinatra'
+gem 'will_paginate', '~> 3.1.0'
 # ##########End of custom dependencies##########
 
 group :development do

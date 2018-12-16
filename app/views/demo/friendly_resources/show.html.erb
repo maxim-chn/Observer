@@ -1,12 +1,12 @@
-<h1 class='title-page'><%= getpageTitleForFriendlyResource(getFriendlyResourceName(@friendlyResource)) %></h1>
-<div class='about-page'>
+<h1 class="title-page"><%= getpageTitleForFriendlyResource(getFriendlyResourceName(@friendlyResource)) %></h1>
+<div class="about-page">
   <p><b>Name:</b> <%= getFriendlyResourceName(@friendlyResource) %>
   <p><b>IP address</b>: <%= getFriendlyResourceIpAddress(@friendlyResource) %></p>
   <p>Details of <i>"<%= getFriendlyResourceName(@friendlyResource) %>"</i> can be edited via
     <%= link_to "#{@friendlyResource.name()} edit", edit_demo_friendly_resource_path(@friendlyResource) %>
   </p>
 </div>
-<div class='navigate-resources'>
+<div class="navigate-resources">
   <ul>
     <li>
       <%= link_to "Go to CyberReports for #{getFriendlyResourceName(@friendlyResource)}",

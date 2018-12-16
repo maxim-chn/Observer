@@ -1,7 +1,10 @@
 class Demo::FriendlyResourcesController < ApplicationController
   
   def index
-    @friendlyResources = FriendlyResource.all()
+    page               = params[:page] ? params[:page] : 1
+    pageSize           = params[:page_size] ? params[:page_size] : 10
+    archiveApi         = Departments::Demo::Archive::ArchiveApi.instance()
+    @friendlyResources = archiveApi.getAllFriendlyResources(page, pageSize)
     # render demo/friendly_resources/index.html.erb
   end
 
@@ -11,26 +14,28 @@ class Demo::FriendlyResourcesController < ApplicationController
 
   def show
     friendlyResourceId = params[:id]
-    @friendlyResource  = FriendlyResource.find(friendlyResourceId)
+    archiveApi         = Departments::Demo::Archive::ArchiveApi.instance()
+    @friendlyResource = archiveApi.getFriendlyResourceById(friendlyResourceId)
     # render demo/friendly_resources/show.html.erb
   end
 
   def edit
     friendlyResourceId = params[:id]
-    @friendlyResource = FriendlyResource.find(friendlyResourceId)
+    archiveApi         = Departments::Demo::Archive::ArchiveApi.instance()
+    @friendlyResource = archiveApi.getFriendlyResourceById(friendlyResourceId)
     # render demo/friendly_resources/edit.html.erb
   end
 
   def start_monitoring
     friendlyResourceId  = params[:friendly_resource_id]
-    thinkTankDepartment = Departments::ThinkTank::ThinkTankApi.instance()
-    thinkTankDepartment.monitorDos(friendlyResourceId)
+    thinkTankDepartment = Departments::Demo::ThinkTank::ThinkTankApi.instance()
+    thinkTankDepartment.startMonitoring(friendlyResourceId)
     render plain: "REQUEST TO START ADDED TO QUEUE"
   end
 
   def stop_monitoring
     friendlyResourceId  = params[:friendly_resource_id]
-    thinkTankDepartment = Departments::ThinkTank::ThinkTankApi.instance()
+    thinkTankDepartment = Departments::Demo::ThinkTank::ThinkTankApi.instance()
     thinkTankDepartment.stopMonitoring(friendlyResourceId)
     render plain: "REQUEST TO STOP ADDED TO QUEUE"
   end

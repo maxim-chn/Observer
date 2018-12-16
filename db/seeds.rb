@@ -36,8 +36,8 @@ def getInstanceOfDosInterpretationData(
 end
 # ########################################  MAIN ########################################
 clearAll()
-friendlyResourceAmount = 2
-dosInterpretationDataAmount = 2
+friendlyResourceAmount = 20
+dosInterpretationDataAmount = 20
 (1..friendlyResourceAmount).each do |friendlyResourceCount|
   friendlyResource = getInstanceOfFriendlyResource(
     "demo_#{friendlyResourceCount}",

@@ -4,12 +4,13 @@
 </div>
 <div class="navigate-resources">
   <p>Links to signed up FriendlyResources:</p>
-  <ul class="navigate-links">
+  <ul>
     <% @friendlyResources.each do |friendlyResource| %>
       <li>
         <%= link_to "#{friendlyResource.name()}", demo_friendly_resource_path(friendlyResource) %>
       </li>
     <% end %>
   </ul>
+  <%= will_paginate @friendlyResources %>
   <%= link_to "Back to Observer sub-system homepage", root_path %>
 </div>

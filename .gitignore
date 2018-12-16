@@ -31,3 +31,6 @@
 
 # Ignore gemset version
 .ruby-gemset
+
+# ##########Custom ignores##########
+dump.rdb

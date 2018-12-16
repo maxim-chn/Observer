@@ -1,8 +1,11 @@
 class Demo::CyberReportsController < ApplicationController
   def index
-    friendlyResourceId = params[:friendly_resource_id] 
-    @friendlyResource = FriendlyResource.find(friendlyResourceId)
-    @cyberReports = @friendlyResource.latestCyberReports()
+    friendlyResourceId = params[:friendly_resource_id]
+    page               = params[:page] ? params[:page] : 1
+    pageSize           = params[:page_size] ? params[:page_size] : 10
+    archiveApi         = Departments::Demo::Archive::ArchiveApi.instance()
+    @cyberReports      = archiveApi.getAllCyberReports(friendlyResourceId, page, pageSize)
+    @friendlyResource  = archiveApi.getFriendlyResourceById(friendlyResourceId)
     # render demo/cyber_reports/index.html.erb
   end
 
