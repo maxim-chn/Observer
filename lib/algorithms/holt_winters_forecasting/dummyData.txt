@@ -1,0 +1,1 @@
+publish 1337270017_dosIcmpRawData "{\"continueAnalysis\":true,\"intelligenceData\":[{\"source\":2337270017,\"destination\":1337270017,\"bodyLengthInBytes\":10000}]}"

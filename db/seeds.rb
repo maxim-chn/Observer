@@ -9,7 +9,7 @@
 require 'ipaddr'
 # ######################################## HELPERS ########################################
 def clearCyberReports()
-  DosInterpretationData.delete_all()
+  Dos::Icmp::DosIcmpInterpretation.delete_all()
 end
 
 def clearAll()
@@ -20,31 +20,13 @@ end
 def getInstanceOfFriendlyResource(name = "demo", ipAddress = IPAddr.new("79.181.31.4"))
   return FriendlyResource.new(name: name, ip_address: ipAddress.to_i)
 end
-
-def getInstanceOfDosInterpretationData(
-  baseline = 0.0, trend = 0.0, seasonalTrend = 0.0,
-  weightedAverageAbsoluteDeviation = 0.0, aberrantBehavior = false, actualValue = 0.0
-  )
-  return DosInterpretationData.new(
-    baseline:                             baseline,
-    trend:                                trend,
-    seasonal_trend:                       seasonalTrend,
-    weighted_average_absolute_deviation:  weightedAverageAbsoluteDeviation,
-    aberrant_behavior:                    aberrantBehavior,
-    actual_value:                         actualValue
-  )
-end
 # ########################################  MAIN ########################################
 clearAll()
-friendlyResourceAmount = 20
-dosInterpretationDataAmount = 20
+friendlyResourceAmount = 1
 (1..friendlyResourceAmount).each do |friendlyResourceCount|
   friendlyResource = getInstanceOfFriendlyResource(
     "demo_#{friendlyResourceCount}",
     IPAddr.new("79.181.31.#{friendlyResourceCount}")
   )
-  (1..dosInterpretationDataAmount).each do |dosInterpretationCount|
-    friendlyResource.dos_interpretation_data << getInstanceOfDosInterpretationData()
-  end
   friendlyResource.save()
 end

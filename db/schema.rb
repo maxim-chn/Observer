@@ -12,17 +12,20 @@
 
 ActiveRecord::Schema.define(version: 2018_11_25_080252) do
 
-  create_table "dos_interpretation_data", force: :cascade do |t|
+  create_table "dos_icmp_interpretations", force: :cascade do |t|
     t.integer "friendly_resource_id"
-    t.float "baseline"
-    t.float "trend"
-    t.float "seasonal_trend"
-    t.float "weighted_average_absolute_deviation"
     t.boolean "aberrant_behavior"
     t.float "actual_value"
+    t.float "baseline"
+    t.float "confidence_band_upper_value"
+    t.float "estimated_value"
+    t.float "linear_trend"
+    t.integer "seasonal_index"
+    t.float "seasonal_trend"
+    t.float "weighted_avg_abs_deviation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["friendly_resource_id"], name: "index_dos_interpretation_data_on_friendly_resource_id"
+    t.index ["friendly_resource_id"], name: "index_dos_icmp_interpretations_on_friendly_resource_id"
   end
 
   create_table "friendly_resources", force: :cascade do |t|

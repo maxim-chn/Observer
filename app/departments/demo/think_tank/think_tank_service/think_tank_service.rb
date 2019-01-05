@@ -33,7 +33,7 @@ module Departments
             friendlyResourceId, friendlyResourceIpAddress, Departments::Demo::Shared::AnalysisType::DOS
           )
           analysisDepartment = Departments::Demo::Analysis::AnalysisApi.instance()
-          analysisDepartment.produceInterpretationData(analysisQuery)
+          analysisDepartment.produceDosInterpretationData(analysisQuery)
           end
         def stopDosIntelligenceAnalysis(friendlyResourceId, friendlyResourceIpAddress)
           Rails.logger.info("ThinkTankService - stopDosIntelligenceAnalysis() - friendlyResource - id: #{friendlyResourceId}, ip : #{friendlyResourceIpAddress}")
@@ -41,7 +41,7 @@ module Departments
             friendlyResourceId, friendlyResourceIpAddress, Departments::Demo::Shared::AnalysisType::DOS
           )
           analysisDepartment = Departments::Demo::Analysis::AnalysisApi.instance()
-          analysisDepartment.stopInterpretationDataProduction(analysisQuery)
+          analysisDepartment.stopDosInterpretationDataProduction(analysisQuery)
         end
       end # ThinkTankServices
     end # ThinkTank

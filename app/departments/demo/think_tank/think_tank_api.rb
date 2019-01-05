@@ -20,7 +20,6 @@ module Departments
           Rails.logger.info("ThinkTankApi - stopMonitoring() - friendlyResourceId : #{friendlyResourceId}")
           archiveApi       = Departments::Demo::Archive::ArchiveApi.instance()
           friendlyResource = archiveApi.getFriendlyResourceById(friendlyResourceId)
-          friendlyResource = FriendlyResource.find(friendlyResourceId)
           thinkTankService = Departments::Demo::ThinkTank::ThinkTankService.instance()
           # Dos related methods.
           thinkTankService.stopDosIntelligenceGathering(friendlyResource.id(), friendlyResource.ip_address())

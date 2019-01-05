@@ -12,14 +12,20 @@ class CyberReport < ApplicationRecord
     details = {}
     type    = cyberReport.class().to_s()
     case type
-    when "DosInterpretationData"
-      details["Baseline"]                             = cyberReport.baseline()
-      details["Trend"]                                = cyberReport.trend()
-      details["Seasonal trend"]                       = cyberReport.seasonal_trend()
-      details["Weighted average absolute deviation"]  = cyberReport.weighted_average_absolute_deviation()
-      details["Aberrant behavior"]                    = cyberReport.aberrant_behavior()
-      details["Actual Value"]                         = cyberReport.actual_value()
+    when "Demo::Dos::Icmp::InterpretationData"
+      details = getDetailsFromInterpretationReport(cyberReport)
     end
     return details
   end
-end
+  private
+  def getDetailsFromInterpretationReport(cyberReport)
+    result = {}
+    details["Baseline"]                             = cyberReport.baseline()
+    details["Trend"]                                = cyberReport.trend()
+    details["Seasonal trend"]                       = cyberReport.seasonal_trend()
+    details["Weighted average absolute deviation"]  = cyberReport.weighted_average_absolute_deviation()
+    details["Aberrant behavior"]                    = cyberReport.aberrant_behavior()
+    details["Actual Value"]                         = cyberReport.actual_value()
+    return result
+  end
+end # СyberReport
