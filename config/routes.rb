@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   scope :demo, module: 'demo', as: 'demo' do
     get 'welcome' => 'welcome#index', as: 'homepage'
     resources :friendly_resources, only: [:index, :show, :new, :edit] do
-      get 'start_monitoring' => 'friendly_resources#start_monitoring'
-      get 'stop_monitoring'  => 'friendly_resources#stop_monitoring'
+      get 'start_monitoring' => 'friendly_resources#startMonitoring'
+      get 'stop_monitoring'  => 'friendly_resources#stopMonitoring'
       resources :cyber_reports, only: [:index]
     end
     resources :cyber_reports, only: [:show]

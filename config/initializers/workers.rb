@@ -1,0 +1,6 @@
+require("#{Rails.root}/app/workers/demo/analysis/dos/holt_winters_forecasting_worker.rb")
+require("#{Rails.root}/app/workers/demo/analysis/dos/icmp_interpretation_data_producer.rb")
+require("#{Rails.root}/app/workers/demo/analysis/dos/redis_channels.rb")
+require("#{Rails.root}/app/workers/demo/analysis/dos/stop_icmp_interpretation_data_producer.rb")
+require("#{Rails.root}/app/workers/demo/intelligence/add_collection_format.rb")
+require("#{Rails.root}/app/workers/demo/intelligence/remove_collection_format.rb")

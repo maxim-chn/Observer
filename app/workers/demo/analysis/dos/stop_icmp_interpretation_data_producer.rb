@@ -9,10 +9,11 @@ module Workers
           sidekiq_options retry: false
   
           def perform(friendlyResourceIp, redisChannel)
-            logger.info("StopIcmpInterpretationDataProducer - friendlyResourceIp : #{friendlyResourceIp}, redis channel : #{redisChannel}")
+            logger.info("#{self.class.name} - #{__method__} - friendlyResourceIp : #{friendlyResourceIp}, redis channel : #{redisChannel}")
             redis = Redis.new(:host => 'localhost', :port => '6379', :timeout => 0)
-            redis.publish(redisChannel, ''.to_json)
-            logger.debug("StopIcmpInterpretationDataProducer - redis channels affected : #{redisChannel}")
+            message = {:continueAnalysis => false}
+            redis.publish(redisChannel, JSON.generate(message))
+            logger.debug("#{self.class.name} - #{__method__} - redis channels affected : #{redisChannel}")
           end
         end # StopInterpretationDataProducer
       end # Dos

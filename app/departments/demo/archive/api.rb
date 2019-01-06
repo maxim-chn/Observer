@@ -1,8 +1,9 @@
 require 'singleton'
+require_relative './archive_services/services'
 module Departments
   module Demo
     module Archive
-      class ArchiveApi
+      class Api
         include Singleton
         # ##################################################
         # FriendlyResource related methods.
@@ -23,44 +24,48 @@ module Departments
         # CyberReport related methods.
         # ##################################################
         def getAllCyberReports(friendlyResourceId, page, pageSize)
-          FriendlyResource.find(friendlyResourceId).dos_icmp_interpretation_data.paginate(:page => page, :per_page => pageSize)
-        end
-        def getCyberReportByTypeAndId(cyberReportType, cyberReportId)
-          CyberReport.findSpecificReport(cyberReportType, cyberReportId)
-        end
-        def getCyberReportByFriendlyResourceIpAndType(friendlyResourceIp, cyberReportType)
-          friendlyResource = FriendlyResource.find_by(ip_address: friendlyResourceIp)
-          unless friendlyResource
-            throw Exception.new("ArchiveApi - getCyberReportByFriendlyResourceIpAndType() - no friendly resource for ip : #{friendlyResourceIp}.")
+          result = []
+          friendlyResource = getFriendlyResourceById(friendlyResourceId)
+          if friendlyResource
+            result = friendlyResource.dos_icmp_interpretation_data.paginate(
+              :page => page, :per_page => pageSize
+            )
           end
-          return friendlyResource.getLatestDosCyberReport(cyberReportType)
+          return result
+        end
+        def getCyberReportByIdAndType(cyberReportId, cyberReportType)
+          cyberReport = nil
+          case cyberReportType
+          when Departments::Demo::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
+            cyberReport = getIcmpInterpretationDataById(cyberReportId)
+          end
+          return cyberReport
         end
         def getCyberReportByFriendlyResourceIpAndTypeAndCustomAttributeValue(friendlyResourceIp, cyberReportType, opts)
-          result = nil
+          result           = nil
           friendlyResource = getFriendlyResourceByIp(friendlyResourceIp)
           unless friendlyResource
-            throw Exception.new("ArchiveApi - getCyberReportByFriendlyResourceIpAndTypeAndCustomAttributeValue() - no friendly resource for ip : #{friendlyResourceIp}.")\
+            throw Exception.new("#{self.class.name} - #{__method__} - no friendly resource for ip : #{friendlyResourceIp}.")
           end
           case cyberReportType
-          when Dos::DosReport::ICMP_DOS_CYBER_REPORT
+          when Departments::Demo::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
             result = getLatestIcmpInterpretationDataByFriendlyResourceIpAndSeasonalIndex(
               friendlyResource.id, opts[:seasonalIndex]
             )
           end
           return result
         end
-        def getCyberReportDetails(cyberReport)
-          CyberReport.getDetailsForSpecificReport(cyberReport)
-        end
         def getNewCyberReportObject(friendlyResourceIp, cyberReportType, opts)
           result = nil
-          friendlyResource = FriendlyResource.find_by(ip_address: friendlyResourceIp)
+          friendlyResource = getFriendlyResourceByIp(friendlyResourceIp)
           unless friendlyResource
-            throw Exception.new("ArchiveApi - getCyberReportByFriendlyResourceIpAndType() - no friendly resource for ip : #{friendlyResourceIp}.")
+            throw Exception.new("#{self.class.name} - #{__method__} - no friendly resource for ip : #{friendlyResourceIp}.")
           end
           case cyberReportType
-          when Dos::DosReport::ICMP_DOS_CYBER_REPORT
-            result = getNewIcmpInterpretationDataObject(opts[:seasonalIndex])
+          when Departments::Demo::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
+            result = getNewIcmpInterpretationDataObject(
+              opts[:seasonalIndex]
+            )
             if result
               friendlyResource.dos_icmp_interpretation_data << result
             end
@@ -72,24 +77,29 @@ module Departments
         end
         private
         # ##################################################
-        # CyberReport related methods.
+        # DosIcmpInterpretation related methods.
+        # It is not in separate file, because then Dos::Icmp::DosIcmpInterpretation
+        # is not found for some reason.
         # ##################################################
+        def getIcmpInterpretationDataById(cyberReportId)
+          Dos::Icmp::DosIcmpInterpretation.find(cyberReportId)
+        end
         def getNewIcmpInterpretationDataObject(seasonalIndex)
           result = nil
           if seasonalIndex
-            if (seasonalIndex == Dos::DosReport::SEASON_DURATION_IN_SECONDS)
-              seasonalIndex = Dos::DosReport::FIRST_SEASONAL_INDEX
-            end
-            result = Dos::Icmp::DosIcmpInterpretation.new(seasonal_index: seasonalIndex)
+            result = Dos::Icmp::DosIcmpInterpretation.new(
+              seasonal_index: seasonalIndex,
+              report_type: Departments::Demo::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
+            )
           else
-            throw Exception.new('ArchiveApi - getNewIcmpInterpretationDataObject() - seasonalIndex must have a value.')
+            throw Exception.new("#{self.class.name} - #{__method__} - seasonalIndex must have a value.")
           end
           return result
         end
         def getLatestIcmpInterpretationDataByFriendlyResourceIpAndSeasonalIndex(friendlyResourceId, seasonalIndex)
           result = nil
-          if seasonalIndex.nil? || friendlyResourceId.nil?
-            throw Exception.new('ArchiveApi - getLatestIcmpInterpretationDataByFriendlyResourceIpAndSeasonalIndex() - friendlyResourceId and seasonalIndex must have values.')
+          if (friendlyResourceId.nil? || seasonalIndex.nil?)
+            throw Exception.new("#{self.class.name} - #{__method__} - friendlyResourceId and seasonalIndex must have values.")
           else
             queryResult = Dos::Icmp::DosIcmpInterpretation.where('friendly_resource_id = ? AND seasonal_index = ?', friendlyResourceId, seasonalIndex)
                             .limit(1)
@@ -97,9 +107,6 @@ module Departments
             result = queryResult.to_a.first
           end
           return result
-        end
-        def persistIcmpInterpretationDataObject(interpretationData)
-          interpretationData.save()
         end
       end # ArchiveApi
     end # Archive

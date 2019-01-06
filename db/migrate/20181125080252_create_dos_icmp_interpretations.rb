@@ -1,6 +1,6 @@
 class CreateDosIcmpInterpretations < ActiveRecord::Migration[5.2]
   def change
-    create_table    :dos_icmp_interpretations do |t|
+    create_table   :dos_icmp_interpretations do |t|
       t.belongs_to :friendly_resource
       t.boolean    :aberrant_behavior
       t.float      :actual_value
@@ -10,6 +10,7 @@ class CreateDosIcmpInterpretations < ActiveRecord::Migration[5.2]
       t.float      :linear_trend
       t.integer    :seasonal_index
       t.float      :seasonal_trend
+      t.string     :report_type
       t.float      :weighted_avg_abs_deviation 
       t.timestamps
     end

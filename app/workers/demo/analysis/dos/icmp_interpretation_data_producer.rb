@@ -4,7 +4,7 @@ module Workers
   module Demo
     module Analysis
       module Dos
-        class IcmpInterpretationDataProducer
+        class IcmpInterpretationDataProducer < Workers::Demo::Analysis::Dos::HoltWintersForecastingWorker
           # The worker subscribes to channel "[IP]_dosIcmpRawData".
           # Messages in "[IP]_dosIcmpRawData" are strings that can be parsed as JSON.
           # Message format is:
@@ -14,37 +14,42 @@ module Workers
           sidekiq_options retry: false
   
           def perform(friendlyResourceIp, redisChannel, typeOfDosCyberReport)
-            logger.info("IcmpInterpretationDataProducer - friendlyResourceIp : #{friendlyResourceIp}, redisChannel : #{redisChannel}, typeOfDosCyberReport : #{typeOfDosCyberReport}")
+            logger.info("#{self.class.name} - #{__method__} - friendlyResourceIp : #{friendlyResourceIp}, redisChannel : #{redisChannel}, typeOfDosCyberReport : #{typeOfDosCyberReport}")
             redis = Redis.new(:host => 'localhost', :port => '6379', :timeout => 0)
             redis.subscribe(redisChannel) do |on|
               on.message do |channel, messageRaw|
                 begin
                   message = eval(messageRaw)
                   if message[:continueAnalysis]
-                    archiveApi      = Departments::Demo::Archive::ArchiveApi.instance()
-                    lastCyberReport = archiveApi.getCyberReportByFriendlyResourceIpAndType(
-                      friendlyResourceIp, typeOfDosCyberReport
+                    holtWintersForecastingApi = Algorithms::HoltWintersForecasting::Api.instance()
+                    currentSeasonalIndex      = holtWintersForecastingApi.getSeasonalIndex()
+                    previousSeasonalIndex     = holtWintersForecastingApi.getPreviousSeasonalIndex(currentSeasonalIndex)
+                    nextSeasonalIndex         = holtWintersForecastingApi.getNextSeasonalIndex(currentSeasonalIndex)
+                    logger.debug("#{self.class.name} - #{__method__} - seasonal indices - : previous : #{previousSeasonalIndex}, current : #{currentSeasonalIndex}, next #{nextSeasonalIndex}")
+                    archiveApi = Departments::Demo::Archive::Api.instance()
+                    lastCyberReport = archiveApi.getCyberReportByFriendlyResourceIpAndTypeAndCustomAttributeValue(
+                      friendlyResourceIp, typeOfDosCyberReport, seasonalIndex: previousSeasonalIndex
                     )
-                    logger.debug("IcmpInterpretationDataProducer - cyber report at T-1 : #{lastCyberReport.inspect()}")
-                    currentSeasonalIndex    = getCurrentSeasonalIndex(lastCyberReport)
+                    logger.debug("#{self.class.name} - #{__method__} - cyber report at T-1 : #{lastCyberReport.inspect()}")
                     cyberReportAtPrevSeason = archiveApi.getCyberReportByFriendlyResourceIpAndTypeAndCustomAttributeValue(
                       friendlyResourceIp, typeOfDosCyberReport, seasonalIndex: currentSeasonalIndex
                     )
-                    logger.debug("IcmpInterpretationDataProducer - cyber report at T-M : #{cyberReportAtPrevSeason.inspect()}")
+                    logger.debug("#{self.class.name} - #{__method__} - cyber report at T-M : #{cyberReportAtPrevSeason.inspect()}")
                     cyberReportAtPrevSeasonForNextStep = archiveApi.getCyberReportByFriendlyResourceIpAndTypeAndCustomAttributeValue(
-                      friendlyResourceIp, typeOfDosCyberReport, seasonalIndex: currentSeasonalIndex + 1
+                      friendlyResourceIp, typeOfDosCyberReport, seasonalIndex: nextSeasonalIndex
                     )
-                    logger.debug("IcmpInterpretationDataProducer - cyber report at T-M+1 : #{cyberReportAtPrevSeason.inspect()}")
+                    logger.debug("#{self.class.name} - #{__method__} - cyber report at T-M+1 : #{cyberReportAtPrevSeasonForNextStep.inspect()}")
                     latestCyberReport = archiveApi.getNewCyberReportObject(
-                      typeOfDosCyberReport, seasonalIndex: currentSeasonalIndex
+                      friendlyResourceIp, typeOfDosCyberReport, seasonalIndex: currentSeasonalIndex
                     )
-                    logger.debug("IcmpInterpretationDataProducer - initialized new cyber report object : #{latestCyberReport.inspect()}")
+                    logger.debug("#{self.class.name} - #{__method__} - initialized new cyber report object : #{latestCyberReport.inspect()}")
                     actualIcmpRequests = countIncomingIcmpRequests(message[:intelligenceData], friendlyResourceIp)
-                    logger.debug("IcmpInterpretationDataProducer - counted amount of ICMP requests : #{actualIcmpRequests}")
+                    logger.debug("#{self.class.name} - #{__method__} - counted amount of ICMP requests : #{actualIcmpRequests}")
                     holtWintersForecastStep(
                       actualIcmpRequests, lastCyberReport, latestCyberReport, cyberReportAtPrevSeason, cyberReportAtPrevSeasonForNextStep
                     )
-                    archiveApi.persistCyberReport(friendlyResourceIp, latestCyberReport)
+                    archiveApi.persistCyberReport(latestCyberReport)
+                    logger.debug("#{self.class.name} - #{__method__} - persisted #{latestCyberReport.inspect()}.")
                   else
                     redis.unsubscribe(channel)
                     logger.info("IcmpInterpretationDataProducer - unsubscribed from channel : #{channel}")
@@ -58,14 +63,6 @@ module Workers
             end
           end
           private
-          def getCurrentSeasonalIndex(lastCyberReport)
-            if lastCyberReport
-              if lastCyberReport.seasonal_index
-                return lastCyberReport.seasonal_index + 1
-              end
-            end
-            return 0
-          end
           def countIncomingIcmpRequests(intelligenceData, friendlyResourceIp)
             result = 0
             if intelligenceData
@@ -73,103 +70,9 @@ module Workers
                 intelligenceEntry[:destination] == friendlyResourceIp 
               }.count()
             else
-              throw Exception.new('countIncomingIcmpRequests() - corrupted intelligenceData.')
+              throw Exception.new("#{self.class.name} -#{__method__} - corrupted intelligenceData.")
             end
             return result
-          end
-          def holtWintersForecastStep(actualValue, lastCyberReport, latestCyberReport, cyberReportAtPreviousSeason, cyberReportAtPreviousSeasonForNextStep)
-            # We are relating to current moment as T,
-            # length of 1 season is M
-            # Retrieve data holtWintersForecastStep at T-1 (previous step)
-            previousBaseline         = getBaseline(lastCyberReport)
-            previousLinearTrend      = getLinearTrend(lastCyberReport)
-            estimatedValue           = getEstimatedValue(lastCyberReport)
-            confidenceBandUpperValue = getConfidenceBandUpperValue(lastCyberReport)
-            # Retrieve data from holtWintersForecastStep at T-M (step at previous season)
-            seasonalTrendAtPreviousSeason           = getSeasonalTrend(cyberReportAtPreviousSeason)
-            weightedAvgAbsDeviationAtPreviousSeason = getWeightedAvgAbsDeviation(cyberReportAtPreviousSeason)
-            # Retrieve data from holtWintersForecastStep at T-M+1 (next step, at previous season)
-            seasonalTrendForNextStepAtPreviousSeason = getSeasonalTrend(cyberReportAtPreviousSeasonForNextStep)
-            # Perform calculations
-            holtWintersForecastingApi = Algorithms::HoltWintersForecasting::Api.instance()
-            aberrantBehavior = holtWintersForecastingApi.isAberrantBehavior(
-              actualValue, confidenceBandUpperValue
-            )
-            baseline = holtWintersForecastingApi.getBaseline(
-              actualValue, seasonalTrendAtPreviousSeason, previousBaseline, previousLinearTrend
-            )
-            linearTrend = holtWintersForecastingApi.getLinearTrend(
-              baseline, previousBaseline, previousLinearTrend
-            )
-            seasonalTrend = holtWintersForecastingApi.getSeasonalTrend(
-              actualValue, baseline, seasonalTrendAtPreviousSeason
-            )
-            confidenceBandUpperValueForNextStep = holtWintersForecastingApi.getConfidenceBandUpperValue(
-              estimatedValue, weightedAvgAbsDeviationAtPreviousSeason
-            )
-            weightedAvgAbsDeviation = holtWintersForecastingApi.getWeightedAvgAbsDeviation(
-              actualValue, estimatedValue, weightedAvgAbsDeviationAtPreviousSeason
-            )
-            estimatedValueForNextStep = holtWintersForecastingApi.getEstimatedValue(
-              baseline, linearTrend, seasonalTrendForNextStepAtPreviousSeason
-            )
-            # Update latest interpretation data with calculations
-            latestCyberReport.actual_value                = actualValue
-            latestCyberReport.baseline                    = baseline
-            latestCyberReport.confidence_band_upper_value = confidenceBandUpperValueForNextStep
-            latestCyberReport.estimated_value             = estimatedValueForNextStep
-            latestCyberReport.aberrant_behavior           = aberrantBehavior
-            latestCyberReport.linear_trend                = linearTrend
-            latestCyberReport.seasonal_trend              = seasonalTrend
-            latestCyberReport.weighted_avg_abs_deviation  = weightedAvgAbsDeviation
-          end
-          def getBaseline(interpretationData)
-            if interpretationData
-              if interpretationData.baseline
-                return interpretationData.baseline
-              end
-            end
-            return 0
-          end
-          def getLinearTrend(interpretationData)
-            if interpretationData
-              if interpretationData.linear_trend
-                return interpretationData.linear_trend
-              end
-            end
-            return 0
-          end
-          def getEstimatedValue(interpretationData)
-            if interpretationData
-              if interpretationData.estimated_value
-                return interpretationData.estimated_value
-              end
-            end
-            return 0
-          end
-          def getConfidenceBandUpperValue(interpretationData)
-            if interpretationData
-              if interpretationData.confidence_band_upper_value
-                return interpretationData.confidence_band_upper_value
-              end
-            end
-            return nil
-          end
-          def getSeasonalTrend(interpretationData)
-            if interpretationData
-              if interpretationData.seasonal_trend
-                return interpretationData.seasonal_trend
-              end
-            end
-            return 0
-          end
-          def getWeightedAvgAbsDeviation(interpretationData)
-            if interpretationData
-              if interpretationData.weighted_avg_abs_deviation
-                return interpretationData.weighted_avg_abs_deviation
-              end
-            end
-            return 0
           end
         end # DosInterpretationDataProducer
       end # Dos

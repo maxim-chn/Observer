@@ -3,16 +3,16 @@ module Departments
     module Shared
       class IntelligenceQuery
         attr_reader :friendlyResourceIp, :collectFormat
-        
         def initialize(friendlyResourceIp, collectFormat)
           @friendlyResourceIp      = friendlyResourceIp
-          @collectFormat = collectFormat
+          @collectFormat           = collectFormat
         end
-  
         def inspect()
-          "friendlyResourceIp: #{@friendlyResourceIp}, collectFormat: #{@collectFormat}"
+          result = {}
+          result[:friendlyResourceIp] = @friendlyResourceIp
+          result[:collectFormat]      = @collectFormat
+          JSON.generate(result)
         end
-        
       end # IntelligenceQuery
     end # Shared
   end # Demo

@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2018_11_25_080252) do
     t.float "linear_trend"
     t.integer "seasonal_index"
     t.float "seasonal_trend"
+    t.string "report_type"
     t.float "weighted_avg_abs_deviation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

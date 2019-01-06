@@ -10,7 +10,7 @@
     <% @cyberReports.each do |cyberReport| %>
       <li>
         <%= link_to getCyberReportName(cyberReport),
-          "#{demo_cyber_report_path(cyberReport)}?type=#{cyberReport.class.to_s}" %>
+          "#{demo_cyber_report_path(cyberReport)}?type=#{cyberReport.report_type}" %>
       </li>
     <% end %>
   </ul>

@@ -2,18 +2,17 @@ module Departments
   module Demo
     module Shared
       class AnalysisQuery
-        attr_reader :friendlyResourceId, :friendlyResourceIp, :analysisType
-        
-        def initialize(friendlyResourceId, friendlyResourceIp, analysisType)
-          @friendlyResourceId = friendlyResourceId
+        attr_reader :friendlyResourceIp, :analysisType
+        def initialize(friendlyResourceIp, analysisType)
           @friendlyResourceIp = friendlyResourceIp
           @analysisType       = analysisType
         end
-        
         def inspect()
-          "friendlyResourceId: #{@friendlyResourceId}, friendlyResourceIp: #{@friendlyResourceIp}, analysisFormat: #{@analysisType}"
+          result = {}
+          result[:friendlyResourceIp] = @friendlyResourceIp
+          result[:analysisType]       = @analysisType
+          return JSON.generate(result)
         end
-        
       end # AnalysisQuery
     end # Shared
   end # Demo

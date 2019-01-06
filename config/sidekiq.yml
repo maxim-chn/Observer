@@ -2,7 +2,7 @@
   # :logfile: log/workers.log
   development:
     :verbose: true
-    :concurrency: 2
+    :concurrency: 3
     :queues:
     - ['analysis_slave', 4]
     - ['field_agent_notifier', 3] 
