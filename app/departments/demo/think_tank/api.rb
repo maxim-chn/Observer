@@ -7,16 +7,18 @@ module Departments
         include Singleton
         def startMonitoring(friendlyResourceId)
           Rails.logger.info("#{self.class.name} - #{__method__} - friendlyResourceId : #{friendlyResourceId}")
+          archiveApi        = Departments::Demo::Archive::Api.instance()
+          friendlyResource  = archiveApi.getFriendlyResourceById(friendlyResourceId)
           thinkTankServices = Departments::Demo::ThinkTank::ThinkTankServices::Services.instance()
-          friendlyResource  = thinkTankServices.getFriendlyResourceById(friendlyResourceId)
           # Dos related methods.
           thinkTankServices.gatherDosIntelligence(friendlyResource.ip_address())
           thinkTankServices.analyzeDosIntelligence(friendlyResource.ip_address())
         end
         def stopMonitoring(friendlyResourceId)
           Rails.logger.info("#{self.class.name} - #{__method__} - friendlyResourceId : #{friendlyResourceId}")
+          archiveApi        = Departments::Demo::Archive::Api.instance()
+          friendlyResource  = archiveApi.getFriendlyResourceById(friendlyResourceId)
           thinkTankServices = Departments::Demo::ThinkTank::ThinkTankServices::Services.instance()
-          friendlyResource  = thinkTankServices.getFriendlyResourceById(friendlyResourceId)
           # Dos related methods.
           thinkTankServices.stopDosIntelligenceGathering(friendlyResource.ip_address())
           thinkTankServices.stopDosIntelligenceAnalysis(friendlyResource.ip_address())

@@ -1,5 +1,4 @@
 require 'singleton'
-require_relative './archive_services/services'
 module Departments
   module Demo
     module Archive
