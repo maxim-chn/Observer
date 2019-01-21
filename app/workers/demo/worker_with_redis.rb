@@ -10,7 +10,7 @@ module Workers
             redisClient = Redis.new(:host => 'localhost', :port => '6379', :timeout => 0)
           end
           if Rails.env.production?
-            redisClient = Redis.new(:host => ENV[REDIS_URL], :timeout => 0)
+            redisClient = Redis.new(:timeout => 0)
           end
         rescue Exception => e
           throw Exception.new("#{self.class.name} - #{__method__} - has failed to initialize redis client - reason - #{e.inspect()}")
