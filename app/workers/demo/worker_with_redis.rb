@@ -15,7 +15,7 @@ module Workers
         rescue Exception => e
           throw Exception.new("#{self.class.name} - #{__method__} - has failed to initialize redis client - reason - #{e.inspect()}")
         end
-        if (redisClinet)
+        if (redisClient)
           return redisClient
         else
           throw Exception.new("#{self.class.name} - #{__method__} - has failed to initialize redis client.")
