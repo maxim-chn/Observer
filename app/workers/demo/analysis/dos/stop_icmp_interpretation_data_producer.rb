@@ -1,18 +1,22 @@
-require 'redis'
-
 module Workers
   module Demo
     module Analysis
       module Dos
-        class StopIcmpInterpretationDataProducer
+        class StopIcmpInterpretationDataProducer < Workers::Demo::WorkerWithRedis
           include Sidekiq::Worker
           sidekiq_options retry: false
   
           def perform(friendlyResourceIp, redisChannel)
             logger.info("#{self.class.name} - #{__method__} - friendlyResourceIp : #{friendlyResourceIp}, redis channel : #{redisChannel}")
-            redis = Redis.new(:host => 'localhost', :port => '6379', :timeout => 0)
+            redisClient = nil
+            begin
+              redisClient = getRedisClient()
+            rescue Exception => e
+              logger.error("#{self.class.name} - #{__method__} - failed to get redisClient - reason - #{e.inspect()}")
+              return
+            end
             message = {:continueAnalysis => false}
-            redis.publish(redisChannel, JSON.generate(message))
+            redisClient.publish(redisChannel, JSON.generate(message))
             logger.debug("#{self.class.name} - #{__method__} - redis channels affected : #{redisChannel}")
           end
         end # StopInterpretationDataProducer

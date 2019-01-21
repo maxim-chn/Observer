@@ -2,7 +2,7 @@ module Workers
   module Demo
     module Analysis
       module Dos
-        class HoltWintersForecastingWorker
+        class HoltWintersForecastingWorker < Workers::Demo::WorkerWithRedis
           private
           def holtWintersForecastStep(actualValue, lastCyberReport, latestCyberReport, cyberReportAtPrevSeason, cyberReportAtPrevSeasonForNextStep)
             # We are relating to current moment as T,

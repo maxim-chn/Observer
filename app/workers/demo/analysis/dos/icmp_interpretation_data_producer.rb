@@ -1,5 +1,3 @@
-require 'redis'
-
 module Workers
   module Demo
     module Analysis
@@ -15,8 +13,14 @@ module Workers
   
           def perform(friendlyResourceIp, redisChannel, typeOfDosCyberReport)
             logger.info("#{self.class.name} - #{__method__} - friendlyResourceIp : #{friendlyResourceIp}, redisChannel : #{redisChannel}, typeOfDosCyberReport : #{typeOfDosCyberReport}")
-            redis = Redis.new(:host => 'localhost', :port => '6379', :timeout => 0)
-            redis.subscribe(redisChannel) do |on|
+            redisClient = nil
+            begin
+              redisClient = getRedisClient()
+            rescue Exception => e
+              logger.error("#{self.class.name} - #{__method__} - failed to get redisClient - reason - #{e.inspect()}")
+              return
+            end
+            redisClient.subscribe(redisChannel) do |on|
               on.message do |channel, messageRaw|
                 begin
                   message = eval(messageRaw)
@@ -51,12 +55,12 @@ module Workers
                     archiveApi.persistCyberReport(latestCyberReport)
                     logger.debug("#{self.class.name} - #{__method__} - persisted #{latestCyberReport.inspect()}.")
                   else
-                    redis.unsubscribe(channel)
-                    logger.info("IcmpInterpretationDataProducer - unsubscribed from channel : #{channel}")
+                    redisClient.unsubscribe(channel)
+                    logger.info("#{self.class.name} - #{__method__} - unsubscribed from channel : #{channel}")
                   end
                 rescue Exception => e
-                  logger.error("IcmpInterpretationDataProducer - failed to procees message from channel : #{channel}")
-                  logger.error("IcmpInterpretationDataProducer - error : #{e.inspect()}")
+                  logger.error("#{self.class.name} - #{__method__} - failed to procees message from channel : #{channel}")
+                  logger.error("#{self.class.name} - #{__method__} - error : #{e.inspect()}")
                   return
                 end
               end

@@ -1,3 +1,4 @@
+require("#{Rails.root}/app/workers/demo/worker_with_redis.rb")
 require("#{Rails.root}/app/workers/demo/analysis/dos/holt_winters_forecasting_worker.rb")
 require("#{Rails.root}/app/workers/demo/analysis/dos/icmp_interpretation_data_producer.rb")
 require("#{Rails.root}/app/workers/demo/analysis/dos/redis_channels.rb")

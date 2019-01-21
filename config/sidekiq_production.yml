@@ -1,0 +1,9 @@
+---
+  :logfile: log/sidekiq.log
+  :verbose: true
+  :concurrency: 3
+  :queues:
+    - ['analysis_slave', 4]
+    - ['field_agent_notifier', 3] 
+    - ['default', 2]
+    - ['low', 1]
