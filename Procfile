@@ -1,2 +1,2 @@
 web: bundle exec rails server -p $PORT
-worker: bundle exec sidekiq -C ./config/sidekiq_production.yml
+sidekiq: bundle exec sidekiq -C ./config/sidekiq_production.yml
