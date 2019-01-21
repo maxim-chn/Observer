@@ -10,4 +10,7 @@ Rails.application.routes.draw do
     resources :cyber_reports, only: [:show]
   end
   root to: 'demo/welcome#index' # root to: homepage_path
+  # To access Sidekiq Dashboard
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 end # Rails.application.routes.draw
