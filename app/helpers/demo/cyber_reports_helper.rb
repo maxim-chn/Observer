@@ -1,21 +1,26 @@
-module Demo::CyberReportsHelper
-  def getPageTitleForCyberReport(pageDetails)
-    return "CyberReports | #{pageDetails}"
-  end
-  def getCyberReportType(cyberReport)
-    type = "None"
-    unless cyberReport.nil?
-      type = cyberReport.class
+# frozen_string_literal: true
+
+module Demo
+  ##
+  # Holds helper methods for cyber reports view template.
+  class CyberReportsHelper
+    def page_title_for_cyber_reports_view(page_details)
+      "CyberReports | #{page_details}"
     end
-    return type
-  end
-  def getCyberReportName(cyberReport)
-    name = "None"
-    unless cyberReport.nil?
-      cyberReportType         = cyberReport.class()
-      cyberReportCreationDate = cyberReport.created_at().strftime("%Y-%m-%dT%H:%M:%S")
-      name = "#{cyberReportType} from #{cyberReportCreationDate}"
+
+    def cyber_report_type(cyber_report)
+      return cyberReport.class if cyber_report
+
+      'None'
     end
-    return name
+
+    def cyber_report_name(cyber_report)
+      if cyber_report
+        type = cyberReport.class
+        creation_date = cyber_report.created_at.strftime('%Y-%m-%dT%H:%M:%S')
+        return "#{type} from #{creation_date}"
+      end
+      'None'
+    end
   end
-end # Demo::CyberReportsHelper
+end

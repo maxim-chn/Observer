@@ -1,25 +1,29 @@
 require 'singleton'
 module Algorithms
+  ##
+  # Holds +API+s and +Services+ necessary for *Holt Winters Forecasting*.
+  #
+  # For now we have one type of forecasting. Types are identified by constants:
+  # * [Algorithms::HolWintersForecasting::ICMP_FLOOD] - modified Holt Winters forecasting
+  # for ICMP Flood attacks.
   module HoltWintersForecasting
+    ICMP_FLOOD = 'HOLT_WINTERS_FORECASTING_FOR_ICMP_FLOOD'
+    ##
+    # +API+ for consumption by other modules.
+    # Any necessary methods are implemented here,
+    # there is no need for additional +Services+.
     class Api
       include Singleton
-      # ##################################################
-      # Methods for affecting constants,
-      # i.e. smoothing constants.
-      # ##################################################
-      def setHourDurationInMinutes(minutes)
-        @minutesInAnHour = minutes
+      
+      def set_time_unit_in_seconds(type, seconds)
+        Services::IcmpFlood.instance.set_time_unit_in_seconds(seconds) if type == HoltWintersForecasting::ICMP_FLOOD
       end
-      def setMinuteDurationInSeconds(seconds)
-        @secondsInAMinute = seconds
+
+      def set_min_seasonal_index(index)
+        @min_seasonal_index = index
       end
-      def setIntervalBetweenCollectionsInSeconds(seconds)
-        @intervalBeetweenObservationsInSeconds = seconds
-      end
-      def setMinSeasonalIndex(index)
-        @minSeasonalIndex = index
-      end
-      def setMaxSeasonalIndex(index)
+
+      def set_max_seasonal_index(index)
         @maxSeasonalIndex = index
       end
       def setAlpha(percentageOfTotalWeights, amountOfTimePoints)
@@ -45,14 +49,11 @@ module Algorithms
       # Methods that perform actual calculations.
       # ##################################################
       def getSeasonalIndex()
-        hour    = DateTime.now().strftime('%H').to_i()
-        minutes = DateTime.now().strftime('%M').to_i()
-        seconds = DateTime.now().strftime('%S').to_i()
-        return (((hour*@minutesInAnHour)+(minutes*@secondsInAMinute)+(seconds)) / @intervalBeetweenObservationsInSeconds)
+        
       end
       def getPreviousSeasonalIndex(seasonalIndex)
         validateSeasonalIndex(seasonalIndex)
-        if (seasonalIndex > @minSeasonalIndex)
+        if (seasonalIndex > @min_seasonal_index)
           return seasonalIndex - 1
         else
           return @maxSeasonalIndex
@@ -63,7 +64,7 @@ module Algorithms
         if (seasonalIndex < @maxSeasonalIndex)
           return seasonalIndex + 1
         else
-          return @minSeasonalIndex
+          return @min_seasonal_index
         end
       end
       def isAberrantBehavior(actualValue, confidenceBandUpperValue)
@@ -148,13 +149,13 @@ module Algorithms
       end
       def validateSeasonalIndex(seasonalIndex)
         if seasonalIndex
-          if (seasonalIndex < @minSeasonalIndex || seasonalIndex > @maxSeasonalIndex)
-            throw Exception.new("#{self.class.name} - #{__method__} - seasonalIndex must belong to [#{@minSeasonalIndex},#{@maxSeasonalIndex}]")
+          if (seasonalIndex < @min_seasonal_index || seasonalIndex > @maxSeasonalIndex)
+            throw Exception.new("#{self.class.name} - #{__method__} - seasonalIndex must belong to [#{@min_seasonal_index},#{@maxSeasonalIndex}]")
           end
         else
           throw Exception.new("#{self.class.name} - #{__method__} - seasonalIndex must have a value.")
         end
       end
     end # Api
-  end # HoltWintersForecasting
+  end
 end # Algorithms

@@ -1,26 +1,26 @@
+# frozen_string_literal: true
+
 require 'redis'
+
 module Workers
   module Demo
+    ##
+    # Sidekiq manages our background processing and it needs
+    # Redis. Hence, every worker must have Redis connection.
     class WorkerWithRedis
       private
-      def getRedisClient()
-        redisClient = nil
+
+      def redis_client
+        client = nil
         begin
-          if Rails.env.development?
-            redisClient = Redis.new(:host => 'localhost', :port => '6379', :timeout => 0)
-          end
-          if Rails.env.production?
-            redisClient = Redis.new(:timeout => 0)
-          end
-        rescue Exception => e
-          throw Exception.new("#{self.class.name} - #{__method__} - has failed to initialize redis client - reason - #{e.inspect()}")
+          client = Redis.new(host: 'localhost', port: '6379', timeout: 0) if Rails.env.development?
+          client = Redis.new(timeout: 0) if Rails.env.production?
+        rescue StandardError => e
+          throw StandardError.new("#{self.class.name} - #{__method__} - failed - reason - #{e.inspect}")
         end
-        if (redisClient)
-          return redisClient
-        else
-          throw Exception.new("#{self.class.name} - #{__method__} - has failed to initialize redis client.")
-        end
+        redisClient if client
+        throw StandardError.new("#{self.class.name} - #{__method__} - has failed - reason - unknown.")
       end
-    end # WorkerWithRedis
-  end # Demo
-end # Workers
+    end
+  end
+end

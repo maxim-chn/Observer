@@ -1,21 +1,30 @@
+# frozen_string_literal: true
+
 require 'singleton'
-require_relative './intelligence_services/services.rb'
+require_relative './services/field_agent_contact.rb'
+
 module Departments
   module Demo
     module Intelligence
+      ##
+      # This is an [API] for consumption by other modules in Observer.
       class Api
         include Singleton
-        def startIntelligenceGathering(intelligenceQuery)
-          Rails.logger.info("#{self.class.name} - #{__method__} - intelligenceQuery : #{intelligenceQuery.inspect()}")
-          fieldAgentContactApi = Departments::Demo::Intelligence::IntelligenceServices::FieldAgentContact::Api.instance()
-          fieldAgentContactApi.missionDispatch(intelligenceQuery)
-        end  
-        def stopIntelligenceGathering(intelligenceQuery)
-          Rails.logger.info("#{self.class.name} - #{__method__} - intelligenceQuery : #{intelligenceQuery.inspect()}")
-          fieldAgentContactApi = Departments::Demo::Intelligence::IntelligenceServices::FieldAgentContact::Api.instance()
-          fieldAgentContactApi.missionAbort(intelligenceQuery)
+
+        # +query+ - an object of type [IntelligenceQuery].
+        def start_intelligence_gathering(query)
+          Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}")
+          field_agent_contact = Services::FieldAgentContact::Api.instance
+          field_agent_contact.mission_dispatch(query)
         end
-      end # Api
-    end # Intelligence
-  end # Demo
-end # Departments
+
+        # +query+ - an object of type [IntelligenceQuery].
+        def stop_intelligence_gathering(query)
+          Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}")
+          field_agent_contact = Services::FieldAgentContact::Api.instance
+          field_agent_contact.mission_abort(query)
+        end
+      end
+    end
+  end
+end

@@ -1,43 +1,36 @@
-class Demo::FriendlyResourcesController < ApplicationController
-  
-  def index
-    page               = params[:page] ? params[:page] : 1
-    pageSize           = params[:page_size] ? params[:page_size] : 10
-    archiveApi         = Departments::Demo::Archive::Api.instance()
-    @friendlyResources = archiveApi.getAllFriendlyResources(page, pageSize)
-    # render demo/friendly_resources/index.html.erb
-  end
+# frozen_string_literal: true
 
-  def new
-    # render demo/friendly_resources/new.html.erb
-  end
+module Demo
+  ##
+  # This class consumes [ArchiveApi] and [ThinkTankApi].
+  class FriendlyResourcesController < ApplicationController
+    # Renders a view template with a set of [FriendlyResource].
+    def index
+      page = params[:page] || 1
+      page_size = params[:page_size] || 10
+      archive_api = Departments::Demo::Archive::Api.instance
+      @friendly_resources = archive_api.getAllFriendlyResources(page, page_size)
+    end
 
-  def show
-    friendlyResourceId = params[:id]
-    archiveApi         = Departments::Demo::Archive::Api.instance()
-    @friendlyResource = archiveApi.getFriendlyResourceById(friendlyResourceId)
-    # render demo/friendly_resources/show.html.erb
-  end
+    # Renders a view template with a form for a new [FriendlyResource].
+    # TODO: edit template to actually have form with input fields.
+    def new
+      # render demo/friendly_resources/new.html.erb.
+    end
 
-  def edit
-    friendlyResourceId = params[:id]
-    archiveApi         = Departments::Demo::Archive::Api.instance()
-    @friendlyResource = archiveApi.getFriendlyResourceById(friendlyResourceId)
-    # render demo/friendly_resources/edit.html.erb
-  end
+    # Renders a view template with particular [FriendlyResource].
+    def show
+      friendly_resource_id = params[:id]
+      archive_api = Departments::Demo::Archive::Api.instance
+      @friendly_resource = archive_api.getFriendlyResourceById(friendly_resource_id)
+    end
 
-  def startMonitoring
-    friendlyResourceId  = params[:friendly_resource_id]
-    thinkTankDepartment = Departments::Demo::ThinkTank::Api.instance()
-    thinkTankDepartment.startMonitoring(friendlyResourceId)
-    render plain: "REQUEST TO START ADDED TO QUEUE"
+    # Renders a view templste with a form for a existing [FriendlyResource].
+    # The details of the form can be edited and submitted.
+    def edit
+      friendly_resource_id = params[:id]
+      archive_api = Departments::Demo::Archive::Api.instance
+      @friendly_resource = archive_api.getFriendlyResourceById(friendly_resource_id)
+    end
   end
-
-  def stopMonitoring
-    friendlyResourceId  = params[:friendly_resource_id]
-    thinkTankDepartment = Departments::Demo::ThinkTank::Api.instance()
-    thinkTankDepartment.stopMonitoring(friendlyResourceId)
-    render plain: "REQUEST TO STOP ADDED TO QUEUE"
-  end
-
-end # Demo::FriendlyResourcesController
+end

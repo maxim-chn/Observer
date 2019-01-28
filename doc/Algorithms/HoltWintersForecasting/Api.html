@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Algorithms::HoltWintersForecasting::Api - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../../Object.html">Object</a>
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">Singleton</span>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-getBaseline">#getBaseline</a>
+    
+    <li ><a href="#method-i-getConfidenceBandUpperValue">#getConfidenceBandUpperValue</a>
+    
+    <li ><a href="#method-i-getEstimatedValue">#getEstimatedValue</a>
+    
+    <li ><a href="#method-i-getLinearTrend">#getLinearTrend</a>
+    
+    <li ><a href="#method-i-getNextSeasonalIndex">#getNextSeasonalIndex</a>
+    
+    <li ><a href="#method-i-getPreviousSeasonalIndex">#getPreviousSeasonalIndex</a>
+    
+    <li ><a href="#method-i-getSeasonalIndex">#getSeasonalIndex</a>
+    
+    <li ><a href="#method-i-getSeasonalTrend">#getSeasonalTrend</a>
+    
+    <li ><a href="#method-i-getWeightedAvgAbsDeviation">#getWeightedAvgAbsDeviation</a>
+    
+    <li ><a href="#method-i-isAberrantBehavior">#isAberrantBehavior</a>
+    
+    <li ><a href="#method-i-setAlpha">#setAlpha</a>
+    
+    <li ><a href="#method-i-setBeta">#setBeta</a>
+    
+    <li ><a href="#method-i-setGamma">#setGamma</a>
+    
+    <li ><a href="#method-i-setHourDurationInMinutes">#setHourDurationInMinutes</a>
+    
+    <li ><a href="#method-i-setIntervalBetweenCollectionsInSeconds">#setIntervalBetweenCollectionsInSeconds</a>
+    
+    <li ><a href="#method-i-setMaxSeasonalIndex">#setMaxSeasonalIndex</a>
+    
+    <li ><a href="#method-i-setMinSeasonalIndex">#setMinSeasonalIndex</a>
+    
+    <li ><a href="#method-i-setMinuteDurationInSeconds">#setMinuteDurationInSeconds</a>
+    
+    <li ><a href="#method-i-setTeta">#setTeta</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Algorithms::HoltWintersForecasting::Api">
+  <h1 id="class-Algorithms::HoltWintersForecasting::Api" class="class">
+    class Algorithms::HoltWintersForecasting::Api
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-getBaseline" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getBaseline</span><span
+            class="method-args">(actualValue, seasonalTrendAtPrevSeason, previousBaseline, previousLinearTrend)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="getBaseline-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">getBaseline</span>(<span class="ruby-identifier">actualValue</span>, <span class="ruby-identifier">seasonalTrendAtPrevSeason</span>, <span class="ruby-identifier">previousBaseline</span>, <span class="ruby-identifier">previousLinearTrend</span>)
+  <span class="ruby-comment"># Other terms for baseline: intercept, level.</span>
+  <span class="ruby-comment"># We return baseline at moment T.</span>
+  <span class="ruby-comment"># actualValue is at moment T.</span>
+  <span class="ruby-comment"># seasonalTrendAtPrevSeason is at moment T-M.</span>
+  <span class="ruby-comment"># previousBaseline is at moment T-1.</span>
+  <span class="ruby-comment"># previousLinearTrend is at moment T-1.</span>
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - actualValue must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">actualValue</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - seasonalTrendAtPrevSeason must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">seasonalTrendAtPrevSeason</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - previousBaseline must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">previousBaseline</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - previousLinearTrend must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">previousLinearTrend</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@alpha</span><span class="ruby-operator">*</span>(<span class="ruby-identifier">actualValue</span><span class="ruby-operator">-</span><span class="ruby-identifier">seasonalTrendAtPrevSeason</span>)<span class="ruby-operator">+</span>(<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-ivar">@alpha</span>)<span class="ruby-operator">*</span>(<span class="ruby-identifier">previousBaseline</span><span class="ruby-operator">+</span><span class="ruby-identifier">previousLinearTrend</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getConfidenceBandUpperValue" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getConfidenceBandUpperValue</span><span
+            class="method-args">(estimatedValue, weightedAvgAbsDeviationAtPrevSeason)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="getConfidenceBandUpperValue-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">getConfidenceBandUpperValue</span>(<span class="ruby-identifier">estimatedValue</span>, <span class="ruby-identifier">weightedAvgAbsDeviationAtPrevSeason</span>)
+  <span class="ruby-comment"># We return upper value for confidence band at moment T+1.</span>
+  <span class="ruby-comment"># estimatedValue is at moment T. It has been calculated at moment T-1.</span>
+  <span class="ruby-comment"># weightedAvgAbsDeviationAtPrevSeason is at moment T-M.</span>
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - estimatedValue must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">estimatedValue</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - weightedAvgAbsDeviationAtPrevSeason must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">weightedAvgAbsDeviationAtPrevSeason</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">estimatedValue</span><span class="ruby-operator">+</span>(<span class="ruby-ivar">@teta</span><span class="ruby-operator">*</span><span class="ruby-identifier">weightedAvgAbsDeviationAtPrevSeason</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getEstimatedValue" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getEstimatedValue</span><span
+            class="method-args">(baseline, linearTrend, seasonalTrendForNextStepAtPrevSeason)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="getEstimatedValue-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">getEstimatedValue</span>(<span class="ruby-identifier">baseline</span>, <span class="ruby-identifier">linearTrend</span>, <span class="ruby-identifier">seasonalTrendForNextStepAtPrevSeason</span>)
+  <span class="ruby-comment"># We return estimatedValue at moment T+1.</span>
+  <span class="ruby-comment"># baseline is at moment T.</span>
+  <span class="ruby-comment"># linearTrend is at moment T.</span>
+  <span class="ruby-comment"># seasonalTrendForNextStepAtPrevSeason is at moment T-M+1.</span>
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - baseline must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">baseline</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - linearTrend must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">linearTrend</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - seasonalTrendForNextStepAtPrevSeason must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">seasonalTrendForNextStepAtPrevSeason</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-keyword">return</span> (<span class="ruby-identifier">baseline</span><span class="ruby-operator">+</span><span class="ruby-identifier">linearTrend</span><span class="ruby-operator">+</span><span class="ruby-identifier">seasonalTrendForNextStepAtPrevSeason</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getLinearTrend" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getLinearTrend</span><span
+            class="method-args">(baseline, previousBaseline, previousLinearTrend)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="getLinearTrend-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">getLinearTrend</span>(<span class="ruby-identifier">baseline</span>, <span class="ruby-identifier">previousBaseline</span>, <span class="ruby-identifier">previousLinearTrend</span>)
+  <span class="ruby-comment"># Other terms for linearTrend: slope</span>
+  <span class="ruby-comment"># We return linear trend at moment T.</span>
+  <span class="ruby-comment"># baseline is at moment T.</span>
+  <span class="ruby-comment"># previousBaseline is at moment T-1.</span>
+  <span class="ruby-comment"># previousLinearTrend is at moment T-1.</span>
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - baseline must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">baseline</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - previousBaseline must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">previousBaseline</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - previousLinearTrend must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">previousLinearTrend</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@beta</span><span class="ruby-operator">*</span>(<span class="ruby-identifier">baseline</span><span class="ruby-operator">-</span><span class="ruby-identifier">previousBaseline</span>)<span class="ruby-operator">+</span>((<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-ivar">@beta</span>)<span class="ruby-operator">*</span><span class="ruby-identifier">previousLinearTrend</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getNextSeasonalIndex" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getNextSeasonalIndex</span><span
+            class="method-args">(seasonalIndex)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="getNextSeasonalIndex-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">getNextSeasonalIndex</span>(<span class="ruby-identifier">seasonalIndex</span>)
+  <span class="ruby-identifier">validateSeasonalIndex</span>(<span class="ruby-identifier">seasonalIndex</span>)
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">seasonalIndex</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@maxSeasonalIndex</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">seasonalIndex</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@minSeasonalIndex</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getPreviousSeasonalIndex" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getPreviousSeasonalIndex</span><span
+            class="method-args">(seasonalIndex)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="getPreviousSeasonalIndex-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">getPreviousSeasonalIndex</span>(<span class="ruby-identifier">seasonalIndex</span>)
+  <span class="ruby-identifier">validateSeasonalIndex</span>(<span class="ruby-identifier">seasonalIndex</span>)
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">seasonalIndex</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@minSeasonalIndex</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">seasonalIndex</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@maxSeasonalIndex</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getSeasonalIndex" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getSeasonalIndex</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>################################################## Methods that perform
+actual calculations. ##################################################</p>
+          
+          
+
+          
+          <div class="method-source-code" id="getSeasonalIndex-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">getSeasonalIndex</span>()
+  <span class="ruby-identifier">hour</span>    = <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">now</span>().<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%H&#39;</span>).<span class="ruby-identifier">to_i</span>()
+  <span class="ruby-identifier">minutes</span> = <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">now</span>().<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%M&#39;</span>).<span class="ruby-identifier">to_i</span>()
+  <span class="ruby-identifier">seconds</span> = <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">now</span>().<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%S&#39;</span>).<span class="ruby-identifier">to_i</span>()
+  <span class="ruby-keyword">return</span> (((<span class="ruby-identifier">hour</span><span class="ruby-operator">*</span><span class="ruby-ivar">@minutesInAnHour</span>)<span class="ruby-operator">+</span>(<span class="ruby-identifier">minutes</span><span class="ruby-operator">*</span><span class="ruby-ivar">@secondsInAMinute</span>)<span class="ruby-operator">+</span>(<span class="ruby-identifier">seconds</span>)) <span class="ruby-operator">/</span> <span class="ruby-ivar">@intervalBeetweenObservationsInSeconds</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getSeasonalTrend" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getSeasonalTrend</span><span
+            class="method-args">(actualValue, baseline, seasonalTrendAtPrevSeason)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="getSeasonalTrend-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">getSeasonalTrend</span>(<span class="ruby-identifier">actualValue</span>, <span class="ruby-identifier">baseline</span>, <span class="ruby-identifier">seasonalTrendAtPrevSeason</span>)
+  <span class="ruby-comment"># We return seasonal trend at moment T.</span>
+  <span class="ruby-comment"># actualValue is at moment T.</span>
+  <span class="ruby-comment"># baseline is at moment T.</span>
+  <span class="ruby-comment"># seasonalTrendAtPrevSeason is at moment T-M.</span>
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - actualValue must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">actualValue</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - baseline must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">baseline</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - seasonalTrendAtPrevSeason must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">seasonalTrendAtPrevSeason</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@gamma</span><span class="ruby-operator">*</span>(<span class="ruby-identifier">actualValue</span><span class="ruby-operator">-</span><span class="ruby-identifier">baseline</span>)<span class="ruby-operator">+</span>((<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-ivar">@gamma</span>)<span class="ruby-operator">*</span><span class="ruby-identifier">seasonalTrendAtPrevSeason</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getWeightedAvgAbsDeviation" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getWeightedAvgAbsDeviation</span><span
+            class="method-args">(actualValue, estimatedValue, weightedAvgAbsDeviationAtPrevSeason)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="getWeightedAvgAbsDeviation-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">getWeightedAvgAbsDeviation</span>(<span class="ruby-identifier">actualValue</span>, <span class="ruby-identifier">estimatedValue</span>, <span class="ruby-identifier">weightedAvgAbsDeviationAtPrevSeason</span>)
+  <span class="ruby-comment"># We return weighted average absolute deviation at moment T.</span>
+  <span class="ruby-comment"># actualValue is at moment T.</span>
+  <span class="ruby-comment"># estimatedValue is at moment T. It has been calculated at moment T-1.</span>
+  <span class="ruby-comment"># weightedAvgAbsDeviationAtPrevSeason is at moment T-M.</span>
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - actualValue must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">actualValue</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - estimatedValue must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">estimatedValue</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - weightedAvgAbsDeviationAtPrevSeason must have a value.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">weightedAvgAbsDeviationAtPrevSeason</span>.<span class="ruby-identifier">nil?</span>()
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@gamma</span><span class="ruby-operator">*</span>(<span class="ruby-identifier">actualValue</span><span class="ruby-operator">-</span><span class="ruby-identifier">estimatedValue</span>).<span class="ruby-identifier">abs</span>()<span class="ruby-operator">+</span>((<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-ivar">@gamma</span>)<span class="ruby-operator">*</span><span class="ruby-identifier">weightedAvgAbsDeviationAtPrevSeason</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-isAberrantBehavior" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">isAberrantBehavior</span><span
+            class="method-args">(actualValue, confidenceBandUpperValue)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="isAberrantBehavior-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">isAberrantBehavior</span>(<span class="ruby-identifier">actualValue</span>, <span class="ruby-identifier">confidenceBandUpperValue</span>)
+  <span class="ruby-comment"># Is there aberrant behavior at moment T?</span>
+  <span class="ruby-comment"># During &quot;cold start&quot; confidenceBandUpperValue might be nil, for the lack of prior observations.</span>
+  <span class="ruby-comment"># We will return false in this case.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">actualValue</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">confidenceBandUpperValue</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">actualValue</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">confidenceBandUpperValue</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">throw</span> <span class="ruby-constant">Exception</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class.name} - #{__method__} - actualValue must have a value.&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setAlpha" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setAlpha</span><span
+            class="method-args">(percentageOfTotalWeights, amountOfTimePoints)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="setAlpha-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setAlpha</span>(<span class="ruby-identifier">percentageOfTotalWeights</span>, <span class="ruby-identifier">amountOfTimePoints</span>)
+  <span class="ruby-identifier">value</span> = <span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">exp</span>((<span class="ruby-constant">Math</span>.<span class="ruby-identifier">log10</span>(<span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">percentageOfTotalWeights</span>)) <span class="ruby-operator">/</span> <span class="ruby-identifier">amountOfTimePoints</span>)
+  <span class="ruby-identifier">validateSmoothingConstant</span>(<span class="ruby-string">&#39;Alpha&#39;</span>, <span class="ruby-value">0</span>, <span class="ruby-value">1</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@alpha</span> = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setBeta" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setBeta</span><span
+            class="method-args">(percentageOfTotalWeights, amountOfTimePoints)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="setBeta-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setBeta</span>(<span class="ruby-identifier">percentageOfTotalWeights</span>, <span class="ruby-identifier">amountOfTimePoints</span>)
+  <span class="ruby-identifier">value</span> = <span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">exp</span>((<span class="ruby-constant">Math</span>.<span class="ruby-identifier">log10</span>(<span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">percentageOfTotalWeights</span>)) <span class="ruby-operator">/</span> <span class="ruby-identifier">amountOfTimePoints</span>)
+  <span class="ruby-identifier">validateSmoothingConstant</span>(<span class="ruby-string">&#39;Beta&#39;</span>, <span class="ruby-value">0</span>, <span class="ruby-value">1</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@beta</span> = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setGamma" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setGamma</span><span
+            class="method-args">(percentageOfTotalWeights, amountOfTimePoints)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="setGamma-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setGamma</span>(<span class="ruby-identifier">percentageOfTotalWeights</span>, <span class="ruby-identifier">amountOfTimePoints</span>)
+  <span class="ruby-identifier">value</span> = <span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">exp</span>((<span class="ruby-constant">Math</span>.<span class="ruby-identifier">log10</span>(<span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">percentageOfTotalWeights</span>)) <span class="ruby-operator">/</span> <span class="ruby-identifier">amountOfTimePoints</span>)
+  <span class="ruby-identifier">validateSmoothingConstant</span>(<span class="ruby-string">&#39;Gamma&#39;</span>, <span class="ruby-value">0</span>, <span class="ruby-value">1</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@gamma</span> = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setHourDurationInMinutes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setHourDurationInMinutes</span><span
+            class="method-args">(minutes)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>################################################## Methods for affecting
+constants, i.e. smoothing constants.
+##################################################</p>
+          
+          
+
+          
+          <div class="method-source-code" id="setHourDurationInMinutes-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setHourDurationInMinutes</span>(<span class="ruby-identifier">minutes</span>)
+  <span class="ruby-ivar">@minutesInAnHour</span> = <span class="ruby-identifier">minutes</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setIntervalBetweenCollectionsInSeconds" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setIntervalBetweenCollectionsInSeconds</span><span
+            class="method-args">(seconds)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="setIntervalBetweenCollectionsInSeconds-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setIntervalBetweenCollectionsInSeconds</span>(<span class="ruby-identifier">seconds</span>)
+  <span class="ruby-ivar">@intervalBeetweenObservationsInSeconds</span> = <span class="ruby-identifier">seconds</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setMaxSeasonalIndex" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setMaxSeasonalIndex</span><span
+            class="method-args">(index)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="setMaxSeasonalIndex-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setMaxSeasonalIndex</span>(<span class="ruby-identifier">index</span>)
+  <span class="ruby-ivar">@maxSeasonalIndex</span> = <span class="ruby-identifier">index</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setMinSeasonalIndex" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setMinSeasonalIndex</span><span
+            class="method-args">(index)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="setMinSeasonalIndex-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setMinSeasonalIndex</span>(<span class="ruby-identifier">index</span>)
+  <span class="ruby-ivar">@minSeasonalIndex</span> = <span class="ruby-identifier">index</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setMinuteDurationInSeconds" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setMinuteDurationInSeconds</span><span
+            class="method-args">(seconds)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="setMinuteDurationInSeconds-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setMinuteDurationInSeconds</span>(<span class="ruby-identifier">seconds</span>)
+  <span class="ruby-ivar">@secondsInAMinute</span> = <span class="ruby-identifier">seconds</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setTeta" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setTeta</span><span
+            class="method-args">(value)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="setTeta-source">
+            <pre><span class="ruby-comment"># File lib/algorithms/holt_winters_forecasting/api.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setTeta</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">validateSmoothingConstant</span>(<span class="ruby-string">&#39;Teta&#39;</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@teta</span> = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>development.log - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Gemfile.html">Gemfile</a>
+  
+    <li><a href="../Gemfile_lock.html">Gemfile.lock</a>
+  
+    <li><a href="../LICENSE.html">LICENSE</a>
+  
+    <li><a href="../Procfile.html">Procfile</a>
+  
+    <li><a href="../README_md.html">README</a>
+  
+    <li><a href="../Rakefile.html">Rakefile</a>
+  
+    <li><a href="../app/assets/config/manifest_js.html">manifest.js</a>
+  
+    <li><a href="../app/assets/javascripts/application_js.html">application.js</a>
+  
+    <li><a href="../app/assets/javascripts/cable_js.html">cable.js</a>
+  
+    <li><a href="../app/assets/javascripts/demo/cyber_reports_coffee.html">cyber_reports.coffee</a>
+  
+    <li><a href="../app/assets/javascripts/demo/friendly_resources_coffee.html">friendly_resources.coffee</a>
+  
+    <li><a href="../app/assets/javascripts/demo/welcome_coffee.html">welcome.coffee</a>
+  
+    <li><a href="../app/assets/stylesheets/application_css.html">application.css</a>
+  
+    <li><a href="../app/assets/stylesheets/demo/cyber_reports_scss.html">cyber_reports.scss</a>
+  
+    <li><a href="../app/assets/stylesheets/demo/friendly_resources_scss.html">friendly_resources.scss</a>
+  
+    <li><a href="../app/assets/stylesheets/demo/welcome_scss.html">welcome.scss</a>
+  
+    <li><a href="../config_ru.html">config.ru</a>
+  
+    <li><a href="../config/credentials_yml_enc.html">credentials.yml.enc</a>
+  
+    <li><a href="../lib/algorithms/holt_winters_forecasting/dummyData_txt.html">dummyData</a>
+  
+    <li><a href="../log/db_log.html">db.log</a>
+  
+    <li><a href="../log/development_log.html">development.log</a>
+  
+    <li><a href="../package_json.html">package.json</a>
+  
+    <li><a href="../public/404_html.html">404.html</a>
+  
+    <li><a href="../public/422_html.html">422.html</a>
+  
+    <li><a href="../public/500_html.html">500.html</a>
+  
+    <li><a href="../public/apple-touch-icon-precomposed_png.html">apple-touch-icon-precomposed.png</a>
+  
+    <li><a href="../public/apple-touch-icon_png.html">apple-touch-icon.png</a>
+  
+    <li><a href="../public/favicon_ico.html">favicon.ico</a>
+  
+    <li><a href="../public/robots_txt.html">robots</a>
+  
+    <li><a href="../tmp/restart_txt.html">restart</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page log/development.log">
+
+<p>Started GET “/” for 127.0.0.1 at 2019-01-21 13:20:13 +0200</p>
+
+<pre>[1m[35m (0.3ms)[0m  [1m[34mSELECT &quot;schema_migrations&quot;.&quot;version&quot; FROM &quot;schema_migrations&quot; ORDER BY &quot;schema_migrations&quot;.&quot;version&quot; ASC[0m
+↳ /home/max/.rvm/gems/ruby-2.5.3@rails-5.2.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98</pre>
+
+<p>Processing by <a
+href="../Demo/WelcomeController.html#method-i-index">Demo::WelcomeController#index</a>
+as HTML</p>
+
+<pre>Rendering demo/welcome/index.html.erb within layouts/application
+Rendered demo/welcome/index.html.erb within layouts/application (10.8ms)</pre>
+
+<p>Completed 200 OK in 513ms (Views: 467.0ms | ActiveRecord: 0.0ms)</p>
+
+<p>Started GET “/sidekiq” for 127.0.0.1 at 2019-01-21 13:20:17 +0200 Started
+GET “/sidekiq/stylesheets/bootstrap.css” for 127.0.0.1 at 2019-01-21
+13:20:17 +0200 Started GET “/sidekiq/stylesheets/application.css” for
+127.0.0.1 at 2019-01-21 13:20:17 +0200 Started GET
+“/sidekiq/javascripts/application.js” for 127.0.0.1 at 2019-01-21 13:20:17
++0200 Started GET “/sidekiq/javascripts/dashboard.js” for 127.0.0.1 at
+2019-01-21 13:20:17 +0200 Started GET “/sidekiq/images/status.png” for
+127.0.0.1 at 2019-01-21 13:20:17 +0200 Started GET
+“/sidekiq/images/favicon.ico” for 127.0.0.1 at 2019-01-21 13:20:17 +0200
+Started GET “/sidekiq/stats” for 127.0.0.1 at 2019-01-21 13:20:22 +0200
+Started GET “/” for 127.0.0.1 at 2019-01-21 14:57:07 +0200</p>
+
+<pre>[1m[35m (0.2ms)[0m  [1m[34mSELECT &quot;schema_migrations&quot;.&quot;version&quot; FROM &quot;schema_migrations&quot; ORDER BY &quot;schema_migrations&quot;.&quot;version&quot; ASC[0m
+↳ /home/max/.rvm/gems/ruby-2.5.3@rails-5.2.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98</pre>
+
+<p>Processing by <a
+href="../Demo/WelcomeController.html#method-i-index">Demo::WelcomeController#index</a>
+as HTML</p>
+
+<pre>Rendering demo/welcome/index.html.erb within layouts/application
+Rendered demo/welcome/index.html.erb within layouts/application (7.8ms)</pre>
+
+<p>Completed 200 OK in 477ms (Views: 448.7ms | ActiveRecord: 0.0ms)</p>
+
+<p>Started GET “/demo/friendly_resources” for 127.0.0.1 at 2019-01-21 14:57:25
++0200 Processing by <a
+href="../Demo/FriendlyResourcesController.html#method-i-index">Demo::FriendlyResourcesController#index</a>
+as HTML</p>
+
+<pre>Rendering demo/friendly_resources/index.html.erb within layouts/application
+[1m[36mFriendlyResource Load (0.6ms)[0m  [1m[34mSELECT  &quot;friendly_resources&quot;.* FROM &quot;friendly_resources&quot; LIMIT ? OFFSET ?[0m  [[&quot;LIMIT&quot;, 10], [&quot;OFFSET&quot;, 0]]
+↳ app/views/demo/friendly_resources/index.html.erb:8
+Rendered demo/friendly_resources/index.html.erb within layouts/application (19.3ms)</pre>
+
+<p>Completed 200 OK in 107ms (Views: 84.2ms | ActiveRecord: 1.8ms)</p>
+
+<p>Started GET “/demo/friendly_resources/1” for 127.0.0.1 at 2019-01-21
+14:57:27 +0200 Processing by <a
+href="../Demo/FriendlyResourcesController.html#method-i-show">Demo::FriendlyResourcesController#show</a>
+as HTML</p>
+
+<pre>Parameters: {&quot;id&quot;=&gt;&quot;1&quot;}
+[1m[36mFriendlyResource Load (0.9ms)[0m  [1m[34mSELECT  &quot;friendly_resources&quot;.* FROM &quot;friendly_resources&quot; WHERE &quot;friendly_resources&quot;.&quot;id&quot; = ? LIMIT ?[0m  [[&quot;id&quot;, 1], [&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:17
+Rendering demo/friendly_resources/show.html.erb within layouts/application
+Rendered demo/friendly_resources/show.html.erb within layouts/application (3.4ms)</pre>
+
+<p>Completed 200 OK in 84ms (Views: 66.4ms | ActiveRecord: 0.9ms)</p>
+
+<p>Started GET “/demo/friendly_resources/1/start_monitoring” for 127.0.0.1 at
+2019-01-21 14:57:31 +0200 Processing by
+Demo::FriendlyResourcesController#startMonitoring as HTML</p>
+
+<pre>Parameters: {&quot;friendly_resource_id&quot;=&gt;&quot;1&quot;}</pre>
+
+<p><a
+href="../Departments/Demo/ThinkTank/Api.html">Departments::Demo::ThinkTank::Api</a>
+- startMonitoring - friendlyResourceId : 1</p>
+
+<pre>[1m[36mFriendlyResource Load (0.4ms)[0m  [1m[34mSELECT  &quot;friendly_resources&quot;.* FROM &quot;friendly_resources&quot; WHERE &quot;friendly_resources&quot;.&quot;id&quot; = ? LIMIT ?[0m  [[&quot;id&quot;, 1], [&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:17</pre>
+
+<p>Departments::Demo::ThinkTank::ThinkTankServices::Services -
+gatherDosIntelligence - friendlyResource - ip : 1337270017 <a
+href="../Departments/Demo/Intelligence/Api.html">Departments::Demo::Intelligence::Api</a>
+- startIntelligenceGathering - intelligenceQuery :
+{“friendlyResourceIp”:1337270017,“collectFormat”:“DOS_ICMP”}
+Departments::Demo::Intelligence::IntelligenceServices::FieldAgentContact::Api
+- missionDispatch - intelligenceQuery :
+{“friendlyResourceIp”:1337270017,“collectFormat”:“DOS_ICMP”}
+Departments::Demo::ThinkTank::ThinkTankServices::Services -
+analyzeDosIntelligence - friendlyResource - ip : 1337270017 <a
+href="../Departments/Demo/Analysis/Api.html">Departments::Demo::Analysis::Api</a>
+- produceInterpretationData - analysisQuery :
+{“friendlyResourceIp”:1337270017,“analysisType”:“icmpDosCyberReport”}
+Departments::Demo::Analysis::AnalysisServices::Services -
+startDosIcmpInterpretationDataProducer - friendlyResourceIp : 1337270017
+Departments::Demo::Analysis::AnalysisServices::Services -
+startDosIcmpInterpretationDataProducer - started
+Dos::IcmpInterpretationDataProducer</p>
+
+<pre>Rendering text template
+Rendered text template (0.2ms)</pre>
+
+<p>Completed 200 OK in 60ms (Views: 20.7ms | ActiveRecord: 0.4ms)</p>
+
+<p>Started GET “/demo/friendly_resources/1/start_monitoring” for 127.0.0.1 at
+2019-01-21 15:00:56 +0200 Processing by
+Demo::FriendlyResourcesController#startMonitoring as HTML</p>
+
+<pre>Parameters: {&quot;friendly_resource_id&quot;=&gt;&quot;1&quot;}</pre>
+
+<p><a
+href="../Departments/Demo/ThinkTank/Api.html">Departments::Demo::ThinkTank::Api</a>
+- startMonitoring - friendlyResourceId : 1</p>
+
+<pre>[1m[36mFriendlyResource Load (0.2ms)[0m  [1m[34mSELECT  &quot;friendly_resources&quot;.* FROM &quot;friendly_resources&quot; WHERE &quot;friendly_resources&quot;.&quot;id&quot; = ? LIMIT ?[0m  [[&quot;id&quot;, 1], [&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:17</pre>
+
+<p>Departments::Demo::ThinkTank::ThinkTankServices::Services -
+gatherDosIntelligence - friendlyResource - ip : 1337270017 <a
+href="../Departments/Demo/Intelligence/Api.html">Departments::Demo::Intelligence::Api</a>
+- startIntelligenceGathering - intelligenceQuery :
+{“friendlyResourceIp”:1337270017,“collectFormat”:“DOS_ICMP”}
+Departments::Demo::Intelligence::IntelligenceServices::FieldAgentContact::Api
+- missionDispatch - intelligenceQuery :
+{“friendlyResourceIp”:1337270017,“collectFormat”:“DOS_ICMP”}
+Departments::Demo::ThinkTank::ThinkTankServices::Services -
+analyzeDosIntelligence - friendlyResource - ip : 1337270017 <a
+href="../Departments/Demo/Analysis/Api.html">Departments::Demo::Analysis::Api</a>
+- produceInterpretationData - analysisQuery :
+{“friendlyResourceIp”:1337270017,“analysisType”:“icmpDosCyberReport”}
+Departments::Demo::Analysis::AnalysisServices::Services -
+startDosIcmpInterpretationDataProducer - friendlyResourceIp : 1337270017
+Departments::Demo::Analysis::AnalysisServices::Services -
+startDosIcmpInterpretationDataProducer - started
+Dos::IcmpInterpretationDataProducer</p>
+
+<pre>Rendering text template
+Rendered text template (0.2ms)</pre>
+
+<p>Completed 200 OK in 62ms (Views: 5.9ms | ActiveRecord: 1.2ms)</p>
+
+<pre>[1m[36mFriendlyResource Load (0.3ms)[0m  [1m[34mSELECT  &quot;friendly_resources&quot;.* FROM &quot;friendly_resources&quot; WHERE &quot;friendly_resources&quot;.&quot;ip_address&quot; = ? LIMIT ?[0m  [[&quot;ip_address&quot;, 1337270017], [&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:20
+[1m[36mDos::Icmp::DosIcmpInterpretation Load (1.2ms)[0m  [1m[34mSELECT  &quot;dos_icmp_interpretations&quot;.* FROM &quot;dos_icmp_interpretations&quot; WHERE (friendly_resource_id = 1 AND seasonal_index = 95) ORDER BY created_at desc LIMIT ?[0m  [[&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:106
+[1m[36mCACHE FriendlyResource Load (0.1ms)[0m  [1m[34mSELECT  &quot;friendly_resources&quot;.* FROM &quot;friendly_resources&quot; WHERE &quot;friendly_resources&quot;.&quot;ip_address&quot; = ? LIMIT ?[0m  [[&quot;ip_address&quot;, 1337270017], [&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:20
+[1m[36mDos::Icmp::DosIcmpInterpretation Load (1.1ms)[0m  [1m[34mSELECT  &quot;dos_icmp_interpretations&quot;.* FROM &quot;dos_icmp_interpretations&quot; WHERE (friendly_resource_id = 1 AND seasonal_index = 96) ORDER BY created_at desc LIMIT ?[0m  [[&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:106
+[1m[36mCACHE FriendlyResource Load (0.1ms)[0m  [1m[34mSELECT  &quot;friendly_resources&quot;.* FROM &quot;friendly_resources&quot; WHERE &quot;friendly_resources&quot;.&quot;ip_address&quot; = ? LIMIT ?[0m  [[&quot;ip_address&quot;, 1337270017], [&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:20
+[1m[36mDos::Icmp::DosIcmpInterpretation Load (0.4ms)[0m  [1m[34mSELECT  &quot;dos_icmp_interpretations&quot;.* FROM &quot;dos_icmp_interpretations&quot; WHERE (friendly_resource_id = 1 AND seasonal_index = 97) ORDER BY created_at desc LIMIT ?[0m  [[&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:106
+[1m[36mCACHE FriendlyResource Load (0.0ms)[0m  [1m[34mSELECT  &quot;friendly_resources&quot;.* FROM &quot;friendly_resources&quot; WHERE &quot;friendly_resources&quot;.&quot;ip_address&quot; = ? LIMIT ?[0m  [[&quot;ip_address&quot;, 1337270017], [&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:20
+[1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+↳ app/departments/demo/archive/api.rb:69
+[1m[36mDos::Icmp::DosIcmpInterpretation Create (2.7ms)[0m  [1m[32mINSERT INTO &quot;dos_icmp_interpretations&quot; (&quot;friendly_resource_id&quot;, &quot;aberrant_behavior&quot;, &quot;actual_value&quot;, &quot;baseline&quot;, &quot;confidence_band_upper_value&quot;, &quot;estimated_value&quot;, &quot;linear_trend&quot;, &quot;seasonal_index&quot;, &quot;seasonal_trend&quot;, &quot;report_type&quot;, &quot;weighted_avg_abs_deviation&quot;, &quot;created_at&quot;, &quot;updated_at&quot;) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [[&quot;friendly_resource_id&quot;, 1], [&quot;aberrant_behavior&quot;, 1], [&quot;actual_value&quot;, 0.0], [&quot;baseline&quot;, 0.0], [&quot;confidence_band_upper_value&quot;, 0.0], [&quot;estimated_value&quot;, 0.0], [&quot;linear_trend&quot;, 0.0], [&quot;seasonal_index&quot;, 96], [&quot;seasonal_trend&quot;, 0.0], [&quot;report_type&quot;, &quot;icmpDosCyberReport&quot;], [&quot;weighted_avg_abs_deviation&quot;, 0.0], [&quot;created_at&quot;, &quot;2019-01-21 13:01:04.959902&quot;], [&quot;updated_at&quot;, &quot;2019-01-21 13:01:04.959902&quot;]]
+↳ app/departments/demo/archive/api.rb:69
+[1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+↳ app/departments/demo/archive/api.rb:69
+[1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+↳ app/departments/demo/archive/api.rb:75
+[1m[36mDos::Icmp::DosIcmpInterpretation Update (4.8ms)[0m  [1m[33mUPDATE &quot;dos_icmp_interpretations&quot; SET &quot;aberrant_behavior&quot; = ?, &quot;actual_value&quot; = ?, &quot;baseline&quot; = ?, &quot;estimated_value&quot; = ?, &quot;linear_trend&quot; = ?, &quot;seasonal_trend&quot; = ?, &quot;weighted_avg_abs_deviation&quot; = ?, &quot;updated_at&quot; = ? WHERE &quot;dos_icmp_interpretations&quot;.&quot;id&quot; = ?[0m  [[&quot;aberrant_behavior&quot;, 0], [&quot;actual_value&quot;, 1.0], [&quot;baseline&quot;, 0.001670991201796257], [&quot;estimated_value&quot;, 0.001671049420512853], [&quot;linear_trend&quot;, 5.8218716596193254e-08], [&quot;seasonal_trend&quot;, 4.969018341223734e-06], [&quot;weighted_avg_abs_deviation&quot;, 4.977335424927176e-06], [&quot;updated_at&quot;, &quot;2019-01-21 13:01:04.989587&quot;], [&quot;id&quot;, 5]]
+↳ app/departments/demo/archive/api.rb:75
+[1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+↳ app/departments/demo/archive/api.rb:75</pre>
+
+<p>Started GET “/demo/friendly_resources/1/cyber_reports” for 127.0.0.1 at
+2019-01-21 15:01:14 +0200 Processing by <a
+href="../Demo/CyberReportsController.html#method-i-index">Demo::CyberReportsController#index</a>
+as HTML</p>
+
+<pre>Parameters: {&quot;friendly_resource_id&quot;=&gt;&quot;1&quot;}
+[1m[36mFriendlyResource Load (0.2ms)[0m  [1m[34mSELECT  &quot;friendly_resources&quot;.* FROM &quot;friendly_resources&quot; WHERE &quot;friendly_resources&quot;.&quot;id&quot; = ? LIMIT ?[0m  [[&quot;id&quot;, 1], [&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:17
+[1m[36mCACHE FriendlyResource Load (0.0ms)[0m  [1m[34mSELECT  &quot;friendly_resources&quot;.* FROM &quot;friendly_resources&quot; WHERE &quot;friendly_resources&quot;.&quot;id&quot; = ? LIMIT ?[0m  [[&quot;id&quot;, 1], [&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:17
+Rendering demo/cyber_reports/index.html.erb within layouts/application
+[1m[36mDos::Icmp::DosIcmpInterpretation Load (0.5ms)[0m  [1m[34mSELECT  &quot;dos_icmp_interpretations&quot;.* FROM &quot;dos_icmp_interpretations&quot; WHERE &quot;dos_icmp_interpretations&quot;.&quot;friendly_resource_id&quot; = ? LIMIT ? OFFSET ?[0m  [[&quot;friendly_resource_id&quot;, 1], [&quot;LIMIT&quot;, 10], [&quot;OFFSET&quot;, 0]]
+↳ app/views/demo/cyber_reports/index.html.erb:10
+Rendered demo/cyber_reports/index.html.erb within layouts/application (26.0ms)</pre>
+
+<p>Completed 200 OK in 162ms (Views: 94.1ms | ActiveRecord: 2.1ms)</p>
+
+<p>Started GET “/demo/cyber_reports/5?type=icmpDosCyberReport” for 127.0.0.1
+at 2019-01-21 15:01:21 +0200 Processing by <a
+href="../Demo/CyberReportsController.html#method-i-show">Demo::CyberReportsController#show</a>
+as HTML</p>
+
+<pre>Parameters: {&quot;type&quot;=&gt;&quot;icmpDosCyberReport&quot;, &quot;id&quot;=&gt;&quot;5&quot;}
+[1m[36mDos::Icmp::DosIcmpInterpretation Load (1.1ms)[0m  [1m[34mSELECT  &quot;dos_icmp_interpretations&quot;.* FROM &quot;dos_icmp_interpretations&quot; WHERE &quot;dos_icmp_interpretations&quot;.&quot;id&quot; = ? LIMIT ?[0m  [[&quot;id&quot;, 5], [&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:84
+[1m[36mFriendlyResource Load (0.5ms)[0m  [1m[34mSELECT  &quot;friendly_resources&quot;.* FROM &quot;friendly_resources&quot; WHERE &quot;friendly_resources&quot;.&quot;id&quot; = ? LIMIT ?[0m  [[&quot;id&quot;, 1], [&quot;LIMIT&quot;, 1]]
+↳ app/controllers/demo/cyber_reports_controller.rb:18
+Rendering demo/cyber_reports/show.html.erb within layouts/application
+Rendered demo/cyber_reports/show.html.erb within layouts/application (1.2ms)</pre>
+
+<p>Completed 200 OK in 89ms (Views: 53.8ms | ActiveRecord: 1.7ms)</p>
+
+<p>Started GET “/demo/friendly_resources/1/stop_monitoring” for 127.0.0.1 at
+2019-01-21 15:01:35 +0200 Processing by
+Demo::FriendlyResourcesController#stopMonitoring as HTML</p>
+
+<pre>Parameters: {&quot;friendly_resource_id&quot;=&gt;&quot;1&quot;}</pre>
+
+<p><a
+href="../Departments/Demo/ThinkTank/Api.html">Departments::Demo::ThinkTank::Api</a>
+- stopMonitoring - friendlyResourceId : 1</p>
+
+<pre>[1m[36mFriendlyResource Load (0.4ms)[0m  [1m[34mSELECT  &quot;friendly_resources&quot;.* FROM &quot;friendly_resources&quot; WHERE &quot;friendly_resources&quot;.&quot;id&quot; = ? LIMIT ?[0m  [[&quot;id&quot;, 1], [&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:17</pre>
+
+<p>Departments::Demo::ThinkTank::ThinkTankServices::Services -
+stopDosIntelligenceGathering - friendlyResource - ip : 1337270017 <a
+href="../Departments/Demo/Intelligence/Api.html">Departments::Demo::Intelligence::Api</a>
+- stopIntelligenceGathering - intelligenceQuery :
+{“friendlyResourceIp”:1337270017,“collectFormat”:“DOS_ICMP”}
+Departments::Demo::Intelligence::IntelligenceServices::FieldAgentContact::Api
+- missionAbort - intelligenceQuery :
+{“friendlyResourceIp”:1337270017,“collectFormat”:“DOS_ICMP”}
+Departments::Demo::ThinkTank::ThinkTankServices::Services -
+stopDosIntelligenceAnalysis - friendlyResource - ip : 1337270017 <a
+href="../Departments/Demo/Analysis/Api.html">Departments::Demo::Analysis::Api</a>
+- stopInterpretationDataProduction - analysisQuery :
+{“friendlyResourceIp”:1337270017,“analysisType”:“icmpDosCyberReport”}
+Departments::Demo::Analysis::AnalysisServices::Services -
+stopDosIcmpInterpretationDataProducer - friendlyResourceIp : 1337270017
+Departments::Demo::Analysis::AnalysisServices::Services -
+stopDosIcmpInterpretationDataProducer - started
+Dos::StopIcmpInterpretationDataProducer</p>
+
+<pre>Rendering text template
+Rendered text template (0.1ms)</pre>
+
+<p>Completed 200 OK in 44ms (Views: 10.5ms | ActiveRecord: 0.4ms)</p>
+
+<p>Started GET “/demo/friendly_resources/1/stop_monitoring” for 127.0.0.1 at
+2019-01-21 15:01:35 +0200 Processing by
+Demo::FriendlyResourcesController#stopMonitoring as HTML</p>
+
+<pre>Parameters: {&quot;friendly_resource_id&quot;=&gt;&quot;1&quot;}</pre>
+
+<p><a
+href="../Departments/Demo/ThinkTank/Api.html">Departments::Demo::ThinkTank::Api</a>
+- stopMonitoring - friendlyResourceId : 1</p>
+
+<pre>[1m[36mFriendlyResource Load (0.3ms)[0m  [1m[34mSELECT  &quot;friendly_resources&quot;.* FROM &quot;friendly_resources&quot; WHERE &quot;friendly_resources&quot;.&quot;id&quot; = ? LIMIT ?[0m  [[&quot;id&quot;, 1], [&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:17</pre>
+
+<p>Departments::Demo::ThinkTank::ThinkTankServices::Services -
+stopDosIntelligenceGathering - friendlyResource - ip : 1337270017 <a
+href="../Departments/Demo/Intelligence/Api.html">Departments::Demo::Intelligence::Api</a>
+- stopIntelligenceGathering - intelligenceQuery :
+{“friendlyResourceIp”:1337270017,“collectFormat”:“DOS_ICMP”}
+Departments::Demo::Intelligence::IntelligenceServices::FieldAgentContact::Api
+- missionAbort - intelligenceQuery :
+{“friendlyResourceIp”:1337270017,“collectFormat”:“DOS_ICMP”}
+Departments::Demo::ThinkTank::ThinkTankServices::Services -
+stopDosIntelligenceAnalysis - friendlyResource - ip : 1337270017 <a
+href="../Departments/Demo/Analysis/Api.html">Departments::Demo::Analysis::Api</a>
+- stopInterpretationDataProduction - analysisQuery :
+{“friendlyResourceIp”:1337270017,“analysisType”:“icmpDosCyberReport”}
+Departments::Demo::Analysis::AnalysisServices::Services -
+stopDosIcmpInterpretationDataProducer - friendlyResourceIp : 1337270017
+Departments::Demo::Analysis::AnalysisServices::Services -
+stopDosIcmpInterpretationDataProducer - started
+Dos::StopIcmpInterpretationDataProducer</p>
+
+<pre>Rendering text template
+Rendered text template (0.0ms)</pre>
+
+<p>Completed 200 OK in 53ms (Views: 6.5ms | ActiveRecord: 0.3ms)</p>
+
+<p>Started GET “/demo/friendly_resources/1” for 127.0.0.1 at 2019-01-21
+15:01:39 +0200 Processing by <a
+href="../Demo/FriendlyResourcesController.html#method-i-show">Demo::FriendlyResourcesController#show</a>
+as HTML</p>
+
+<pre>Parameters: {&quot;id&quot;=&gt;&quot;1&quot;}
+[1m[36mFriendlyResource Load (0.2ms)[0m  [1m[34mSELECT  &quot;friendly_resources&quot;.* FROM &quot;friendly_resources&quot; WHERE &quot;friendly_resources&quot;.&quot;id&quot; = ? LIMIT ?[0m  [[&quot;id&quot;, 1], [&quot;LIMIT&quot;, 1]]
+↳ app/departments/demo/archive/api.rb:17
+Rendering demo/friendly_resources/show.html.erb within layouts/application
+Rendered demo/friendly_resources/show.html.erb within layouts/application (2.5ms)</pre>
+
+<p>Completed 200 OK in 63ms (Views: 52.2ms | ActiveRecord: 0.2ms)</p>
+
+<p>Started POST “/backend_api/dos_icmp_intelligence” for 127.0.0.1 at
+2019-01-21 16:04:58 +0200</p>
+
+<pre>[1m[35m (0.3ms)[0m  [1m[34mSELECT &quot;schema_migrations&quot;.&quot;version&quot; FROM &quot;schema_migrations&quot; ORDER BY &quot;schema_migrations&quot;.&quot;version&quot; ASC[0m
+↳ /home/max/.rvm/gems/ruby-2.5.3@rails-5.2.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98</pre>
+
+<p>ActionController::RoutingError (No route matches [POST]
+“/backend_api/dos_icmp_intelligence”):</p>
+
+<p>actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in
+`call&#39; web-console (3.7.0) lib/web_console/middleware.rb:135:in
+`call_app&#39; web-console (3.7.0) lib/web_console/middleware.rb:30:in
+`block in call&#39; web-console (3.7.0) lib/web_console/middleware.rb:20:in
+`catch&#39; web-console (3.7.0) lib/web_console/middleware.rb:20:in
+`call&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/show_exceptions.rb:33:in `call&#39; railties
+(5.2.2) lib/rails/rack/logger.rb:38:in `call_app&#39; railties (5.2.2)
+lib/rails/rack/logger.rb:26:in `block in call&#39; activesupport (5.2.2)
+lib/active_support/tagged_logging.rb:71:in `block in tagged&#39;
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in
+`tagged&#39; activesupport (5.2.2)
+lib/active_support/tagged_logging.rb:71:in `tagged&#39; railties (5.2.2)
+lib/rails/rack/logger.rb:26:in `call&#39; sprockets-rails (3.2.1)
+lib/sprockets/rails/quiet_assets.rb:13:in `call&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/remote_ip.rb:81:in `call&#39; actionpack
+(5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call&#39; rack
+(2.0.6) lib/rack/method_override.rb:22:in `call&#39; rack (2.0.6)
+lib/rack/runtime.rb:22:in `call&#39; activesupport (5.2.2)
+lib/active_support/cache/strategy/local_cache_middleware.rb:29:in
+`call&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/executor.rb:14:in `call&#39; actionpack
+(5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call&#39; rack
+(2.0.6) lib/rack/sendfile.rb:111:in `call&#39; railties (5.2.2)
+lib/rails/engine.rb:524:in `call&#39; puma (3.12.0)
+lib/puma/configuration.rb:225:in `call&#39; puma (3.12.0)
+lib/puma/server.rb:658:in `handle_request&#39; puma (3.12.0)
+lib/puma/server.rb:472:in `process_client&#39; puma (3.12.0)
+lib/puma/server.rb:332:in `block in run&#39; puma (3.12.0)
+lib/puma/thread_pool.rb:133:in `block in spawn_thread&#39; Started POST
+“/demo/backend_api/dos_icmp_intelligence” for 127.0.0.1 at 2019-01-21
+16:05:23 +0200</p>
+
+<p>SyntaxError
+(/mnt/c/Users/ardor/Desktop/Observer/app/controllers/demo/backend_api/dos_icmp_intelligence_controller.rb:9:
+syntax error, unexpected end-of-input, expecting keyword_end):</p>
+
+<p>app/controllers/demo/backend_api/dos_icmp_intelligence_controller.rb:9:
+syntax error, unexpected end-of-input, expecting keyword_end Started POST
+“/demo/backend_api/dos_icmp_intelligence” for 127.0.0.1 at 2019-01-21
+16:05:55 +0200</p>
+
+<p>SyntaxError
+(/mnt/c/Users/ardor/Desktop/Observer/app/controllers/demo/backend_api/dos_icmp_intelligence_controller.rb:9:
+syntax error, unexpected end-of-input, expecting keyword_end):</p>
+
+<p>app/controllers/demo/backend_api/dos_icmp_intelligence_controller.rb:9:
+syntax error, unexpected end-of-input, expecting keyword_end Started POST
+“/demo/backend_api/dos_icmp_intelligence” for 127.0.0.1 at 2019-01-21
+16:06:59 +0200</p>
+
+<pre>[1m[35m (0.2ms)[0m  [1m[34mSELECT &quot;schema_migrations&quot;.&quot;version&quot; FROM &quot;schema_migrations&quot; ORDER BY &quot;schema_migrations&quot;.&quot;version&quot; ASC[0m
+↳ /home/max/.rvm/gems/ruby-2.5.3@rails-5.2.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98</pre>
+
+<p>LoadError (Unable to autoload constant <a
+href="../Demo/BackendApi/DosIcmpIntelligenceController.html">Demo::BackendApi::DosIcmpIntelligenceController</a>,
+expected
+/mnt/c/Users/ardor/Desktop/Observer/app/controllers/demo/backend_api/dos_icmp_intelligence_controller.rb
+to define it):</p>
+
+<p>activesupport (5.2.2) lib/active_support/dependencies.rb:511:in
+`load_missing_constant&#39; bootsnap (1.3.2)
+lib/bootsnap/load_path_cache/core_ext/active_support.rb:58:in `block in
+load_missing_constant&#39; bootsnap (1.3.2)
+lib/bootsnap/load_path_cache/core_ext/active_support.rb:16:in
+`allow_bootsnap_retry&#39; bootsnap (1.3.2)
+lib/bootsnap/load_path_cache/core_ext/active_support.rb:57:in
+`load_missing_constant&#39; activesupport (5.2.2)
+lib/active_support/dependencies.rb:195:in `const_missing&#39; activesupport
+(5.2.2) lib/active_support/inflector/methods.rb:285:in `const_get&#39;
+activesupport (5.2.2) lib/active_support/inflector/methods.rb:285:in `block
+in constantize&#39; activesupport (5.2.2)
+lib/active_support/inflector/methods.rb:281:in `each&#39; activesupport
+(5.2.2) lib/active_support/inflector/methods.rb:281:in `inject&#39;
+activesupport (5.2.2) lib/active_support/inflector/methods.rb:281:in
+`constantize&#39; activesupport (5.2.2)
+lib/active_support/dependencies.rb:582:in `get&#39; activesupport (5.2.2)
+lib/active_support/dependencies.rb:613:in `constantize&#39; actionpack
+(5.2.2) lib/action_dispatch/http/request.rb:88:in
+`controller_class_for&#39; actionpack (5.2.2)
+lib/action_dispatch/http/parameters.rb:101:in `binary_params_for?&#39;
+actionpack (5.2.2) lib/action_dispatch/http/parameters.rb:92:in
+`set_binary_encoding&#39; actionpack (5.2.2)
+lib/action_dispatch/http/parameters.rb:69:in `path_parameters=&#39;
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:50:in `block in
+serve&#39; actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in
+`each&#39; actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in
+`serve&#39; actionpack (5.2.2)
+lib/action_dispatch/routing/route_set.rb:840:in `call&#39; rack (2.0.6)
+lib/rack/tempfile_reaper.rb:15:in `call&#39; rack (2.0.6)
+lib/rack/etag.rb:25:in `call&#39; rack (2.0.6)
+lib/rack/conditional_get.rb:38:in `call&#39; rack (2.0.6)
+lib/rack/head.rb:12:in `call&#39; actionpack (5.2.2)
+lib/action_dispatch/http/content_security_policy.rb:18:in `call&#39; rack
+(2.0.6) lib/rack/session/abstract/id.rb:232:in `context&#39; rack (2.0.6)
+lib/rack/session/abstract/id.rb:226:in `call&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/cookies.rb:670:in `call&#39; activerecord
+(5.2.2) lib/active_record/migration.rb:559:in `call&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/callbacks.rb:28:in `block in call&#39;
+activesupport (5.2.2) lib/active_support/callbacks.rb:98:in
+`run_callbacks&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/callbacks.rb:26:in `call&#39; actionpack
+(5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call&#39;
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:61:in
+`call&#39; web-console (3.7.0) lib/web_console/middleware.rb:135:in
+`call_app&#39; web-console (3.7.0) lib/web_console/middleware.rb:30:in
+`block in call&#39; web-console (3.7.0) lib/web_console/middleware.rb:20:in
+`catch&#39; web-console (3.7.0) lib/web_console/middleware.rb:20:in
+`call&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/show_exceptions.rb:33:in `call&#39; railties
+(5.2.2) lib/rails/rack/logger.rb:38:in `call_app&#39; railties (5.2.2)
+lib/rails/rack/logger.rb:26:in `block in call&#39; activesupport (5.2.2)
+lib/active_support/tagged_logging.rb:71:in `block in tagged&#39;
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in
+`tagged&#39; activesupport (5.2.2)
+lib/active_support/tagged_logging.rb:71:in `tagged&#39; railties (5.2.2)
+lib/rails/rack/logger.rb:26:in `call&#39; sprockets-rails (3.2.1)
+lib/sprockets/rails/quiet_assets.rb:13:in `call&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/remote_ip.rb:81:in `call&#39; actionpack
+(5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call&#39; rack
+(2.0.6) lib/rack/method_override.rb:22:in `call&#39; rack (2.0.6)
+lib/rack/runtime.rb:22:in `call&#39; activesupport (5.2.2)
+lib/active_support/cache/strategy/local_cache_middleware.rb:29:in
+`call&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/executor.rb:14:in `call&#39; actionpack
+(5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call&#39; rack
+(2.0.6) lib/rack/sendfile.rb:111:in `call&#39; railties (5.2.2)
+lib/rails/engine.rb:524:in `call&#39; puma (3.12.0)
+lib/puma/configuration.rb:225:in `call&#39; puma (3.12.0)
+lib/puma/server.rb:658:in `handle_request&#39; puma (3.12.0)
+lib/puma/server.rb:472:in `process_client&#39; puma (3.12.0)
+lib/puma/server.rb:332:in `block in run&#39; puma (3.12.0)
+lib/puma/thread_pool.rb:133:in `block in spawn_thread&#39; Started POST
+“/demo/backend_api/dos_icmp_intelligence” for 127.0.0.1 at 2019-01-21
+16:09:11 +0200</p>
+
+<pre>[1m[35m (0.3ms)[0m  [1m[34mSELECT &quot;schema_migrations&quot;.&quot;version&quot; FROM &quot;schema_migrations&quot; ORDER BY &quot;schema_migrations&quot;.&quot;version&quot; ASC[0m
+↳ /home/max/.rvm/gems/ruby-2.5.3@rails-5.2.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98</pre>
+
+<p>Processing by <a
+href="../Demo/BackendApi/DosIcmpIntelligenceController.html#method-i-create">Demo::BackendApi::DosIcmpIntelligenceController#create</a>
+as *</p>
+
+<p>Can&#39;t verify CSRF token authenticity. Completed 422 Unprocessable
+Entity in 2ms (ActiveRecord: 0.0ms)</p>
+
+<p>ActionController::InvalidAuthenticityToken
+(ActionController::InvalidAuthenticityToken):</p>
+
+<p>actionpack (5.2.2)
+lib/action_controller/metal/request_forgery_protection.rb:211:in
+`handle_unverified_request&#39; actionpack (5.2.2)
+lib/action_controller/metal/request_forgery_protection.rb:243:in
+`handle_unverified_request&#39; actionpack (5.2.2)
+lib/action_controller/metal/request_forgery_protection.rb:238:in
+`verify_authenticity_token&#39; activesupport (5.2.2)
+lib/active_support/callbacks.rb:426:in `block in make_lambda&#39;
+activesupport (5.2.2) lib/active_support/callbacks.rb:198:in `block (2
+levels) in halting&#39; actionpack (5.2.2)
+lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in
+&lt;module:Callbacks&gt;&#39; activesupport (5.2.2)
+lib/active_support/callbacks.rb:199:in `block in halting&#39; activesupport
+(5.2.2) lib/active_support/callbacks.rb:513:in `block in invoke_before&#39;
+activesupport (5.2.2) lib/active_support/callbacks.rb:513:in `each&#39;
+activesupport (5.2.2) lib/active_support/callbacks.rb:513:in
+`invoke_before&#39; activesupport (5.2.2)
+lib/active_support/callbacks.rb:131:in `run_callbacks&#39; actionpack
+(5.2.2) lib/abstract_controller/callbacks.rb:41:in `process_action&#39;
+actionpack (5.2.2) lib/action_controller/metal/rescue.rb:22:in
+`process_action&#39; actionpack (5.2.2)
+lib/action_controller/metal/instrumentation.rb:34:in `block in
+process_action&#39; activesupport (5.2.2)
+lib/active_support/notifications.rb:168:in `block in instrument&#39;
+activesupport (5.2.2)
+lib/active_support/notifications/instrumenter.rb:23:in `instrument&#39;
+activesupport (5.2.2) lib/active_support/notifications.rb:168:in
+`instrument&#39; actionpack (5.2.2)
+lib/action_controller/metal/instrumentation.rb:32:in `process_action&#39;
+actionpack (5.2.2) lib/action_controller/metal/params_wrapper.rb:256:in
+`process_action&#39; activerecord (5.2.2)
+lib/active_record/railties/controller_runtime.rb:24:in `process_action&#39;
+actionpack (5.2.2) lib/abstract_controller/base.rb:134:in `process&#39;
+actionview (5.2.2) lib/action_view/rendering.rb:32:in `process&#39;
+actionpack (5.2.2) lib/action_controller/metal.rb:191:in `dispatch&#39;
+actionpack (5.2.2) lib/action_controller/metal.rb:252:in `dispatch&#39;
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:52:in
+`dispatch&#39; actionpack (5.2.2)
+lib/action_dispatch/routing/route_set.rb:34:in `serve&#39; actionpack
+(5.2.2) lib/action_dispatch/journey/router.rb:52:in `block in serve&#39;
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in `each&#39;
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in `serve&#39;
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:840:in
+`call&#39; rack (2.0.6) lib/rack/tempfile_reaper.rb:15:in `call&#39; rack
+(2.0.6) lib/rack/etag.rb:25:in `call&#39; rack (2.0.6)
+lib/rack/conditional_get.rb:38:in `call&#39; rack (2.0.6)
+lib/rack/head.rb:12:in `call&#39; actionpack (5.2.2)
+lib/action_dispatch/http/content_security_policy.rb:18:in `call&#39; rack
+(2.0.6) lib/rack/session/abstract/id.rb:232:in `context&#39; rack (2.0.6)
+lib/rack/session/abstract/id.rb:226:in `call&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/cookies.rb:670:in `call&#39; activerecord
+(5.2.2) lib/active_record/migration.rb:559:in `call&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/callbacks.rb:28:in `block in call&#39;
+activesupport (5.2.2) lib/active_support/callbacks.rb:98:in
+`run_callbacks&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/callbacks.rb:26:in `call&#39; actionpack
+(5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call&#39;
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:61:in
+`call&#39; web-console (3.7.0) lib/web_console/middleware.rb:135:in
+`call_app&#39; web-console (3.7.0) lib/web_console/middleware.rb:30:in
+`block in call&#39; web-console (3.7.0) lib/web_console/middleware.rb:20:in
+`catch&#39; web-console (3.7.0) lib/web_console/middleware.rb:20:in
+`call&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/show_exceptions.rb:33:in `call&#39; railties
+(5.2.2) lib/rails/rack/logger.rb:38:in `call_app&#39; railties (5.2.2)
+lib/rails/rack/logger.rb:26:in `block in call&#39; activesupport (5.2.2)
+lib/active_support/tagged_logging.rb:71:in `block in tagged&#39;
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in
+`tagged&#39; activesupport (5.2.2)
+lib/active_support/tagged_logging.rb:71:in `tagged&#39; railties (5.2.2)
+lib/rails/rack/logger.rb:26:in `call&#39; sprockets-rails (3.2.1)
+lib/sprockets/rails/quiet_assets.rb:13:in `call&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/remote_ip.rb:81:in `call&#39; actionpack
+(5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call&#39; rack
+(2.0.6) lib/rack/method_override.rb:22:in `call&#39; rack (2.0.6)
+lib/rack/runtime.rb:22:in `call&#39; activesupport (5.2.2)
+lib/active_support/cache/strategy/local_cache_middleware.rb:29:in
+`call&#39; actionpack (5.2.2)
+lib/action_dispatch/middleware/executor.rb:14:in `call&#39; actionpack
+(5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call&#39; rack
+(2.0.6) lib/rack/sendfile.rb:111:in `call&#39; railties (5.2.2)
+lib/rails/engine.rb:524:in `call&#39; puma (3.12.0)
+lib/puma/configuration.rb:225:in `call&#39; puma (3.12.0)
+lib/puma/server.rb:658:in `handle_request&#39; puma (3.12.0)
+lib/puma/server.rb:472:in `process_client&#39; puma (3.12.0)
+lib/puma/server.rb:332:in `block in run&#39; puma (3.12.0)
+lib/puma/thread_pool.rb:133:in `block in spawn_thread&#39; Started POST
+“/demo/backend_api/dos_icmp_intelligence” for 127.0.0.1 at 2019-01-21
+16:12:32 +0200</p>
+
+<pre>[1m[35m (0.3ms)[0m  [1m[34mSELECT &quot;schema_migrations&quot;.&quot;version&quot; FROM &quot;schema_migrations&quot; ORDER BY &quot;schema_migrations&quot;.&quot;version&quot; ASC[0m
+↳ /home/max/.rvm/gems/ruby-2.5.3@rails-5.2.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98</pre>
+
+<p>ActionController::RoutingError (undefined method `skip_before_filter&#39;
+for Demo::BackendApi::DosIcmpIntelligenceController:Class Did you mean? 
+skip_before_action):</p>
+
+<p>app/controllers/demo/backend_api/dos_icmp_intelligence_controller.rb:2:in
+`&lt;class:DosIcmpIntelligenceController&gt;&#39;
+app/controllers/demo/backend_api/dos_icmp_intelligence_controller.rb:1:in
+`&lt;main&gt;&#39; Started POST “/demo/backend_api/dos_icmp_intelligence”
+for 127.0.0.1 at 2019-01-21 16:12:57 +0200</p>
+
+<pre>[1m[35m (0.2ms)[0m  [1m[34mSELECT &quot;schema_migrations&quot;.&quot;version&quot; FROM &quot;schema_migrations&quot; ORDER BY &quot;schema_migrations&quot;.&quot;version&quot; ASC[0m
+↳ /home/max/.rvm/gems/ruby-2.5.3@rails-5.2.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98</pre>
+
+<p>Processing by <a
+href="../Demo/BackendApi/DosIcmpIntelligenceController.html#method-i-create">Demo::BackendApi::DosIcmpIntelligenceController#create</a>
+as   * Completed 500 Internal Server Error in 173ms (ActiveRecord: 0.0ms)</p>
+
+<p>NameError (undefined local variable or method `intelligence_data&#39; for
+#&lt;Demo::BackendApi::DosIcmpIntelligenceController:0x00000000037f51b8&gt;
+Did you mean?  @intelligenceData):</p>
+
+<p>app/controllers/demo/backend_api/dos_icmp_intelligence_controller.rb:5:in
+`create&#39; Started POST “/demo/backend_api/dos_icmp_intelligence” for
+127.0.0.1 at 2019-01-21 16:13:22 +0200</p>
+
+<pre>[1m[35m (0.3ms)[0m  [1m[34mSELECT &quot;schema_migrations&quot;.&quot;version&quot; FROM &quot;schema_migrations&quot; ORDER BY &quot;schema_migrations&quot;.&quot;version&quot; ASC[0m
+↳ /home/max/.rvm/gems/ruby-2.5.3@rails-5.2.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98</pre>
+
+<p>Processing by <a
+href="../Demo/BackendApi/DosIcmpIntelligenceController.html#method-i-create">Demo::BackendApi::DosIcmpIntelligenceController#create</a>
+as *</p>
+
+<pre>Rendering text template
+Rendered text template (0.0ms)</pre>
+
+<p>Completed 200 OK in 11ms (Views: 6.3ms | ActiveRecord: 0.0ms)</p>
+
+<p>Started POST “/demo/backend_api/dos_icmp_intelligence” for 127.0.0.1 at
+2019-01-21 16:14:45 +0200 Processing by <a
+href="../Demo/BackendApi/DosIcmpIntelligenceController.html#method-i-create">Demo::BackendApi::DosIcmpIntelligenceController#create</a>
+as   *</p>
+
+<pre>Parameters: {&quot;continueAnalysis&quot;=&gt;true, &quot;intelligenceData&quot;=&gt;[{&quot;source&quot;=&gt;2337270017, &quot;destination&quot;=&gt;1337270017, &quot;bodyLengthInBytes&quot;=&gt;10000}], &quot;dos_icmp_intelligence&quot;=&gt;{&quot;continueAnalysis&quot;=&gt;true, &quot;intelligenceData&quot;=&gt;[{&quot;source&quot;=&gt;2337270017, &quot;destination&quot;=&gt;1337270017, &quot;bodyLengthInBytes&quot;=&gt;10000}]}}
+Rendering text template
+Rendered text template (0.0ms)</pre>
+
+<p>Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.0ms)</p>
+
+<p>Started POST “/demo/backend_api/dos_icmp_intelligence” for 127.0.0.1 at
+2019-01-25 12:41:35 +0200</p>
+
+<pre>[1m[35m (0.3ms)[0m  [1m[34mSELECT &quot;schema_migrations&quot;.&quot;version&quot; FROM &quot;schema_migrations&quot; ORDER BY &quot;schema_migrations&quot;.&quot;version&quot; ASC[0m
+↳ /home/max/.rvm/gems/ruby-2.5.3@rails-5.2.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98</pre>
+
+<p>Processing by <a
+href="../Demo/BackendApi/DosIcmpIntelligenceController.html#method-i-create">Demo::BackendApi::DosIcmpIntelligenceController#create</a>
+as <strong>/</strong></p>
+
+<pre>Parameters: {&quot;continueAnalysis&quot;=&gt;true, &quot;intelligenceData&quot;=&gt;[{&quot;source&quot;=&gt;2337270017, &quot;destination&quot;=&gt;1337270017, &quot;bodyLengthInBytes&quot;=&gt;10000}], &quot;dos_icmp_intelligence&quot;=&gt;{&quot;continueAnalysis&quot;=&gt;true, &quot;intelligenceData&quot;=&gt;[{&quot;source&quot;=&gt;2337270017, &quot;destination&quot;=&gt;1337270017, &quot;bodyLengthInBytes&quot;=&gt;10000}]}}
+Rendering text template
+Rendered text template (0.1ms)</pre>
+
+<p>Completed 200 OK in 31ms (Views: 14.9ms | ActiveRecord: 0.0ms)</p>
+
+<p>Started POST “/demo/backend_api/dos_icmp_intelligence” for 127.0.0.1 at
+2019-01-25 12:41:44 +0200 Processing by <a
+href="../Demo/BackendApi/DosIcmpIntelligenceController.html#method-i-create">Demo::BackendApi::DosIcmpIntelligenceController#create</a>
+as <strong>/</strong></p>
+
+<pre>Parameters: {&quot;continueAnalysis&quot;=&gt;true, &quot;intelligenceData&quot;=&gt;[{&quot;source&quot;=&gt;2337270017, &quot;destination&quot;=&gt;1337270017, &quot;bodyLengthInBytes&quot;=&gt;10000}], &quot;dos_icmp_intelligence&quot;=&gt;{&quot;continueAnalysis&quot;=&gt;true, &quot;intelligenceData&quot;=&gt;[{&quot;source&quot;=&gt;2337270017, &quot;destination&quot;=&gt;1337270017, &quot;bodyLengthInBytes&quot;=&gt;10000}]}}
+Rendering text template
+Rendered text template (0.0ms)</pre>
+
+<p>Completed 200 OK in 9ms (Views: 1.9ms | ActiveRecord: 0.0ms)</p>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
