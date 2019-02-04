@@ -1,0 +1,24 @@
+<h1 class="title-page">
+  <%= page_title_for_cyber_reports_view("FriendlyResource \"#{friendly_resource_name(@friendly_resource)}\"") %>
+</h1>
+<div class="about-page">
+  <p>You can navigate to any relevant CyberReport from here.</p>
+</div>
+<div class="navigate-resources">
+  <p>Navigation links to CyberReports:</p>
+  <ul>
+    <% @cyber_reports.each do |cyber_report| %>
+      <li>
+        <%= link_to cyber_report_name(cyber_report),
+          "#{cyber_report_path(cyber_report)}?type=#{cyber_report.report_type}" %>
+      </li>
+    <% end %>
+  </ul>
+  <p>Navigation links to CyberReports with positive results:</p>
+  <ul>
+    <li>Link to CyberReportWithAttack1</li>
+    <li>Link to CyberReportWithAttack2</li>
+  </ul>
+  <span><button>Previous Page</button><button>Next Page</button></span>
+  <p><%= link_to "Back to \"#{friendly_resource_name(@friendly_resource)}\"", friendly_resource_path(@friendly_resource) %></p>
+</div>

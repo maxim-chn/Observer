@@ -2,8 +2,8 @@ require 'test_helper'
 
 class Demo::CyberReportsControllerTest < ActionDispatch::IntegrationTest
   # test "demo_friendly_resource_cyber_reports fetch" do
-  #   friendlyResource = FriendlyResource.first()
-  #   get demo_friendly_resource_cyber_reports_path(friendlyResource)
+  #   friendly_resource = FriendlyResource.first()
+  #   get demo_friendly_resource_cyber_reports_path(friendly_resource)
   #   assert_select "h1.title-page", "This is CyberReports main page for FriendlyResource None"
   # end
 

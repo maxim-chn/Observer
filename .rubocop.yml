@@ -56,16 +56,24 @@ AllCops:
     - '**/Vagabondfile'
     - '**/Vagrantfile'
   Exclude:
-    - 'node_modules/**/*'
-    - 'vendor/**/*'
     - '.git/**/*'
+    - '.gitignore'
+    - '.ruby-gemset'
+    - '.ruby-version'
     - 'bin/*'
+    - 'config.ru'
     - 'log/*'
+    - 'node_modules/**/*'
+    - 'test/*'
     - 'tmp/*'
+    - 'vendor/**/*'
+    - 'Gemfile'
+    - 'Gemfile.lock'
+    - 'LICENSE'
+    - 'package.json'
     - 'Procfile'
     - 'Rakefile'
-    - 'Gemfile'
-    - 'config.ru'
+    - 'README.md'
   # Default formatter will be used if no `-f/--format` option is given.
   DefaultFormatter: progress
   # Cop names are displayed in offense messages by default. Change behavior

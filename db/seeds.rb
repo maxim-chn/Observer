@@ -16,9 +16,9 @@ end
 clear_all
 friendly_resources_amount = 1
 (1..friendly_resources_amount).each do |n|
-  friendlyResource = new_friendly_resource(
+  friendly_resource = new_friendly_resource(
     "demo_#{n}",
     IPAddr.new("79.181.31.#{n}")
   )
-  friendlyResource.save
+  friendly_resource.save
 end

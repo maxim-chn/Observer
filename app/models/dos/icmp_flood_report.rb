@@ -55,7 +55,7 @@ module Dos
 
     def validate_seasonal_index
       if seasonal_index
-        return if seasonal_index.between(
+        return if seasonal_index.between?(
           DosReport::FIRST_SEASONAL_INDEX,
           DosReport::LAST_SEASONAL_INDEX
         )

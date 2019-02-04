@@ -11,8 +11,14 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2018_11_25_080252) do
+  create_table "friendly_resources", force: :cascade do |t|
+    t.string "name"
+    t.integer "ip_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
-  create_table "dos_icmp_interpretations", force: :cascade do |t|
+  create_table "icmp_flood_reports", force: :cascade do |t|
     t.integer "friendly_resource_id"
     t.boolean "aberrant_behavior"
     t.float "actual_value"
@@ -24,16 +30,9 @@ ActiveRecord::Schema.define(version: 2018_11_25_080252) do
     t.float "seasonal_trend"
     t.string "report_type"
     t.float "weighted_avg_abs_deviation"
+    t.float "time_spent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["friendly_resource_id"], name: "index_dos_icmp_interpretations_on_friendly_resource_id"
+    t.index ["friendly_resource_id"], name: "index_icmp_flood_reports_on_friendly_resource_id"
   end
-
-  create_table "friendly_resources", force: :cascade do |t|
-    t.string "name"
-    t.integer "ip_address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
 end

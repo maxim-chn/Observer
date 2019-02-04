@@ -9,31 +9,25 @@ class DosInterpretationDataTest < ActiveSupport::TestCase
     aberrantBehavior                 = true
     actualValue                      = 10.0
     dosInterpretationData = DosInterpretationData.new(
-      baseline:                             baseline,
-      trend:                                trend,
-      seasonal_trend:                       seasonalTrend,
-      weighted_average_absolute_deviation:  weightedAverageAbsoluteDeviation,
-      aberrant_behavior:                    aberrantBehavior,
-      actual_value:                         actualValue
+      baseline: baseline,
+      trend: trend,
+      seasonal_trend: seasonalTrend,
+      weighted_average_absolute_deviation: weightedAverageAbsoluteDeviation,
+      aberrant_behavior: aberrantBehavior,
+      actual_value: actualValue
     )
     assert(baseline == dosInterpretationData.baseline,
-      "New dosInterpretationData has unexpected baseline"  
-    )
+           "New dosInterpretationData has unexpected baseline")
     assert(trend == dosInterpretationData.trend,
-      "New dosInterpretationData has unexpected trend"  
-    )
+           "New dosInterpretationData has unexpected trend")
     assert(seasonalTrend == dosInterpretationData.seasonal_trend,
-      "New dosInterpretationData has unexpected seasonalTrend"  
-    )
+           "New dosInterpretationData has unexpected seasonalTrend")
     assert(weightedAverageAbsoluteDeviation ==
       dosInterpretationData.weighted_average_absolute_deviation,
-      "New dosInterpretationData has unexpected weightedAverageAbsoluteDeviation"  
-    )
+           "New dosInterpretationData has unexpected weightedAverageAbsoluteDeviation")
     assert(aberrantBehavior == dosInterpretationData.aberrant_behavior,
-      "New dosInterpretationData has unexpected aberrantBehavior"  
-    )
+           "New dosInterpretationData has unexpected aberrantBehavior")
     assert(actualValue == dosInterpretationData.actual_value,
-      "New dosInterpretationData has unexpected actualValue"  
-    )
+           "New dosInterpretationData has unexpected actualValue")
   end
 end
