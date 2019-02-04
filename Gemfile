@@ -43,6 +43,14 @@ gem 'will_paginate', '~> 3.1.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # RSpec and Capybara testing frameworks.
+  # @see https://medium.com/@PostgradExpat/rails-5-tests-with-capybara-selenium-rspec-factorygirl-and-faker-7db23d193464.
+  gem 'rspec-rails'
+  gem 'capybara', '>= 2.15', '< 4.0'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end
 
 
@@ -55,16 +63,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  # Rubocop is a linting tool, base on https://github.com/rubocop-hq/ruby-style-guide
+  # Rubocop is a linting tool, based on https://github.com/rubocop-hq/ruby-style-guide
   gem 'rubocop', '~> 0.63.1', require: false
-end
-
-group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15', '< 4.0'
-  gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
 end
 
 group :production do
