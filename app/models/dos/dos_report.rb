@@ -7,7 +7,6 @@ module Dos
   class DosReport < CyberReport
     self.abstract_class = true
     # Enums related to Holt Winters algorithm.
-    DAYS_IN_A_WEEK = 7
     HOURS_IN_A_DAY = 24
     MINUTES_IN_AN_HOUR = 60
     SECONDS_IN_A_MINUTE = 60

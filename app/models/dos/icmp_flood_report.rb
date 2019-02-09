@@ -17,7 +17,7 @@ module Dos
     # It takes care of attributes that user has forgotten to pass value for them.
     def init_default_values
       validate_mandatory_values
-      self.aberrant_behavior = 0.0 unless aberrant_behavior
+      self.aberrant_behavior = false unless aberrant_behavior
       self.actual_value = 0.0 unless actual_value
       self.baseline = 0.0 unless baseline
       self.confidence_band_upper_value = 0.0 unless confidence_band_upper_value
@@ -36,7 +36,7 @@ module Dos
       result[:baseline] = baseline
       result[:confidence_band_upper_value] = confidence_band_upper_value
       result[:estimated_value] = estimated_value
-      result[:trend] = linear_trend
+      result[:linear_trend] = linear_trend
       result[:seasonal_index] = seasonal_index
       result[:seasonal_trend] = seasonal_trend
       result[:weighted_avg_abs_deviation] = weighted_avg_abs_deviation

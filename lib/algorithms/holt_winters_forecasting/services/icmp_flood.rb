@@ -9,6 +9,14 @@ module Algorithms
       class IcmpFlood
         include Singleton
 
+        def min_seasonal_index
+          @min_seasonal_index
+        end
+
+        def max_seasonal_index
+          @max_seasonal_index
+        end
+
         def set_defaults
           @hours_in_a_day = 24
           @mins_in_an_hour = 60
@@ -23,12 +31,10 @@ module Algorithms
 
         def seasonal_index
           hour = DateTime.now.strftime('%H').to_i
-          puts hour
           mins = DateTime.now.strftime('%M').to_i
           secs = DateTime.now.strftime('%S').to_i
           index = ((hour * @mins_in_an_hour) + (mins * @secs_in_a_min) + (secs)) / @time_unit
           validate_seasonal_index(index)
-          puts index
           index
         end
 

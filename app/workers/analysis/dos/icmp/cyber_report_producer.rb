@@ -10,19 +10,22 @@ module Workers
           include Sidekiq::Worker
           sidekiq_options retry: false
 
-          # Asynchronously creates CyberReport object for the moment T.
-          # Consumes Departments::Archive::Api to persist it.
-          # [ip] Integer.
-          #      FriendlyResource ip.
-          # [type] Enum.
-          #        CyberReport type. Necessary during Departments::Archive::Api consumption.
-          # [intelligence_data] Hash.
-          # [return] Void.
-          def perform(ip, type, intelligence_data)
-            logger.info("#{self.class.name} - #{__method__} - IP : #{ip}, type: #{type}, \
-              intelligence_data : #{intelligence_data}.")
+          # Asynchronously creates {CyberReport}, i.e. {Dos::IcmpFloodReport}, object for the moment T.
+          # Consumes {Departments::Archive::Api} to persist it.
+          # @param [Integer] ip Numerical representation of {FriendlyResource} ip address.
+          # @param [Symbol] {CyberReport} type to be created, i.e.
+          # {Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT}.
+          # @param [Hash<Symbol, Object>] intelligence_data Contains keys, like :incoming_req_count.
+          # @return [Void]
+          def perform(ip, type, intelligence_data, log: true)
+            logger.info("#{self.class.name} - #{__method__} - IP : #{ip}, type : #{type}, \
+              intelligence_data : #{intelligence_data}.") if log
             begin
-              indices = seasonal_indices_for_holt_winters_calculation_step
+              # In production, there should be no :seasonal_indices inside intelligence_data.
+              # It is an ugly hack, to ease upon integration test. Sorry, could not think
+              # of anything better :(
+              indices = intelligence_data[:seasonal_indices] if intelligence_data[:seasonal_indices]
+              indices = seasonal_indices_for_holt_winters_calculation_step if indices.nil?
               logger.debug("#{self.class.name} - #{__method__} - seasonal indices : #{indices}.")
               reports = cyber_reports_for_holt_winters_calculation_step(
                 ip,
@@ -35,7 +38,7 @@ module Workers
                 reports[:prev_season_next_step],
                 reports[:last],
                 reports[:latest],
-                intelligence_data['incoming_req_count']
+                intelligence_data[:incoming_req_count]
               )
               Departments::Archive::Api.instance.persist_cyber_report(reports[:latest])
               logger.debug("#{self.class.name} - #{__method__} - persisted #{reports[:latest].inspect}.")
@@ -46,9 +49,7 @@ module Workers
 
           private
 
-          # Retrieves seasonal indices of CyberReport objects,
-          # necessary for Holt Winters calculation step.
-          # [return] Hash.
+          # @return [Hash<Symbol, Integer>]
           def seasonal_indices_for_holt_winters_calculation_step
             indices = {}
             hw_forecasting_api = Algorithms::HoltWintersForecasting::Api.instance
@@ -64,18 +65,9 @@ module Workers
             indices
           end
 
-          # Retrieves [CyberReport] objects by their seasonal indices.
-          # [ip] Integer.
-          #      FriendlyResource ip.
-          # [type] Enum.
-          #        CyberReport type.
-          # [indices] Hash.
-          #           Seasonal indices.
-          #             * :last - seasonal index at the moment (T-1).
-          #             * :prev_season - seasonal index at the moment (T-M), M beign a season duration.
-          #             * :prev_season_next_step - seasonal index at the moment (T+1-M).
-          #             * :latest - seasonal index at the moment T.
-          # [return] [Hash].
+          # @param [Integer] ip Numerical representation of {FriendlyResource} ip address.
+          # @param [Symbol] type {CyberReport} type, i.e. {Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT}.
+          # @return [Hash<Symbol, CyberReport>]
           def cyber_reports_for_holt_winters_calculation_step(ip, type, indices)
             reports = {}
             archive_api = Departments::Archive::Api.instance

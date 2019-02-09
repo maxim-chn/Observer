@@ -65,6 +65,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Rubocop is a linting tool, based on https://github.com/rubocop-hq/ruby-style-guide
   gem 'rubocop', '~> 0.63.1', require: false
+  # Documentation gem
+  gem 'yard'
 end
 
 group :production do

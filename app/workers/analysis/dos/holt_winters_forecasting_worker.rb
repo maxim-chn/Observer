@@ -8,17 +8,14 @@ module Workers
       # HoltWintersFrecasting analysis.
       class HoltWintersForecastingWorker < Workers::WorkerWithRedis
         # Performs calculations for a single step in Holt Winters Forecasting Algorithm.
-        # [cyber_report_t_minus_m] CyberReport.
-        #                          Cyber report at the moment (T-M), M beign a season duration.
-        # [cyber_report_t_plus_one_minus_m] CyberReport.
-        #                                   Cyber report at the moment (T+1-M).
-        # [cyber_report_t_minus_one] CyberReport.
-        #                            Cyber report at the moment (T-1).
-        # [cyber_report_t] CyberReport.
-        #                  Cyber report at the moment T.
-        # [actual_value] Integer.
-        #                Measured value at the moment T.
-        # [return] Void.
+        # {CyberReport} used here are actual classes, i.e. {Dos::IcmpReportFlood}.
+        # M is a duration of a single season.
+        # @param [CyberReport] cyber_report_t_minus_m {CyberReport} at the moment (T-M).
+        # @param [CyberReport] cyber_report_t_plus_one_minus_m {CyberReport} at the moment (T+1-M).
+        # @param [CyberReport] cyber_report_t_minus_one {CyberReport} at the moment (T-1).
+        # @param [CyberReport] cyber_report_t {CyberReport} at the moment T.
+        # @param [Integer] actual_value Measured value, during past interval, i.e. amount of incoming requests.
+        # @return [Void].
         def forecasting_step(
           cyber_report_t_minus_m,
           cyber_report_t_plus_one_minus_m,
@@ -44,7 +41,6 @@ module Workers
           estimated_value_for_moment_t(moment_b, moment_d)
           weighted_avg_abs_deviation_for_moment_t(moment_a, moment_c, moment_d)
           confidence_band_upper_value_at_moment_t(moment_a, moment_c, moment_d)
-          logger.debug("#{self.class.name} - #{__method__} - Moment T, after calculations : #{moment_d}.")
           update_cyber_report_with_calculations(cyber_report_t, moment_d)
         end
 
@@ -67,10 +63,11 @@ module Workers
         end
 
         def aberrant_behavior_at_moment_t(moment_c, moment_d)
-          moment_d[:aberrant_behavior] = Algorithms::HoltWintersForecasting::Api.instance.aberrant_behavior(
+          result = Algorithms::HoltWintersForecasting::Api.instance.aberrant_behavior(
             moment_d[:actual_value],
             moment_c[:confidence_band_upper_value]
           )
+          moment_d[:aberrant_behavior] = result
         end
 
         def baseline_at_moment_t(moment_a, moment_c, moment_d)

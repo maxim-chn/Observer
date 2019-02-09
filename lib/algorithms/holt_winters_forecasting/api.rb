@@ -4,6 +4,8 @@ require 'singleton'
 require_relative './services/validation.rb'
 require_relative './services/icmp_flood.rb'
 
+##
+# Holds modules of algorithms. Each algorithm, i.e. Holt Winters Forecasting, should have its own module.
 module Algorithms
   ##
   # Holds +API+ and +Services+ necessary for *Holt Winters Forecasting*.
@@ -66,15 +68,29 @@ module Algorithms
         end
       end
 
+      def min_seasonal_index(type)
+        case type
+        when HoltWintersForecasting::ICMP_FLOOD
+          return HoltWintersForecasting::Services::IcmpFlood.instance.min_seasonal_index
+        end
+      end
+
+      def max_seasonal_index(type)
+        case type
+        when HoltWintersForecasting::ICMP_FLOOD
+          return HoltWintersForecasting::Services::IcmpFlood.instance.max_seasonal_index
+        end
+      end
+
       # Determines aberrant behavior at the moment T.
       # @param [Integer] actual_value_t Measured value at the moment T.
       # @param [Float] confidence_band_upper_value_t Maximum expected value at the moment T.
-      # @return [Boolean].
+      # @return [Boolean]
       def aberrant_behavior(actual_value_t, confidence_band_upper_value_t)
         validation = Services::Validation.instance
         validation.actual_value?(actual_value_t)
         validation.confidence_band_upper_value?(confidence_band_upper_value_t)
-        return actual_value_t > confidence_band_upper_value_t if confidence_band_upper_value_t
+        return (actual_value_t > confidence_band_upper_value_t) if confidence_band_upper_value_t
 
         false # Cold start.
       end
@@ -84,7 +100,7 @@ module Algorithms
       # @param [Float] linear_trend_t Linear trend at the moment T.
       # @param [Float] seasonal_trend_t_plus_one_minus_m Seasonal trend at the moment (T+1-M),
       # M beign a season duration.
-      # @return [Float].
+      # @return [Float]
       def estimated_value(baseline_t, linear_trend_t, seasonal_trend_t_plus_one_minus_m)
         validation = Services::Validation.instance
         validation.baseline?(baseline_t)
@@ -101,15 +117,15 @@ module Algorithms
       # @param [Float] seasonal_trend_t_minus_m Seasonal trend at the moment (T-M), M beign a season duration.
       # @param [Float] baseline_t_minus_one Baseline value at the moment (T-1).
       # @param [Float] linear_trend_t_minus_one Linear trend at the moment (T-1).
-      # @return [Float].
+      # @return [Float]
       def baseline(actual_value_t, seasonal_trend_t_minus_m, baseline_t_minus_one, linear_trend_t_minus_one)
         validation = Services::Validation.instance
         validation.actual_value?(actual_value_t)
         validation.seasonal_trend?(seasonal_trend_t_minus_m)
         validation.baseline?(baseline_t_minus_one)
         validation.linear_trend?(linear_trend_t_minus_one)
-        result = actual_value_t
-        result = @alpha * (result - seasonal_trend_t_minus_m) if seasonal_trend_t_minus_m
+        result = @alpha * actual_value_t
+        result = (result - @alpha * seasonal_trend_t_minus_m) if seasonal_trend_t_minus_m
         if baseline_t_minus_one
           result += (1 - @alpha) * (baseline_t_minus_one + linear_trend_t_minus_one) if linear_trend_t_minus_one
         end
@@ -121,7 +137,7 @@ module Algorithms
       # @param [Float] estimated_value_t Estimated value at the moment T.
       # @param [Float] weighted_avg_abs_deviation_t_minus_m Weighted Avg Abs Deviation at the moment
       # (T-M), M beign a season duration.
-      # @return [Float].
+      # @return [Float]
       def confidence_band_upper_value(estimated_value_t, weighted_avg_abs_deviation_t_minus_m)
         validation = Services::Validation.instance
         validation.estimated_value?(estimated_value_t)
@@ -136,7 +152,7 @@ module Algorithms
       # @param [Float] baseline_t Baseline value at the moment T.
       # @param [Float] baseline_t_minus_one Basline value at the moment (T-1).
       # @param [Float] linear_trend_t_minus_one Linear trend value at the moment (T-1).
-      # @return [Float].
+      # @return [Float]
       def linear_trend(baseline_t, baseline_t_minus_one, linear_trend_t_minus_one)
         validation = Services::Validation.instance
         validation.baseline?(baseline_t)
@@ -154,14 +170,14 @@ module Algorithms
       # @param [Float] basline_t Baseline value at the moment T.
       # @param [Float] seasonal_trend_t_minus_m Seasonal trend at the moment (T-M), M beign
       # a season duration.
-      # @return [Float].
+      # @return [Float]
       def seasonal_trend(actual_value_t, baseline_t, seasonal_trend_t_minus_m)
         validation = Services::Validation.instance
         validation.actual_value?(actual_value_t)
         validation.baseline?(baseline_t)
         validation.seasonal_trend?(seasonal_trend_t_minus_m)
-        result = actual_value_t
-        result = @gamma * (result - baseline_t) if baseline_t && baseline_t < actual_value_t
+        result = @gamma * actual_value_t
+        result =  (result - @gamma * baseline_t) if baseline_t && baseline_t < actual_value_t
         result += (1 - @gamma) * seasonal_trend_t_minus_m if seasonal_trend_t_minus_m
         validation.seasonal_trend?(result)
         result

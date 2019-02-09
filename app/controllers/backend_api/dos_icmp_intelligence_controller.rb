@@ -13,7 +13,7 @@ module BackendApi
 
     def create
       intelligence_data = {}
-      intelligence_data[:incoming_req_count] = params[:incoming_req_count]
+      intelligence_data[:incoming_req_count] = params[:incoming_req_count].to_i
       ip = params[:ip]
       if intelligence_data
         begin
