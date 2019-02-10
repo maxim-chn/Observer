@@ -5,80 +5,118 @@ require_relative './services/validation.rb'
 require_relative './services/icmp_flood.rb'
 
 ##
-# Holds modules of algorithms. Each algorithm, i.e. Holt Winters Forecasting, should have its own module.
+# Holds modules of algorithms. Each algorithm, i.e.
+# {https://ieeexplore.ieee.org/document/4542524 Modified Holt Winters Forecasting}, should have its own module.
 module Algorithms
   ##
-  # Holds +API+ and +Services+ necessary for *Holt Winters Forecasting*.
-  #
-  # For now we have one type of forecasting. Types are identified by constants:
-  # * [Algorithms::HolWintersForecasting::ICMP_FLOOD] - modified Holt Winters forecasting
-  # for ICMP Flood attacks.
+  # Algorithms::HoltWintersForecasting::API and
+  # Algorithms::HoltWintersForecasting::Services necessary for Holt Winters Forecasting analysis.
   module HoltWintersForecasting
     ICMP_FLOOD = 'HOLT_WINTERS_FORECASTING_FOR_ICMP_FLOOD'
     ##
-    # +API+ for consumption by other modules.
+    # Holt Winters Forecasting analysis methods, ready for consumption by other modules.
     class Api
       include Singleton
 
-      def set_time_unit_in_seconds(type, seconds)
-        Services::IcmpFlood.instance.set_time_unit_in_seconds(seconds) if type == HoltWintersForecasting::ICMP_FLOOD
+      # @param [Symbol] type Type of attacks that Holt Winters Forecasting analysis identifies, i.e.
+      # {Algorithms::HoltWintersForecasting::ICMP_FLOOD}.
+      # @param [Integer] seconds How many seconds lasts one moment / time unit in HW Forecasting analysis.
+      # @return [Void]
+      def time_unit_in_seconds(type, seconds)
+        Services::IcmpFlood.instance.time_unit_in_seconds(seconds) if type == HoltWintersForecasting::ICMP_FLOOD
       end
 
-      def set_alpha(weights_percentage, collections_count)
-        value = 1 - Math.exp((Math.log10(1 - weights_percentage)) / collections_count)
+      # Smoothing constant.It is responsible for adaptation of baseline value.
+      # @param [Float] weights_percentage How much of "weight" has the most recent data.
+      # @param [Integer] collections_count How many collections represent the most recent data.
+      # @return [Void]
+      def alpha(weights_percentage, collections_count)
+        value = 1 - Math.exp(Math.log10(1 - weights_percentage) / collections_count)
         Services::Validation.instance.exponential_smoothing_const?(value)
         @alpha = value
       end
 
-      def set_beta(weights_percentage, collections_count)
-        value = 1 - Math.exp((Math.log10(1 - weights_percentage)) / collections_count)
+      # Smoothing constant. It is responsible for adaptation of linear_trend / slope value.
+      # @param [Float] weights_percentage How much of "weight" has the most recent data.
+      # @param [Integer] collections_count How many collections represent the most recent data.
+      # @return [Void]
+      def beta(weights_percentage, collections_count)
+        value = 1 - Math.exp(Math.log10(1 - weights_percentage) / collections_count)
         Services::Validation.instance.exponential_smoothing_const?(value)
         @beta = value
       end
 
-      def set_gamma(weights_percentage, collections_count)
-        value = 1 - Math.exp((Math.log10(1 - weights_percentage)) / collections_count)
+      # Smoothing constant. It is responsible for adaptation of seasonal_trend value.
+      # @param [Float] weights_percentage How much of "weight" has the most recent data.
+      # @param [Integer] collections_count How many collections represent the most recent data.
+      # @return [Void]
+      def gamma(weights_percentage, collections_count)
+        value = 1 - Math.exp(Math.log10(1 - weights_percentage) / collections_count)
         Services::Validation.instance.exponential_smoothing_const?(value)
         @gamma = value
       end
 
-      def set_teta(value)
+      # Smoothing constant. It is responsible for scaling of confidence_band_upper_value.
+      # @param [Float] value Should be in the range [2,3].
+      # 2 - no tolerance for false negatives, 3 - false negatives are acceptable.
+      # @return [Void]
+      def teta(value)
         Services::Validation.instance.teta_const?(value)
         @teta = value
       end
 
+      # Maps current moment to a unique index, among collection of indices that represent a season.
+      # For example, if a single day (24 hours) is a season and we collect data every 10 seconds,
+      # there are 8640 seasonal indices.
+      # @param [Symbol] type Type of attacks that Holt Winters Forecasting analysis identifies, i.e.
+      # {Algorithms::HoltWintersForecasting::ICMP_FLOOD}.
+      # @return [Integer]
       def seasonal_index(type)
         case type
         when HoltWintersForecasting::ICMP_FLOOD
-          return HoltWintersForecasting::Services::IcmpFlood.instance.seasonal_index
+          HoltWintersForecasting::Services::IcmpFlood.instance.seasonal_index
         end
       end
 
+      # @param [Symbol] type Type of attacks that Holt Winters Forecasting analysis identifies, i.e.
+      # {Algorithms::HoltWintersForecasting::ICMP_FLOOD}.
+      # @param [Integer] index Current seasonal_index.
+      # @return [Integer]
       def prev_seasonal_index(type, index)
         case type
         when HoltWintersForecasting::ICMP_FLOOD
-          return HoltWintersForecasting::Services::IcmpFlood.instance.prev_seasonal_index(index)
+          HoltWintersForecasting::Services::IcmpFlood.instance.prev_seasonal_index(index)
         end
       end
 
+      # @param [Symbol] type Type of attacks that Holt Winters Forecasting analysis identifies, i.e.
+      # {Algorithms::HoltWintersForecasting::ICMP_FLOOD}.
+      # @param [Integer] index Current seasonal_index.
+      # @return [Integer]
       def next_seasonal_index(type, index)
         case type
         when HoltWintersForecasting::ICMP_FLOOD
-          return HoltWintersForecasting::Services::IcmpFlood.instance.next_seasonal_index(index)
+          HoltWintersForecasting::Services::IcmpFlood.instance.next_seasonal_index(index)
         end
       end
 
+      # @param [Symbol] type Type of attacks that Holt Winters Forecasting analysis identifies, i.e.
+      # {Algorithms::HoltWintersForecasting::ICMP_FLOOD}.
+      # @return [Integer]
       def min_seasonal_index(type)
         case type
         when HoltWintersForecasting::ICMP_FLOOD
-          return HoltWintersForecasting::Services::IcmpFlood.instance.min_seasonal_index
+          HoltWintersForecasting::Services::IcmpFlood.instance.min_seasonal_index
         end
       end
 
+      # @param [Symbol] type Type of attacks that Holt Winters Forecasting analysis identifies, i.e.
+      # {Algorithms::HoltWintersForecasting::ICMP_FLOOD}.
+      # @return [Integer]
       def max_seasonal_index(type)
         case type
         when HoltWintersForecasting::ICMP_FLOOD
-          return HoltWintersForecasting::Services::IcmpFlood.instance.max_seasonal_index
+          HoltWintersForecasting::Services::IcmpFlood.instance.max_seasonal_index
         end
       end
 
@@ -90,7 +128,7 @@ module Algorithms
         validation = Services::Validation.instance
         validation.actual_value?(actual_value_t)
         validation.confidence_band_upper_value?(confidence_band_upper_value_t)
-        return (actual_value_t > confidence_band_upper_value_t) if confidence_band_upper_value_t
+        return actual_value_t > confidence_band_upper_value_t if confidence_band_upper_value_t
 
         false # Cold start.
       end
@@ -194,8 +232,8 @@ module Algorithms
         validation.actual_value?(actual_value_t)
         validation.estimated_value?(estimated_value_t)
         validation.weighted_avg_abs_deviation_value?(weighted_avg_abs_deviation_t_minus_m)
-        result = actual_value_t
-        result = @gamma * (result - estimated_value_t).abs() if estimated_value_t
+        result = @gamma * actual_value_t
+        result =  (result - @gamma * estimated_value_t).abs if estimated_value_t
         result += (1 - @gamma) * weighted_avg_abs_deviation_t_minus_m if weighted_avg_abs_deviation_t_minus_m
         validation.weighted_avg_abs_deviation_value?(result)
         result

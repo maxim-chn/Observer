@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Specifies creation of a table friendly_resources.
 class CreateFriendlyResources < ActiveRecord::Migration[5.2]

@@ -26,7 +26,7 @@ module Workers
           moment_a = {} # Moment (T-M).
           moment_b = {} # Moment (T+1-M).
           moment_c = {} # Moment (T-1).
-          moment_d = { :actual_value => actual_value } # Moment T.
+          moment_d = { actual_value: actual_value } # Moment T.
           data_at_moment_t_minus_m(moment_a, cyber_report_t_minus_m)
           logger.debug("#{self.class.name} - #{__method__} - Moment (T-M) : #{moment_a}.")
           data_at_moment_t_plus_one_minus_m(moment_b, cyber_report_t_plus_one_minus_m)

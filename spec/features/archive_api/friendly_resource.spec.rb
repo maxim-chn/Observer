@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 RSpec.describe 'ArchiveApi', type: :feature do
   context 'A number of persisted friendly resources' do
@@ -7,7 +9,7 @@ RSpec.describe 'ArchiveApi', type: :feature do
           "demo_#{n}",
           IPAddr.new("79.181.31.#{n}").to_i
         )
-        next_friendly_resource.save()
+        next_friendly_resource.save
       end
     end
     subject(:archive_api) { Departments::Archive::Api.instance }

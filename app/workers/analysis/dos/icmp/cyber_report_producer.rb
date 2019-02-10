@@ -5,7 +5,7 @@ module Workers
     module Dos
       module Icmp
         ##
-        # Produces Dos::IcmpFloodReport.
+        # Produces {Dos::IcmpFloodReport}.
         class CyberReportProducer < Workers::Analysis::Dos::HoltWintersForecastingWorker
           include Sidekiq::Worker
           sidekiq_options retry: false
@@ -18,8 +18,10 @@ module Workers
           # @param [Hash<Symbol, Object>] intelligence_data Contains keys, like :incoming_req_count.
           # @return [Void]
           def perform(ip, type, intelligence_data, log: true)
-            logger.info("#{self.class.name} - #{__method__} - IP : #{ip}, type : #{type}, \
-              intelligence_data : #{intelligence_data}.") if log
+            if log
+              logger.info("#{self.class.name} - #{__method__} - IP : #{ip}, type : #{type}, \
+                intelligence_data : #{intelligence_data}.")
+            end
             begin
               # In production, there should be no :seasonal_indices inside intelligence_data.
               # It is an ugly hack, to ease upon integration test. Sorry, could not think

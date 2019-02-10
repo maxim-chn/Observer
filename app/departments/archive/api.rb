@@ -4,10 +4,11 @@ require 'singleton'
 require_relative './services/icmp_flood_report.rb'
 
 module Departments
+  ##
+  # A module that has direct access to models, i.e. {FriendlyResource}.
   module Archive
     ##
-    # API that is consumed by other modules.
-    # It is used for operating models, i.e. {FriendlyResource}.
+    # Methods for operating models, i.e. {FriendlyResource}.
     class Api
       include Singleton
 

@@ -64,7 +64,8 @@ AllCops:
     - 'config.ru'
     - 'log/*'
     - 'node_modules/**/*'
-    - 'test/*'
+    - 'spec/support/*'
+    - 'test/**/*'
     - 'tmp/*'
     - 'vendor/**/*'
     - 'Gemfile'
@@ -1658,7 +1659,7 @@ Metrics/BlockLength:
   VersionAdded: '0.44'
   VersionChanged: '0.58'
   CountComments: false  # count full line comments?
-  Max: 25
+  Max: 280
   ExcludedMethods:
     # By default, exclude the `#refine` method, as it tends to have larger
     # associated blocks.
@@ -2761,11 +2762,11 @@ Style/BlockDelimiters:
                 Avoid using {...} for multi-line blocks (multiline chaining is
                 always ugly).
                 Prefer {...} over do...end for single-line blocks.
-  StyleGuide: '#single-line-blocks'
+  StyleGuide: '#semantic'
   Enabled: true
   VersionAdded: '0.30'
   VersionChanged: '0.35'
-  EnforcedStyle: line_count_based
+  EnforcedStyle: semantic
   SupportedStyles:
     # The `line_count_based` style enforces braces around single line blocks and
     # do..end around multi-line blocks.
@@ -3682,7 +3683,7 @@ Style/NumericLiterals:
                  Add underscores to large numeric literals to improve their
                  readability.
   StyleGuide: '#underscores-in-numerics'
-  Enabled: true
+  Enabled: false
   VersionAdded: '0.9'
   VersionChanged: '0.48'
   MinDigits: 5

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Specifies creation of table icmp_flood_reports.
 class CreateIcmpFloodReports < ActiveRecord::Migration[5.2]

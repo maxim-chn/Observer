@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'ipaddr'
 
 def clear_cyber_reports
@@ -9,8 +11,8 @@ def clear_all
   FriendlyResource.delete_all
 end
 
-def new_friendly_resource(name = "demo", ipAddress = IPAddr.new("79.181.31.4"))
-  return FriendlyResource.new(name: name, ip_address: ipAddress.to_i)
+def new_friendly_resource(name = 'demo', ip_address = IPAddr.new('79.181.31.4'))
+  FriendlyResource.new(name: name, ip_address: ip_address.to_i)
 end
 
 clear_all

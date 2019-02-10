@@ -22,14 +22,14 @@ module Departments
         private
 
         def validate_page(value)
-          return if value.class == Integer && value > 0
+          return if value.class == Integer && value.positive?
 
           throw StandardError.new("#{self.class.name} - #{__method__} - expected page to be an\
              #{Integer.name} greater than 0.")
         end
 
         def validate_page_size(value)
-          return if value.class == Integer && value > 0
+          return if value.class == Integer && value.positive?
 
           throw StandardError.new("#{self.class.name} - #{__method__} - expected page_size to be an\
              #{Integer.name} greater than 0.")

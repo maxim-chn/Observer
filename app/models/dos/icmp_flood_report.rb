@@ -19,12 +19,6 @@ module Dos
       validate_mandatory_values
       self.aberrant_behavior = false unless aberrant_behavior
       self.actual_value = 0.0 unless actual_value
-      self.baseline = 0.0 unless baseline
-      self.confidence_band_upper_value = 0.0 unless confidence_band_upper_value
-      self.estimated_value = 0.0 unless estimated_value
-      self.linear_trend = 0.0 unless linear_trend
-      self.seasonal_trend = 0.0 unless seasonal_trend
-      self.weighted_avg_abs_deviation = 0.0 unless weighted_avg_abs_deviation
     end
 
     # A method that is similar to toString() in Java.

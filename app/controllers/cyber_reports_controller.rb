@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
 ##
-# Action View Controller for CyberReport.
-# [consumes] Departments::Archive::Api.
+# Action View Controller for {CyberReport}.
+# Consumes {Departments::Archive::Api}.
 class CyberReportsController < ApplicationController
   def index
     friendly_resource_id = params[:friendly_resource_id]
-    page = params[:page] || 1
-    page_size = params[:page_size] || 10
     archive_api = Departments::Archive::Api.instance
-    @cyber_reports = []
     @friendly_resource = archive_api.friendly_resource_by_id(friendly_resource_id)
+    @cyber_reports = []
   end
 
   def show

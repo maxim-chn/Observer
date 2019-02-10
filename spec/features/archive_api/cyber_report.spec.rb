@@ -1,15 +1,22 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 RSpec.describe 'ArchiveApi', type: :feature do
   context 'A number of persisted cyber reports' do
     before(:all) do
-      friendly_resource_ip = FactoryGirl.create(:friendly_resource).ip_address.to_i
+      friendly_resource = Departments::Archive::Api.instance.new_friendly_resource(
+        'demo_1',
+        IPAddr.new('79.181.31.10').to_i
+      )
+      friendly_resource.save
+      friendly_resource_ip = friendly_resource.ip_address.to_i
       (0..5).each do |n|
         next_cyber_report = Departments::Archive::Api.instance.new_cyber_report_object_for_friendly_resource(
           friendly_resource_ip,
           Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT,
           seasonal_index: n
         )
-        next_cyber_report.save()
+        next_cyber_report.save
       end
     end
     subject(:archive_api) { Departments::Archive::Api.instance }

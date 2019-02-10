@@ -7,7 +7,7 @@ module Departments
   module Archive
     module Services
       ##
-      # This class consumes models that extend Dos::DosReport.
+      # This class consumes model {Dos::IcmpFloodReport}.
       class IcmpFloodReport
         include Singleton
 
@@ -20,7 +20,7 @@ module Departments
           records_to_skip = QueryHelper.instance.records_to_skip(page, page_size)
           Dos::IcmpFloodReport.where(
             'friendly_resource_id = ?',
-            id,
+            id
           ).order('created_at desc').limit(page_size).offset(records_to_skip).to_a
         end
 
