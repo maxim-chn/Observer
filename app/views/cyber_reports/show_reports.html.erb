@@ -2,12 +2,10 @@
   <%= page_title_for_cyber_reports_view(
     "FriendlyResource \"#{friendly_resource_name(@friendly_resource)}\" | #{cyber_report_type(@cyber_report)}") %>
 </h1>
-<div class="about-page">
-  <p>You are looking at <%= cyber_report_name(@cyber_report) %>.</p>
-  <% @cyber_report_details.each do |field, value| %>
-    <p><b><%= field %></b>: <%= value %></p>
-  <% end %>
+<div class="graphical-representation">
+  <%= line_chart @cyber_reports_graph %>
 </div>
+<%= will_paginate @cyber_reports_graph %>
 <div class="navigate-resources">
   <p>Navigation links:</p>
   <ul>

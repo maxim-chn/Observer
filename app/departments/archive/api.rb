@@ -52,6 +52,22 @@ module Departments
         friendly_resource.save
       end
 
+      # Returns total amount of {CyberReport}, base on filtering.
+      # @param [Integer] ip Numerical representation of {FriendlyResource} IP address.
+      # @param [Symbol] type Type of {CyberReport}, i.e. {Shared::AnalysisType::ICMP_DOS_CYBER_REPORT}.
+      # @return [Integer]
+      def cyber_records_count(ip, type)
+        result = 0
+        friendly_resource = friendly_resource_by_ip(ip)
+        if friendly_resource
+          case type
+          when Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
+            result = Services::IcmpFloodReport.instance.count_records(friendly_resource.id)
+          end
+        end
+        result
+      end
+
       # Retrieves in DESC order, according to creation date.
       # @param [Integer] ip Integer representation of {FriendlyResource} ip address.
       # @param [Symbol] type {CyberReport} type, i.e. {Shared::AnalysisType::ICMP_DOS_CYBER_REPORT}.
@@ -132,8 +148,17 @@ module Departments
           for ip : #{ip}.")
       end
 
+      # @param [CyberReport] report An object of one of {CyberReport} sub-classes,
+      # i.e. {Dos::IcmpFloodReport}
       def persist_cyber_report(report)
         report.save
+      end
+
+      # @return [Array<Symbol>]
+      def cyber_report_types
+        result = []
+        result << Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
+        result
       end
     end
   end

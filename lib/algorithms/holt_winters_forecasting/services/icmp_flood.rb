@@ -35,11 +35,19 @@ module Algorithms
           update_max_seasonal_index(seconds)
         end
 
+        def seasonal_index_reverse(index)
+          time_in_seconds = index * @time_unit
+          secs = time_in_seconds % @secs_in_a_min
+          mins = ((time_in_seconds - secs) % (@mins_in_an_hour * @secs_in_a_min)) / @secs_in_a_min
+          hour = (time_in_seconds - secs) / (@mins_in_an_hour * @secs_in_a_min)
+          "#{hour}:#{mins}:#{secs}"
+        end
+
         def seasonal_index
           hour = DateTime.now.strftime('%H').to_i
           mins = DateTime.now.strftime('%M').to_i
           secs = DateTime.now.strftime('%S').to_i
-          index = (hour * @mins_in_an_hour + mins * @secs_in_a_min + secs) / @time_unit
+          index = (hour * @mins_in_an_hour * @secs_in_a_min + mins * @secs_in_a_min + secs) / @time_unit
           validate_seasonal_index(index)
           index
         end

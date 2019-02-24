@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 module Departments
+  ##
+  # Holds modules and classes shared by all departments.
   module Shared
     ##
-    # Represents arguments for Departments::Analysis::Api.
+    # Unites arguments for {Departments::Analysis::Api}.
     class AnalysisQuery
       attr_reader :friendly_resource_ip, :analysis_type
 

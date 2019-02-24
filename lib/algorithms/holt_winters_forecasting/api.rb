@@ -78,6 +78,13 @@ module Algorithms
         end
       end
 
+      # Maps seasonal index to string representation of time.
+      # @param [Integer] index
+      # @return [String]
+      def seasonal_index_reverse(index)
+        HoltWintersForecasting::Services::IcmpFlood.instance.seasonal_index_reverse(index)
+      end
+
       # @param [Symbol] type Type of attacks that Holt Winters Forecasting analysis identifies, i.e.
       # {Algorithms::HoltWintersForecasting::ICMP_FLOOD}.
       # @param [Integer] index Current seasonal_index.

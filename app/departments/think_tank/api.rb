@@ -42,6 +42,35 @@ module Departments
         query = Departments::Shared::AnalysisQuery.new(ip, Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT)
         Services::Analysis.instance.analyze(query, data)
       end
+
+      # Will return cyber reports in format that is parsable for a graph.
+      # @param [Symbol] type Type cyber report, i.e. {Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT}
+      # @param [Integer] ip Numerical representation of ip address of {FriendlyResource}.
+      # @param [Integer] page Page starts from 1.
+      # @param [Integer] page_size Size of a single page.
+      # @return [Array<CyberReport>]
+      def latest_cyber_reports_graph(type, ip, page, page_size)
+        archive_api = Departments::Archive::Api.instance
+        latest_cyber_reports = archive_api.cyber_reports_by_friendly_resource_ip_and_type(
+          ip,
+          type,
+          page,
+          page_size
+        )
+        graph = []
+        case type
+        when Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
+          graph << { name: 'confidence_band_upper_value', data: {} }
+          graph << { name: 'actual_value', data: {} }
+          hw_forecasting_api = Algorithms::HoltWintersForecasting::Api.instance
+          latest_cyber_reports.each do |report|
+            time_str = hw_forecasting_api.seasonal_index_reverse(report.seasonal_index.dup)
+            graph[0][:data][time_str] = report.confidence_band_upper_value.dup
+            graph[1][:data][time_str] = report.actual_value.dup
+          end
+        end
+        graph
+      end
     end
   end
 end

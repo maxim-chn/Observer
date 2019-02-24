@@ -9,12 +9,12 @@ Rails.application.routes.draw do
     get 'start_monitoring' => 'friendly_resources#start_monitoring'
     get 'stop_monitoring'  => 'friendly_resources#stop_monitoring'
     resources :cyber_reports, only: [:index]
+    get 'show_reports/:type' => 'cyber_reports#show_reports'
   end
-  scope :backend_api, module: 'backend_api', as: 'backendApi' do
+  scope :backend_api, module: 'backend_api', as: 'backend_api' do
     resources :dos_icmp_intelligence, only: [:create] do
     end
   end
-  resources :cyber_reports, only: [:show]
   root to: 'welcome#index' # root to: homepage_path
   # To access Sidekiq Dashboard
   require 'sidekiq/web'

@@ -23,4 +23,21 @@ friendly_resources_amount = 1
     IPAddr.new("79.181.31.#{n}")
   )
   friendly_resource.save
+  min = 0
+  max = 120
+  (min..max).each do |t|
+    seasonal_indices = { current: n, previous: t - 1, next: t + 1 }
+    seasonal_indices[:previous] = max if t == min
+    seasonal_indices[:next] = min if t == max
+    Workers::Analysis::Dos::Icmp::CyberReportProducer.new.perform(
+      friendly_resource.ip_address,
+      Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT,
+      {
+        ip: friendly_resource.ip_address,
+        incoming_req_count: rand(100..1000),
+        seasonal_indices: seasonal_indices
+      },
+      log: false
+    )
+  end
 end

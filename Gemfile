@@ -39,6 +39,8 @@ gem 'sidekiq', '~> 5.2', '>= 5.2.3'
 gem 'sinatra', github: 'sinatra/sinatra'
 # Use will_paginate for pagination
 gem 'will_paginate', '~> 3.1.0'
+# Use chartkick to represent data visually
+gem "chartkick"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

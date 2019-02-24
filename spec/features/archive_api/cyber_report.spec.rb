@@ -60,5 +60,8 @@ RSpec.describe 'ArchiveApi', type: :feature do
                seasonal_index: 2
              )).to be_an_instance_of(Dos::IcmpFloodReport)
     end
+    it 'Retrieves CyberReport types' do
+      expect(archive_api.cyber_report_types.size).to be > 0
+    end
   end
 end

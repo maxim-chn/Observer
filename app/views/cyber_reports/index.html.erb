@@ -7,18 +7,11 @@
 <div class="navigate-resources">
   <p>Navigation links to CyberReports:</p>
   <ul>
-    <% @cyber_reports.each do |cyber_report| %>
+    <% @cyber_report_types.each do |t| %>
       <li>
-        <%= link_to cyber_report_name(cyber_report),
-          "#{cyber_report_path(cyber_report)}?type=#{cyber_report.report_type}" %>
+        <%= link_to t, "show_reports/#{t}" %>
       </li>
     <% end %>
   </ul>
-  <p>Navigation links to CyberReports with positive results:</p>
-  <ul>
-    <li>Link to CyberReportWithAttack1</li>
-    <li>Link to CyberReportWithAttack2</li>
-  </ul>
-  <span><button>Previous Page</button><button>Next Page</button></span>
   <p><%= link_to "Back to \"#{friendly_resource_name(@friendly_resource)}\"", friendly_resource_path(@friendly_resource) %></p>
 </div>
