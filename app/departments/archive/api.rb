@@ -37,12 +37,32 @@ module Departments
         FriendlyResource.find_by(ip_address: ip)
       end
 
-      # Initiates a new object. It is not persisted inside database yet.
+      # Initiates a new {FriendlyResource} object. It is not persisted inside database yet.
       # @param [String] name {FriendlyResource} name.
       # @param [Integer] ip {FriendlyResource} ip address.
       # @return [FriendlyResource]
-      def new_friendly_resource(name, ip)
-        FriendlyResource.new(name: name, ip_address: ip)
+      def new_friendly_resource(name, ip_address)
+        if ip_address =~ /^[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*$/
+          ip_address = IPAddr.new(ip_address).to_i
+        elsif ip_address =~ /^[0-9]*$/
+          ip_adress = ip_address.to_i
+        else
+          throw StandardError.new('Illegal format for IP address.')
+        end
+        FriendlyResource.new(name: name, ip_address: ip_address)
+      end
+
+      # Initiates a new {FriendlyResource} object. It is not persisted inside database yet.
+      # @param [Hash] friendly_resource Contains fields and values for {FriendlyResource}.
+      # @return [FriendlyResource]
+      def new_friendly_resource_from_hash(friendly_resource)
+        new_friendly_resource(friendly_resource['name'], friendly_resource['ip_address'])
+      end
+
+      # Initiates a new {FriendlyResource} object. It is not persisted inside database yet.
+      # @return [FriendlyResource]
+      def new_empty_friendly_resource()
+        FriendlyResource.new
       end
 
       # Will persist the object in database.

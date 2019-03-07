@@ -1,5 +1,6 @@
 <h1 class="title-page"><%= page_title_for_friendly_resources_view(friendly_resource_name(@friendly_resource)) %></h1>
 <div class="about-page">
+  <p class="flash-notice"><%= flash[:notice] %></p>
   <p><b>Name:</b> <%= friendly_resource_name(@friendly_resource) %>
   <p><b>IP address</b>: <%= friendly_resource_ip(@friendly_resource) %></p>
   <p>Details of <i>"<%= friendly_resource_name(@friendly_resource) %>"</i> can be edited via

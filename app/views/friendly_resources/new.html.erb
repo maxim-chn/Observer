@@ -3,8 +3,28 @@
   <p>The form holds necessary fields for creating new FriendlyResource</p>
 </div>
 <div class="signup-form-container">  
-  <%= form_tag do %>
-    Form contents
+  <%= form_for @friendly_resource do |f| %>
+    <% if @friendly_resource.errors.any? %>
+      <div id="errorExplanation">
+        <h2><%= pluralize(@friendly_resource.errors.count, "error") %> prohibited this post from being saved:</h2>
+        <ul>
+        <% @friendly_resource.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :ip_address %><br />
+      <%= f.text_field :ip_address %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
   <% end %>
 </div>
 <div class="navigate-resources">

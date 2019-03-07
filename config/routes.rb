@@ -5,7 +5,7 @@
 # @see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
   get 'welcome' => 'welcome#index', as: 'homepage'
-  resources :friendly_resources, only: %i[index show new edit] do
+  resources :friendly_resources, only: %i[index show new edit create] do
     get 'start_monitoring' => 'friendly_resources#start_monitoring'
     get 'stop_monitoring'  => 'friendly_resources#stop_monitoring'
     resources :cyber_reports, only: [:index]

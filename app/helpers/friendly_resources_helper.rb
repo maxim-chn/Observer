@@ -12,7 +12,8 @@ module FriendlyResourcesHelper
   end
 
   def friendly_resource_ip(friendly_resource)
-    IPAddr.new(friendly_resource.ip_address, Socket::AF_INET).to_s if friendly_resource
+    return IPAddr.new(friendly_resource.ip_address, Socket::AF_INET).to_s if friendly_resource
+    
     'Unknown'
   end
 

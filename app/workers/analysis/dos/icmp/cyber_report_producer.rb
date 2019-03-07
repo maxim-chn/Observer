@@ -40,7 +40,7 @@ module Workers
                 reports[:prev_season_next_step],
                 reports[:last],
                 reports[:latest],
-                intelligence_data[:incoming_req_count]
+                intelligence_data['incoming_req_count']
               )
               Departments::Archive::Api.instance.persist_cyber_report(reports[:latest])
               logger.debug("#{self.class.name} - #{__method__} - persisted #{reports[:latest].inspect}.")

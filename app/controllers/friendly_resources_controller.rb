@@ -13,7 +13,9 @@ class FriendlyResourcesController < ApplicationController
   end
 
   def new
-    # render demo/friendly_resources/new.html.erb.
+    archive_api = Departments::Archive::Api.instance
+    @friendly_resource = archive_api.new_empty_friendly_resource
+    # will render new.html.erb
   end
 
   def show
@@ -28,27 +30,44 @@ class FriendlyResourcesController < ApplicationController
     @friendly_resource = archive_api.friendly_resource_by_id(friendly_resource_id)
   end
 
+  def create
+    archive_api = Departments::Archive::Api.instance
+    begin
+      @friendly_resource = archive_api.new_friendly_resource_from_hash(params['friendly_resource'])
+      if archive_api.persist_friendly_resource(@friendly_resource)
+        redirect_to(@friendly_resource, notice: 'Friendly resource has been created successfully.')
+      else
+        render action: "new", notice: 'Something went wrong with persisting new Friendly Resource'
+      end
+    rescue StandardError => e
+      Rails.logger.error(e.message)
+      render action: "new", notice: 'Something went wrong with creating new Friendly Resource'
+    end
+  end
+
   def start_monitoring
     friendly_resource_id = params[:friendly_resource_id]
+    @friendly_resource = Departments::Archive::Api.instance.friendly_resource_by_id(friendly_resource_id)
     think_tank_api = Departments::ThinkTank::Api.instance
     begin
       think_tank_api.start_monitoring(friendly_resource_id)
-      render plain: 'Succeeded to start monitoring.'
+      redirect_to(@friendly_resource, notice: 'Succeeded to start monitoring.')
     rescue StandardError => e
       Rails.logger.error(e.message)
-      render plain: 'Failed to start monitoring.'
+      redirect_to(@friendly_resource, notice: 'Failed to start monitoring.')
     end
   end
 
   def stop_monitoring
     friendly_resource_id = params[:friendly_resource_id]
+    @friendly_resource = Departments::Archive::Api.instance.friendly_resource_by_id(friendly_resource_id)
     think_tank_api = Departments::ThinkTank::Api.instance
     begin
       think_tank_api.stop_monitoring(friendly_resource_id)
-      render plain: 'Succeeded to stop monitoring.'
+      redirect_to(@friendly_resource, notice: 'Succeeded to stop monitoring.')
     rescue StandardError => e
       Rails.logger.error(e.message)
-      render plain: 'Failed to stop monitoring.'
+      redirect_to(@friendly_resource, notice: 'Failed to stop monitoring.')
     end
   end
 end
