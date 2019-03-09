@@ -15,17 +15,23 @@ module BackendApi
       intelligence_data = {}
       intelligence_data[:incoming_req_count] = params[:incoming_req_count].to_i
       ip = params[:ip]
+      message = { result: '', continue_collection: '' }
+      think_tank = Departments::ThinkTank::Api.instance
       if intelligence_data
         begin
-          Departments::ThinkTank::Api.instance.analyze_icmp_dos_intelligence_data(ip, intelligence_data)
-          render plain: 'Request to analyze succeeded'
+          think_tank.analyze_icmp_dos_intelligence_data(ip, intelligence_data)
+          message[:result] = 'Request to analyze succeeded'
         rescue StandardError => e
           Rails.logger.error(e.message)
-          render plain: 'Request to analyze failed'
+          message[:result] = 'Request to analyze failed'
+        ensure
+          message[:continue_collection] = think_tank.continue_icmp_dos_intelligence_collection?(ip)
         end
       else
-        render plain: 'DOS ICMP Intelligence Data not received'
+        message[:result] = 'DOS ICMP Intelligence Data not received'
+        message[:continue_collection] = false
       end
+      render plain: JSON.generate(message)
     end
   end
 end

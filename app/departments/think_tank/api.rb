@@ -85,6 +85,25 @@ module Departments
         end
         graph
       end
+
+      # Indicates if collection of intelligence data for ICMP flood attack analysis is still needed
+      # @param [Integer] ip Numerical representation of {FriendlyResource} ip address.
+      # @return [Boolean]
+      def continue_icmp_dos_intelligence_collection?(ip)
+        begin
+          redis_client = Services::Redis.instance.get_client
+          raw_cached_data = client.get(ip.to_s)
+          raw_cached_data ||= '{}'
+          cached_data = JSON.parse(raw_cached_data)
+          collect_formats = []
+          if cached_data.key?('collect_formats')
+            collect_formats = cached_data['collect_formats']
+          end
+          return collect_formats.include?(Shared::IntelligenceFormat::DOS_ICMP)
+        rescue StandardError => e
+          return false
+        end
+      end
     end
   end
 end
