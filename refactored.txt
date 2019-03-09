@@ -1,0 +1,11 @@
+Refactored:
+  - app
+    - controllers
+    - departments
+    - helpers
+    - models
+  - lib
+    - api.rb
+    - services
+      - icmp_flood.rb
+      - validation.rb

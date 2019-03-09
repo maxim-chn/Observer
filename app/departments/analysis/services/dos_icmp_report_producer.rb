@@ -4,17 +4,19 @@ require 'singleton'
 
 module Departments
   module Analysis
+    ##
+    # Any long / supporting implementations that are used in {Departments::Analysis::Api}
+    # are under this module.
     module Services
       ##
-      # Has access to Workers::Analysis::Dos::Icmp::CyberReportProducer.
+      # Has access to {Workers::Analysis::Dos::Icmp::CyberReportProducer}.
       class DosIcmpCyberReport
         include Singleton
 
-        # Will queue a job for production of Dos::IcmpCyberReport.
-        # [ip] Integer.
-        #      FriendlyResource ip address.
-        # [data] Hash.
-        #        Intelligence data collected by field agent.
+        # Queues a job for a production of {Dos::IcmpFloodReport}.
+        # @param [Integer] ip {FriendlyResource} ip address. Numerical representation.
+        # @param [Hash] data Intelligence data for the production of a {Dos::IcmpFloodReport}.
+        # @return [Void]
         def queue_dos_icmp_report(ip, data)
           Rails.logger.debug(
             "#{self.class.name} - #{__method__} - #{ip}\n \

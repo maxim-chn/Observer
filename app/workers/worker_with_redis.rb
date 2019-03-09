@@ -11,6 +11,8 @@ module Workers
   class WorkerWithRedis
     private
 
+    # A {redis client}[https://github.com/redis/redis-rb] with an active connection.
+    # @return [Redis]
     def redis_client
       client = nil
       begin

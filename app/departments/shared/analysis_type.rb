@@ -3,10 +3,12 @@
 module Departments
   module Shared
     ##
-    # Holds Enum objects for identifying CyberReport type.
+    # Holds Enum objects for identifying {CyberReport} type.
     module AnalysisType
       ICMP_DOS_CYBER_REPORT = 'icmp_dos_cyber_report'
 
+      # Collection of available types of {CyberReport}
+      # @return [Array<String>]
       def self.dos_formats
         result = []
         result << ICMP_DOS_CYBER_REPORT

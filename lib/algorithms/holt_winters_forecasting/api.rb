@@ -6,28 +6,29 @@ require_relative './services/icmp_flood.rb'
 
 ##
 # Holds modules of algorithms. Each algorithm, i.e.
-# {https://ieeexplore.ieee.org/document/4542524 Modified Holt Winters Forecasting}, should have its own module.
+# {https://ieeexplore.ieee.org/document/4542524 Modified Holt Winters Forecasting}, resides in its own module.
 module Algorithms
   ##
-  # Algorithms::HoltWintersForecasting::API and
-  # Algorithms::HoltWintersForecasting::Services necessary for Holt Winters Forecasting analysis.
+  # A module with implementation of {https://ieeexplore.ieee.org/document/4542524 Modified Holt Winters Forecasting}.
   module HoltWintersForecasting
+    # Helps in calculation of seasonal indices. Their value differs on what type of attack we are analyzing.
     ICMP_FLOOD = 'HOLT_WINTERS_FORECASTING_FOR_ICMP_FLOOD'
     ##
-    # Holt Winters Forecasting analysis methods, ready for consumption by other modules.
+    # Holds {https://ieeexplore.ieee.org/document/4542524 Modified Holt Winters Forecasting} analysis methods,
+    # that can be consumed by other modules.
     class Api
       include Singleton
 
-      # @param [Symbol] type Type of attacks that Holt Winters Forecasting analysis identifies, i.e.
-      # {Algorithms::HoltWintersForecasting::ICMP_FLOOD}.
-      # @param [Integer] seconds How many seconds lasts one moment / time unit in HW Forecasting analysis.
+      # @param [Symbol] type Type of attack that is being analysed,
+      # i.e. {Algorithms::HoltWintersForecasting::ICMP_FLOOD}.
+      # @param [Integer] seconds Duration of analysis time unit in seconds.
       # @return [Void]
       def time_unit_in_seconds(type, seconds)
         Services::IcmpFlood.instance.time_unit_in_seconds(seconds) if type == HoltWintersForecasting::ICMP_FLOOD
       end
 
-      # Smoothing constant.It is responsible for adaptation of baseline value.
-      # @param [Float] weights_percentage How much of "weight" has the most recent data.
+      # A smoothing constant. It is responsible for adaptation of baseline value.
+      # @param [Float] weights_percentage How important most recent data against past records.
       # @param [Integer] collections_count How many collections represent the most recent data.
       # @return [Void]
       def alpha(weights_percentage, collections_count)
@@ -36,8 +37,8 @@ module Algorithms
         @alpha = value
       end
 
-      # Smoothing constant. It is responsible for adaptation of linear_trend / slope value.
-      # @param [Float] weights_percentage How much of "weight" has the most recent data.
+      # A smoothing constant. It is responsible for adaptation of linear_trend / slope value.
+      # @param [Float] weights_percentage How important most recent data against past records.
       # @param [Integer] collections_count How many collections represent the most recent data.
       # @return [Void]
       def beta(weights_percentage, collections_count)
@@ -46,8 +47,8 @@ module Algorithms
         @beta = value
       end
 
-      # Smoothing constant. It is responsible for adaptation of seasonal_trend value.
-      # @param [Float] weights_percentage How much of "weight" has the most recent data.
+      # A smoothing constant. It is responsible for adaptation of seasonal_trend value.
+      # @param [Float] weights_percentage How important most recent data against past records.
       # @param [Integer] collections_count How many collections represent the most recent data.
       # @return [Void]
       def gamma(weights_percentage, collections_count)
@@ -56,7 +57,7 @@ module Algorithms
         @gamma = value
       end
 
-      # Smoothing constant. It is responsible for scaling of confidence_band_upper_value.
+      # A smoothing constant. It is responsible for scaling of confidence_band_upper_value.
       # @param [Float] value Should be in the range [2,3].
       # 2 - no tolerance for false negatives, 3 - false negatives are acceptable.
       # @return [Void]
@@ -65,7 +66,7 @@ module Algorithms
         @teta = value
       end
 
-      # Maps current moment to a unique index, among collection of indices that represent a season.
+      # Maps current moment to an unique index, among collection of indices that represent a season.
       # For example, if a single day (24 hours) is a season and we collect data every 10 seconds,
       # there are 8640 seasonal indices.
       # @param [Symbol] type Type of attacks that Holt Winters Forecasting analysis identifies, i.e.
@@ -78,14 +79,15 @@ module Algorithms
         end
       end
 
-      # Maps seasonal index to string representation of time.
+      # Maps seasonal index to a string representation of time.
+      # Vital for reporting {CyberReport} results as a graph.
       # @param [Integer] index
       # @return [String]
       def seasonal_index_reverse(index)
         HoltWintersForecasting::Services::IcmpFlood.instance.seasonal_index_reverse(index)
       end
 
-      # @param [Symbol] type Type of attacks that Holt Winters Forecasting analysis identifies, i.e.
+      # @param [Symbol] type Type of attack that is being analysed, i.e.
       # {Algorithms::HoltWintersForecasting::ICMP_FLOOD}.
       # @param [Integer] index Current seasonal_index.
       # @return [Integer]
@@ -96,7 +98,7 @@ module Algorithms
         end
       end
 
-      # @param [Symbol] type Type of attacks that Holt Winters Forecasting analysis identifies, i.e.
+      # @param [Symbol] type Type of attack that is being analysed, i.e.
       # {Algorithms::HoltWintersForecasting::ICMP_FLOOD}.
       # @param [Integer] index Current seasonal_index.
       # @return [Integer]
@@ -107,7 +109,7 @@ module Algorithms
         end
       end
 
-      # @param [Symbol] type Type of attacks that Holt Winters Forecasting analysis identifies, i.e.
+      # @param [Symbol] type Type of attack that is being analysed, i.e.
       # {Algorithms::HoltWintersForecasting::ICMP_FLOOD}.
       # @return [Integer]
       def min_seasonal_index(type)
@@ -117,7 +119,7 @@ module Algorithms
         end
       end
 
-      # @param [Symbol] type Type of attacks that Holt Winters Forecasting analysis identifies, i.e.
+      # @param [Symbol] type Type of attack that is being analysed, i.e.
       # {Algorithms::HoltWintersForecasting::ICMP_FLOOD}.
       # @return [Integer]
       def max_seasonal_index(type)
@@ -127,7 +129,7 @@ module Algorithms
         end
       end
 
-      # Determines aberrant behavior at the moment T.
+      # Determines the aberrant behavior at the moment T.
       # @param [Integer] actual_value_t Measured value at the moment T.
       # @param [Float] confidence_band_upper_value_t Maximum expected value at the moment T.
       # @return [Boolean]
@@ -140,7 +142,7 @@ module Algorithms
         false # Cold start.
       end
 
-      # Determines expected value at the moment (T+1).
+      # Determines the expected value at the moment (T+1).
       # @param [Float] baseline_t Baseline at the moment T.
       # @param [Float] linear_trend_t Linear trend at the moment T.
       # @param [Float] seasonal_trend_t_plus_one_minus_m Seasonal trend at the moment (T+1-M),
@@ -157,7 +159,7 @@ module Algorithms
         result
       end
 
-      # Calculates baseline at the moment T.
+      # Calculates the baseline at the moment T.
       # @param [Integer] actual_value_t Measured value at the moment T.
       # @param [Float] seasonal_trend_t_minus_m Seasonal trend at the moment (T-M), M beign a season duration.
       # @param [Float] baseline_t_minus_one Baseline value at the moment (T-1).
@@ -178,7 +180,7 @@ module Algorithms
         result
       end
 
-      # Calucalates confidence band upper value at the moment T.
+      # Calucalates the confidence band upper value at the moment T.
       # @param [Float] estimated_value_t Estimated value at the moment T.
       # @param [Float] weighted_avg_abs_deviation_t_minus_m Weighted Avg Abs Deviation at the moment
       # (T-M), M beign a season duration.
@@ -193,7 +195,7 @@ module Algorithms
         result
       end
 
-      # Calculates linear trend at the moment T.
+      # Calculates the linear trend at the moment T.
       # @param [Float] baseline_t Baseline value at the moment T.
       # @param [Float] baseline_t_minus_one Basline value at the moment (T-1).
       # @param [Float] linear_trend_t_minus_one Linear trend value at the moment (T-1).
@@ -210,9 +212,9 @@ module Algorithms
         result
       end
 
-      # Calculates seasonal trend at the moment T.
+      # Calculates the seasonal trend at the moment T.
       # @param [Integer] actual_value_t Actual value at the moment T.
-      # @param [Float] basline_t Baseline value at the moment T.
+      # @param [Float] baseline_t Baseline value at the moment T.
       # @param [Float] seasonal_trend_t_minus_m Seasonal trend at the moment (T-M), M beign
       # a season duration.
       # @return [Float]
@@ -228,12 +230,12 @@ module Algorithms
         result
       end
 
-      # Calculates weighted average absolute deviation at the moment T.
+      # Calculates the weighted average absolute deviation at the moment T.
       # @param [Float] actual_value_t Actual value at the moment T.
       # @param [Float] estimated_value_t Estimated value at the moment T.
       # @param [Float] weighted_avg_abs_deviation_t_minus_m Weighted average absolute deviation value
       # at the moment (T-M), M beign a season duration.
-      # @return [Float].
+      # @return [Float]
       def weighted_avg_abs_deviation(actual_value_t, estimated_value_t, weighted_avg_abs_deviation_t_minus_m)
         validation = Services::Validation.instance
         validation.actual_value?(actual_value_t)

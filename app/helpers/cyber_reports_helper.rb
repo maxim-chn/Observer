@@ -3,16 +3,19 @@
 ##
 # Holds helper methods for cyber reports view template.
 module CyberReportsHelper
+  # @return [String]
   def page_title_for_cyber_reports_view(page_details)
     "CyberReports | #{page_details}"
   end
 
+  # @return [String]
   def cyber_report_type(cyber_report)
     return cyberReport.class if cyber_report
 
     'None'
   end
 
+  # @return [String]
   def cyber_report_name(cyber_report)
     if cyber_report
       type = cyberReport.class

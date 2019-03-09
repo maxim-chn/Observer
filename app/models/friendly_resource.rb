@@ -6,7 +6,7 @@ class FriendlyResource < ApplicationRecord
   # Relation to models that extend [CyberReport].
   has_many :icmp_flood_report, class_name: 'Dos::IcmpFloodReport', dependent: :destroy
 
-  # Object representation.
+  # String representation of an object.
   # @return [String]
   def inspect
     result = {}

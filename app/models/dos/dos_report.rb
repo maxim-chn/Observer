@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+# Scopes classes that represent DOS related data.
+# For example, {Dos::IcmpFloodReport}.
 module Dos
   ##
-  # Any class that represents dos interpretation data should extend this class.
+  # Any class that represents DOS interpretation data should extend this class.
   # This is an abstract class.
   class DosReport < CyberReport
     self.abstract_class = true

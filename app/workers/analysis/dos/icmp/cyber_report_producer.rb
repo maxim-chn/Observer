@@ -3,6 +3,8 @@
 module Workers
   module Analysis
     module Dos
+      ##
+      # Scopes workers that interpret intelligence related to ICMP flood attack.
       module Icmp
         ##
         # Produces {Dos::IcmpFloodReport}.
@@ -13,7 +15,7 @@ module Workers
           # Asynchronously creates {CyberReport}, i.e. {Dos::IcmpFloodReport}, object for the moment T.
           # Consumes {Departments::Archive::Api} to persist it.
           # @param [Integer] ip Numerical representation of {FriendlyResource} ip address.
-          # @param [Symbol] {CyberReport} type to be created, i.e.
+          # @param [Symbol] type Type of {CyberReport} to be created, i.e.
           # {Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT}.
           # @param [Hash<Symbol, Object>] intelligence_data Contains keys, like :incoming_req_count.
           # @return [Void]

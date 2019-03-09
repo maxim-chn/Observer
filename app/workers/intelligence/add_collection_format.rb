@@ -1,18 +1,20 @@
 # frozen_string_literal: true
 
 module Workers
+  ##
+  # Scopes workers that affect collection of intelligence data.
   module Intelligence
     ##
-    # Persists in Redis desired intelligence data formats.
+    # Persists in {Redis}[https://redis.io/] desired intelligence data formats.
     # These formats affect field agent.
     class AddCollectionFormat < Workers::WorkerWithRedis
       include Sidekiq::Worker
       sidekiq_options retry: false, queue: 'field_agent_notifier'
 
-      # Creates a process that updates desirable intelligence data in Redis.
-      # [ip] Integer.
-      #      FriendlyResource ip.
-      # [collect_format] Departments::Shared::IntelligenceFormat.
+      # Creates a process that updates desirable intelligence data in {Redis}[https://redis.io/].
+      # @param [Integer] ip FriendlyResource ip address. Numerical representaion.
+      # @param [Departments::Shared::IntelligenceFormat] collect_format Format of intelligence data to be collected.
+      # @return [Void]
       def perform(ip, collect_format)
         logger.info("#{self.class.name} - #{__method__} - IP : #{ip}, collect_format : #{collect_format}")
         begin

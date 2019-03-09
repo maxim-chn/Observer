@@ -4,18 +4,20 @@ require 'singleton'
 require_relative './services/dos_icmp_report_producer.rb'
 
 module Departments
+  ##
+  # Manages interpretation of intelligence data.
+  # For example, it has methods that create {CyberReport}.
   module Analysis
     ##
-    # API for consumption by other modules.
-    # It allows to operate analysis services,
-    # i.e. queue particular CyberReport production.
+    # Methods that are consumed by other modules / classes.
+    # For example, queue a production of a particular type of {CyberReport}.
     class Api
       include Singleton
 
-      # Will queue a job for a relevant CyberReport producer.
-      # [query] Departments::Shared::AnalysisQuery.
-      # [intelligence_data] Hash.
-      #                     Intelligence data collected by field agent.
+      # Queues a job for a relevant {CyberReport} producer.
+      # @param [Departments::Shared::AnalysisQuery] query Query for production of {CyberReport}.
+      # @param [Hash] data Intelligence data that is needed for a production of a {CyberReport}.
+      # @return [Void]
       def request_cyber_report(query, data)
         Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}, #{data}")
         case query.analysis_type

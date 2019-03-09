@@ -3,6 +3,7 @@
 ##
 # Holds helper methods for welcome view template.
 module WelcomeHelper
+  # @return [String]
   def page_title_for_welcome_view(page_details)
     "Observer sub-system | #{page_details}"
   end

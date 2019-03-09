@@ -2,12 +2,12 @@
 
 module Dos
   ##
-  # A class for DoS interpretation data for ICMP protocol.
+  # A class for DoS interpretation data for ICMP protocol. It is used during ICMP flood attack.
   # "data" had to be removed from class name, due to restrictions on class name length.
   # We have additional "DosIcmp" in class name, because Rails translates
   # class name into table name and neglects namespacing before class name.
   class IcmpFloodReport < Dos::DosReport
-    # Relation to [FriendlyResource] model.
+    # Relation to {FriendlyResource} model.
     belongs_to :friendly_resource, class_name: 'FriendlyResource'
 
     # A hook to ensure initialization of a new object with legal values.
@@ -21,8 +21,8 @@ module Dos
       self.actual_value = 0.0 unless actual_value
     end
 
-    # A method that is similar to toString() in Java.
-    # Gives a [String] representaion of an object.
+    # String representation of an object.
+    # @return [String]
     def inspect
       result = {}
       result[:aberrant_behavior] = aberrant_behavior
@@ -39,8 +39,8 @@ module Dos
 
     private
 
-    # Trows [Exception] if following values are illegal:
-    # * +self.seasonal_index+
+    # Throws {Exception} if following values are illegal:
+    # - +self.seasonal_index+
     # * +self.report_type+
     def validate_mandatory_values
       validate_seasonal_index

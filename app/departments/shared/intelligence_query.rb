@@ -3,7 +3,9 @@
 module Departments
   module Shared
     ##
-    # Represents arguments for Departments::Intelligence::Api.
+    # Unites arguments for [Departments::Intelligence::Api].
+    # United arguments are the intelligence query that specifies what type of
+    # of data we are interested in collecting and what not.
     class IntelligenceQuery
       attr_reader :friendly_resource_ip, :collect_format
 
@@ -12,8 +14,8 @@ module Departments
         @collect_format = collect_format
       end
 
-      # [return] String.
-      #          Textual representation of an object.
+      # Textual representation of an object.
+      # @return [String]
       def inspect
         result = {}
         result[:friendly_resource_ip] = @friendly_resource_ip

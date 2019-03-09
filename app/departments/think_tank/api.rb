@@ -4,16 +4,30 @@ require 'singleton'
 require_relative './services/analysis.rb'
 require_relative './services/intelligence.rb'
 
+##
+# Unites three main responsibilities of Observer:
+# intelligence, interpretation, data, cooperation between previous three and View controllers,
+# i.e. {FriendlyResourcesController}.
+# Each responsibility has its own module:
+# - {Departments::Analysis} - handles interpretation of intelligence.
+# - {Departments::Archive} - handles data.
+# - {Departments::Intelligence} - handles intelligence.
+# - {Departments::Shared} - holds methods or values common to a group of departments.
+# - {Departments::ThinkTank} - a bridge between {Departments::Intelligence},
+#   {Departments::Analysis} and View controllers.
 module Departments
+  ##
+  # Holds logic that connects between View controllers, i.e. {FriendlyResourcesController}, and
+  # {Departments::Intelligence}, {Departments::Analysis}.
   module ThinkTank
     ##
-    # API for consumption by other modules.
+    # Methods that are consumed by other modules / classes, i.e. {FriendlyResourcesController}.
     class Api
       include Singleton
 
-      # [id] Integer.
-      #      FriendlyResource id in the database.
-      # [return] Void.
+      # Sets up gathering of intelligence and its interpretation for a particular {FriendlyResource}.
+      # @param [Integer] id {FriendlyResource} id in the database.
+      # @return [Void]
       def start_monitoring(id)
         Rails.logger.info("#{self.class.name} - #{__method__} - id : #{id}")
         archive_api = Departments::Archive::Api.instance
@@ -22,9 +36,9 @@ module Departments
         intelligence_services.gather_dos_intelligence(friendly_resource.ip_address)
       end
 
-      # [id] Integer.
-      #      FriendlyResource id in the database.
-      # [return] Void.
+      # Stops gathering of intelligence and its interpretation for a particular {FriendlyResource}.
+      # @param [Integer] id {FriendlyResource} id in the database.
+      # @return [Void]
       def stop_monitoring(id)
         Rails.logger.info("#{self.class.name} - #{__method__} - id : #{id}")
         archive_api = Departments::Archive::Api.instance
@@ -33,11 +47,11 @@ module Departments
         intelligence_services.stop_dos_intelligence_gathering(friendly_resource.ip_address)
       end
 
-      # [ip] Integer.
-      #      FriendlyResource ip address.
-      # [data] Hash.
-      #        intelligence data.
-      # [return] Void.
+      # Initiates interpretation of a latest intelligence data for a {FriendlyResource}.
+      # Intelligence data is connected to ICMP flood analysis.
+      # @param [Integer] ip {FriendlyResource} ip address. Numeric representation.
+      # @param [Hash] data Intelligence data, connected to ICMP Flood analysis.
+      # @return [Void]
       def analyze_icmp_dos_intelligence_data(ip, data)
         query = Departments::Shared::AnalysisQuery.new(ip, Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT)
         Services::Analysis.instance.analyze(query, data)

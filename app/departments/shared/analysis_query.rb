@@ -2,10 +2,16 @@
 
 module Departments
   ##
-  # Holds modules and classes shared by all departments.
+  # Holds modules and classes shared by all departments:
+  # - {Departments::Analysis}
+  # - {Departments::Archive}
+  # - {Departments::Intelligence}
+  # - {Departments::ThinkTank}
   module Shared
     ##
     # Unites arguments for {Departments::Analysis::Api}.
+    # United arguments are the analysis query that specifies what type of
+    # {CyberReport} we would like to get and for what {FriendlyResource}.
     class AnalysisQuery
       attr_reader :friendly_resource_ip, :analysis_type
 
@@ -14,8 +20,8 @@ module Departments
         @analysis_type = analysis_type
       end
 
-      # [return] String.
-      #          Textual representaion of an object.
+      # Textual representaion of an object.
+      # @return [String]
       def inspect
         result = {}
         result[:friendly_resource_ip] = @friendly_resource_ip

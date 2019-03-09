@@ -6,10 +6,12 @@ module Departments
   module ThinkTank
     module Services
       ##
-      # Consumes Departments::Intelligence::Api.
+      # Consumes {Departments::Intelligence::Api}.
       class Intelligence
         include Singleton
 
+        # @param [Integer] ip {FriendlyResource} ip address. Numerical representation.
+        # @return [Void]
         def gather_dos_intelligence(ip)
           Rails.logger.info("#{self.class.name} - #{__method__} - IP : #{ip}")
           intelligence_department_api = Departments::Intelligence::Api.instance
@@ -19,6 +21,8 @@ module Departments
           end
         end
 
+        # @param [Integer] ip {FriendlyResource} ip address. Numerical representation.
+        # @return [Void]
         def stop_dos_intelligence_gathering(ip)
           Rails.logger.info("#{self.class.name} - #{__method__} - IP : #{ip}")
           intelligence_department_api = Departments::Intelligence::Api.instance

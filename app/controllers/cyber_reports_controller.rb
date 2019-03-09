@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 ##
-# Action View Controller for {CyberReport}.
+# {Action View Controller}[https://guides.rubyonrails.org/action_controller_overview.html] for {CyberReport}.
 # Consumes {Departments::Archive::Api}.
 class CyberReportsController < ApplicationController
+  # Renders a HTML document with a collection of available {CyberReport} types for a
+  # particular {FriendlyResource}
   def index
     friendly_resource_id = params[:friendly_resource_id]
     archive_api = Departments::Archive::Api.instance
@@ -11,6 +13,8 @@ class CyberReportsController < ApplicationController
     @cyber_report_types = archive_api.cyber_report_types
   end
 
+  # Renders a HTML document with a collection of certain {CyberReport} type.
+  # For example, reports of type {Dos::IcmpFloodReport} are a collection of graph points.
   def show_reports
     type = params[:type]
     id = params[:friendly_resource_id]

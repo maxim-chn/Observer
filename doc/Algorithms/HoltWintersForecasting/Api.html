@@ -1,0 +1,2380 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Algorithms::HoltWintersForecasting::Api
+  
+    &mdash; Documentation by YARD 0.9.18
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "Algorithms::HoltWintersForecasting::Api";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Algorithms.html" title="Algorithms (module)">Algorithms</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../HoltWintersForecasting.html" title="Algorithms::HoltWintersForecasting (module)">HoltWintersForecasting</a></span></span>
+     &raquo; 
+    <span class="title">Api</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Algorithms::HoltWintersForecasting::Api
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Algorithms::HoltWintersForecasting::Api</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd>Singleton</dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/algorithms/holt_winters_forecasting/api.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Holds <a href="https://ieeexplore.ieee.org/document/4542524" target="_parent" title="Modified Holt Winters Forecasting">Modified Holt Winters Forecasting</a> analysis methods, that can be consumed by other modules.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#aberrant_behavior-instance_method" title="#aberrant_behavior (instance method)">#<strong>aberrant_behavior</strong>(actual_value_t, confidence_band_upper_value_t)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Determines the aberrant behavior at the moment T.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#alpha-instance_method" title="#alpha (instance method)">#<strong>alpha</strong>(weights_percentage, collections_count)  &#x21d2; Void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A smoothing constant.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#baseline-instance_method" title="#baseline (instance method)">#<strong>baseline</strong>(actual_value_t, seasonal_trend_t_minus_m, baseline_t_minus_one, linear_trend_t_minus_one)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calculates the baseline at the moment T.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#beta-instance_method" title="#beta (instance method)">#<strong>beta</strong>(weights_percentage, collections_count)  &#x21d2; Void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A smoothing constant.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#confidence_band_upper_value-instance_method" title="#confidence_band_upper_value (instance method)">#<strong>confidence_band_upper_value</strong>(estimated_value_t, weighted_avg_abs_deviation_t_minus_m)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calucalates the confidence band upper value at the moment T.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#estimated_value-instance_method" title="#estimated_value (instance method)">#<strong>estimated_value</strong>(baseline_t, linear_trend_t, seasonal_trend_t_plus_one_minus_m)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Determines the expected value at the moment (T+1).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gamma-instance_method" title="#gamma (instance method)">#<strong>gamma</strong>(weights_percentage, collections_count)  &#x21d2; Void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A smoothing constant.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#linear_trend-instance_method" title="#linear_trend (instance method)">#<strong>linear_trend</strong>(baseline_t, baseline_t_minus_one, linear_trend_t_minus_one)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calculates the linear trend at the moment T.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_seasonal_index-instance_method" title="#max_seasonal_index (instance method)">#<strong>max_seasonal_index</strong>(type)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#min_seasonal_index-instance_method" title="#min_seasonal_index (instance method)">#<strong>min_seasonal_index</strong>(type)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#next_seasonal_index-instance_method" title="#next_seasonal_index (instance method)">#<strong>next_seasonal_index</strong>(type, index)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#prev_seasonal_index-instance_method" title="#prev_seasonal_index (instance method)">#<strong>prev_seasonal_index</strong>(type, index)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#seasonal_index-instance_method" title="#seasonal_index (instance method)">#<strong>seasonal_index</strong>(type)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Maps current moment to an unique index, among collection of indices that
+represent a season.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#seasonal_index_reverse-instance_method" title="#seasonal_index_reverse (instance method)">#<strong>seasonal_index_reverse</strong>(index)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Maps seasonal index to a string representation of time.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#seasonal_trend-instance_method" title="#seasonal_trend (instance method)">#<strong>seasonal_trend</strong>(actual_value_t, baseline_t, seasonal_trend_t_minus_m)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calculates the seasonal trend at the moment T.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#teta-instance_method" title="#teta (instance method)">#<strong>teta</strong>(value)  &#x21d2; Void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A smoothing constant.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#time_unit_in_seconds-instance_method" title="#time_unit_in_seconds (instance method)">#<strong>time_unit_in_seconds</strong>(type, seconds)  &#x21d2; Void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>i.e.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#weighted_avg_abs_deviation-instance_method" title="#weighted_avg_abs_deviation (instance method)">#<strong>weighted_avg_abs_deviation</strong>(actual_value_t, estimated_value_t, weighted_avg_abs_deviation_t_minus_m)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calculates the weighted average absolute deviation at the moment T.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="aberrant_behavior-instance_method">
+  
+    #<strong>aberrant_behavior</strong>(actual_value_t, confidence_band_upper_value_t)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Determines the aberrant behavior at the moment T.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>actual_value_t</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Measured value at the moment T.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>confidence_band_upper_value_t</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Maximum expected value at the moment T.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+136
+137
+138
+139
+140
+141
+142
+143</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 136</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_aberrant_behavior'>aberrant_behavior</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_value_t'>actual_value_t</span><span class='comma'>,</span> <span class='id identifier rubyid_confidence_band_upper_value_t'>confidence_band_upper_value_t</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/Validation.html" title="Algorithms::HoltWintersForecasting::Services::Validation (class)">Validation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_actual_value?'>actual_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_value_t'>actual_value_t</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_confidence_band_upper_value?'>confidence_band_upper_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_confidence_band_upper_value_t'>confidence_band_upper_value_t</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_actual_value_t'>actual_value_t</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_confidence_band_upper_value_t'>confidence_band_upper_value_t</span> <span class='kw'>if</span> <span class='id identifier rubyid_confidence_band_upper_value_t'>confidence_band_upper_value_t</span>
+
+  <span class='kw'>false</span> <span class='comment'># Cold start.
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="alpha-instance_method">
+  
+    #<strong>alpha</strong>(weights_percentage, collections_count)  &#x21d2; <tt>Void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A smoothing constant. It is responsible for adaptation of baseline value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>weights_percentage</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>How important most recent data against past records.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>collections_count</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>How many collections represent the most recent data.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Void</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_alpha'>alpha</span><span class='lparen'>(</span><span class='id identifier rubyid_weights_percentage'>weights_percentage</span><span class='comma'>,</span> <span class='id identifier rubyid_collections_count'>collections_count</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='int'>1</span> <span class='op'>-</span> <span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_exp'>exp</span><span class='lparen'>(</span><span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_log10'>log10</span><span class='lparen'>(</span><span class='int'>1</span> <span class='op'>-</span> <span class='id identifier rubyid_weights_percentage'>weights_percentage</span><span class='rparen'>)</span> <span class='op'>/</span> <span class='id identifier rubyid_collections_count'>collections_count</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/Validation.html" title="Algorithms::HoltWintersForecasting::Services::Validation (class)">Validation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_exponential_smoothing_const?'>exponential_smoothing_const?</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+  <span class='ivar'>@alpha</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="baseline-instance_method">
+  
+    #<strong>baseline</strong>(actual_value_t, seasonal_trend_t_minus_m, baseline_t_minus_one, linear_trend_t_minus_one)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calculates the baseline at the moment T.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>actual_value_t</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Measured value at the moment T.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>seasonal_trend_t_minus_m</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Seasonal trend at the moment (T-M), M beign a season duration.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>baseline_t_minus_one</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Baseline value at the moment (T-1).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>linear_trend_t_minus_one</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Linear trend at the moment (T-1).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 168</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_baseline'>baseline</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_value_t'>actual_value_t</span><span class='comma'>,</span> <span class='id identifier rubyid_seasonal_trend_t_minus_m'>seasonal_trend_t_minus_m</span><span class='comma'>,</span> <span class='id identifier rubyid_baseline_t_minus_one'>baseline_t_minus_one</span><span class='comma'>,</span> <span class='id identifier rubyid_linear_trend_t_minus_one'>linear_trend_t_minus_one</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/Validation.html" title="Algorithms::HoltWintersForecasting::Services::Validation (class)">Validation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_actual_value?'>actual_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_value_t'>actual_value_t</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_seasonal_trend?'>seasonal_trend?</span><span class='lparen'>(</span><span class='id identifier rubyid_seasonal_trend_t_minus_m'>seasonal_trend_t_minus_m</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_baseline?'>baseline?</span><span class='lparen'>(</span><span class='id identifier rubyid_baseline_t_minus_one'>baseline_t_minus_one</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_linear_trend?'>linear_trend?</span><span class='lparen'>(</span><span class='id identifier rubyid_linear_trend_t_minus_one'>linear_trend_t_minus_one</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='ivar'>@alpha</span> <span class='op'>*</span> <span class='id identifier rubyid_actual_value_t'>actual_value_t</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span> <span class='op'>-</span> <span class='ivar'>@alpha</span> <span class='op'>*</span> <span class='id identifier rubyid_seasonal_trend_t_minus_m'>seasonal_trend_t_minus_m</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_seasonal_trend_t_minus_m'>seasonal_trend_t_minus_m</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_baseline_t_minus_one'>baseline_t_minus_one</span>
+    <span class='id identifier rubyid_result'>result</span> <span class='op'>+=</span> <span class='lparen'>(</span><span class='int'>1</span> <span class='op'>-</span> <span class='ivar'>@alpha</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='lparen'>(</span><span class='id identifier rubyid_baseline_t_minus_one'>baseline_t_minus_one</span> <span class='op'>+</span> <span class='id identifier rubyid_linear_trend_t_minus_one'>linear_trend_t_minus_one</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_linear_trend_t_minus_one'>linear_trend_t_minus_one</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_baseline?'>baseline?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="beta-instance_method">
+  
+    #<strong>beta</strong>(weights_percentage, collections_count)  &#x21d2; <tt>Void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A smoothing constant. It is responsible for adaptation of linear_trend /
+slope value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>weights_percentage</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>How important most recent data against past records.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>collections_count</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>How many collections represent the most recent data.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Void</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 44</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_beta'>beta</span><span class='lparen'>(</span><span class='id identifier rubyid_weights_percentage'>weights_percentage</span><span class='comma'>,</span> <span class='id identifier rubyid_collections_count'>collections_count</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='int'>1</span> <span class='op'>-</span> <span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_exp'>exp</span><span class='lparen'>(</span><span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_log10'>log10</span><span class='lparen'>(</span><span class='int'>1</span> <span class='op'>-</span> <span class='id identifier rubyid_weights_percentage'>weights_percentage</span><span class='rparen'>)</span> <span class='op'>/</span> <span class='id identifier rubyid_collections_count'>collections_count</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/Validation.html" title="Algorithms::HoltWintersForecasting::Services::Validation (class)">Validation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_exponential_smoothing_const?'>exponential_smoothing_const?</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+  <span class='ivar'>@beta</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="confidence_band_upper_value-instance_method">
+  
+    #<strong>confidence_band_upper_value</strong>(estimated_value_t, weighted_avg_abs_deviation_t_minus_m)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calucalates the confidence band upper value at the moment T. (T-M), M beign
+a season duration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>estimated_value_t</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Estimated value at the moment T.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>weighted_avg_abs_deviation_t_minus_m</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Weighted Avg Abs Deviation at the moment</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+188
+189
+190
+191
+192
+193
+194
+195
+196</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 188</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_confidence_band_upper_value'>confidence_band_upper_value</span><span class='lparen'>(</span><span class='id identifier rubyid_estimated_value_t'>estimated_value_t</span><span class='comma'>,</span> <span class='id identifier rubyid_weighted_avg_abs_deviation_t_minus_m'>weighted_avg_abs_deviation_t_minus_m</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/Validation.html" title="Algorithms::HoltWintersForecasting::Services::Validation (class)">Validation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_estimated_value?'>estimated_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_estimated_value_t'>estimated_value_t</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_weighted_avg_abs_deviation_value?'>weighted_avg_abs_deviation_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_weighted_avg_abs_deviation_t_minus_m'>weighted_avg_abs_deviation_t_minus_m</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_estimated_value_t'>estimated_value_t</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>+=</span> <span class='ivar'>@teta</span> <span class='op'>*</span> <span class='id identifier rubyid_weighted_avg_abs_deviation_t_minus_m'>weighted_avg_abs_deviation_t_minus_m</span> <span class='kw'>if</span> <span class='id identifier rubyid_weighted_avg_abs_deviation_t_minus_m'>weighted_avg_abs_deviation_t_minus_m</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_confidence_band_upper_value?'>confidence_band_upper_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="estimated_value-instance_method">
+  
+    #<strong>estimated_value</strong>(baseline_t, linear_trend_t, seasonal_trend_t_plus_one_minus_m)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Determines the expected value at the moment (T+1). M beign a season
+duration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>baseline_t</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Baseline at the moment T.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>linear_trend_t</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Linear trend at the moment T.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>seasonal_trend_t_plus_one_minus_m</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Seasonal trend at the moment (T+1-M),</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 151</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_estimated_value'>estimated_value</span><span class='lparen'>(</span><span class='id identifier rubyid_baseline_t'>baseline_t</span><span class='comma'>,</span> <span class='id identifier rubyid_linear_trend_t'>linear_trend_t</span><span class='comma'>,</span> <span class='id identifier rubyid_seasonal_trend_t_plus_one_minus_m'>seasonal_trend_t_plus_one_minus_m</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/Validation.html" title="Algorithms::HoltWintersForecasting::Services::Validation (class)">Validation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_baseline?'>baseline?</span><span class='lparen'>(</span><span class='id identifier rubyid_baseline_t'>baseline_t</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_linear_trend?'>linear_trend?</span><span class='lparen'>(</span><span class='id identifier rubyid_linear_trend_t'>linear_trend_t</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_seasonal_trend?'>seasonal_trend?</span><span class='lparen'>(</span><span class='id identifier rubyid_seasonal_trend_t_plus_one_minus_m'>seasonal_trend_t_plus_one_minus_m</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_baseline_t'>baseline_t</span> <span class='op'>+</span> <span class='id identifier rubyid_linear_trend_t'>linear_trend_t</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>+=</span> <span class='id identifier rubyid_seasonal_trend_t_plus_one_minus_m'>seasonal_trend_t_plus_one_minus_m</span> <span class='kw'>if</span> <span class='id identifier rubyid_seasonal_trend_t_plus_one_minus_m'>seasonal_trend_t_plus_one_minus_m</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_estimated_value?'>estimated_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gamma-instance_method">
+  
+    #<strong>gamma</strong>(weights_percentage, collections_count)  &#x21d2; <tt>Void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A smoothing constant. It is responsible for adaptation of seasonal_trend
+value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>weights_percentage</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>How important most recent data against past records.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>collections_count</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>How many collections represent the most recent data.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Void</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+54
+55
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 54</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_gamma'>gamma</span><span class='lparen'>(</span><span class='id identifier rubyid_weights_percentage'>weights_percentage</span><span class='comma'>,</span> <span class='id identifier rubyid_collections_count'>collections_count</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='int'>1</span> <span class='op'>-</span> <span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_exp'>exp</span><span class='lparen'>(</span><span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_log10'>log10</span><span class='lparen'>(</span><span class='int'>1</span> <span class='op'>-</span> <span class='id identifier rubyid_weights_percentage'>weights_percentage</span><span class='rparen'>)</span> <span class='op'>/</span> <span class='id identifier rubyid_collections_count'>collections_count</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/Validation.html" title="Algorithms::HoltWintersForecasting::Services::Validation (class)">Validation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_exponential_smoothing_const?'>exponential_smoothing_const?</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+  <span class='ivar'>@gamma</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="linear_trend-instance_method">
+  
+    #<strong>linear_trend</strong>(baseline_t, baseline_t_minus_one, linear_trend_t_minus_one)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calculates the linear trend at the moment T.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>baseline_t</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Baseline value at the moment T.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>baseline_t_minus_one</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Basline value at the moment (T-1).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>linear_trend_t_minus_one</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Linear trend value at the moment (T-1).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 203</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_linear_trend'>linear_trend</span><span class='lparen'>(</span><span class='id identifier rubyid_baseline_t'>baseline_t</span><span class='comma'>,</span> <span class='id identifier rubyid_baseline_t_minus_one'>baseline_t_minus_one</span><span class='comma'>,</span> <span class='id identifier rubyid_linear_trend_t_minus_one'>linear_trend_t_minus_one</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/Validation.html" title="Algorithms::HoltWintersForecasting::Services::Validation (class)">Validation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_baseline?'>baseline?</span><span class='lparen'>(</span><span class='id identifier rubyid_baseline_t'>baseline_t</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_baseline?'>baseline?</span><span class='lparen'>(</span><span class='id identifier rubyid_baseline_t_minus_one'>baseline_t_minus_one</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_linear_trend?'>linear_trend?</span><span class='lparen'>(</span><span class='id identifier rubyid_linear_trend_t_minus_one'>linear_trend_t_minus_one</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_baseline_t'>baseline_t</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='ivar'>@beta</span> <span class='op'>*</span> <span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span> <span class='op'>-</span> <span class='id identifier rubyid_baseline_t_minus_one'>baseline_t_minus_one</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_baseline_t_minus_one'>baseline_t_minus_one</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>+=</span> <span class='lparen'>(</span><span class='int'>1</span> <span class='op'>-</span> <span class='ivar'>@beta</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_linear_trend_t_minus_one'>linear_trend_t_minus_one</span> <span class='kw'>if</span> <span class='id identifier rubyid_linear_trend_t_minus_one'>linear_trend_t_minus_one</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_linear_trend?'>linear_trend?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_seasonal_index-instance_method">
+  
+    #<strong>max_seasonal_index</strong>(type)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Type of attack that is being analysed, i.e.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 125</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_max_seasonal_index'>max_seasonal_index</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_type'>type</span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html" title="Algorithms::HoltWintersForecasting (module)">HoltWintersForecasting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span></span>
+    <span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html" title="Algorithms::HoltWintersForecasting (module)">HoltWintersForecasting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/IcmpFlood.html" title="Algorithms::HoltWintersForecasting::Services::IcmpFlood (class)">IcmpFlood</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_max_seasonal_index'>max_seasonal_index</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="min_seasonal_index-instance_method">
+  
+    #<strong>min_seasonal_index</strong>(type)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Type of attack that is being analysed, i.e.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117
+118
+119
+120</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 115</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_min_seasonal_index'>min_seasonal_index</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_type'>type</span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html" title="Algorithms::HoltWintersForecasting (module)">HoltWintersForecasting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span></span>
+    <span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html" title="Algorithms::HoltWintersForecasting (module)">HoltWintersForecasting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/IcmpFlood.html" title="Algorithms::HoltWintersForecasting::Services::IcmpFlood (class)">IcmpFlood</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_min_seasonal_index'>min_seasonal_index</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="next_seasonal_index-instance_method">
+  
+    #<strong>next_seasonal_index</strong>(type, index)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Type of attack that is being analysed, i.e.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Current seasonal_index.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+105
+106
+107
+108
+109
+110</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 105</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_next_seasonal_index'>next_seasonal_index</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_type'>type</span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html" title="Algorithms::HoltWintersForecasting (module)">HoltWintersForecasting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span></span>
+    <span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html" title="Algorithms::HoltWintersForecasting (module)">HoltWintersForecasting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/IcmpFlood.html" title="Algorithms::HoltWintersForecasting::Services::IcmpFlood (class)">IcmpFlood</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_next_seasonal_index'>next_seasonal_index</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="prev_seasonal_index-instance_method">
+  
+    #<strong>prev_seasonal_index</strong>(type, index)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Type of attack that is being analysed, i.e.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Current seasonal_index.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96
+97
+98
+99</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_prev_seasonal_index'>prev_seasonal_index</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_type'>type</span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html" title="Algorithms::HoltWintersForecasting (module)">HoltWintersForecasting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span></span>
+    <span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html" title="Algorithms::HoltWintersForecasting (module)">HoltWintersForecasting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/IcmpFlood.html" title="Algorithms::HoltWintersForecasting::Services::IcmpFlood (class)">IcmpFlood</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_prev_seasonal_index'>prev_seasonal_index</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="seasonal_index-instance_method">
+  
+    #<strong>seasonal_index</strong>(type)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Maps current moment to an unique index, among collection of indices that
+represent a season. For example, if a single day (24 hours) is a season and
+we collect data every 10 seconds, there are 8640 seasonal indices.
+<span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Type of attacks that Holt Winters Forecasting analysis identifies, i.e.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+75
+76
+77
+78
+79
+80</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 75</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_seasonal_index'>seasonal_index</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_type'>type</span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html" title="Algorithms::HoltWintersForecasting (module)">HoltWintersForecasting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span></span>
+    <span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html" title="Algorithms::HoltWintersForecasting (module)">HoltWintersForecasting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/IcmpFlood.html" title="Algorithms::HoltWintersForecasting::Services::IcmpFlood (class)">IcmpFlood</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_seasonal_index'>seasonal_index</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="seasonal_index_reverse-instance_method">
+  
+    #<strong>seasonal_index_reverse</strong>(index)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Maps seasonal index to a string representation of time. Vital for reporting
+<span class='object_link'><a href="../../CyberReport.html" title="CyberReport (class)">CyberReport</a></span> results as a graph.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+86
+87
+88</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 86</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_seasonal_index_reverse'>seasonal_index_reverse</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html" title="Algorithms::HoltWintersForecasting (module)">HoltWintersForecasting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/IcmpFlood.html" title="Algorithms::HoltWintersForecasting::Services::IcmpFlood (class)">IcmpFlood</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_seasonal_index_reverse'>seasonal_index_reverse</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="seasonal_trend-instance_method">
+  
+    #<strong>seasonal_trend</strong>(actual_value_t, baseline_t, seasonal_trend_t_minus_m)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calculates the seasonal trend at the moment T. a season duration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>actual_value_t</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Actual value at the moment T.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>baseline_t</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Baseline value at the moment T.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>seasonal_trend_t_minus_m</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Seasonal trend at the moment (T-M), M beign</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 221</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_seasonal_trend'>seasonal_trend</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_value_t'>actual_value_t</span><span class='comma'>,</span> <span class='id identifier rubyid_baseline_t'>baseline_t</span><span class='comma'>,</span> <span class='id identifier rubyid_seasonal_trend_t_minus_m'>seasonal_trend_t_minus_m</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/Validation.html" title="Algorithms::HoltWintersForecasting::Services::Validation (class)">Validation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_actual_value?'>actual_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_value_t'>actual_value_t</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_baseline?'>baseline?</span><span class='lparen'>(</span><span class='id identifier rubyid_baseline_t'>baseline_t</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_seasonal_trend?'>seasonal_trend?</span><span class='lparen'>(</span><span class='id identifier rubyid_seasonal_trend_t_minus_m'>seasonal_trend_t_minus_m</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='ivar'>@gamma</span> <span class='op'>*</span> <span class='id identifier rubyid_actual_value_t'>actual_value_t</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span>  <span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span> <span class='op'>-</span> <span class='ivar'>@gamma</span> <span class='op'>*</span> <span class='id identifier rubyid_baseline_t'>baseline_t</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_baseline_t'>baseline_t</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_baseline_t'>baseline_t</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_actual_value_t'>actual_value_t</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>+=</span> <span class='lparen'>(</span><span class='int'>1</span> <span class='op'>-</span> <span class='ivar'>@gamma</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_seasonal_trend_t_minus_m'>seasonal_trend_t_minus_m</span> <span class='kw'>if</span> <span class='id identifier rubyid_seasonal_trend_t_minus_m'>seasonal_trend_t_minus_m</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_seasonal_trend?'>seasonal_trend?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="teta-instance_method">
+  
+    #<strong>teta</strong>(value)  &#x21d2; <tt>Void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A smoothing constant. It is responsible for scaling of
+confidence_band_upper_value. 2 - no tolerance for false negatives, 3 -
+false negatives are acceptable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Should be in the range [2,3].</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Void</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+64
+65
+66
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 64</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_teta'>teta</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/Validation.html" title="Algorithms::HoltWintersForecasting::Services::Validation (class)">Validation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_teta_const?'>teta_const?</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+  <span class='ivar'>@teta</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="time_unit_in_seconds-instance_method">
+  
+    #<strong>time_unit_in_seconds</strong>(type, seconds)  &#x21d2; <tt>Void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>i.e. <span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Type of attack that is being analysed,</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>seconds</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Duration of analysis time unit in seconds.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Void</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 26</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_time_unit_in_seconds'>time_unit_in_seconds</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_seconds'>seconds</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/IcmpFlood.html" title="Algorithms::HoltWintersForecasting::Services::IcmpFlood (class)">IcmpFlood</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_time_unit_in_seconds'>time_unit_in_seconds</span><span class='lparen'>(</span><span class='id identifier rubyid_seconds'>seconds</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html" title="Algorithms::HoltWintersForecasting (module)">HoltWintersForecasting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HoltWintersForecasting.html#ICMP_FLOOD-constant" title="Algorithms::HoltWintersForecasting::ICMP_FLOOD (constant)">ICMP_FLOOD</a></span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="weighted_avg_abs_deviation-instance_method">
+  
+    #<strong>weighted_avg_abs_deviation</strong>(actual_value_t, estimated_value_t, weighted_avg_abs_deviation_t_minus_m)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calculates the weighted average absolute deviation at the moment T. at the
+moment (T-M), M beign a season duration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>actual_value_t</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Actual value at the moment T.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>estimated_value_t</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Estimated value at the moment T.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>weighted_avg_abs_deviation_t_minus_m</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Weighted average absolute deviation value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/algorithms/holt_winters_forecasting/api.rb', line 239</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_weighted_avg_abs_deviation'>weighted_avg_abs_deviation</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_value_t'>actual_value_t</span><span class='comma'>,</span> <span class='id identifier rubyid_estimated_value_t'>estimated_value_t</span><span class='comma'>,</span> <span class='id identifier rubyid_weighted_avg_abs_deviation_t_minus_m'>weighted_avg_abs_deviation_t_minus_m</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Services.html" title="Algorithms::HoltWintersForecasting::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/Validation.html" title="Algorithms::HoltWintersForecasting::Services::Validation (class)">Validation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_actual_value?'>actual_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_value_t'>actual_value_t</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_estimated_value?'>estimated_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_estimated_value_t'>estimated_value_t</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_weighted_avg_abs_deviation_value?'>weighted_avg_abs_deviation_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_weighted_avg_abs_deviation_t_minus_m'>weighted_avg_abs_deviation_t_minus_m</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='ivar'>@gamma</span> <span class='op'>*</span> <span class='id identifier rubyid_actual_value_t'>actual_value_t</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span>  <span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span> <span class='op'>-</span> <span class='ivar'>@gamma</span> <span class='op'>*</span> <span class='id identifier rubyid_estimated_value_t'>estimated_value_t</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_abs'>abs</span> <span class='kw'>if</span> <span class='id identifier rubyid_estimated_value_t'>estimated_value_t</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>+=</span> <span class='lparen'>(</span><span class='int'>1</span> <span class='op'>-</span> <span class='ivar'>@gamma</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_weighted_avg_abs_deviation_t_minus_m'>weighted_avg_abs_deviation_t_minus_m</span> <span class='kw'>if</span> <span class='id identifier rubyid_weighted_avg_abs_deviation_t_minus_m'>weighted_avg_abs_deviation_t_minus_m</span>
+  <span class='id identifier rubyid_validation'>validation</span><span class='period'>.</span><span class='id identifier rubyid_weighted_avg_abs_deviation_value?'>weighted_avg_abs_deviation_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Sat Mar  9 09:43:24 2019 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.18 (ruby-2.5.3).
+</div>
+
+    </div>
+  </body>
+</html>

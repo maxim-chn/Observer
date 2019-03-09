@@ -39,13 +39,13 @@ module Departments
 
       # Initiates a new {FriendlyResource} object. It is not persisted inside database yet.
       # @param [String] name {FriendlyResource} name.
-      # @param [Integer] ip {FriendlyResource} ip address.
+      # @param [Integer] ip_address {FriendlyResource} ip address.
       # @return [FriendlyResource]
       def new_friendly_resource(name, ip_address)
-        if ip_address =~ /^[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*$/
+        if ip_address.match?(/^[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*$/)
           ip_address = IPAddr.new(ip_address).to_i
-        elsif ip_address =~ /^[0-9]*$/
-          ip_adress = ip_address.to_i
+        elsif ip_address.match?(/^[0-9]*$/)
+          ip_address = ip_address.to_i
         else
           throw StandardError.new('Illegal format for IP address.')
         end
@@ -61,7 +61,7 @@ module Departments
 
       # Initiates a new {FriendlyResource} object. It is not persisted inside database yet.
       # @return [FriendlyResource]
-      def new_empty_friendly_resource()
+      def new_empty_friendly_resource
         FriendlyResource.new
       end
 

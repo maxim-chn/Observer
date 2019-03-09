@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 ##
-# A set of controllers that accept requests, not resulting in rendering
-# any Data object.
+# A set of controllers that accept requests, not resulting in rendering any Data object.
 module BackendApi
   ##
-  # Manages routes for requests with intelligence data payloads. The scope of intelligence is
-  # ICMP requests.
+  # Manages routes for requests with intelligence data payloads. The scope of intelligence is ICMP requests.
   class DosIcmpIntelligenceController < ApplicationController
     # Otherwise, POST requests from resource files outside our server are blocked.
     skip_before_action :verify_authenticity_token
 
+    # Runs a background job to create {Dos::IcmpFloodReport}.
+    # Necessary parameters come from a POST request.
     def create
       intelligence_data = {}
       intelligence_data[:incoming_req_count] = params[:incoming_req_count].to_i
@@ -24,7 +24,7 @@ module BackendApi
           render plain: 'Request to analyze failed'
         end
       else
-        render plain: 'DOS ICMP Intelligence Data Not Received'
+        render plain: 'DOS ICMP Intelligence Data not received'
       end
     end
   end

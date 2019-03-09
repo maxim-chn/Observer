@@ -3,16 +3,16 @@
 module Workers
   module Intelligence
     ##
-    # Persists in intelligence data to not be collected Redis.
+    # Removes from {Redis}[https://redis.io/] intelligence data that is no longer necessary.
     # These formats affect field agent.
     class RemoveCollectionFormat < Workers::WorkerWithRedis
       include Sidekiq::Worker
       sidekiq_options retry: false, queue: 'field_agent_notifier'
 
-      # Creates a process that updates none desirable intelligence data in Redis.
-      # [ip] Integer.
-      #      FriendlyResource ip.
-      # [collect_format] Departments::Shared::IntelligenceFormat.
+      # Creates a process that updates none-desirable intelligence data in {Redis}[https://redis.io/].
+      # @param [Integer] ip FriendlyResource ip address. Numerical representaion.
+      # @param [Departments::Shared::IntelligenceFormat] collect_format Format of intelligence data to be collected.
+      # @return [Void]
       def perform(ip, collect_format)
         logger.info("#{self.class.name} - #{__method__} - IP : #{ip}, collect_format : #{collect_format}")
         begin

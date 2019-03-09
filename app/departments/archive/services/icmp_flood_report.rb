@@ -5,6 +5,9 @@ require_relative './query_helper.rb'
 
 module Departments
   module Archive
+    ##
+    # Any long / supporting implementations that are used in {Departments::Archive::Api}
+    # are under this module.
     module Services
       ##
       # This class consumes model {Dos::IcmpFloodReport}.

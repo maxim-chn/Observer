@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Departments::ThinkTank::Api
+  
+    &mdash; Documentation by YARD 0.9.18
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "Departments::ThinkTank::Api";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Departments.html" title="Departments (module)">Departments</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../ThinkTank.html" title="Departments::ThinkTank (module)">ThinkTank</a></span></span>
+     &raquo; 
+    <span class="title">Api</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Departments::ThinkTank::Api
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Departments::ThinkTank::Api</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd>Singleton</dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/departments/think_tank/api.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Methods that are consumed by other modules / classes, i.e.
+<span class='object_link'><a href="../../FriendlyResourcesController.html" title="FriendlyResourcesController (class)">FriendlyResourcesController</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#analyze_icmp_dos_intelligence_data-instance_method" title="#analyze_icmp_dos_intelligence_data (instance method)">#<strong>analyze_icmp_dos_intelligence_data</strong>(ip, data)  &#x21d2; Void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Initiates interpretation of a latest intelligence data for a
+<span class='object_link'><a href="../../FriendlyResource.html" title="FriendlyResource (class)">FriendlyResource</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#latest_cyber_reports_graph-instance_method" title="#latest_cyber_reports_graph (instance method)">#<strong>latest_cyber_reports_graph</strong>(type, ip, page, page_size)  &#x21d2; Array&lt;CyberReport&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Will return cyber reports in format that is parsable for a graph.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#start_monitoring-instance_method" title="#start_monitoring (instance method)">#<strong>start_monitoring</strong>(id)  &#x21d2; Void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets up gathering of intelligence and its interpretation for a particular
+<span class='object_link'><a href="../../FriendlyResource.html" title="FriendlyResource (class)">FriendlyResource</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop_monitoring-instance_method" title="#stop_monitoring (instance method)">#<strong>stop_monitoring</strong>(id)  &#x21d2; Void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Stops gathering of intelligence and its interpretation for a particular
+<span class='object_link'><a href="../../FriendlyResource.html" title="FriendlyResource (class)">FriendlyResource</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="analyze_icmp_dos_intelligence_data-instance_method">
+  
+    #<strong>analyze_icmp_dos_intelligence_data</strong>(ip, data)  &#x21d2; <tt>Void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Initiates interpretation of a latest intelligence data for a
+<span class='object_link'><a href="../../FriendlyResource.html" title="FriendlyResource (class)">FriendlyResource</a></span>. Intelligence data is connected to ICMP flood analysis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ip</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="../../FriendlyResource.html" title="FriendlyResource (class)">FriendlyResource</a></span> ip address. Numeric representation.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Intelligence data, connected to ICMP Flood analysis.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Void</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+55
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/departments/think_tank/api.rb', line 55</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_analyze_icmp_dos_intelligence_data'>analyze_icmp_dos_intelligence_data</span><span class='lparen'>(</span><span class='id identifier rubyid_ip'>ip</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Departments.html" title="Departments (module)">Departments</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Shared.html" title="Departments::Shared (module)">Shared</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Shared/AnalysisQuery.html" title="Departments::Shared::AnalysisQuery (class)">AnalysisQuery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Shared/AnalysisQuery.html#initialize-instance_method" title="Departments::Shared::AnalysisQuery#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_ip'>ip</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../Departments.html" title="Departments (module)">Departments</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Shared.html" title="Departments::Shared (module)">Shared</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Shared/AnalysisType.html" title="Departments::Shared::AnalysisType (module)">AnalysisType</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Shared/AnalysisType.html#ICMP_DOS_CYBER_REPORT-constant" title="Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT (constant)">ICMP_DOS_CYBER_REPORT</a></span></span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Services.html" title="Departments::ThinkTank::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/Analysis.html" title="Departments::ThinkTank::Services::Analysis (class)">Analysis</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_analyze'>analyze</span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="latest_cyber_reports_graph-instance_method">
+  
+    #<strong>latest_cyber_reports_graph</strong>(type, ip, page, page_size)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../../CyberReport.html" title="CyberReport (class)">CyberReport</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Will return cyber reports in format that is parsable for a graph.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Type cyber report, i.e.
+<span class='object_link'><a href="../Shared/AnalysisType.html#ICMP_DOS_CYBER_REPORT-constant" title="Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT (constant)">Shared::AnalysisType::ICMP_DOS_CYBER_REPORT</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ip</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Numerical representation of ip address of <span class='object_link'><a href="../../FriendlyResource.html" title="FriendlyResource (class)">FriendlyResource</a></span>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Page starts from 1.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Size of a single page.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../../CyberReport.html" title="CyberReport (class)">CyberReport</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/departments/think_tank/api.rb', line 66</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_latest_cyber_reports_graph'>latest_cyber_reports_graph</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_ip'>ip</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_page_size'>page_size</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_archive_api'>archive_api</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Departments.html" title="Departments (module)">Departments</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Archive.html" title="Departments::Archive (module)">Archive</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Archive/Api.html" title="Departments::Archive::Api (class)">Api</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='id identifier rubyid_latest_cyber_reports'>latest_cyber_reports</span> <span class='op'>=</span> <span class='id identifier rubyid_archive_api'>archive_api</span><span class='period'>.</span><span class='id identifier rubyid_cyber_reports_by_friendly_resource_ip_and_type'>cyber_reports_by_friendly_resource_ip_and_type</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_ip'>ip</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page'>page</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_size'>page_size</span>
+  <span class='rparen'>)</span>
+  <span class='id identifier rubyid_graph'>graph</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_type'>type</span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="../Shared.html" title="Departments::Shared (module)">Shared</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Shared/AnalysisType.html" title="Departments::Shared::AnalysisType (module)">AnalysisType</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Shared/AnalysisType.html#ICMP_DOS_CYBER_REPORT-constant" title="Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT (constant)">ICMP_DOS_CYBER_REPORT</a></span></span>
+    <span class='id identifier rubyid_graph'>graph</span> <span class='op'>&lt;&lt;</span> <span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>confidence_band_upper_value</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>data:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_graph'>graph</span> <span class='op'>&lt;&lt;</span> <span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>actual_value</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>data:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_hw_forecasting_api'>hw_forecasting_api</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Algorithms.html" title="Algorithms (module)">Algorithms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Algorithms/HoltWintersForecasting.html" title="Algorithms::HoltWintersForecasting (module)">HoltWintersForecasting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Algorithms/HoltWintersForecasting/Api.html" title="Algorithms::HoltWintersForecasting::Api (class)">Api</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+    <span class='id identifier rubyid_latest_cyber_reports'>latest_cyber_reports</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_report'>report</span><span class='op'>|</span>
+      <span class='id identifier rubyid_time_str'>time_str</span> <span class='op'>=</span> <span class='id identifier rubyid_hw_forecasting_api'>hw_forecasting_api</span><span class='period'>.</span><span class='id identifier rubyid_seasonal_index_reverse'>seasonal_index_reverse</span><span class='lparen'>(</span><span class='id identifier rubyid_report'>report</span><span class='period'>.</span><span class='id identifier rubyid_seasonal_index'>seasonal_index</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_graph'>graph</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:data</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_time_str'>time_str</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_report'>report</span><span class='period'>.</span><span class='id identifier rubyid_confidence_band_upper_value'>confidence_band_upper_value</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+      <span class='id identifier rubyid_graph'>graph</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:data</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_time_str'>time_str</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_report'>report</span><span class='period'>.</span><span class='id identifier rubyid_actual_value'>actual_value</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_graph'>graph</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="start_monitoring-instance_method">
+  
+    #<strong>start_monitoring</strong>(id)  &#x21d2; <tt>Void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets up gathering of intelligence and its interpretation for a particular
+<span class='object_link'><a href="../../FriendlyResource.html" title="FriendlyResource (class)">FriendlyResource</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="../../FriendlyResource.html" title="FriendlyResource (class)">FriendlyResource</a></span> id in the database.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Void</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33
+34
+35
+36
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/departments/think_tank/api.rb', line 31</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_start_monitoring'>start_monitoring</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+  <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'> - </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid___method__'>__method__</span><span class='embexpr_end'>}</span><span class='tstring_content'> - id : </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_id'>id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_archive_api'>archive_api</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Departments.html" title="Departments (module)">Departments</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Archive.html" title="Departments::Archive (module)">Archive</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Archive/Api.html" title="Departments::Archive::Api (class)">Api</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='id identifier rubyid_friendly_resource'>friendly_resource</span> <span class='op'>=</span> <span class='id identifier rubyid_archive_api'>archive_api</span><span class='period'>.</span><span class='id identifier rubyid_friendly_resource_by_id'>friendly_resource_by_id</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_intelligence_services'>intelligence_services</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Services.html" title="Departments::ThinkTank::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/Intelligence.html" title="Departments::ThinkTank::Services::Intelligence (class)">Intelligence</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='id identifier rubyid_intelligence_services'>intelligence_services</span><span class='period'>.</span><span class='id identifier rubyid_gather_dos_intelligence'>gather_dos_intelligence</span><span class='lparen'>(</span><span class='id identifier rubyid_friendly_resource'>friendly_resource</span><span class='period'>.</span><span class='id identifier rubyid_ip_address'>ip_address</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop_monitoring-instance_method">
+  
+    #<strong>stop_monitoring</strong>(id)  &#x21d2; <tt>Void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Stops gathering of intelligence and its interpretation for a particular
+<span class='object_link'><a href="../../FriendlyResource.html" title="FriendlyResource (class)">FriendlyResource</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="../../FriendlyResource.html" title="FriendlyResource (class)">FriendlyResource</a></span> id in the database.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Void</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44
+45
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/departments/think_tank/api.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_stop_monitoring'>stop_monitoring</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+  <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'> - </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid___method__'>__method__</span><span class='embexpr_end'>}</span><span class='tstring_content'> - id : </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_id'>id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_archive_api'>archive_api</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Departments.html" title="Departments (module)">Departments</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Archive.html" title="Departments::Archive (module)">Archive</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Archive/Api.html" title="Departments::Archive::Api (class)">Api</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='id identifier rubyid_friendly_resource'>friendly_resource</span> <span class='op'>=</span> <span class='id identifier rubyid_archive_api'>archive_api</span><span class='period'>.</span><span class='id identifier rubyid_friendly_resource_by_id'>friendly_resource_by_id</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_intelligence_services'>intelligence_services</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Services.html" title="Departments::ThinkTank::Services (module)">Services</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services/Intelligence.html" title="Departments::ThinkTank::Services::Intelligence (class)">Intelligence</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='id identifier rubyid_intelligence_services'>intelligence_services</span><span class='period'>.</span><span class='id identifier rubyid_stop_dos_intelligence_gathering'>stop_dos_intelligence_gathering</span><span class='lparen'>(</span><span class='id identifier rubyid_friendly_resource'>friendly_resource</span><span class='period'>.</span><span class='id identifier rubyid_ip_address'>ip_address</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Sat Mar  9 09:43:23 2019 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.18 (ruby-2.5.3).
+</div>
+
+    </div>
+  </body>
+</html>
