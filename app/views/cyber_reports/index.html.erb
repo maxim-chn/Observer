@@ -5,10 +5,15 @@
     </h1>
   </div>
   <div class="row about-page">
-    <p>You can navigate to any relevant CyberReport from here.</p>
+    <p>
+      You can navigate to any relevant
+      <span data-toogle="tooltip" data-placement="top" title="A set of specific calculations / observations that lead to an assessment of whether friendly resource is under online attack.">
+        <em>cyber report</em>
+      </span>
+      from here.
+    </p>
   </div>
   <div class="row navigate-resources">
-    <p>Navigation links to CyberReports:</p>
     <ul class="list-group">
       <% @cyber_report_types.each do |t| %>
         <li class="list-group-item">

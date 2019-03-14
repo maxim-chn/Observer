@@ -5,6 +5,18 @@
         "FriendlyResource \"#{friendly_resource_name(@friendly_resource)}\" | #{cyber_report_type(@cyber_report)}") %>
     </h1>
   </div>
+  <div class="row">
+    <p>
+      When
+      <span data-toogle="tooltip" data-placement="top" title="i.e. actual amount of incoming requests to the server.">
+        <em>actual_value</em>
+      </span>
+      is greater than
+      <span data-toogle="tooltip" data-placement="top" title="Greatest value for actual_value that has been calculated with analysis algorithm.">
+        <em>confidence_band_upper_value</em>
+      </span>
+      , there is an ongoing attack.</p>
+  </div>
   <div class="row graphical-representation">
     <%= line_chart @cyber_reports_graph %>
   </div>

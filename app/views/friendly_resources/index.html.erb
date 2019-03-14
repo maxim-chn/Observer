@@ -3,10 +3,15 @@
     <h1 class="title-page"><%= page_title_for_friendly_resources_view("Main Page") %></h1>
   </div>
   <div class="row about-page">
-    <p>You can navigate to any signed up FriendlyResource from here.</p>
+    <p>
+      You can navigate to any signed up
+      <span data-toogle="tooltip" data-placement="top" title="Web Application / Server that is monitored by Observer.">
+        <em>friendly resource</em>
+      </span>
+      from here.
+    </p>
   </div>
   <div class="row navigate-resources">
-    <p>Links to signed up FriendlyResources:</p>
     <ul class="list-group">
       <% @friendly_resources.each do |friendly_resource| %>
         <li class="list-group-item">

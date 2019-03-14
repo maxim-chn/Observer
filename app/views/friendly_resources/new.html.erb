@@ -1,7 +1,15 @@
 <div class="container">
-  <h1 class="title-page"><%= page_title_for_friendly_resources_view("Signup new resource") %></h1>
-  <div class="about-page">
-    <p>Below is the form for creation of new FriendlyResource.</p>
+  <div class="row">
+    <h1 class="title-page"><%= page_title_for_friendly_resources_view("Signup new resource") %></h1>
+  </div>
+  <div class="row about-page">
+    <p>
+      Below is the form for creation of new
+      <span data-toogle="tooltip" data-placement="top" title="Web Application / Server that is monitored by Observer.">
+        <em>friendly resource</em>
+      </span>
+      .
+    </p>
   </div>
   <div class="row signup-form-container">  
     <%= form_for @friendly_resource do |f| %>
