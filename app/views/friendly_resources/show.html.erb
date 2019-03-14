@@ -1,28 +1,35 @@
-<h1 class="title-page"><%= page_title_for_friendly_resources_view(friendly_resource_name(@friendly_resource)) %></h1>
-<div class="about-page">
-  <p class="flash-notice"><%= flash[:notice] %></p>
-  <p><b>Name:</b> <%= friendly_resource_name(@friendly_resource) %>
-  <p><b>IP address</b>: <%= friendly_resource_ip(@friendly_resource) %></p>
-  <p>Details of <i>"<%= friendly_resource_name(@friendly_resource) %>"</i> can be edited via
-    <%= link_to "#{@friendly_resource.name} edit", friendly_resource_path(@friendly_resource) %>
-  </p>
-</div>
-<div class="navigate-resources">
-  <ul>
-    <li>
-      <%= link_to "Go to CyberReports for #{friendly_resource_name(@friendly_resource)}",
-        friendly_resource_cyber_reports_path(@friendly_resource) %>
-    </li>
-    <li>
-      <%= link_to "Start monitoring for #{friendly_resource_name(@friendly_resource)}",
-        friendly_resource_start_monitoring_path(@friendly_resource) %>
-    </li>
-    <li>
-      <%= link_to "Stop monitoring for #{friendly_resource_name(@friendly_resource)}",
-        friendly_resource_stop_monitoring_path(@friendly_resource) %>
-    </li>
-    <li>
-      <%= link_to "Back to all FriendlyResources", friendly_resources_path %>
-    </li>
-  </ul>
+<div class="container">
+  <div class="row">
+    <h1 class="title-page"><%= page_title_for_friendly_resources_view(friendly_resource_name(@friendly_resource)) %></h1>
+  </div>
+  <div class="row about-page">
+    <p class="flash-notice"><%= flash[:notice] %></p>
+    <p><b>Name:</b> <%= friendly_resource_name(@friendly_resource) %>
+    <p><b>IP address</b>: <%= friendly_resource_ip(@friendly_resource) %></p>
+  </div>
+  <div class="row navigate-resources">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-warning">
+        <%= link_to "Go to CyberReports for #{friendly_resource_name(@friendly_resource)}",
+          friendly_resource_cyber_reports_path(@friendly_resource) %>
+      </button>
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-warning">
+        <%= link_to "Start monitoring for #{friendly_resource_name(@friendly_resource)}",
+          friendly_resource_start_monitoring_path(@friendly_resource) %>
+      </button>
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-warning">
+        <%= link_to "Stop monitoring for #{friendly_resource_name(@friendly_resource)}",
+          friendly_resource_stop_monitoring_path(@friendly_resource) %>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <%= link_to "Back to all FriendlyResources", friendly_resources_path %>
+  </div>
 </div>

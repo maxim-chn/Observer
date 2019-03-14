@@ -1,16 +1,30 @@
-<h1 class="title-page"><%= page_title_for_friendly_resources_view("Main Page") %></h1>
-<div class="about-page">
-  <p>You can navigate to any signed up FriendlyResource from here.</p>
-</div>
-<div class="navigate-resources">
-  <p>Links to signed up FriendlyResources:</p>
-  <ul>
-    <% @friendly_resources.each do |friendly_resource| %>
-      <li>
-        <%= link_to "#{friendly_resource.name}", friendly_resource_path(friendly_resource) %>
-      </li>
-    <% end %>
-  </ul>
-  <%= will_paginate @friendly_resources %>
-  <%= link_to "Back to Observer sub-system homepage", root_path %>
+<div class="container">
+  <div class="row">
+    <h1 class="title-page"><%= page_title_for_friendly_resources_view("Main Page") %></h1>
+  </div>
+  <div class="row about-page">
+    <p>You can navigate to any signed up FriendlyResource from here.</p>
+  </div>
+  <div class="row navigate-resources">
+    <p>Links to signed up FriendlyResources:</p>
+    <ul class="list-group">
+      <% @friendly_resources.each do |friendly_resource| %>
+        <li class="list-group-item">
+          <%= link_to "#{friendly_resource.name}", friendly_resource_path(friendly_resource) %>
+        </li>
+      <% end %>
+    </ul>
+    <div class="row">
+      <div class="col-sm-3">
+      </div>
+      <div class="col-sm-6 text-center">
+        <%= will_paginate @friendly_resources %>
+      </div>
+      <div class="col-sm-3">
+      </div>
+    </div>
+    <div class="row">
+      <%= link_to "Back to Observer sub-system homepage", root_path %>
+    </div>
+  </div>
 </div>

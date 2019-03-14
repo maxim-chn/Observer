@@ -34,6 +34,9 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# Use Boostrap for frontend design
+gem 'bootstrap-sass'
+
 # Use Sidekiq for background processing
 gem 'sidekiq', '~> 5.2', '>= 5.2.3'
 gem 'sinatra', github: 'sinatra/sinatra'

@@ -9,7 +9,7 @@ class FriendlyResourcesController < ApplicationController
   # Renders View template that lists registered {FriendlyResource}
   def index
     page = params[:page] || 1
-    page_size = params[:page_size] || 10
+    page_size = params[:page_size] || 3
     archive_api = Departments::Archive::Api.instance
     @friendly_resources = archive_api.all_friendly_resources(page, page_size)
   end

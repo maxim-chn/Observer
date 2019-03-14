@@ -1,11 +1,29 @@
-<h1 class="title-page"><%= page_title_for_welcome_view("Homepage") %></h1>
-<div class="about-page">
-  <p>It will hold description about Observer</p>
-</div>
-<div class="navigate-resources">
-  <p>Navigation links:</p>
-  <ul>
-    <li><%= link_to "Signup FriendlyResource", new_friendly_resource_path %></li>
-    <li><%= link_to "Show FriendlyResources", friendly_resources_path %></li>
-  </ul>
+<div class="container">
+  <div class="row">
+    <h1 class="title-page"><%= page_title_for_welcome_view("Homepage") %></h1>
+  </div>
+  <div class="row about-page">
+    <p>Observer is one of three sub-systems that represent Modular Platform for Researching Web Penetrations.</p>
+    <p>Primary goal of Observer is to receive intelligence data concerning a friendly resource and interpret it
+      into a cyber report. In other words, based on a collected data Observer tries to answer the question - is 
+      friendly resource under attack or not.
+    </p>
+    <p>The source code can be found at Github, 
+      <a href="https://github.com/Z0neNp/Observer">https://github.com/Z0neNp/Observer</a>.
+    </p>
+  </div>
+  <div class="row navigate-resources">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-warning">
+        <%= link_to "Signup FriendlyResource", new_friendly_resource_path, :class => "nav-item nav-link" %>
+      </button>
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-warning">
+        <%= link_to "Show FriendlyResources", friendly_resources_path, :class => "nav-item nav-link" %>
+      </button>
+    </div>
+  </div>
 </div>

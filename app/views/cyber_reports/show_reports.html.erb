@@ -1,15 +1,24 @@
-<h1 class="title-page">
-  <%= page_title_for_cyber_reports_view(
-    "FriendlyResource \"#{friendly_resource_name(@friendly_resource)}\" | #{cyber_report_type(@cyber_report)}") %>
-</h1>
-<div class="graphical-representation">
-  <%= line_chart @cyber_reports_graph %>
-</div>
-<%= will_paginate @cyber_reports_graph %>
-<div class="navigate-resources">
-  <p>Navigation links:</p>
-  <ul>
-    <li><%= link_to "Back to CyberReports for #{friendly_resource_name(@friendly_resource)}",
-      friendly_resource_cyber_reports_path(@friendly_resource) %></li>
-  </ul>
+<div class="container">
+  <div class="row">
+    <h1 class="title-page">
+      <%= page_title_for_cyber_reports_view(
+        "FriendlyResource \"#{friendly_resource_name(@friendly_resource)}\" | #{cyber_report_type(@cyber_report)}") %>
+    </h1>
+  </div>
+  <div class="row graphical-representation">
+    <%= line_chart @cyber_reports_graph %>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-6 text-center">
+      <%= will_paginate @cyber_reports_graph %>
+    </div>
+    <div class="col-sm-3">
+    </div>
+  </div>
+  <div class="row navigate-resources">
+    <%= link_to "Back to CyberReports for #{friendly_resource_name(@friendly_resource)}",
+      friendly_resource_cyber_reports_path(@friendly_resource) %>
+  </div>
 </div>
