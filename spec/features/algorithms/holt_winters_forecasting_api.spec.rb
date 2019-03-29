@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe 'ArchiveApi', type: :feature do
+RSpec.describe 'HoltWintersForecastingApi', type: :feature do
   let(:hw_forecasting_api) { Algorithms::HoltWintersForecasting::Api.instance }
   let(:icmp_flood_analysis) { Algorithms::HoltWintersForecasting::ICMP_FLOOD }
   it 'Throws error when seconds value is illegal' do

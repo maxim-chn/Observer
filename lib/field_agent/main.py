@@ -45,7 +45,7 @@ def reportIntelligence(intelligence, observerUrl):
   return continueReporting
 
 captureFilename = 'dumpfile.pcap'
-currentIp = '79.181.31.6'
+currentIp = '79.181.31.1'
 observerUrl = 'http://localhost:3000/backend_api/dos_icmp_intelligence'
 continueReporting = True
 lastModificationTime = None
