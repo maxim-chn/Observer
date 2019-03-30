@@ -4,19 +4,64 @@
   * [Ruby](https://www.ruby-lang.org/en/) - programming language of choice for the project.
   * [Bundler](https://bundler.io/) - manages [Ruby Gems](https://rubygems.org/gems) for the project.
   * [Redis](https://redis.io/) - in-memory data structure store. It's used for caching.
-**Note!** Linux is the preferrable platform for running Observer in development mode. So far, we have used following Ubuntu options:
+**Note!** Linux is the preferrable platform for running Observer in development mode. Installation steps to follow relate to:
   * [Ubuntu](https://www.ubuntu.com/download/desktop) - open source Linux based OS with GUI.
   * [Bash on Ubuntu for Windows 10](https://www.windowscentral.com/how-install-bash-shell-command-line-windows-10) - provides Ubuntu shell with most of Linux commands on Windows 10.
-Following installation steps are relevant for Ubuntu.
-Before installing new program, you are advised to run:
+**Note!** Before installing new program, you are advised to run:
   `sudo apt-get update`
   `sudo apt-get upgrade`
+**Note!** At the end of each installation we test if it is successfull by getting the version of the freshly installed program.
 ## Git installation
   * `sudo apt-get install git`
-  * `git --version`. If you get a version of git, it's installation has been successfull.
-# Launch local instance in development mode
+  * `git --version`
+## RVM installation
+  * `sudo apt-get install software-properties-common`
+  * `sudo apt-add-repository -y ppa:rael-gc/rvm`
+  * `sudo apt-get update`
+  * `sudo apt-get install rvm`
+  * Restart computer and open a terminal.
+  * `rvm --version`
+## Ruby installation
+  * `rvm install 2.5.3`
+  * `ruby --version`
+An additional test is running:
+  * `gem list`
+    It should output a short list of [Ruby Gems](https://rubygems.org/gems) available by default.
+## Bundler installation
+  * `gem install bundler`
+  * `bundler --version`
+## Gem management
+So far, we have installed [Ruby Gems](https://rubygems.org/gems) that are common to any project based on Ruby version 2.5.3.
+Now is the moment to create [Ruby Gemset](https://rvm.io/gemsets/basics) for our project.
+We will later populate it with [Ruby Gems](https://rubygems.org/gems) relevant for Observer only.
+The fundamental Gem is [Rails](https://rubygems.org/gems/rails/versions/5.0.0), a.k.a Ruby on Rails. Hence, the name for our gemset is going to be *rails-5.2.0*. Run:
+  * `rvm gemset create rails-5.2.0`
+  * `rvm gemset list`
+    It should output a list of [Ruby Gemsets](https://rvm.io/gemsets/basics) containing an item with the name *rails-5.2.0*.
+## Redis installation
+  * `sudo apt-get install build-essential`
+  * `sudo apt-get install tcl8.5`
+  * `wget http://download.redis.io/releases/redis-stable.tar.gz`
+  * `tar xzf redis-stable.tar.gz`
+  * `cd redis-stable`
+  * `make`
+  * `make test`
+  * `sudo cp src/redis-server /usr/local/bin/`
+  * `sudo cp src/redis-cli /usr/local/bin/`
+  * `redis-server`
+  * Open new terminal and run:
+    - `redis-cli`
+    - `PING`
+      You should get *PONG*
+## Gem installation
+Go to the root directory of the project. It contains following files: *.ruby-gemset*, *.ruby-version*. Run:
+  * `bundle install --without production`
+# Launch Observer on local machine(development mode)
+
+## Launch local machine
 Local instance uses SQLITE3 database.
 Command to launch rails server with connection to SQLITE3: `rails --environment=development`
+
 # Known issues
   1. Positive true test generates confidence band upper value lower than minimal amount of requests.
   2. Sniffer is not affected by "continue_analysis", based on type of analysis.
