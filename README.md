@@ -3,6 +3,7 @@
   * [RVM](https://rvm.io/) - Ruby Version Manager. Makes [Ruby](https://www.ruby-lang.org/en/) installation easier.
   * [Ruby](https://www.ruby-lang.org/en/) - programming language of choice for the project.
   * [Bundler](https://bundler.io/) - manages [Ruby Gems](https://rubygems.org/gems) for the project.
+  * [NodeJS](https://nodejs.org/en/) - provides Javascript runtime, which is mandatory for of the Gems in the project.
   * [Redis](https://redis.io/) - in-memory data structure store. It's used for caching.
 **Note!** Linux is the preferrable platform for running Observer in development mode. Installation steps to follow relate to:
   * [Ubuntu](https://www.ubuntu.com/download/desktop) - open source Linux based OS with GUI.
@@ -30,6 +31,13 @@ An additional test is running:
 ## Bundler installation
   * `gem install bundler`
   * `bundler --version`
+## NodeJS installation
+Install (NVM)[https://github.com/creationix/nvm/releases] first:
+  * `curl https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash`
+  * `nvm --version`
+Install NodeJS itself:
+  * `nvm install 10.15.3`
+  * `node --version`
 ## Gem management
 So far, we have installed [Ruby Gems](https://rubygems.org/gems) that are common to any project based on Ruby version 2.5.3.
 Now is the moment to create [Ruby Gemset](https://rvm.io/gemsets/basics) for our project.
@@ -54,13 +62,15 @@ The fundamental Gem is [Rails](https://rubygems.org/gems/rails/versions/5.0.0), 
     - `PING`
       You should get *PONG*
 ## Gem installation
-Go to the root directory of the project. It contains following files: *.ruby-gemset*, *.ruby-version*. Run:
+Go to the root directory of the project(it contains *.ruby-gemset*, *.ruby-version*). Run:
   * `bundle install --without production`
 # Launch Observer on local machine(development mode)
-
-## Launch local machine
-Local instance uses SQLITE3 database.
-Command to launch rails server with connection to SQLITE3: `rails --environment=development`
+Go to the root directory of the project(it contains directory *config*).
+Start the following processes, whether in the background or with a dedicated terminal for each:
+  * `redis-server`
+  * `sidekiq -C config/sidekiq_development`
+  * `rails server --environment=development`
+The application is ready at *http://localhost:3000*.
 
 # Known issues
   1. Positive true test generates confidence band upper value lower than minimal amount of requests.
