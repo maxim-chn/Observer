@@ -65,19 +65,29 @@ The fundamental Gem is [Rails](https://rubygems.org/gems/rails/versions/5.0.0), 
 Go to the root directory of the project(it contains *.ruby-gemset*, *.ruby-version*). Run:
   * `bundle install --without production`
 # Launch Observer on local machine(development mode)
-Go to the root directory of the project(it contains directory *config*).
+Go to the root directory of the project(it contains the directory *config*).
 Start the following processes, whether in the background or with a dedicated terminal for each:
   * `redis-server`
   * `sidekiq -C config/sidekiq_development`
   * `rails server --environment=development`
 The application is ready at *http://localhost:3000*.
-
+# Launch detailed documentation
+  **to be completed**
+# Tests
+Go to root directory of the project(it contains the directory *spec*).
+## Regression tests
+  **to be completed**
+## Unit tests
+### Algorithms module
+  * `rspec spec/features/algorithms/*.spec.rb`
 # Known issues
   1. Positive true test generates confidence band upper value lower than minimal amount of requests.
   2. Sniffer is not affected by "continue_analysis", based on type of analysis.
   3. There is no demo friendly resource with a season of data for holt winters forecasting algorithm.
-  4. README lacks steps for installing pre-requisites.
+  4. Provide regression tests.
   5. README lacks steps for deploying the project to Heroku.
+  6. Detailed documentation.
+  7. Refactor files.
 # Refactored files
   - app
     - controllers

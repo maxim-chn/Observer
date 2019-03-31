@@ -28,7 +28,7 @@ module Workers
               # In production, there should be no :seasonal_indices inside intelligence_data.
               # It is an ugly hack, to ease upon integration test. Sorry, could not think
               # of anything better :(
-              indices = intelligence_data[:seasonal_indices] if intelligence_data[:seasonal_indices]
+              indices = intelligence_data['seasonal_indices'] if intelligence_data['seasonal_indices']
               indices = seasonal_indices_for_holt_winters_calculation_step if indices.nil?
               logger.debug("#{self.class.name} - #{__method__} - seasonal indices : #{indices}.")
               reports = cyber_reports_for_holt_winters_calculation_step(
