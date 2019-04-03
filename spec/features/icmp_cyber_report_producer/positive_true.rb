@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 require 'logger'
+
 RSpec.describe 'Positive True', type: :feature do
   context 'A season of prior data is known' do
     before(:all) do
@@ -58,7 +59,7 @@ RSpec.describe 'Positive True', type: :feature do
     end
     let(:min_seasonal_index) { 0 }
     let(:max_seasonal_index) { 100 }
-=begin
+
     it 'Has confidence_band_upper_value formidable to instant changes' do
       (min_seasonal_index..max_seasonal_index).each do |n|
         puts "Past #{n} records with ICMP Flood amount of requests." if n % 1000 == 0
@@ -84,6 +85,5 @@ RSpec.describe 'Positive True', type: :feature do
         expect(cyber_report.aberrant_behavior).to be true
       end
     end
-=end
   end
 end

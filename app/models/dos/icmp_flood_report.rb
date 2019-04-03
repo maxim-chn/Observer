@@ -40,7 +40,7 @@ module Dos
     private
 
     # Throws {Exception} if following values are illegal:
-    # - +self.seasonal_index+
+    # * +self.seasonal_index+
     # * +self.report_type+
     def validate_mandatory_values
       validate_seasonal_index

@@ -8,6 +8,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'database_cleaner'
+require 'ipaddr'
 
 begin
   ActiveRecord::Migration.maintain_test_schema!

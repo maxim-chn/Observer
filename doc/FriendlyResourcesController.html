@@ -373,11 +373,11 @@ request.</p>
     <span class='kw'>if</span> <span class='id identifier rubyid_archive_api'>archive_api</span><span class='period'>.</span><span class='id identifier rubyid_persist_friendly_resource'>persist_friendly_resource</span><span class='lparen'>(</span><span class='ivar'>@friendly_resource</span><span class='rparen'>)</span>
       <span class='id identifier rubyid_redirect_to'>redirect_to</span><span class='lparen'>(</span><span class='ivar'>@friendly_resource</span><span class='comma'>,</span> <span class='label'>notice:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Friendly resource has been created successfully.</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
     <span class='kw'>else</span>
-      <span class='id identifier rubyid_render'>render</span> <span class='label'>action:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>notice:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Something went wrong with persisting new Friendly Resource</span><span class='tstring_end'>&#39;</span></span>
+      <span class='id identifier rubyid_render'>render</span> <span class='label'>action:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>new</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>notice:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Something went wrong with persisting new Friendly Resource</span><span class='tstring_end'>&#39;</span></span>
     <span class='kw'>end</span>
   <span class='kw'>rescue</span> <span class='const'>StandardError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
     <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_error'>error</span><span class='lparen'>(</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_render'>render</span> <span class='label'>action:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>notice:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Something went wrong with creating new Friendly Resource</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>action:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>new</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>notice:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Something went wrong with creating new Friendly Resource</span><span class='tstring_end'>&#39;</span></span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -474,7 +474,7 @@ request.</p>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
   <span class='id identifier rubyid_page'>page</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:page</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='int'>1</span>
-  <span class='id identifier rubyid_page_size'>page_size</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:page_size</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='int'>10</span>
+  <span class='id identifier rubyid_page_size'>page_size</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:page_size</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='int'>3</span>
   <span class='id identifier rubyid_archive_api'>archive_api</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Departments.html" title="Departments (module)">Departments</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Departments/Archive.html" title="Departments::Archive (module)">Archive</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Departments/Archive/Api.html" title="Departments::Archive::Api (class)">Api</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
   <span class='ivar'>@friendly_resources</span> <span class='op'>=</span> <span class='id identifier rubyid_archive_api'>archive_api</span><span class='period'>.</span><span class='id identifier rubyid_all_friendly_resources'>all_friendly_resources</span><span class='lparen'>(</span><span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_page_size'>page_size</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -696,7 +696,7 @@ particular <span class='object_link'><a href="FriendlyResource.html" title="Frie
 </div>
 
       <div id="footer">
-  Generated on Sat Mar  9 09:43:24 2019 by
+  Generated on Mon Apr  1 06:57:45 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.18 (ruby-2.5.3).
 </div>

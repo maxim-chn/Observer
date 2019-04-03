@@ -1,14 +1,17 @@
 # frozen_string_literal: true
+
 require 'singleton'
 require 'redis'
 
 module Departments
   module ThinkTank
     module Services
+      ##
+      # Services, like redis client, for {Departments::ThinkTank}.
       class Redis
         include Singleton
 
-        def get_client
+        def client
           client = nil
           begin
             client = Redis.new(host: 'localhost', port: '6379', timeout: 0) if Rails.env.development?

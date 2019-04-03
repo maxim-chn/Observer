@@ -322,7 +322,7 @@ for the moment T. Consumes <span class='object_link'><a href="../../../../Depart
     <span class='comment'># In production, there should be no :seasonal_indices inside intelligence_data.
 </span>    <span class='comment'># It is an ugly hack, to ease upon integration test. Sorry, could not think
 </span>    <span class='comment'># of anything better :(
-</span>    <span class='id identifier rubyid_indices'>indices</span> <span class='op'>=</span> <span class='id identifier rubyid_intelligence_data'>intelligence_data</span><span class='lbracket'>[</span><span class='symbol'>:seasonal_indices</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_intelligence_data'>intelligence_data</span><span class='lbracket'>[</span><span class='symbol'>:seasonal_indices</span><span class='rbracket'>]</span>
+</span>    <span class='id identifier rubyid_indices'>indices</span> <span class='op'>=</span> <span class='id identifier rubyid_intelligence_data'>intelligence_data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>seasonal_indices</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_intelligence_data'>intelligence_data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>seasonal_indices</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
     <span class='id identifier rubyid_indices'>indices</span> <span class='op'>=</span> <span class='id identifier rubyid_seasonal_indices_for_holt_winters_calculation_step'>seasonal_indices_for_holt_winters_calculation_step</span> <span class='kw'>if</span> <span class='id identifier rubyid_indices'>indices</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
     <span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'> - </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid___method__'>__method__</span><span class='embexpr_end'>}</span><span class='tstring_content'> - seasonal indices : </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_indices'>indices</span><span class='embexpr_end'>}</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
     <span class='id identifier rubyid_reports'>reports</span> <span class='op'>=</span> <span class='id identifier rubyid_cyber_reports_for_holt_winters_calculation_step'>cyber_reports_for_holt_winters_calculation_step</span><span class='lparen'>(</span>
@@ -354,7 +354,7 @@ for the moment T. Consumes <span class='object_link'><a href="../../../../Depart
 </div>
 
       <div id="footer">
-  Generated on Sat Mar  9 09:43:24 2019 by
+  Generated on Mon Apr  1 06:57:46 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.18 (ruby-2.5.3).
 </div>
