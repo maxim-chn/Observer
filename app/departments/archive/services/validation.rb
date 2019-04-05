@@ -33,6 +33,57 @@ module Departments
           throw StandardError.new("#{self.class.name} - #{__method__} - #{value} must be\
             an instance of #{Integer.name}.")
         end
+
+        def cyber_report?(report)
+          return if report.class < CyberReport
+
+          throw StandardError.new("#{self.class.name} - #{__method__} - #{report} must be\
+            an instance of #{CyberReport.name}.")
+        end
+
+        def page?(value)
+          integer?(value)
+          return if value.positive?
+
+          throw StandardError.new("#{self.class.name} - #{__method__} - #{value} must be\
+            an instance of #{Integer.name} greater than 0.")
+        end
+
+        def page_size?(value)
+          integer?(value)
+          return if value.positive?
+
+          throw StandardError.new("#{self.class.name} - #{__method__} - #{value} must be\
+            an instance of #{Integer.name} greater than 0.")
+        end
+
+        def hash?(value)
+          return if value.class == Hash
+
+          throw StandardError.new("#{self.class.name} - #{__method__} - #{value} must be\
+            an instance of #{Hash.name}.")
+        end
+
+        def friendly_resource?(friendly_resource)
+          return if friendly_resource.class == FriendlyResource
+
+          throw StandardError.new("#{self.class.name} - #{__method__} - #{friendly_resource} must be\
+            an instance of #{FriendlyResource.name}.")
+        end
+
+        def cyper_report_type?(type)
+          return if Shared::AnalysisType.formats.include?(type)
+
+          throw StandardError.new("#{self.class.name} - #{__method__} - #{type} must be\
+            of one of #{Shared::AnalysisType.name} formats.")
+        end
+
+        def seasonal_index_in_opts?(opts)
+          return if opts.key?('seasonal_index')
+
+          throw StandardError.new("#{self.class.name} - #{__method__} - #{opts} must contain the key\
+            seasonal_index.")
+        end
       end
     end
   end

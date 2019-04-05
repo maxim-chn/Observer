@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'ArchiveApi - FriendlyResource model', type: :feature do
+RSpec.describe 'ArchiveApi - FriendlyResource model.', type: :feature do
   subject(:archive_api) { Departments::Archive::Api.instance }
   let(:illegal_name_empty) { '' }
   let(:illegal_name_null) { nil }
@@ -118,5 +118,68 @@ RSpec.describe 'ArchiveApi - FriendlyResource model', type: :feature do
     expect(
       archive_api.friendly_resource_by_cyber_report(cyber_report).inspect
     ).to eql(friendly_resource.inspect)
+  end
+
+  let(:illegal_cyber_report_null) { nil }
+
+  it 'Throws an error when friendly resource is retrieved by illegal cyber report' do
+    expect {
+      archive_api.friendly_resource_by_cyber_report(illegal_cyber_report_null)
+    }.to raise_error(StandardError)
+    archive_api.persist_friendly_resource(friendly_resource)
+    illegal_cyber_report_str = archive_api.new_cyber_report_object_for_friendly_resource(
+      friendly_resource.ip_address,
+      Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT,
+      seasonal_index: icmp_dos_cyber_report_min_seasonal_index
+    ).inspect
+    expect {
+      archive_api.friendly_resource_by_cyber_report(illegal_cyber_report_str)
+    }.to raise_error(StandardError)
+  end
+
+  let(:illegal_page_null) { nil }
+  let(:illegal_page_zero) { 0 }
+  let(:illegal_page_size_null) { nil }
+  let(:illegal_pate_size_empty) { 0 }
+  let(:legal_page) { 1 }
+  let(:legal_page_size) { 1 }
+
+  it 'Throws an error when page is not legal' do
+    expect {
+      archive_api.all_friendly_resources(illegal_page_null, legal_page_size)
+    }.to raise_error(StandardError)
+    expect {
+      archive_api.all_friendly_resources(illegal_page_zero, legal_page_size)
+    }.to raise_error(StandardError)
+  end
+
+  it 'Throws an error when page_size is not legal' do
+    expect {
+      archive_api.all_friendly_resources(legal_page, illegal_page_size_null)
+    }.to raise_error(StandardError)
+    expect {
+      archive_api.all_friendly_resources(legal_page, illegal_page_size_empty)
+    }.to raise_error(StandardError)
+  end
+
+  it 'Throws an error when hashed friendly resource is not a hash' do
+    expect {
+      archive_api.new_friendly_resource_from_hash(0)
+    }.to raise_error(StandardError)
+    expect {
+      archive_api.new_friendly_resource_from_hash('"key" => 2')
+    }.to raise_error(StandardError)
+  end
+
+  it 'Throws an error when persisting friendly resource that is illegal' do
+    expect {
+      archive_api.persist_friendly_resource(0)
+    }.to raise_error(StandardError)
+    expect {
+      archive_api.persist_friendly_resource(nil)
+    }.to raise_error(StandardError)
+    expect {
+      archive_api.persist_friendly_resource(friendly_resource.inspect)
+    }.to raise_error(StandardError)
   end
 end

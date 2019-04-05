@@ -7,12 +7,18 @@ module Departments
     module AnalysisType
       ICMP_DOS_CYBER_REPORT = 'icmp_dos_cyber_report'
 
-      # Collection of available types of {CyberReport}
+      # Collection of available dos {CyberReport} types
       # @return [Array<String>]
       def self.dos_formats
         result = []
         result << ICMP_DOS_CYBER_REPORT
         result
+      end
+
+      # Collection of all possible {CyberReport} types
+      # @return [Array<String>]
+      def self.formats
+        dos_formats
       end
     end
   end

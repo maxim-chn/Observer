@@ -26,7 +26,7 @@ class CyberReportsController < ApplicationController
     think_tank_api = Departments::ThinkTank::Api.instance
     @friendly_resource = archive_api.friendly_resource_by_id(id)
     @cyber_reports_graph = think_tank_api.latest_cyber_reports_graph(type, @friendly_resource.ip_address, page, page_size)
-    max_records = archive_api.cyber_records_count(@friendly_resource.ip_address, type)
+    max_records = archive_api.cyber_reports_count(@friendly_resource.ip_address, type)
     @cyber_reports_graph = WillPaginate::Collection.create(page, page_size, max_records) do |pager|
       pager.replace(@cyber_reports_graph)
     end

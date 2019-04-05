@@ -33,4 +33,5 @@
 .ruby-gemset
 
 # ##########Custom ignores##########
-dump.rdb
+/dump.rdb
+./doc/*
