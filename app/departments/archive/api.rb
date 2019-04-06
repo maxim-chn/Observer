@@ -3,6 +3,7 @@
 require 'singleton'
 require_relative './services/validation.rb'
 require_relative './services/icmp_flood_report.rb'
+require_relative './services/query_helper'
 
 module Departments
   ##
@@ -16,10 +17,11 @@ module Departments
       # @param [Integer] page First page starts at 1.
       # @param [Integer] page_size Size of a page.
       # @return [Array<FriendlyResource>]
-      def all_friendly_resources(page, page_size)
+      def friendly_resources(page, page_size)
         Services::Validation.instance.page?(page)
         Services::Validation.instance.page_size?(page_size)
-        FriendlyResource.paginate(page: page, per_page: page_size)
+        records_to_skip = Services::QueryHelper.instance.records_to_skip(page, page_size)
+        FriendlyResource.order('created_at desc').limit(page_size).offset(records_to_skip).to_a
       end
 
       # @param [CyberReport] cyber_report For example, {Dos::IcmpFloodReport}.
@@ -32,7 +34,7 @@ module Departments
       # @param [Integer] id {FriendlyResource} id in the database.
       # @return [FriendlyResource]
       def friendly_resource_by_id(id)
-        Services::Validation.instance.integer?(id)
+        Services::Validation.instance.id?(id)
         FriendlyResource.find(id)
       end
 

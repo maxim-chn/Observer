@@ -18,10 +18,13 @@ module Departments
         end
 
         def friendly_resource_ip_address?(ip_address)
-          ip_address_str = ip_address.to_s
-          return if ip_address_str.match?(/^[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*$/)
+          if ip_address.class == Integer
+            return if ip_address.positive?
+          end
 
-          return if ip_address_str.match?(/^[0-9]*$/)
+          if ip_address.class == String
+            return if ip_address.match?(/^[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*$/)
+          end
 
           throw StandardError.new("#{self.class.name} - #{__method__} - #{ip_address} \
             does not match expected format.")
@@ -83,6 +86,14 @@ module Departments
 
           throw StandardError.new("#{self.class.name} - #{__method__} - #{opts} must contain the key\
             seasonal_index.")
+        end
+
+        def id?(value)
+          integer?(value)
+          return if value >= 0
+
+          throw StandardError.new("#{self.class.name} - #{__method__} - #{value} must be\
+            a non-negative #{Integer.name}.")
         end
       end
     end

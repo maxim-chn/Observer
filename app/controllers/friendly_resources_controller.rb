@@ -11,7 +11,7 @@ class FriendlyResourcesController < ApplicationController
     page = params[:page] || 1
     page_size = params[:page_size] || 3
     archive_api = Departments::Archive::Api.instance
-    @friendly_resources = archive_api.all_friendly_resources(page, page_size)
+    @friendly_resources = archive_api.friendly_resources(page, page_size)
   end
 
   # Renders View template with a registration form for a {FriendlyResource}

@@ -4,83 +4,149 @@ require 'rails_helper'
 
 RSpec.describe 'ArchiveApi - FriendlyResource model.', type: :feature do
   subject(:archive_api) { Departments::Archive::Api.instance }
-  let(:illegal_name_empty) { '' }
-  let(:illegal_name_null) { nil }
   let(:legal_name) { 'Demo_1' }
-  let(:legal_ip_address_str) { '79.181.31.4' }
-  let(:legal_ip_address_int) { IPAddr.new('79.181.31.4').to_i }
-  let(:illegal_ip_address_null) { nil }
-  let(:illegal_ip_address_str) { '79.181.31' }
-  let(:illegal_ip_address_int) { -1 }
-
-  it 'Throws an error when illegal name' do
-    expect {
-      archive_api.new_friendly_resource(illegal_name_empty, legal_ip_address_str)
-    }.to raise_error(StandardError)
-    expect {
-      archive_api.new_friendly_resource(illegal_name_null, legal_ip_address_str)
-    }.to raise_error(StandardError)
-  end
-
-  it 'Throws an error when illegal ip address' do
-    expect {
-      archive_api.new_friendly_resource(legal_name, illegal_ip_address_null)
-    }.to raise_error(StandardError)
-    expect {
-      archive_api.new_friendly_resource(legal_name, illegal_ip_address_str)
-    }.to raise_error(StandardError)
-    expect {
-      archive_api.new_friendly_resource(legal_name, illegal_ip_address_int)
-    }.to raise_error(StandardError)
-  end
-
+  let(:legal_ip_address) { '79.181.31.4' }
   let(:friendly_resource) {
-    archive_api.new_friendly_resource(legal_name, legal_ip_address_str)
+    archive_api.new_friendly_resource(legal_name, legal_ip_address)
+  }
+  let(:friendly_resource_hash) {
+    { 'name' => legal_name, 'ip_address' => legal_ip_address }
+  }
+  let(:icmp_dos_cyber_report_min_seasonal_index) {
+    Algorithms::HoltWintersForecasting::Api.instance.min_seasonal_index(
+      Algorithms::HoltWintersForecasting::ICMP_FLOOD
+    )
+  }
+  let(:legal_page) { 1 }
+  let(:legal_page_size) { 1 }
+  let(:illegal_names) {
+    [nil, 1, '']
+  }
+  let(:illegal_ip_addresses) {
+    [nil, '1', '1.3.4', -1]
+  }
+  let(:illegal_ids) {
+    [nil, '1', '1.3.4', -1]
+  }
+  let(:illegal_friendly_resource_hashes) {
+    [nil, {}, '1', 2, []]
+  }
+  let(:illegal_pages) {
+    [nil, '1', 0, -1]
+  }
+  let(:illegal_page_sizes) {
+    [nil, '1', 0, -1]
+  }
+  let(:illegal_cyber_reports) {
+    [nil, 1, '2']
+  }
+  let(:illegal_friendly_resources) {
+    [nil, '1', 2, {}]
   }
 
-  it 'Persists a friendly resource' do
+  it 'Throws an error when creating a new friendly resource with illegal name.' do
+    illegal_names.each do |name|
+      expect {
+        archive_api.new_friendly_resource(name, legal_ip_address)
+      }.to raise_error(StandardError)
+    end
+  end
+
+  it 'Throws an error when creating a new friendly resource with illegal ip address.' do
+    illegal_ip_addresses.each do |address|
+      expect {
+        archive_api.new_friendly_resource(legal_name, address)
+      }.to raise_error(StandardError)
+    end
+  end
+
+  it 'Creates a new friendly resource object.' do
+    expect(
+      archive_api.new_friendly_resource(legal_name, legal_ip_address).class
+    ).to eql(FriendlyResource)
+  end
+
+  it 'Throws an error when persisting an illegal friendly resource.' do
+    illegal_friendly_resources.each do |f|
+      expect {
+        archive_api.persist_friendly_resource(f)
+      }.to raise_error(StandardError)
+    end
+  end
+
+  it 'Persists a friendly resource object.' do
     expect {
       archive_api.persist_friendly_resource(friendly_resource)
     }.to_not raise_error
   end
 
-  it 'Retrieves a persisted friendly resource from the DB by ip' do
+  it 'Throws an error when retrieving a persisted friendly resource by illegal ip address.' do
+    illegal_ip_addresses.each do |address|
+      expect {
+        archive_api.friendly_resource_by_ip(address)
+      }.to raise_error(StandardError)
+    end
+  end
+
+  it 'Retrieves a persisted friendly resource by an ip address.' do
     archive_api.persist_friendly_resource(friendly_resource)
     expect(
-      archive_api.friendly_resource_by_ip(legal_ip_address_int).inspect
+      archive_api.friendly_resource_by_ip(friendly_resource.ip_address).inspect
     ).to eql(friendly_resource.inspect)
   end
 
-  it 'Retrieves a persisted friendly resource from the DB by id' do
+  it 'Throws an error when retrieving a persisted friendly resource by illegal id.' do
+    illegal_ids.each do |id|
+      expect {
+        archive_api.friendly_resource_by_id(id)
+      }.to raise_error(StandardError)
+    end
+  end
+
+  it 'Retrieves a persisted friendly resource by an id.' do
     archive_api.persist_friendly_resource(friendly_resource)
-    id = archive_api.friendly_resource_by_ip(legal_ip_address_int).id
+    id = archive_api.friendly_resource_by_ip(friendly_resource.ip_address).id
     expect(
       archive_api.friendly_resource_by_id(id).inspect
     ).to eql(friendly_resource.inspect)
   end
 
-  it 'Throws an error when retrieving friendly resource from the DB by non-integer ip' do
-    archive_api.persist_friendly_resource(friendly_resource)
-    expect {
-      archive_api.friendly_resource_by_ip(legal_ip_address_str)
-    }.to raise_error(StandardError)
+  it 'Throws an error when create a new friendly resource object from an illegal hash.' do
+    illegal_friendly_resource_hashes.each do |h|
+      expect {
+        archive_api.new_friendly_resource_from_hash(h)
+      }.to raise_error(StandardError)
+    end
   end
 
-  let(:friendly_resource_hash) {
-    { 'name' => legal_name, 'ip_address' => legal_ip_address_str }
-  }
-
-  it 'Creates friendly resource object from hash' do
+  it 'Creates a new friendly resource object from a hash.' do
     expect(
-      archive_api.new_friendly_resource_from_hash(friendly_resource_hash).class.name
-    ).to eql(FriendlyResource.name)
+      archive_api.new_friendly_resource_from_hash(friendly_resource_hash).class
+    ).to eql(FriendlyResource)
   end
 
-  it 'Paginates persisted friendly resources in the DB' do
+  it 'Throws an error when paginating over the persisted friendly resources with an illegal page.' do
+    illegal_pages.each do |page|
+      expect {
+        archive_api.friendly_resources(page, legal_page_size)
+      }.to raise_error(StandardError)
+    end
+  end
+
+  it 'Throws an error when paginating over the persisted friendly resources with an illegal page size.' do
+    illegal_page_sizes.each do |size|
+      expect {
+        archive_api.friendly_resources(legal_page, size)
+      }.to raise_error(StandardError)
+    end
+  end
+
+  it 'Paginates over persisted friendly resources.' do
     friendly_resources_data = [
-      { 'name' => 'Demo_2', 'ip_address' => '79.181.31.4' },
-      { 'name' => 'Demo_3', 'ip_address' => '79.181.31.5' },
-      { 'name' => 'Demo_4', 'ip_address' => '79.181.31.6' }
+      { 'name' => legal_name, 'ip_address' => legal_ip_address },
+      { 'name' => 'Demo_2', 'ip_address' => '79.181.31.5' },
+      { 'name' => 'Demo_3', 'ip_address' => '79.181.31.6' },
+      { 'name' => 'Demo_4', 'ip_address' => '79.181.31.7' }
     ]
     friendly_resources_data.each do |f|
       archive_api.persist_friendly_resource(
@@ -88,98 +154,40 @@ RSpec.describe 'ArchiveApi - FriendlyResource model.', type: :feature do
       )
     end
     expect(
-      archive_api.all_friendly_resources(1, 1).size
+      archive_api.friendly_resources(legal_page, legal_page_size).size
+    ).to eql(legal_page)
+    expect(
+      archive_api.friendly_resources(1, 4).size
+    ).to eql(4)
+    expect(
+      archive_api.friendly_resources(2, 2).size
+    ).to eql(2)
+    expect(
+      archive_api.friendly_resources(2, 3).size
     ).to eql(1)
     expect(
-      archive_api.all_friendly_resources(2, 1).size
-    ).to eql(1)
-    expect(
-      archive_api.all_friendly_resources(3, 1).size
-    ).to eql(1)
-    expect(
-      archive_api.all_friendly_resources(1, 3).size
-    ).to eql(3)
+      archive_api.friendly_resources(3, 3).size
+    ).to eql(0)
   end
 
-  let(:icmp_dos_cyber_report_min_seasonal_index) {
-    Algorithms::HoltWintersForecasting::Api.instance.min_seasonal_index(
-      Algorithms::HoltWintersForecasting::ICMP_FLOOD
-    )
-  }
+  it 'Throws an error when a persisted friendly resource is retrieved by an illegal cyber report.' do
+    illegal_cyber_reports.each do |report|
+      expect {
+        archive_api.friendly_resource_by_cyber_report(report)
+      }.to raise_error(StandardError)
+    end
+  end
 
-  it 'Retrieves a persisted friendly resource from the DB by a cyber report' do
+  it 'Retrieves a persisted friendly resource by a cyber report.' do
     archive_api.persist_friendly_resource(friendly_resource)
     cyber_report = archive_api.new_cyber_report_object_for_friendly_resource(
       friendly_resource.ip_address,
       Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT,
-      seasonal_index: icmp_dos_cyber_report_min_seasonal_index
+      'seasonal_index' => icmp_dos_cyber_report_min_seasonal_index
     )
     archive_api.persist_cyber_report(cyber_report)
     expect(
       archive_api.friendly_resource_by_cyber_report(cyber_report).inspect
     ).to eql(friendly_resource.inspect)
-  end
-
-  let(:illegal_cyber_report_null) { nil }
-
-  it 'Throws an error when friendly resource is retrieved by illegal cyber report' do
-    expect {
-      archive_api.friendly_resource_by_cyber_report(illegal_cyber_report_null)
-    }.to raise_error(StandardError)
-    archive_api.persist_friendly_resource(friendly_resource)
-    illegal_cyber_report_str = archive_api.new_cyber_report_object_for_friendly_resource(
-      friendly_resource.ip_address,
-      Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT,
-      seasonal_index: icmp_dos_cyber_report_min_seasonal_index
-    ).inspect
-    expect {
-      archive_api.friendly_resource_by_cyber_report(illegal_cyber_report_str)
-    }.to raise_error(StandardError)
-  end
-
-  let(:illegal_page_null) { nil }
-  let(:illegal_page_zero) { 0 }
-  let(:illegal_page_size_null) { nil }
-  let(:illegal_pate_size_empty) { 0 }
-  let(:legal_page) { 1 }
-  let(:legal_page_size) { 1 }
-
-  it 'Throws an error when page is not legal' do
-    expect {
-      archive_api.all_friendly_resources(illegal_page_null, legal_page_size)
-    }.to raise_error(StandardError)
-    expect {
-      archive_api.all_friendly_resources(illegal_page_zero, legal_page_size)
-    }.to raise_error(StandardError)
-  end
-
-  it 'Throws an error when page_size is not legal' do
-    expect {
-      archive_api.all_friendly_resources(legal_page, illegal_page_size_null)
-    }.to raise_error(StandardError)
-    expect {
-      archive_api.all_friendly_resources(legal_page, illegal_page_size_empty)
-    }.to raise_error(StandardError)
-  end
-
-  it 'Throws an error when hashed friendly resource is not a hash' do
-    expect {
-      archive_api.new_friendly_resource_from_hash(0)
-    }.to raise_error(StandardError)
-    expect {
-      archive_api.new_friendly_resource_from_hash('"key" => 2')
-    }.to raise_error(StandardError)
-  end
-
-  it 'Throws an error when persisting friendly resource that is illegal' do
-    expect {
-      archive_api.persist_friendly_resource(0)
-    }.to raise_error(StandardError)
-    expect {
-      archive_api.persist_friendly_resource(nil)
-    }.to raise_error(StandardError)
-    expect {
-      archive_api.persist_friendly_resource(friendly_resource.inspect)
-    }.to raise_error(StandardError)
   end
 end

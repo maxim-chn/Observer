@@ -28,7 +28,7 @@ RSpec.describe 'Positive True', type: :feature do
       end
     end
     subject(:archive_api) { Departments::Archive::Api.instance }
-    let(:friendly_resource) { archive_api.all_friendly_resources(1, 1).first }
+    let(:friendly_resource) { archive_api.friendly_resources(1, 1).first }
     let(:cyber_report_type) { Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT }
     let(:flood_amount_of_attacks) { 2000 }
 
