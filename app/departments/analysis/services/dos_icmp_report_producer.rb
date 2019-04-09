@@ -19,7 +19,7 @@ module Departments
         # @return [Void]
         def queue_dos_icmp_report(ip, data)
           Services::Validation.instance.ip_address?(ip)
-          Services::Validation.instance.intelligence_data_for_dos_icmp_report?(data)
+          Services::Validation.instance.dos_icmp_intelligence_data?(data)
           Rails.logger.debug("#{self.class.name} - #{__method__} - #{ip}, #{data}")
           Workers::Analysis::Dos::Icmp::CyberReportProducer.perform_async(
             ip,

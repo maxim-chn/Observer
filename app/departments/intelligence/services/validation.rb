@@ -4,11 +4,9 @@ require 'singleton'
 
 module Departments
   module Intelligence
-    ##
-    # Supporting implementations for the methods in {Departments::Intelligence::Api}.
     module Services
       ##
-      # Consumes {Workers::Intelligence::AddCollectionFormat}.
+      # Contains validation methods for the {Departments::Intelligence::Services}.
       class Validation
         def intelligence_query?(query)
           return if query.class == Shared::IntelligenceQuery

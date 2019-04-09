@@ -24,7 +24,7 @@ module Departments
             an instance of #{Hash.name}.")
         end
 
-        def intelligence_data_for_dos_icmp_report?(data)
+        def dos_icmp_intelligence_data?(data)
           intelligence_data?(data)
           if data.key?('incoming_req_count')
             return if data['incoming_req_count'].class == Integer && data['incoming_req_count'] >= 0
