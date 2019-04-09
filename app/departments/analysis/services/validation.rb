@@ -24,11 +24,21 @@ module Departments
             an instance of #{Hash.name}.")
         end
 
+        def intelligence_data_for_dos_icmp_report?(data)
+          intelligence_data?(data)
+          if data.key?('incoming_req_count')
+            return if data['incoming_req_count'].class == Integer && data['incoming_req_count'] >= 0
+          end
+
+          throw StandardError.new("#{self.class.name} - #{__method__} - #{data} must be\
+            an instance of #{Hash.name} with a key 'incoming_req_count' holding positive #{Integer.class} value.")
+        end
+
         def ip_address?(ip)
-          return if ip.class == Integer
+          return if ip.class == Integer && ip.positive?
 
           throw StandardError.new("#{self.class.name} - #{__method__} - #{ip} must be\
-            an instance of #{Integer.name}.")
+            a positive #{Integer.name}.")
         end
       end
     end

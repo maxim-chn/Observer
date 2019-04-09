@@ -20,6 +20,7 @@ module Departments
       def friendly_resources(page, page_size)
         Services::Validation.instance.page?(page)
         Services::Validation.instance.page_size?(page_size)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{page}, #{page_size}.")
         records_to_skip = Services::QueryHelper.instance.records_to_skip(page, page_size)
         FriendlyResource.order('created_at desc').limit(page_size).offset(records_to_skip).to_a
       end
@@ -28,6 +29,7 @@ module Departments
       # @return [FriendlyResource]
       def friendly_resource_by_cyber_report(cyber_report)
         Services::Validation.instance.cyber_report?(cyber_report)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{cyber_report.inspect}.")
         cyber_report.friendly_resource
       end
 
@@ -35,6 +37,7 @@ module Departments
       # @return [FriendlyResource]
       def friendly_resource_by_id(id)
         Services::Validation.instance.id?(id)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{id}.")
         FriendlyResource.find(id)
       end
 
@@ -43,6 +46,7 @@ module Departments
       def friendly_resource_by_ip(ip_address)
         Services::Validation.instance.friendly_resource_ip_address?(ip_address)
         Services::Validation.instance.integer?(ip_address)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip_address}.")
         FriendlyResource.find_by(ip_address: ip_address)
       end
 
@@ -53,6 +57,7 @@ module Departments
       def new_friendly_resource(name, ip_address)
         Services::Validation.instance.friendly_resource_name?(name)
         Services::Validation.instance.friendly_resource_ip_address?(ip_address)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{name}, #{ip_address}.")
         if ip_address.class == String
           if ip_address.match?(/^[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*$/)
             ip_address = IPAddr.new(ip_address).to_i
@@ -68,12 +73,14 @@ module Departments
       # @return [FriendlyResource]
       def new_friendly_resource_from_hash(friendly_resource)
         Services::Validation.instance.hash?(friendly_resource)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{friendly_resource}.")
         new_friendly_resource(friendly_resource['name'], friendly_resource['ip_address'])
       end
 
       # Initiates a new {FriendlyResource} object. It is not persisted in the database yet.
       # @return [FriendlyResource]
       def new_empty_friendly_resource
+        Rails.logger.info("#{self.class.name} - #{__method__}.")
         FriendlyResource.new
       end
 
@@ -82,6 +89,7 @@ module Departments
       # @return [Void]
       def persist_friendly_resource(friendly_resource)
         Services::Validation.instance.friendly_resource?(friendly_resource)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{friendly_resource.inspect}.")
         friendly_resource.save
       end
 
@@ -92,6 +100,7 @@ module Departments
       def cyber_reports_count(ip, type)
         Services::Validation.instance.friendly_resource_ip_address?(ip)
         Services::Validation.instance.cyper_report_type?(type)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}.")
         result = 0
         friendly_resource = friendly_resource_by_ip(ip)
         if friendly_resource
@@ -114,6 +123,7 @@ module Departments
         Services::Validation.instance.cyper_report_type?(type)
         Services::Validation.instance.page?(page)
         Services::Validation.instance.page_size?(page_size)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{page}, #{page_size}.")
         result = []
         friendly_resource = friendly_resource_by_ip(ip)
         if friendly_resource
@@ -135,6 +145,7 @@ module Departments
       def cyber_report_by_id_and_type(id, type)
         Services::Validation.instance.integer?(id)
         Services::Validation.instance.cyper_report_type?(type)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{id}, #{type}.")
         cyber_report = nil
         case type
         when Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
@@ -151,6 +162,7 @@ module Departments
       def cyber_report_by_friendly_resource_ip_and_type_and_custom_attr(ip, type, opts)
         Services::Validation.instance.friendly_resource_ip_address?(ip)
         Services::Validation.instance.cyper_report_type?(type)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{opts}.")
         friendly_resource = friendly_resource_by_ip(ip)
         if friendly_resource
           result = nil
@@ -177,6 +189,7 @@ module Departments
       def new_cyber_report_object_for_friendly_resource(ip, type, opts)
         Services::Validation.instance.friendly_resource_ip_address?(ip)
         Services::Validation.instance.cyper_report_type?(type)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{opts}.")
         friendly_resource = friendly_resource_by_ip(ip)
         if friendly_resource
           result = nil
@@ -199,11 +212,13 @@ module Departments
       # i.e. {Dos::IcmpFloodReport}
       def persist_cyber_report(cyber_report)
         Services::Validation.instance.cyber_report?(cyber_report)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{cyber_report.inspect}.")
         cyber_report.save
       end
 
       # @return [Array<Symbol>]
       def cyber_report_types
+        Rails.logger.info("#{self.class.name} - #{__method__}.")
         Shared::AnalysisType.formats
       end
     end

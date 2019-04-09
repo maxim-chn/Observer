@@ -28,7 +28,7 @@ RSpec.describe 'ArchiveApi - CyberReport model.', type: :feature do
     [nil, '1']
   }
   let(:illegal_opts) {
-    [nil, { seasonal_index: legal_seasonal_index }, { 'seasonal' => legal_seasonal_index }]
+    [nil, { seasonal_index: legal_seasonal_index }, { 'seasonal' => legal_seasonal_index }, { 'seasonal_index' => -1 }]
   }
   let(:illegal_cyber_reports) {
     [nil, 1, '2']

@@ -88,6 +88,18 @@ module Departments
             seasonal_index.")
         end
 
+        def seasonal_index?(value)
+          hw_forecasting_api = Algorithms::HoltWintersForecasting::Api.instance
+          min = hw_forecasting_api.min_seasonal_index(Algorithms::HoltWintersForecasting::ICMP_FLOOD)
+          max = hw_forecasting_api.max_seasonal_index(Algorithms::HoltWintersForecasting::ICMP_FLOOD)
+          if value.class == Integer
+            return if value >= min && value <= max
+          end
+
+          throw StandardError.new("#{self.class.name} - #{__method__} - seasonal_index must be an\
+            #{Integer.class} in range [#{min},#{max}].")
+        end
+
         def id?(value)
           integer?(value)
           return if value >= 0

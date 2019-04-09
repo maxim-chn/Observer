@@ -17,7 +17,8 @@ module Workers
           # @param [Integer] ip Numerical representation of {FriendlyResource} ip address.
           # @param [Symbol] type Type of {CyberReport} to be created, i.e.
           # {Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT}.
-          # @param [Hash<Symbol, Object>] intelligence_data Contains keys, like :incoming_req_count.
+          # @param [Hash<String, Object>] intelligence_data Contains keys:
+          #   * 'incoming_req_count' Amount of incoming ICMP requests to a {FriendlyResource}.
           # @return [Void]
           def perform(ip, type, intelligence_data, log: true)
             if log

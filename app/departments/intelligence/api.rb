@@ -2,12 +2,12 @@
 
 require 'singleton'
 require_relative './services/field_agent_contact.rb'
+require_relative './services/validation.rb'
 
 module Departments
   ##
-  # Manages any methods related to intelligence.
-  # For example, the methods configure what type of intelligence should be gathered by
-  # field agent.
+  # Manages methods that are related to intelligence.
+  # For example, configuring what type of intelligence should be gathered by the field agent.
   module Intelligence
     ##
     # Methods that are consumed by other modules / classes.
@@ -15,20 +15,24 @@ module Departments
     class Api
       include Singleton
 
-      # @param [Departments::Shared::IntelligenceQuery] query Intelligence query.
+      # Sends a {Departments::Shared::IntelligenceQuery} query
+      # that specifies what type of intelligence should be gathered.
+      # @param [Departments::Shared::IntelligenceQuery] query An intelligence query.
       # @return [Void]
       def start_intelligence_gathering(query)
+        Service::Validation.instance.intelligence_query?(query)
         Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}")
-        field_agent_contact = Services::FieldAgentContact.instance
-        field_agent_contact.mission_dispatch(query)
+        Services::FieldAgentContact.instance.mission_dispatch(query)
       end
 
-      # @param [Departments::Shared::IntelligenceQuery] query Intelligence query.
+      # Sends a {Departments::Shared::IntelligenceQuery} query
+      # that specifies what type of intelligence should not be gathered.
+      # @param [Departments::Shared::IntelligenceQuery] query An intelligence query.
       # @return [Void]
       def stop_intelligence_gathering(query)
+        Service::Validation.instance.intelligence_query?(query)
         Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}")
-        field_agent_contact = Services::FieldAgentContact.instance
-        field_agent_contact.mission_abort(query)
+        Services::FieldAgentContact.instance.mission_abort(query)
       end
     end
   end
