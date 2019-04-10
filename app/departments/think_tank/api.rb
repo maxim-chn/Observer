@@ -54,6 +54,7 @@ module Departments
       def analyze_icmp_dos_intelligence_data(ip, data)
         Services::Validation.instance.ip_address?(ip)
         Services::Validation.instance.dos_icmp_intelligence_data?(data)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{data}")
         query = Departments::Shared::AnalysisQuery.new(ip, Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT)
         Services::Analysis.instance.analyze(query, data)
       end

@@ -25,6 +25,13 @@ module Departments
         FriendlyResource.order('created_at desc').limit(page_size).offset(records_to_skip).to_a
       end
 
+      # Total amount of {FriendlyResource} records in the database.
+      # @return [Integer]
+      def friendly_resources_count
+        Rails.logger.info("#{self.class.name} - #{__method__}.")
+        FriendlyResource.count
+      end
+
       # @param [CyberReport] cyber_report For example, {Dos::IcmpFloodReport}.
       # @return [FriendlyResource]
       def friendly_resource_by_cyber_report(cyber_report)
@@ -103,6 +110,7 @@ module Departments
         Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}.")
         result = 0
         friendly_resource = friendly_resource_by_ip(ip)
+        Rails.logger.info("BLYAT #{friendly_resource.id}")
         if friendly_resource
           case type
           when Shared::AnalysisType::ICMP_DOS_CYBER_REPORT

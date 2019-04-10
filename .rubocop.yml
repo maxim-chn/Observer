@@ -1679,7 +1679,7 @@ Metrics/ClassLength:
   Enabled: true
   VersionAdded: '0.25'
   CountComments: false  # count full line comments?
-  Max: 150
+  Max: 200
 
 # Avoid complex methods.
 Metrics/CyclomaticComplexity:

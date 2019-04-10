@@ -13,8 +13,8 @@ module BackendApi
     # Necessary parameters come from a POST request.
     def create
       intelligence_data = {}
-      intelligence_data['incoming_req_count'] = params[:incoming_req_count].to_i
-      ip = params[:ip]
+      intelligence_data['incoming_req_count'] = params[:incoming_req_count].to_i if params[:incoming_req_count]
+      ip = params[:ip].to_i if params[:ip]
       message = { 'result' => '', 'continue_collection' => '' }
       think_tank = Departments::ThinkTank::Api.instance
       if intelligence_data

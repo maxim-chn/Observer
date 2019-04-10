@@ -19,7 +19,7 @@ module Departments
         # @return [Integer]
         def count_records(id)
           Validation.instance.id?(id)
-          Dos::IcmpFloodReport.count("friendly_resource_id = #{id}")
+          Dos::IcmpFloodReport.where("friendly_resource_id = #{id}").count
         end
 
         # Retrieves a page of persisted {Dos::IcmpFloodReport} in desc order, by @created_at [DateTime]

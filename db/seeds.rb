@@ -23,21 +23,24 @@ friendly_resources_amount = 1
     IPAddr.new("79.181.31.#{n}")
   )
   friendly_resource.save
-  min = 0
-  max = 120
+  hw_forecasting_api = Algorithms::HoltWintersForecasting::Api.instance
+  min = hw_forecasting_api.min_seasonal_index(Algorithms::HoltWintersForecasting::ICMP_FLOOD)
+  max = hw_forecasting_api.max_seasonal_index(Algorithms::HoltWintersForecasting::ICMP_FLOOD)
   (min..max).each do |t|
-    seasonal_indices = { current: n, previous: t - 1, next: t + 1 }
+    Rails.logger.info("Past #{t} records with legal amount of icmp requests, each.") if (t % 100).zero?
+    seasonal_indices = { current: t, previous: t - 1, next: t + 1 }
     seasonal_indices[:previous] = max if t == min
     seasonal_indices[:next] = min if t == max
     Workers::Analysis::Dos::Icmp::CyberReportProducer.new.perform(
       friendly_resource.ip_address,
       Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT,
       {
-        ip: friendly_resource.ip_address,
-        incoming_req_count: rand(100..1000),
-        seasonal_indices: seasonal_indices
+        'ip' => friendly_resource.ip_address,
+        'incoming_req_count' => rand(100..1000),
+        'seasonal_indices' => seasonal_indices
       },
       log: false
     )
+    # sleep(1)
   end
 end

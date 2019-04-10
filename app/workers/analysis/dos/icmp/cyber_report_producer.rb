@@ -80,24 +80,24 @@ module Workers
                              .cyber_report_by_friendly_resource_ip_and_type_and_custom_attr(
                                ip,
                                type,
-                               seasonal_index: indices[:previous]
+                               'seasonal_index' => indices[:previous]
                              )
             reports[:prev_season] = archive_api
                                     .cyber_report_by_friendly_resource_ip_and_type_and_custom_attr(
                                       ip,
                                       type,
-                                      seasonal_index: indices[:current]
+                                      'seasonal_index' => indices[:current]
                                     )
             reports[:prev_season_next_step] = archive_api
                                               .cyber_report_by_friendly_resource_ip_and_type_and_custom_attr(
                                                 ip,
                                                 type,
-                                                seasonal_index: indices[:next]
+                                                'seasonal_index' => indices[:next]
                                               )
             reports[:latest] = archive_api.new_cyber_report_object_for_friendly_resource(
               ip,
               type,
-              seasonal_index: indices[:current]
+              'seasonal_index' => indices[:current]
             )
             reports
           end

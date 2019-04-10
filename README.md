@@ -82,7 +82,7 @@ Go to the root directory of the project(it contains *.ruby-gemset*, *.ruby-versi
 Go to the root directory of the project(it contains the directory *config*).
 Start the following processes, whether in the background or with a dedicated terminal for each:
   * `redis-server`
-  * `sidekiq -C config/sidekiq_development`
+  * `sidekiq -C config/sidekiq_development.yml`
   * `rails server --environment=development`
 The application is ready at *http://localhost:3000*.
 
@@ -99,6 +99,16 @@ Go to root directory of the project(it contains the directory *spec*).
 ## Unit tests
 ### Algorithms module
   * `rspec spec/features/algorithms/*.spec.rb`
+### Analysis module
+  * `rspec spec/features/analysis_department/*.spec.rb`
+### Archive module
+  * `rspec spec/features/archive_department/*.spec.rb`
+### Intelligence module
+  * `rspec spec/features/intelligence_department/*.spec.rb`
+### ThinkTank module
+  * `rspec spec/features/think_tank_department/*.spec.rb`
+### ICMP DoS flood positive true
+  * `rspec spec/features/icmp_cyber_report_producer/positive_true.spec.rb`
 
 # Review (lint) the code
 Go to the root directory of the project(it contains *.rubocop.yml*) and run: 

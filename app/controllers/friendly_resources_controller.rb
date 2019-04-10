@@ -8,10 +8,14 @@
 class FriendlyResourcesController < ApplicationController
   # Renders View template that lists registered {FriendlyResource}
   def index
-    page = params[:page] || 1
-    page_size = params[:page_size] || 3
+    page = params[:page] || '1'
+    page_size = params[:page_size] || '3'
     archive_api = Departments::Archive::Api.instance
-    @friendly_resources = archive_api.friendly_resources(page, page_size)
+    @friendly_resources = archive_api.friendly_resources(page.to_i, page_size.to_i)
+    max_records = archive_api.friendly_resources_count
+    @friendly_resources = WillPaginate::Collection.create(page.to_i, page_size.to_i, max_records) do |pager|
+      pager.replace(@friendly_resources)
+    end
   end
 
   # Renders View template with a registration form for a {FriendlyResource}
@@ -22,14 +26,14 @@ class FriendlyResourcesController < ApplicationController
 
   # Renders View template for a particular {FriendlyResource} with its details.
   def show
-    friendly_resource_id = params[:id]
+    friendly_resource_id = params[:id].to_i if params[:id]
     archive_api = Departments::Archive::Api.instance
     @friendly_resource = archive_api.friendly_resource_by_id(friendly_resource_id)
   end
 
   # @todo Add support for editing details of an existing {FriendlyResource}
   def edit
-    friendly_resource_id = params[:id]
+    friendly_resource_id = params[:id].to_i if params[:id]
     archive_api = Departments::Archive::Api.instance
     @friendly_resource = archive_api.friendly_resource_by_id(friendly_resource_id)
   end
@@ -38,7 +42,10 @@ class FriendlyResourcesController < ApplicationController
   def create
     archive_api = Departments::Archive::Api.instance
     begin
-      @friendly_resource = archive_api.new_friendly_resource_from_hash(params['friendly_resource'])
+      @friendly_resource = archive_api.new_friendly_resource_from_hash(
+        'name' => params[:friendly_resource]['name'],
+        'ip_address' => params[:friendly_resource]['ip_address']
+      )
       if archive_api.persist_friendly_resource(@friendly_resource)
         redirect_to(@friendly_resource, notice: 'Friendly resource has been created successfully.')
       else
@@ -53,7 +60,7 @@ class FriendlyResourcesController < ApplicationController
   # Sets up needed functionality for collecting intelligence data and interpreting it for a
   # particular {FriendlyResource}
   def start_monitoring
-    friendly_resource_id = params[:friendly_resource_id]
+    friendly_resource_id = params[:friendly_resource_id].to_i if params[:friendly_resource_id]
     @friendly_resource = Departments::Archive::Api.instance.friendly_resource_by_id(friendly_resource_id)
     think_tank_api = Departments::ThinkTank::Api.instance
     begin
@@ -67,7 +74,7 @@ class FriendlyResourcesController < ApplicationController
 
   # Stops collection of intelligence data and its interpretation for a particular {FriendlyResource}
   def stop_monitoring
-    friendly_resource_id = params[:friendly_resource_id]
+    friendly_resource_id = params[:friendly_resource_id].to_i if params[:friendly_resource_id]
     @friendly_resource = Departments::Archive::Api.instance.friendly_resource_by_id(friendly_resource_id)
     think_tank_api = Departments::ThinkTank::Api.instance
     begin

@@ -170,6 +170,24 @@ RSpec.describe 'ArchiveApi - FriendlyResource model.', type: :feature do
     ).to eql(0)
   end
 
+  it 'Returns the amount of persisted friendly resources.' do
+    friendly_resources_data = [
+      { 'name' => legal_name, 'ip_address' => legal_ip_address },
+      { 'name' => 'Demo_2', 'ip_address' => '79.181.31.5' },
+      { 'name' => 'Demo_3', 'ip_address' => '79.181.31.6' },
+      { 'name' => 'Demo_4', 'ip_address' => '79.181.31.7' }
+    ]
+    count = 0
+    expect(archive_api.friendly_resources_count).to eql(count)
+    friendly_resources_data.each do |f|
+      count += 1
+      archive_api.persist_friendly_resource(
+        archive_api.new_friendly_resource_from_hash(f)
+      )
+      expect(archive_api.friendly_resources_count).to eql(count)
+    end
+  end
+
   it 'Throws an error when a persisted friendly resource is retrieved by an illegal cyber report.' do
     illegal_cyber_reports.each do |report|
       expect {
