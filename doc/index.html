@@ -99,7 +99,9 @@ commands on Windows 10.</p>
 </li></ul>
 
 <p><strong>Note!</strong> Before installing new program, you are advised to
-run: <code>sudo apt-get update</code> <code>sudo apt-get upgrade</code></p>
+run:</p>
+
+<p><code>sudo apt-get update</code> <code>sudo apt-get upgrade</code></p>
 
 <p><strong>Note!</strong> At the end of each installation we test if it is
 successfull by getting the version of the freshly installed program.</p>
@@ -120,11 +122,11 @@ successfull by getting the version of the freshly installed program.</p>
 <p><code>sudo apt-get update</code></p>
 </li><li>
 <p><code>sudo apt-get install rvm</code></p>
-</li><li>
-<p>Restart computer and open a terminal.</p>
-</li><li>
-<p><code>rvm --version</code></p>
 </li></ul>
+
+<p>Restart the computer and open a terminal. Run:</p>
+
+<p><code>rvm --version</code></p>
 
 <h2 id="label-Ruby+installation">Ruby installation</h2>
 <ul><li>
@@ -133,7 +135,9 @@ successfull by getting the version of the freshly installed program.</p>
 <p><code>ruby --version</code></p>
 </li></ul>
 
-<p>An additional test is running: * <code>gem list</code></p>
+<p>An additional test is running:</p>
+
+<p><code>gem list</code></p>
 
 <p>It should output a short list of <a href="https://rubygems.org/gems">Ruby
 Gems</a> available by default.</p>
@@ -205,15 +209,11 @@ Gemsets</a> containing an item with the name <em>rails-5.2.0</em>.</p>
 <p><code>sudo cp src/redis-cli /usr/local/bin/</code></p>
 </li><li>
 <p><code>redis-server</code></p>
-</li><li>
-<p>Open new terminal and run:</p>
-</li><li>
-<p><code>redis-cli</code></p>
-</li><li>
-<p><code>PING</code></p>
-</li><li>
-<p>You should get <em>PONG</em></p>
 </li></ul>
+
+<p>Open a new terminal and run: * <code>redis-cli</code> * <code>PING</code></p>
+
+<p>You should get <em>PONG</em>.</p>
 
 <h2 id="label-Gem+installation">Gem installation</h2>
 
@@ -254,7 +254,7 @@ browser</p>
 
 <h2 id="label-Regression+tests">Regression tests</h2>
 
-<p><strong>to be completed</strong></p>
+<p><code>rspec spec/features/*<strong>/</strong>.spec.rb</code></p>
 
 <h2 id="label-Unit+tests">Unit tests</h2>
 
@@ -287,57 +287,19 @@ spec/features/icmp_cyber_report_producer/positive_true.spec.rb</code></p>
 
 <p>Go to the root directory of the project(it contains <em>.rubocop.yml</em>)
 and run:</p>
-<ul><li>
+
 <p><code>rubocop -c .rubocop.yml --rails</code></p>
-</li></ul>
 
 <h1 id="label-Known+issues">Known issues</h1>
 <ol><li>
-<p>Sniffer is not affected by “continue_analysis”, based on type of analysis.</p>
+<p>Add SQL injection identification.</p>
 </li><li>
-<p>There is no demo friendly resource with a season of data for holt winters
-forecasting algorithm.</p>
-</li><li>
-<p>Provide regression tests.</p>
-</li><li>
-<p>README lacks steps for deploying the project to Heroku.</p>
-</li><li>
-<p>Detailed documentation.</p>
-</li><li>
-<p>Refactor files.</p>
-
-<h1 id="label-Refactored+files+-2B+Tests">Refactored files + Tests</h1>
-</li><li>
-<p>app</p>
-<ul><li>
-<p>controllers</p>
-</li><li>
-<p>departments</p>
-</li><li>
-<p>analysis.</p>
-</li><li>
-<p>archive …</p>
-</li><li>
-<p>helpers</p>
-</li><li>
-<p>models</p>
-</li></ul>
-</li><li>
-<p>lib</p>
-<ul><li>
-<p>api.rb</p>
-</li><li>
-<p>services</p>
-</li><li>
-<p>icmp_flood.rb</p>
-</li><li>
-<p>validation.rb</p>
-</li></ul>
+<p>Steps for deployment to Heroku.</p>
 </li></ol>
 </div></div>
 
       <div id="footer">
-  Generated on Thu Apr 11 17:45:29 2019 by
+  Generated on Thu Apr 11 18:06:16 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.18 (ruby-2.5.3).
 </div>

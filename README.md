@@ -124,8 +124,8 @@ Go to root directory of the project(it contains the directory *spec*).
 `rspec spec/features/intelligence_department/*.spec.rb`
 ### ThinkTank module
 `rspec spec/features/think_tank_department/*.spec.rb`
-### ICMP DoS flood positive true
-`rspec spec/features/icmp_cyber_report_producer/positive_true.spec.rb`
+### ICMP DoS flood positive true and negative true
+`rspec spec/features/workers/icmp_cyber_report_producer.spec.rb`
 
 # Review (lint) the code
 Go to the root directory of the project(it contains *.rubocop.yml*) and run: 
