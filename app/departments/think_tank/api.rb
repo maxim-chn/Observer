@@ -59,7 +59,7 @@ module Departments
         Services::Analysis.instance.analyze(query, data)
       end
 
-      # Returns {CybreReport} objects in a format that is parsable for a graph.
+      # Returns {CyberReport} objects in a format that is parsable for a graph.
       # @param [Symbol] type {CyberReport} type, i.e. {Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT}.
       # @param [Integer] ip {FriendlyResource} ip address.
       # @param [Integer] page Page starts from 1.
@@ -70,6 +70,7 @@ module Departments
         Services::Validation.instance.ip_address?(ip)
         Services::Validation.instance.page?(page)
         Services::Validation.instance.page_size?(page_size)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{type}, #{ip}, #{page}, #{page_size}.")
         archive_api = Departments::Archive::Api.instance
         latest_cyber_reports = archive_api.cyber_reports_by_friendly_resource_ip_and_type(
           ip,
@@ -95,19 +96,10 @@ module Departments
       # Indicates if the collection of intelligence data for ICMP flood attack analysis is still needed.
       # @param [Integer] ip Numerical representation of {FriendlyResource} ip address.
       # @return [Boolean]
-      def continue_icmp_dos_intelligence_collection?(ip)
+      def icmp_dos_intelligence_collection?(ip)
         Services::Validation.instance.ip_address?(ip)
-        begin
-          redis_client = Services::Redis.instance.client
-          raw_cached_data = redis_client.get(ip.to_s)
-          raw_cached_data ||= '{}'
-          cached_data = JSON.parse(raw_cached_data)
-          collect_formats = []
-          collect_formats = cached_data['collect_formats'] if cached_data.key?('collect_formats')
-          collect_formats.include?(Shared::IntelligenceFormat::DOS_ICMP)
-        rescue StandardError
-          false
-        end
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}.")
+        Services::Intelligence.instance.icmp_dos_intelligence_collection?(ip)
       end
     end
   end

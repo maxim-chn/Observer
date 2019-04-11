@@ -3,6 +3,7 @@
 require 'singleton'
 require_relative './services/field_agent_contact.rb'
 require_relative './services/validation.rb'
+require_relative './services/redis_utils.rb'
 
 module Departments
   ##
@@ -20,7 +21,7 @@ module Departments
       # @param [Departments::Shared::IntelligenceQuery] query An intelligence query.
       # @return [Void]
       def start_intelligence_gathering(query)
-        Service::Validation.instance.intelligence_query?(query)
+        Services::Validation.instance.intelligence_query?(query)
         Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}")
         Services::FieldAgentContact.instance.mission_dispatch(query)
       end
@@ -30,9 +31,29 @@ module Departments
       # @param [Departments::Shared::IntelligenceQuery] query An intelligence query.
       # @return [Void]
       def stop_intelligence_gathering(query)
-        Service::Validation.instance.intelligence_query?(query)
+        Services::Validation.instance.intelligence_query?(query)
         Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}")
         Services::FieldAgentContact.instance.mission_abort(query)
+      end
+
+      # Singnals if a collection for a certain type of intelligence is still required.
+      # @param [Departments::Shared::IntelligenceQuery] query
+      # @return [Boolean]
+      def continue_collection?(query)
+        Services::Validation.instance.intelligence_query?(query)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{query}.")
+        begin
+          redis_client = Services::RedisUtils.instance.client
+          raw_cached_data = redis_client.get(query.friendly_resource_ip.to_s)
+          raw_cached_data ||= '{}'
+          cached_data = JSON.parse(raw_cached_data)
+          collect_formats = []
+          collect_formats = cached_data['collect_formats'] if cached_data.key?('collect_formats')
+          return collect_formats.include?(query.collect_format)
+        rescue StandardError => e
+          Rails.logger.error("#{self.class.name} - #{__method__} - #{e.inspect}")
+          false
+        end
       end
     end
   end

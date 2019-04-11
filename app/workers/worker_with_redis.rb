@@ -3,11 +3,11 @@
 require 'redis'
 
 ##
-# Holds all Worker classes. They represent {background processes}[https://en.wikipedia.org/wiki/Background_process].
+# Holds all Worker classes. They represent the {background processes}[https://en.wikipedia.org/wiki/Background_process].
 module Workers
   ##
   # {Sidekiq}[https://sidekiq.org/] manages our background processing and it needs
-  # {Redis}[https://redis.io/]. Hence, every worker must have Redis connection.
+  # {Redis}[https://redis.io/]. Hence, every worker must have a Redis connection.
   class WorkerWithRedis
     private
 
@@ -22,7 +22,7 @@ module Workers
       rescue StandardError => e
         throw StandardError.new("#{self.class.name} - #{__method__} - failed - reason - #{e.inspect}")
       end
-      throw StandardError.new("#{self.class.name} - #{__method__} - has failed - reason - unknown.")
+      throw StandardError.new("#{self.class.name} - #{__method__} - failed - reason - unknown.")
     end
   end
 end

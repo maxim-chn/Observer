@@ -25,7 +25,7 @@ module BackendApi
           Rails.logger.error(e.message)
           message['result'] = 'Request to analyze failed'
         ensure
-          message['continue_collection'] = think_tank.continue_icmp_dos_intelligence_collection?(ip)
+          message['continue_collection'] = think_tank.icmp_dos_intelligence_collection?(ip)
         end
       else
         message['result'] = 'DOS ICMP Intelligence Data not received'

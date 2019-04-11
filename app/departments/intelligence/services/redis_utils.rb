@@ -4,11 +4,11 @@ require 'singleton'
 require 'redis'
 
 module Departments
-  module ThinkTank
+  module Intelligence
     module Services
       ##
-      # Services, like redis client, for {Departments::ThinkTank}.
-      class Redis
+      # Services, like redis client, for {Departments::Intelligence}.
+      class RedisUtils
         include Singleton
 
         def client
@@ -18,9 +18,9 @@ module Departments
             client = Redis.new(timeout: 0) if Rails.env.production?
             return client if client
           rescue StandardError => e
-            throw StandardError.new("#{self.class.name} - #{__method__} - failed - reason - #{e.inspect}")
+            throw StandardError.new("#{self.class.name} - #{__method__} - #{e.inspect}")
           end
-          throw StandardError.new("#{self.class.name} - #{__method__} - has failed - reason - unknown.")
+          throw StandardError.new("#{self.class.name} - #{__method__} - reason unknown.")
         end
       end
     end

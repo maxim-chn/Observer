@@ -8,6 +8,8 @@ module Departments
       ##
       # Contains validation methods for the {Departments::Intelligence::Services}.
       class Validation
+        include Singleton
+
         def intelligence_query?(query)
           return if query.class == Shared::IntelligenceQuery
 

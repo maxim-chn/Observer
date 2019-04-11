@@ -59,7 +59,7 @@ module Departments
 
       # Initiates a new {FriendlyResource} object. It is not persisted in the database yet.
       # @param [String] name {FriendlyResource} name.
-      # @param [Object] ip_address {FriendlyResource} ip address. I can be {String} or {Integer}.
+      # @param [Object] ip_address {FriendlyResource} ip address. I can be [String] or [Integer].
       # @return [FriendlyResource]
       def new_friendly_resource(name, ip_address)
         Services::Validation.instance.friendly_resource_name?(name)
