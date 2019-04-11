@@ -111,7 +111,7 @@ The application is ready at *http://localhost:3000*.
 Go to root directory of the project(it contains the directory *spec*).
 
 ## Regression tests
-`rspec spec/features/**/*.spec.rb`
+`rspec spec/features/*/*.spec.rb`
 
 ## Unit tests
 ### Algorithms module
