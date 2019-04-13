@@ -5,6 +5,7 @@
 class FriendlyResource < ApplicationRecord
   # Relation to models that extend [CyberReport].
   has_many :icmp_flood_report, class_name: 'Dos::IcmpFloodReport', dependent: :destroy
+  has_many :sql_injection_report, class_name: 'CodeInjection::SqlInjectionReport', dependent: :destroy
 
   # String representation of an object.
   # @return [String]

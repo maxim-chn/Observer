@@ -6,12 +6,14 @@ module Departments
     # Holds Enum objects for identifying {CyberReport} type.
     module AnalysisType
       ICMP_DOS_CYBER_REPORT = 'icmp_dos_cyber_report'
+      SQL_INJECTION_CYBER_REPORT = 'sql_injection_report'
 
       # Collection of available dos {CyberReport} types
       # @return [Array<String>]
       def self.dos_formats
         result = []
         result << ICMP_DOS_CYBER_REPORT
+        result << SQL_INJECTION_CYBER_REPORT
         result
       end
 

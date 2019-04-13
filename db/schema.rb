@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_25_080252) do
+ActiveRecord::Schema.define(version: 2019_04_13_092915) do
   create_table 'friendly_resources', force: :cascade do |t|
     t.string 'name'
     t.integer 'ip_address'
@@ -36,5 +36,13 @@ ActiveRecord::Schema.define(version: 2018_11_25_080252) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['friendly_resource_id'], name: 'index_icmp_flood_reports_on_friendly_resource_id'
+  end
+
+  create_table 'sql_injection_reports', force: :cascade do |t|
+    t.integer 'friendly_resource_id'
+    t.text 'reason'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['friendly_resource_id'], name: 'index_sql_injection_reports_on_friendly_resource_id'
   end
 end

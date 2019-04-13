@@ -3,6 +3,7 @@
 require 'singleton'
 require_relative './services/validation.rb'
 require_relative './services/icmp_flood_report.rb'
+require_relative './services/sql_injection_report.rb'
 require_relative './services/query_helper'
 
 module Departments
@@ -110,11 +111,12 @@ module Departments
         Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}.")
         result = 0
         friendly_resource = friendly_resource_by_ip(ip)
-        Rails.logger.info("BLYAT #{friendly_resource.id}")
         if friendly_resource
           case type
           when Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
             result = Services::IcmpFloodReport.instance.count_records(friendly_resource.id)
+          when Shared::AnalysisType::SQL_INJECTION_CYBER_REPORT
+            result = Services::SqlInjectionReport.instance.count_records(friendly_resource.id)
           end
         end
         result
@@ -142,6 +144,12 @@ module Departments
               page,
               page_size
             )
+          when Shared::AnalysisType::SQL_INJECTION_CYBER_REPORT
+            result = Services::SqlInjectionReport.instance.latest_reports_by_friendly_resource_id(
+              friendly_resource.id,
+              page,
+              page_size
+            )
           end
         end
         result
@@ -157,7 +165,9 @@ module Departments
         cyber_report = nil
         case type
         when Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
-          cyber_report = Services::IcmpFloodReport.instance.icmp_flood_report_by_id(id)
+          cyber_report = Services::IcmpFloodReport.instance.report_by_id(id)
+        when Shared::AnalysisType::SQL_INJECTION_CYBER_REPORT
+          cyber_report = Services::SqlInjectionReport.instance.report_by_id(id)
         end
         cyber_report
       end
@@ -194,7 +204,7 @@ module Departments
       # @param [Hash] opts Additional custom attributes:
       #   * 'seasonal_index' [Integer] a mandatory attribute for {Dos::IcmpFloodReport}.
       # @return {CyberReport}
-      def new_cyber_report_object_for_friendly_resource(ip, type, opts)
+      def new_cyber_report_object_for_friendly_resource(ip, type, opts = {})
         Services::Validation.instance.friendly_resource_ip_address?(ip)
         Services::Validation.instance.cyper_report_type?(type)
         Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{opts}.")
@@ -202,13 +212,16 @@ module Departments
         if friendly_resource
           result = nil
           case type
-          when Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
+          when Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
             Services::Validation.instance.seasonal_index_in_opts?(opts)
-            icmp_interp_data_service = Services::IcmpFloodReport.instance
-            result = icmp_interp_data_service.new_report_object(
+            result = Services::IcmpFloodReport.instance.new_report_object(
               opts['seasonal_index']
             )
             friendly_resource.icmp_flood_report << result if result
+            return result
+          when Shared::AnalysisType::SQL_INJECTION_CYBER_REPORT
+            result = Services::SqlInjectionReport.instance.new_report_object
+            friendly_resource.sql_injection_report << result if result
             return result
           end
         end

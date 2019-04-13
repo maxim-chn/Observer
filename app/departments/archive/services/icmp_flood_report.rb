@@ -40,7 +40,7 @@ module Departments
 
         # @param [Integer] id {Dos::IcmpFloodReport} id.
         # @return [Dos::IcmpFloodReport]
-        def icmp_flood_report_by_id(id)
+        def report_by_id(id)
           Validation.instance.id?(id)
           Dos::IcmpFloodReport.find(id)
         end
@@ -50,10 +50,7 @@ module Departments
         # @return [Dos::IcmpFloodReport]
         def new_report_object(seasonal_index)
           Validation.instance.seasonal_index?(seasonal_index)
-          Dos::IcmpFloodReport.new(
-            seasonal_index: seasonal_index,
-            report_type: Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
-          )
+          Dos::IcmpFloodReport.new(seasonal_index: seasonal_index)
         end
 
         # @param [Integer] id {FriendlyResource} id.
