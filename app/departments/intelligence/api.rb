@@ -41,7 +41,7 @@ module Departments
       # @return [Boolean]
       def continue_collection?(query)
         Services::Validation.instance.intelligence_query?(query)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{query}.")
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}.")
         begin
           redis_client = Services::RedisUtils.instance.client
           raw_cached_data = redis_client.get(query.friendly_resource_ip.to_s)

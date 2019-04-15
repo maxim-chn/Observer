@@ -6,29 +6,62 @@
     </h1>
   </div>
   <div class="row">
-    <p>
-      When
-      <span data-toogle="tooltip" data-placement="top" title="i.e. actual amount of incoming requests to the server.">
-        <em>actual_value</em>
-      </span>
-      is greater than
-      <span data-toogle="tooltip" data-placement="top" title="Greatest value for actual_value that has been calculated with analysis algorithm.">
-        <em>confidence_band_upper_value</em>
-      </span>
-      , there is an ongoing attack.</p>
+    <% if(@dos_icmp_reports) %>
+      <p>
+        When
+        <span data-toogle="tooltip" data-placement="top" title="i.e. actual amount of incoming requests to the server.">
+          <em>actual_value</em>
+        </span>
+        is greater than
+        <span data-toogle="tooltip" data-placement="top" title="Greatest value for actual_value that has been calculated with analysis algorithm.">
+          <em>confidence_band_upper_value</em>
+        </span>
+        , there is an ongoing attack.</p>
+    <% end %>
   </div>
-  <div class="row graphical-representation">
-    <%= line_chart @cyber_reports_graph %>
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
+  <% if(@dos_icmp_reports) %>
+    <div class="row graphical-representation">
+      <%= line_chart @dos_icmp_reports %>
     </div>
-    <div class="col-sm-6 text-center">
-      <%= will_paginate @cyber_reports_graph %>
+    <div class="row">
+      <div class="col-sm-3">
+      </div>
+      <div class="col-sm-6 text-center">
+        <%= will_paginate @dos_icmp_reports %>
+      </div>
+      <div class="col-sm-3">
+      </div>
     </div>
-    <div class="col-sm-3">
+  <% end %>
+  <% if(@sql_injection_reports) %>
+    <div class="row">
+      <div class="col-sm-6 text-center">
+        Malicious code detected
+      </div>
+      <div class="col-sm-6 text-center">
+        Detection time
+      </div>
     </div>
-  </div>
+    <% @sql_injection_reports.each do |report| %>
+      <div class="row list-group-item">
+        <div class="col-sm-6 text-center">
+          <%= report.reason %>
+        </div>
+        <div class="col-sm-6 text-center">
+          <%= report.created_at %>
+        </div>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="col-sm-3">
+      </div>
+      <div class="col-sm-6 text-center">
+        <%= will_paginate @sql_injection_reports %>
+      </div>
+      <div class="col-sm-3">
+      </div>
+    </div>
+  <% end %>
   <div class="row navigate-resources">
     <%= link_to "Back to CyberReports for #{friendly_resource_name(@friendly_resource)}",
       friendly_resource_cyber_reports_path(@friendly_resource) %>

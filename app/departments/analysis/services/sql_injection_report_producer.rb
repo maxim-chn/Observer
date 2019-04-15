@@ -5,25 +5,23 @@ require_relative './validation'
 
 module Departments
   module Analysis
-    ##
-    # Supporting implementations for the methods in {Departments::Analysis::Api}.
     module Services
       ##
-      # Consumes the {Workers::Analysis::Dos::Icmp::CyberReportProducer}.
-      class DosIcmpCyberReport
+      # Consumes the {Workers::Analysis::CodeInjection::Sql::CyberReportProducer}.
+      class SqlInjectionReport
         include Singleton
 
-        # Queues a job for a production of a {Dos::IcmpFloodReport}.
+        # Queues a job for a production of a {CodeInjection::SqlInjectionReport}.
         # @param [Integer] ip {FriendlyResource} ip address.
         # @param [Hash] data Intelligence data.
         # @return [Void]
         def queue_a_report(ip, data)
           Services::Validation.instance.ip_address?(ip)
-          Services::Validation.instance.dos_icmp_intelligence_data?(data)
+          Services::Validation.instance.sql_injection_intelligence_data?(data)
           Rails.logger.debug("#{self.class.name} - #{__method__} - #{ip}, #{data}.")
-          Workers::Analysis::Dos::Icmp::CyberReportProducer.perform_async(
+          Workers::Analysis::CodeInjection::Sql::CyberReportProducer.perform_async(
             ip,
-            Shared::AnalysisType::ICMP_DOS_CYBER_REPORT,
+            Shared::AnalysisType::SQL_INJECTION_CYBER_REPORT,
             data
           )
         end

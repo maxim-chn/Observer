@@ -2,6 +2,7 @@
 
 require 'singleton'
 require_relative './services/dos_icmp_report_producer.rb'
+require_relative './services/sql_injection_report_producer.rb'
 require_relative './services/validation.rb'
 
 module Departments
@@ -22,10 +23,15 @@ module Departments
       def request_cyber_report(query, data)
         Services::Validation.instance.analysis_query?(query)
         Services::Validation.instance.intelligence_data?(data)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}, #{data}")
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}, #{data}.")
         case query.analysis_type
-        when Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
-          Services::DosIcmpCyberReport.instance.queue_dos_icmp_report(
+        when Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
+          Services::DosIcmpCyberReport.instance.queue_a_report(
+            query.friendly_resource_ip,
+            data
+          )
+        when Shared::AnalysisType::SQL_INJECTION_CYBER_REPORT
+          Services::SqlInjectionReport.instance.queue_a_report(
             query.friendly_resource_ip,
             data
           )

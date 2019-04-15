@@ -34,6 +34,19 @@ module Departments
             an instance of #{Hash.name} with a key 'incoming_req_count' holding positive #{Integer.class} value.")
         end
 
+        def sql_injection_intelligence_data?(data)
+          intelligence_data?(data)
+          if data.key?('params')
+            return if data['params'].class == String && !data['params'].empty?
+          end
+          if data.key?('payload')
+            return if data['payload'].class == String && !data['payload'].empty?
+          end
+          throw StandardError.new("#{self.class.name} - #{__method__} - #{data} must be\
+            an instance of #{Hash.name} with both or one of the keys 'params', 'payload';\
+            holding a #{String.name} value.")
+        end
+
         def ip_address?(ip)
           return if ip.class == Integer && ip.positive?
 

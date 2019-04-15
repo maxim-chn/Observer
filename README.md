@@ -110,21 +110,17 @@ The application is ready at *http://localhost:3000*.
 # Tests
 Go to root directory of the project(it contains the directory *spec*).
 
-## Regression tests
-`rspec spec/features/*/*.spec.rb`
-
-## Unit tests
-### Algorithms module
+## Algorithms module
 `rspec spec/features/algorithms/*.spec.rb`
-### Analysis module
+## Analysis module
 `rspec spec/features/analysis_department/*.spec.rb`
-### Archive module
+## Archive module
 `rspec spec/features/archive_department/*.spec.rb`
-### Intelligence module
+## Intelligence module
 `rspec spec/features/intelligence_department/*.spec.rb`
-### ThinkTank module
+## ThinkTank module
 `rspec spec/features/think_tank_department/*.spec.rb`
-### ICMP DoS flood positive true and negative true
+## ICMP DoS flood positive true and negative true
 `rspec spec/features/workers/icmp_cyber_report_producer.spec.rb`
 
 # Review (lint) the code

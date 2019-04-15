@@ -1719,7 +1719,7 @@ Metrics/MethodLength:
   VersionAdded: '0.25'
   VersionChanged: '0.59.2'
   CountComments: false  # count full line comments?
-  Max: 30
+  Max: 35
   ExcludedMethods: []
 
 Metrics/ModuleLength:

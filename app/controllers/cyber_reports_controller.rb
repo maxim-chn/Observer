@@ -24,15 +24,28 @@ class CyberReportsController < ApplicationController
     think_tank_api = Departments::ThinkTank::Api.instance
     @friendly_resource = archive_api.friendly_resource_by_id(id)
     @cyber_report_type = params[:type]
-    @cyber_reports_graph = think_tank_api.latest_cyber_reports_graph(
-      type,
-      @friendly_resource.ip_address,
-      page.to_i,
-      page_size.to_i
-    )
     max_records = archive_api.cyber_reports_count(@friendly_resource.ip_address, type)
-    @cyber_reports_graph = WillPaginate::Collection.create(page.to_i, page_size.to_i, max_records) do |pager|
-      pager.replace(@cyber_reports_graph)
+    case @cyber_report_type
+    when Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
+      @dos_icmp_reports = think_tank_api.latest_cyber_reports_graph(
+        @cyber_report_type,
+        @friendly_resource.ip_address,
+        page.to_i,
+        page_size.to_i
+      )
+      @dos_icmp_reports = WillPaginate::Collection.create(page.to_i, page_size.to_i, max_records) do |pager|
+        pager.replace(@dos_icmp_reports)
+      end
+    when Departments::Shared::AnalysisType::SQL_INJECTION_CYBER_REPORT
+      @sql_injection_reports = archive_api.cyber_reports_by_friendly_resource_ip_and_type(
+        @friendly_resource.ip_address,
+        @cyber_report_type,
+        page.to_i,
+        page_size.to_i
+      )
+      @sql_injection_reports = WillPaginate::Collection.create(page.to_i, page_size.to_i, max_records) do |pager|
+        pager.replace(@sql_injection_reports)
+      end
     end
   end
 end

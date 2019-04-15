@@ -9,6 +9,13 @@ RSpec.describe 'ThinkTankApi', type: :feature do
   let(:legal_cyber_report_type) { Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT }
   let(:legal_page) { 1 }
   let(:legal_page_size) { 1 }
+  let(:legal_sql_injection_intelligence_data) {
+    [
+      { 'params' => 'DROP DATABASE test;', 'payload' => 'DROP DATABASE test;' },
+      { 'params' => 'DROP DATABASE test;' },
+      { 'payload' => 'DROP DATABASE test;' }
+    ]
+  }
   let(:illegal_ids) {
     [nil, '1', '1.3.4', -1, {}, []]
   }
@@ -34,6 +41,17 @@ RSpec.describe 'ThinkTankApi', type: :feature do
   }
   let(:illegal_page_sizes) {
     [nil, '1', 0, -1]
+  }
+  let(:illegal_sql_injection_intelligence_data) {
+    [
+      nil,
+      1,
+      '2',
+      { 'not_params' => 'DROP DATABASE test;' },
+      { 'not_payload' => 'DROP DATABASE test' },
+      { 'params' => 1 },
+      { 'payload' => 2 }
+    ]
   }
 
   it 'Throws an error when starting the monitoring with an illegal friendly resource id.' do
@@ -64,6 +82,22 @@ RSpec.describe 'ThinkTankApi', type: :feature do
     illegal_dos_icmp_intelligence_data.each do |data|
       expect {
         think_tank_api.analyze_icmp_dos_intelligence_data(legal_ip, data)
+      }.to raise_error(StandardError)
+    end
+  end
+
+  it 'Throws an error when analyzing sql injection intelligence data with an illegal ip address.' do
+    illegal_ips.each do |ip|
+      expect {
+        think_tank_api.analyze_sql_injection_intelligence_data(ip, legal_sql_injection_intelligence_data)
+      }.to raise_error(StandardError)
+    end
+  end
+
+  it 'Throws an error when analyzing sql injection intelligence data with an illegal sql injection intelligence' do
+    illegal_sql_injection_intelligence_data.each do |data|
+      expect {
+        think_tank_api.analyze_sql_injection_intelligence_data(legal_ip, data)
       }.to raise_error(StandardError)
     end
   end
@@ -143,7 +177,15 @@ RSpec.describe 'ThinkTankApi', type: :feature do
   it 'Throws an error when testing necessity for the collection of icmp dos intelligence data by illegal ip.' do
     illegal_ips.each do |ip|
       expect {
-        think_tank_api.continue_icmp_dos_intelligence_collection?(ip)
+        think_tank_api.icmp_dos_intelligence_collection?(ip)
+      }.to raise_error(StandardError)
+    end
+  end
+
+  it 'Throws an error when testing necessity for the collection of sql injection intelligence data by illegal ip.' do
+    illegal_ips.each do |ip|
+      expect {
+        think_tank_api.sql_injection_intelligence_collection?(ip)
       }.to raise_error(StandardError)
     end
   end

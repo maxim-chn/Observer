@@ -21,10 +21,7 @@ module Workers
           #   * 'incoming_req_count' Amount of incoming ICMP requests to a {FriendlyResource}.
           # @return [Void]
           def perform(ip, type, intelligence_data, log: true)
-            if log
-              logger.info("#{self.class.name} - #{__method__} - IP : #{ip}, type : #{type}, \
-                intelligence_data : #{intelligence_data}.")
-            end
+            logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{intelligence_data}.") if log
             begin
               # In production, there should be no :seasonal_indices inside intelligence_data.
               # It is an ugly hack, to ease upon integration test. Sorry, could not think

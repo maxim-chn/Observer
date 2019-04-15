@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   scope :backend_api, module: 'backend_api', as: 'backend_api' do
     resources :dos_icmp_intelligence, only: [:create] do
     end
+    resources :sql_injection_intelligence, only: [:create] do
+    end
   end
   root to: 'welcome#index' # root to: homepage_path
   # To access Sidekiq Dashboard

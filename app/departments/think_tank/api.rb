@@ -34,6 +34,7 @@ module Departments
         Rails.logger.info("#{self.class.name} - #{__method__} - #{id}.")
         friendly_resource = Archive::Api.instance.friendly_resource_by_id(id)
         Services::Intelligence.instance.gather_dos_intelligence(friendly_resource.ip_address)
+        Services::Intelligence.instance.gather_code_injection_intelligence(friendly_resource.ip_address)
       end
 
       # Stops the gathering of the intelligence data on a particular {FriendlyResource}.
@@ -41,9 +42,10 @@ module Departments
       # @return [Void]
       def stop_monitoring(id)
         Services::Validation.instance.id?(id)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{id}")
-        friendly_resource = Departments::Archive::Api.instance.friendly_resource_by_id(id)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{id}.")
+        friendly_resource = Archive::Api.instance.friendly_resource_by_id(id)
         Services::Intelligence.instance.stop_dos_intelligence_gathering(friendly_resource.ip_address)
+        Services::Intelligence.instance.stop_code_injection_intelligence_gathering(friendly_resource.ip_address)
       end
 
       # Initiates interpretation of the latest intelligence data for a {FriendlyResource}.
@@ -54,8 +56,21 @@ module Departments
       def analyze_icmp_dos_intelligence_data(ip, data)
         Services::Validation.instance.ip_address?(ip)
         Services::Validation.instance.dos_icmp_intelligence_data?(data)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{data}")
-        query = Departments::Shared::AnalysisQuery.new(ip, Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{data}.")
+        query = Shared::AnalysisQuery.new(ip, Shared::AnalysisType::ICMP_DOS_CYBER_REPORT)
+        Services::Analysis.instance.analyze(query, data)
+      end
+
+      # Initiates an interpretation of the latest intelligence data for a {FriendlyResource}.
+      # Intelligence data is related to SQL Injection analysis.
+      # @param [Integer] ip {FriendlyResource} ip address.
+      # @param [Hash] data Intelligence data, related to SQL Injection analysis.
+      # @return [Void]
+      def analyze_sql_injection_intelligence_data(ip, data)
+        Services::Validation.instance.ip_address?(ip)
+        Services::Validation.instance.sql_injection_intelligence_data?(data)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{data}.")
+        query = Shared::AnalysisQuery.new(ip, Shared::AnalysisType::SQL_INJECTION_CYBER_REPORT)
         Services::Analysis.instance.analyze(query, data)
       end
 
@@ -71,7 +86,7 @@ module Departments
         Services::Validation.instance.page?(page)
         Services::Validation.instance.page_size?(page_size)
         Rails.logger.info("#{self.class.name} - #{__method__} - #{type}, #{ip}, #{page}, #{page_size}.")
-        archive_api = Departments::Archive::Api.instance
+        archive_api = Archive::Api.instance
         latest_cyber_reports = archive_api.cyber_reports_by_friendly_resource_ip_and_type(
           ip,
           type,
@@ -94,12 +109,21 @@ module Departments
       end
 
       # Indicates if the collection of intelligence data for ICMP flood attack analysis is still needed.
-      # @param [Integer] ip Numerical representation of {FriendlyResource} ip address.
+      # @param [Integer] ip {FriendlyResource} ip address.
       # @return [Boolean]
       def icmp_dos_intelligence_collection?(ip)
         Services::Validation.instance.ip_address?(ip)
         Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}.")
         Services::Intelligence.instance.icmp_dos_intelligence_collection?(ip)
+      end
+
+      # Indicates if the collection of the intelligence data for SQL Injection attack analysis is still needed.
+      # @param [Integer] ip {FriendlyResource} ip address.
+      # @return [Boolean]
+      def sql_injection_intelligence_collection?(ip)
+        Services::Validation.instance.ip_address?(ip)
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}.")
+        Services::Intelligence.instance.sql_injection_intelligence_collection?(ip)
       end
     end
   end
