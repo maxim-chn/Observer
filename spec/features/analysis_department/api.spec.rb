@@ -20,7 +20,7 @@ RSpec.describe 'AnalysisApi', type: :feature do
     { 'incoming_req_count' => 12 }
   }
   let(:legal_sql_injection_intelligence_data) {
-    { 'params' => 'DROP DATABASE test;', 'payload' => 'DROP DATABASE test;' }
+    { 'uris' => ['DROP DATABASE test;', '/DROP DATABASE test;/'] }
   }
   let(:illegal_queries) {
     [nil, 1, '2', {}, []]
@@ -33,7 +33,8 @@ RSpec.describe 'AnalysisApi', type: :feature do
       [],
       { 'not_incoming_req_count' => 12 },
       { 'incoming_req_count' => -1 },
-      { 'not_incoming_req_count' => '2' }
+      { 'not_incoming_req_count' => '2' },
+      { 'uris' => [] }
     ]
   }
   let(:illegal_sql_injection_intelligence_data) {

@@ -10,11 +10,7 @@ RSpec.describe 'ThinkTankApi', type: :feature do
   let(:legal_page) { 1 }
   let(:legal_page_size) { 1 }
   let(:legal_sql_injection_intelligence_data) {
-    [
-      { 'params' => 'DROP DATABASE test;', 'payload' => 'DROP DATABASE test;' },
-      { 'params' => 'DROP DATABASE test;' },
-      { 'payload' => 'DROP DATABASE test;' }
-    ]
+    { 'uris' => ['DROP DATABASE test;', '/DROP DATABASE test;/'] }
   }
   let(:illegal_ids) {
     [nil, '1', '1.3.4', -1, {}, []]
@@ -50,7 +46,8 @@ RSpec.describe 'ThinkTankApi', type: :feature do
       { 'not_params' => 'DROP DATABASE test;' },
       { 'not_payload' => 'DROP DATABASE test' },
       { 'params' => 1 },
-      { 'payload' => 2 }
+      { 'payload' => 2 },
+      { 'uris' => [] }
     ]
   }
 

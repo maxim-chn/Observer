@@ -5,6 +5,7 @@ import ipaddress
 import os
 import time
 import sys
+import urllib
 
 def printHelp():
   print('This is a field agent that consumes .pcap file and reports its relevant contents to the Observer.')
@@ -36,11 +37,23 @@ def getCaptureData(filename):
     continueReporting = False
   return captureData, continueReporting
 
-def getIntelligence(captureData):
-  intelligence = {'ip': int(ipaddress.IPv4Address(currentIp)), 'incoming_req_count': 0}
-  for p in captureData:
-    intelligence['incoming_req_count'] += 1
-  return intelligence
+def getIcmpFloodIntelligence(captureData):
+  result = {'ip': int(ipaddress.IPv4Address(currentIp)), 'incoming_req_count': 0}
+  for packet in captureData:
+    if 'icmp' in [ l.layer_name for l in packet.layers ]:
+      result['incoming_req_count'] += 1
+  return result
+
+def getSqlInjectionIntelligence(captureData):
+  result = {'ip': int(ipaddress.IPv4Address(currentIp)), 'uris': []}
+  for packet in captureData:
+    if 'http' in [ l.layer_name for l in packet.layers ]:
+      try:
+        request_uri = urllib.parse.unquote(packet.http.get('request_uri'))
+        result['uris'].append(request_uri)
+      except Exception:
+        pass
+  return result
 
 def reportIntelligence(intelligence, observerUrl):
   continueReporting = True
@@ -65,18 +78,34 @@ else:
   observerUrl = sys.argv[3]
   routeBackendApi = '/backend_api'
   routeDosIcmpIntelligence = '/dos_icmp_intelligence'
-  continueReporting = True
+  routeSqlInjectionIntelligence = '/sql_injection_intelligence'
+  continueIcmpFloodIntelligence = True
+  continueSqlInjectionIntelligence = True
   lastModificationTime = None
-  delayInSeconds = 10
+  delayInSeconds = 1
 
-  while continueReporting:
+  while continueIcmpFloodIntelligence and continueSqlInjectionIntelligence:
     time.sleep(delayInSeconds)
     captureUpdated, lastModificationTime = captureFileUpdated(lastModificationTime, captureFilename)
     captureData = None
     if captureUpdated:
       captureData, continueReporting = getCaptureData(captureFilename)
     if captureData is not None:
-      intelligence = getIntelligence(captureData)
-      backedApiAddressIcmpDosIntelligence = observerUrl + routeBackendApi + routeDosIcmpIntelligence
-      continueReporting = reportIntelligence(intelligence, backedApiAddressIcmpDosIntelligence)
-      print(continueReporting)
+      if continueIcmpFloodIntelligence == True:
+        icmpFloodIntelligence = {}
+        icmpFloodIntelligence = getIcmpFloodIntelligence(captureData)
+        print(icmpFloodIntelligence)
+        backendApiAddressIcmpDosIntelligence = observerUrl + routeBackendApi + routeDosIcmpIntelligence
+        continueIcmpFloodIntelligence = reportIntelligence(
+          icmpFloodIntelligence,
+          backendApiAddressIcmpDosIntelligence
+        )
+      if continueSqlInjectionIntelligence == True:
+        sqlInjectionIntelligence = {}
+        sqlInjectionIntelligence = getSqlInjectionIntelligence(captureData)
+        backendApiAddressSqlInjectionIntelligence = observerUrl + routeBackendApi + routeSqlInjectionIntelligence
+        print(sqlInjectionIntelligence)
+        continueSqlInjectionIntelligence = reportIntelligence(
+          sqlInjectionIntelligence,
+          backendApiAddressSqlInjectionIntelligence
+        )

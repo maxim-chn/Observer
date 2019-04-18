@@ -11,8 +11,7 @@ module BackendApi
     # Necessary parameters come from a POST request.
     def create
       intelligence_data = {}
-      intelligence_data['params'] = params[:params] if params[:params]
-      intelligence_data['payload'] = params[:payload] if params[:payload]
+      intelligence_data['uris'] = params[:uris] if params[:uris]
       ip = params[:ip].to_i if params[:ip]
       message = { 'result' => '', 'continue_collection' => '' }
       think_tank = Departments::ThinkTank::Api.instance

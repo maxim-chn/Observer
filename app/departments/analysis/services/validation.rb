@@ -36,15 +36,11 @@ module Departments
 
         def sql_injection_intelligence_data?(data)
           intelligence_data?(data)
-          if data.key?('params')
-            return if data['params'].class == String && !data['params'].empty?
-          end
-          if data.key?('payload')
-            return if data['payload'].class == String && !data['payload'].empty?
+          if data.key?('uris')
+            return if data['uris'].class == Array && !data['uris'].empty?
           end
           throw StandardError.new("#{self.class.name} - #{__method__} - #{data} must be\
-            an instance of #{Hash.name} with both or one of the keys 'params', 'payload';\
-            holding a #{String.name} value.")
+            an instance of #{Hash.name} with the key 'uris' holding an #{Array.name} value.")
         end
 
         def ip_address?(ip)
