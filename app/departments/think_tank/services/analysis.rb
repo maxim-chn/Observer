@@ -5,10 +5,10 @@ require 'singleton'
 module Departments
   module ThinkTank
     ##
-    # Supporting implementations for the methods that are used in {Departments::ThinkTank::Api}.
+    # Supporting the implementations for the methods that are used in the {Departments::ThinkTank::Api}.
     module Services
       ##
-      # Consumes {Departments::Analysis::Api}.
+      # Consumes the {Departments::Analysis::Api}.
       class Analysis
         include Singleton
 
@@ -16,7 +16,10 @@ module Departments
         # @param [Hash] data Intelligence data.
         # @return [Void]
         def analyze(query, data)
-          Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}, #{data}.")
+          if Rails.env.development?
+            debug_message = "#{self.class.name} - #{__method__} - #{query.inspect}, #{data}."
+            Rails.logger.info(debug_message)
+          end
           Departments::Analysis::Api.instance.request_cyber_report(query, data)
         end
       end

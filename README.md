@@ -122,6 +122,8 @@ Go to root directory of the project(it contains the directory *spec*).
 `rspec spec/features/think_tank_department/*.spec.rb`
 ## ICMP DoS flood positive true and negative true
 `rspec spec/features/workers/icmp_cyber_report_producer.spec.rb`
+## SQL Injection positive true and negative true
+`rspec spec/features/workers/sql_injection_cyber_report_producer.spec.rb`
 
 # Review (lint) the code
 Go to the root directory of the project(it contains *.rubocop.yml*) and run: 
