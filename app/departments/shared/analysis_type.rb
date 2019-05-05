@@ -3,12 +3,12 @@
 module Departments
   module Shared
     ##
-    # Holds Enum objects for identifying {CyberReport} type.
+    # Holds the Enum objects for identifying the {CyberReport} type.
     module AnalysisType
       ICMP_DOS_CYBER_REPORT = 'icmp_dos_cyber_report'
       SQL_INJECTION_CYBER_REPORT = 'sql_injection_report'
 
-      # Collection of available dos {CyberReport} types.
+      # Collection of the available {https://en.wikipedia.org/wiki/Denial_of_Service_attack DOS} {CyberReport} types.
       # @return [Array<String>]
       def self.dos_formats
         result = []
@@ -16,7 +16,7 @@ module Departments
         result
       end
 
-      # Collection of available code injection {CyberReport} types.
+      # Collection of the available {https://en.wikipedia.org/wiki/Code_injection Code Injection} {CyberReport} types.
       # @return [Array<String>]
       def self.code_injection_formats
         result = []
@@ -24,7 +24,7 @@ module Departments
         result
       end
 
-      # Collection of all possible {CyberReport} types.
+      # Collection of all the possible {CyberReport} types.
       # @return [Array<String>]
       def self.formats
         dos_formats + code_injection_formats

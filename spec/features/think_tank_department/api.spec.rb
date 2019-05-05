@@ -53,25 +53,43 @@ RSpec.describe 'ThinkTankApi', type: :feature do
 
   it 'Throws an error when starting the monitoring with an illegal friendly resource id.' do
     illegal_ids.each do |id|
-      expect {
-        think_tank_api.start_monitoring(id)
-      }.to raise_error(StandardError)
+      if id.class == Integer
+        expect {
+          think_tank_api.start_monitoring(id)
+        }.to raise_error(StandardError, /must be a non-negative #{Integer.name}/)
+      else
+        expect {
+          think_tank_api.start_monitoring(id)
+        }.to raise_error(StandardError, /must be an instance of #{Integer.name}/)
+      end
     end
   end
 
   it 'Throws an error when stopping the monitoring with an illegal friendly resource id.' do
     illegal_ids.each do |id|
-      expect {
-        think_tank_api.stop_monitoring(id)
-      }.to raise_error(StandardError)
+      if id.class == Integer
+        expect {
+          think_tank_api.stop_monitoring(id)
+        }.to raise_error(StandardError, /must be a non-negative #{Integer.name}/)
+      else
+        expect {
+          think_tank_api.stop_monitoring(id)
+        }.to raise_error(StandardError, /must be an instance of #{Integer.name}/)
+      end
     end
   end
 
   it 'Throws an error when analyzing dos icmp intelligence data with an illegal ip address.' do
     illegal_ips.each do |ip|
-      expect {
-        think_tank_api.analyze_icmp_dos_intelligence_data(ip, legal_dos_icmp_intelligence_data)
-      }.to raise_error(StandardError)
+      if ip.class == Integer
+        expect {
+          think_tank_api.analyze_icmp_dos_intelligence_data(ip, legal_dos_icmp_intelligence_data)
+        }.to raise_error(StandardError, /must be a positive #{Integer.name}/)
+      else
+        expect {
+          think_tank_api.analyze_icmp_dos_intelligence_data(ip, legal_dos_icmp_intelligence_data)
+        }.to raise_error(StandardError, /must be an instance of #{Integer.name}/)
+      end
     end
   end
 
@@ -79,15 +97,21 @@ RSpec.describe 'ThinkTankApi', type: :feature do
     illegal_dos_icmp_intelligence_data.each do |data|
       expect {
         think_tank_api.analyze_icmp_dos_intelligence_data(legal_ip, data)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /must be an instance of #{Hash.name}/)
     end
   end
 
   it 'Throws an error when analyzing sql injection intelligence data with an illegal ip address.' do
     illegal_ips.each do |ip|
-      expect {
-        think_tank_api.analyze_sql_injection_intelligence_data(ip, legal_sql_injection_intelligence_data)
-      }.to raise_error(StandardError)
+      if ip.class == Integer
+        expect {
+          think_tank_api.analyze_sql_injection_intelligence_data(ip, legal_sql_injection_intelligence_data)
+        }.to raise_error(StandardError, /must be a positive #{Integer.name}/)
+      else
+        expect {
+          think_tank_api.analyze_sql_injection_intelligence_data(ip, legal_sql_injection_intelligence_data)
+        }.to raise_error(StandardError, /must be an instance of #{Integer.name}/)
+      end
     end
   end
 
@@ -95,7 +119,7 @@ RSpec.describe 'ThinkTankApi', type: :feature do
     illegal_sql_injection_intelligence_data.each do |data|
       expect {
         think_tank_api.analyze_sql_injection_intelligence_data(legal_ip, data)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /must be an instance of #{Hash.name}/)
     end
   end
 
@@ -103,31 +127,49 @@ RSpec.describe 'ThinkTankApi', type: :feature do
     illegal_cyber_report_types.each do |type|
       expect {
         think_tank_api.latest_cyber_reports_graph(type, legal_ip, legal_page, legal_page_size)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /must be one of #{Departments::Shared::AnalysisType.name} formats/)
     end
   end
 
   it 'Throws an error when getting latest cyber reports graph with an illegal ip address.' do
     illegal_ips.each do |ip|
-      expect {
-        think_tank_api.latest_cyber_reports_graph(legal_cyber_report_type, ip, legal_page, legal_page_size)
-      }.to raise_error(StandardError)
+      if ip.class == Integer
+        expect {
+          think_tank_api.latest_cyber_reports_graph(legal_cyber_report_type, ip, legal_page, legal_page_size)
+        }.to raise_error(StandardError, /must be a positive #{Integer.name}/)
+      else
+        expect {
+          think_tank_api.latest_cyber_reports_graph(legal_cyber_report_type, ip, legal_page, legal_page_size)
+        }.to raise_error(StandardError, /must be an instance of #{Integer.name}/)
+      end
     end
   end
 
   it 'Throws an error when getting latest cyber reports graph with an illegal page.' do
     illegal_pages.each do |page|
-      expect {
-        think_tank_api.latest_cyber_reports_graph(legal_cyber_report_type, legal_ip, page, legal_page_size)
-      }.to raise_error(StandardError)
+      if page.class == Integer
+        expect {
+          think_tank_api.latest_cyber_reports_graph(legal_cyber_report_type, legal_ip, page, legal_page_size)
+        }.to raise_error(StandardError, /must be a positive #{Integer.name}/)
+      else
+        expect {
+          think_tank_api.latest_cyber_reports_graph(legal_cyber_report_type, legal_ip, page, legal_page_size)
+        }.to raise_error(StandardError, /must be an instance of #{Integer.name}/)
+      end
     end
   end
 
   it 'Throws an error when getting latest cyber reports graph with an illegal page size.' do
     illegal_page_sizes.each do |size|
-      expect {
-        think_tank_api.latest_cyber_reports_graph(legal_cyber_report_type, legal_ip, legal_page, size)
-      }.to raise_error(StandardError)
+      if size.class == Integer
+        expect {
+          think_tank_api.latest_cyber_reports_graph(legal_cyber_report_type, legal_ip, legal_page, size)
+        }.to raise_error(StandardError, /must be a positive #{Integer.name}/)
+      else
+        expect {
+          think_tank_api.latest_cyber_reports_graph(legal_cyber_report_type, legal_ip, legal_page, size)
+        }.to raise_error(StandardError, /must be an instance of #{Integer.name}/)
+      end
     end
   end
 
@@ -171,19 +213,31 @@ RSpec.describe 'ThinkTankApi', type: :feature do
     ).to be_truthy
   end
 
-  it 'Throws an error when testing necessity for the collection of icmp dos intelligence data by illegal ip.' do
+  it 'Throws an error when testing the necessity for the collection of icmp dos intelligence data by illegal ip.' do
     illegal_ips.each do |ip|
-      expect {
-        think_tank_api.icmp_dos_intelligence_collection?(ip)
-      }.to raise_error(StandardError)
+      if ip.class == Integer
+        expect {
+          think_tank_api.icmp_dos_intelligence_collection?(ip)
+        }.to raise_error(StandardError, /must be a positive #{Integer.name}/)
+      else
+        expect {
+          think_tank_api.icmp_dos_intelligence_collection?(ip)
+        }.to raise_error(StandardError, /must be an instance of #{Integer.name}/)
+      end
     end
   end
 
   it 'Throws an error when testing necessity for the collection of sql injection intelligence data by illegal ip.' do
     illegal_ips.each do |ip|
-      expect {
-        think_tank_api.sql_injection_intelligence_collection?(ip)
-      }.to raise_error(StandardError)
+      if ip.class == Integer
+        expect {
+          think_tank_api.sql_injection_intelligence_collection?(ip)
+        }.to raise_error(StandardError, /must be a positive #{Integer.name}/)
+      else
+        expect {
+          think_tank_api.sql_injection_intelligence_collection?(ip)
+        }.to raise_error(StandardError, /must be an instance of #{Integer.name}/)
+      end
     end
   end
 end

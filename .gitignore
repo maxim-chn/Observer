@@ -34,5 +34,5 @@
 
 # ##########Custom ignores##########
 /dump.rdb
-./doc/*
-./spec/examples.txt
+/doc/*
+/spec/examples.txt

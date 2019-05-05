@@ -2,15 +2,11 @@
 
 module Departments
   ##
-  # Holds modules and classes shared by all departments:
-  # - {Departments::Analysis}
-  # - {Departments::Archive}
-  # - {Departments::Intelligence}
-  # - {Departments::ThinkTank}
+  # Holds the classes shared by all the {Departments}.
   module Shared
     ##
-    # Unites arguments for {Departments::Analysis::Api}.
-    # United arguments are the analysis query that specifies what type of
+    # Unites the arguments for the {Departments::Analysis::Api}.
+    # The united arguments are the analysis query that specifies what type of the
     # {CyberReport} we would like to get and for what {FriendlyResource}.
     class AnalysisQuery
       attr_reader :friendly_resource_ip, :analysis_type

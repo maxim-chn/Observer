@@ -3,12 +3,12 @@
 module Departments
   module Shared
     ##
-    # Holds Enum objects for identifying intelligence type.
+    # Holds the Enum objects for identifying the intelligence type.
     module IntelligenceFormat
       ICMP_DOS_CYBER_REPORT = 'icmp_dos_cyber_report'
       SQL_INJECTION_CYBER_REPORT = 'sql_injection_report'
 
-      # Collection of available dos intelligence types.
+      # Collection of the available {https://en.wikipedia.org/wiki/Denial_of_Service_attack DOS} intelligence types.
       # @return [Array<String>]
       def self.dos_formats
         result = []
@@ -16,7 +16,7 @@ module Departments
         result
       end
 
-      # Collection of available code injection intelligence types.
+      # Collection of the available {https://en.wikipedia.org/wiki/Code_injection Code Injection} intelligence types.
       # @return [Array<String>]
       def self.code_injection_formats
         result = []

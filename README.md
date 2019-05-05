@@ -105,7 +105,7 @@ The application is ready at *http://localhost:3000*.
 
 # Launch detailed documentation
 * `yard doc`
-* Copy exact location of *./doc/_index.html* and open it in your browser
+* Copy exact location of *./doc/_index.html* and open it in your browser.
 
 # Tests
 Go to root directory of the project(it contains the directory *spec*).

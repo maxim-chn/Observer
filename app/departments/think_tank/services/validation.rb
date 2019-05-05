@@ -73,8 +73,7 @@ module Departments
           integer?(value)
           return if value.positive?
 
-          error_message = "#{self.class.name} - #{__method__} - #{value} must be"
-          error_message += " an instance of #{Integer.name} greater than 0."
+          error_message = "#{self.class.name} - #{__method__} - #{value} must be a positive #{Integer.name}."
           throw StandardError.new(error_message)
         end
 
@@ -82,8 +81,7 @@ module Departments
           integer?(value)
           return if value.positive?
 
-          error_message = "#{self.class.name} - #{__method__} - #{value} must be"
-          error_message += " an instance of #{Integer.name} greater than 0."
+          error_message = "#{self.class.name} - #{__method__} - #{value} must be a positive #{Integer.name}."
           throw StandardError.new(error_message)
         end
       end

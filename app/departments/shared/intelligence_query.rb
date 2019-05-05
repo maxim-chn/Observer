@@ -3,9 +3,9 @@
 module Departments
   module Shared
     ##
-    # Unites arguments for [Departments::Intelligence::Api].
-    # United arguments are the intelligence query that specifies what type of
-    # of data we are interested in collecting and what not.
+    # Unites the arguments for the {Departments::Intelligence::Api}.
+    # The united arguments are the intelligence query that specifies what type of
+    # the data we are interested in.
     class IntelligenceQuery
       attr_reader :friendly_resource_ip, :collect_format
 
