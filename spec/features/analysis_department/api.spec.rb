@@ -53,7 +53,7 @@ RSpec.describe 'AnalysisApi', type: :feature do
     illegal_queries.each do |query|
       expect {
         analysis_api.request_cyber_report(query, legal_icmp_flood_intelligence_data)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /must be an instance of #{Departments::Shared::AnalysisQuery.name}/)
     end
   end
 
@@ -61,7 +61,7 @@ RSpec.describe 'AnalysisApi', type: :feature do
     illegal_icmp_flood_intelligence_data.each do |data|
       expect {
         analysis_api.request_cyber_report(legal_icmp_flood_report_query, data)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /must be an instance of #{Hash.name}/)
     end
   end
 
@@ -69,7 +69,7 @@ RSpec.describe 'AnalysisApi', type: :feature do
     illegal_queries.each do |query|
       expect {
         analysis_api.request_cyber_report(query, legal_sql_injection_intelligence_data)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /must be an instance of #{Departments::Shared::AnalysisQuery.name}/)
     end
   end
 
@@ -77,7 +77,7 @@ RSpec.describe 'AnalysisApi', type: :feature do
     illegal_sql_injection_intelligence_data.each do |data|
       expect {
         analysis_api.request_cyber_report(legal_icmp_flood_report_query, data)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /must be an instance of #{Hash.name}/)
     end
   end
 end

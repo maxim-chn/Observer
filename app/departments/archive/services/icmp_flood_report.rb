@@ -7,7 +7,7 @@ require_relative './validation'
 module Departments
   module Archive
     ##
-    # Supporting implementations for the methods in {Departments::Archive::Api}.
+    # Supporting methods for the {Departments::Archive} module.
     module Services
       ##
       # Consumes the model {Dos::IcmpFloodReport}.

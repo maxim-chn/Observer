@@ -50,7 +50,7 @@ module Departments
         FriendlyResource.find(id)
       end
 
-      # @param [Integer] ip {FriendlyResource} ip address.
+      # @param [Integer] ip_address {FriendlyResource} ip address.
       # @return [FriendlyResource]
       def friendly_resource_by_ip(ip_address)
         Services::Validation.instance.friendly_resource_ip_address?(ip_address)
@@ -236,7 +236,7 @@ module Departments
         throw Exception.new(error_message)
       end
 
-      # @param [CyberReport] report One of the {CyberReport} instances,
+      # @param [CyberReport] cyber_report One of the {CyberReport} instances,
       # i.e. {Dos::IcmpFloodReport}
       def persist_cyber_report(cyber_report)
         Services::Validation.instance.cyber_report?(cyber_report)

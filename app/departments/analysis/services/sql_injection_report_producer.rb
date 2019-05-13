@@ -18,7 +18,7 @@ module Departments
         def queue_a_report(ip, data)
           Services::Validation.instance.ip_address?(ip)
           Services::Validation.instance.sql_injection_intelligence_data?(data)
-          Rails.logger.debug("#{self.class.name} - #{__method__} - #{ip}, #{data}.")
+          Rails.logger.debug("#{self.class.name} - #{__method__} - #{ip}, #{data}.") if Rails.env.development?
           Workers::Analysis::CodeInjection::Sql::CyberReportProducer.perform_async(
             ip,
             Shared::AnalysisType::SQL_INJECTION_CYBER_REPORT,

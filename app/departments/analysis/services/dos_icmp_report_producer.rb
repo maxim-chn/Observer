@@ -6,7 +6,7 @@ require_relative './validation'
 module Departments
   module Analysis
     ##
-    # Supporting implementations for the methods in {Departments::Analysis::Api}.
+    # Supporting methods for the {Departments::Analysis} module.
     module Services
       ##
       # Consumes the {Workers::Analysis::Dos::Icmp::CyberReportProducer}.
@@ -20,7 +20,7 @@ module Departments
         def queue_a_report(ip, data)
           Services::Validation.instance.ip_address?(ip)
           Services::Validation.instance.dos_icmp_intelligence_data?(data)
-          Rails.logger.debug("#{self.class.name} - #{__method__} - #{ip}, #{data}.")
+          Rails.logger.debug("#{self.class.name} - #{__method__} - #{ip}, #{data}.") if Rails.env.development?
           Workers::Analysis::Dos::Icmp::CyberReportProducer.perform_async(
             ip,
             Shared::AnalysisType::ICMP_DOS_CYBER_REPORT,

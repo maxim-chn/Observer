@@ -29,7 +29,7 @@ module Departments
 
         # Initiates a background process to persist {Departments::Shared::IntelligenceQuery}
         # in {https://redis.io/documentation Redis}.
-        # @param [Departments::Shared::IntelligenceQuery] query.
+        # @param [Departments::Shared::IntelligenceQuery] query
         # @return [Void]
         def mission_abort(query)
           Services::Validation.instance.ip_address?(query.friendly_resource_ip)

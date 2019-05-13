@@ -7,12 +7,11 @@ require_relative './services/validation.rb'
 
 module Departments
   ##
-  # Manages interpretation of intelligence data.
+  # Manages the interpretation of the intelligence data.
   # For example, it has methods that create {CyberReport}.
   module Analysis
     ##
-    # Methods that are consumed by other modules / classes.
-    # For example, queue a production of a particular type of {CyberReport}.
+    # Methods that are consumed by other modules. For example, {Departments::ThinkTank}.
     class Api
       include Singleton
 
@@ -23,7 +22,7 @@ module Departments
       def request_cyber_report(query, data)
         Services::Validation.instance.analysis_query?(query)
         Services::Validation.instance.intelligence_data?(data)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}, #{data}.")
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}, #{data}.") if Rails.env.development?
         case query.analysis_type
         when Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
           Services::DosIcmpCyberReport.instance.queue_a_report(
