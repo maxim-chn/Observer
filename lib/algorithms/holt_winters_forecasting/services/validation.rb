@@ -27,8 +27,8 @@ module Algorithms
         def teta_const?(const)
           return if (@teta_min..@teta_max).cover?(const)
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{const} must belong\
-            to [#{@teta_min},#{@teta_max}].")
+          error_message = "#{self.class.name} - #{__method__} - #{const} must belong to [#{@teta_min},#{@teta_max}]."
+          throw StandardError.new(error_message)
         end
 
         def actual_value?(value)
@@ -66,6 +66,20 @@ module Algorithms
           positive_integer?(value)
         end
 
+        def weights_percentage?(value)
+          if value.class == Float
+            return if value >= 0.0 && value <= 1.0
+          end
+
+          error_message = "#{self.class.name} - #{__method__} - #{value}"
+          error_message += " must be a #{Float.name} in the range [0.0, 1.0]."
+          throw StandardError.new(error_message)
+        end
+
+        def collections_count?(value)
+          positive_integer?(value)
+        end
+
         private
 
         def non_negative_float?(value)
@@ -88,8 +102,8 @@ module Algorithms
         def positive_integer?(value)
           return if value.class == Integer && value.positive?
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{value} is\
-             not a positive #{Integer.name}.")
+          error_message = "#{self.class.name} - #{__method__} - #{value} is not a positive #{Integer.name}."
+          throw StandardError.new(error_message)
         end
       end
     end

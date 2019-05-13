@@ -5,7 +5,7 @@ require_relative './services/validation.rb'
 require_relative './services/icmp_flood.rb'
 
 ##
-# Holds modules of algorithms. Each algorithm, i.e.
+# Holds the modules of algorithms. Each algorithm, i.e.
 # {https://ieeexplore.ieee.org/document/4542524 Modified Holt Winters Forecasting}, resides in its own module.
 module Algorithms
   ##
@@ -27,11 +27,13 @@ module Algorithms
         Services::IcmpFlood.instance.time_unit_in_seconds(seconds) if type == HoltWintersForecasting::ICMP_FLOOD
       end
 
-      # A smoothing constant. It is responsible for adaptation of baseline value.
-      # @param [Float] weights_percentage How important most recent data against past records.
+      # A smoothing constant. It is responsible for the adaptation of the baseline value.
+      # @param [Float] weights_percentage How important most recent data compared to the past records.
       # @param [Integer] collections_count How many collections represent the most recent data.
       # @return [Void]
       def alpha(weights_percentage, collections_count)
+        Services::Validation.instance.weights_percentage?(weights_percentage)
+        Services::Validation.instance.collections_count?(collections_count)
         value = 1 - Math.exp(Math.log10(1 - weights_percentage) / collections_count)
         Services::Validation.instance.exponential_smoothing_const?(value)
         @alpha = value
@@ -42,6 +44,8 @@ module Algorithms
       # @param [Integer] collections_count How many collections represent the most recent data.
       # @return [Void]
       def beta(weights_percentage, collections_count)
+        Services::Validation.instance.weights_percentage?(weights_percentage)
+        Services::Validation.instance.collections_count?(collections_count)
         value = 1 - Math.exp(Math.log10(1 - weights_percentage) / collections_count)
         Services::Validation.instance.exponential_smoothing_const?(value)
         @beta = value
@@ -52,6 +56,8 @@ module Algorithms
       # @param [Integer] collections_count How many collections represent the most recent data.
       # @return [Void]
       def gamma(weights_percentage, collections_count)
+        Services::Validation.instance.weights_percentage?(weights_percentage)
+        Services::Validation.instance.collections_count?(collections_count)
         value = 1 - Math.exp(Math.log10(1 - weights_percentage) / collections_count)
         Services::Validation.instance.exponential_smoothing_const?(value)
         @gamma = value
