@@ -7,7 +7,7 @@ module Departments
   module Intelligence
     module Services
       ##
-      # Services, like redis client, for {Departments::Intelligence}.
+      # Redis services, like {https://redis.io/clients Redis Client}, for the {Departments::Intelligence} module.
       class RedisUtils
         include Singleton
 

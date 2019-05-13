@@ -6,29 +6,34 @@ module Departments
   module Intelligence
     module Services
       ##
-      # Contains validation methods for the {Departments::Intelligence::Services}.
+      # Validations for the inputs / outputs of the methods in {Departments::Intelligence} module.
       class Validation
         include Singleton
 
         def intelligence_query?(query)
-          return if query.class == Shared::IntelligenceQuery
-
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{query} must be\
-            an instance of #{Shared::IntelligenceQuery.name}.")
+          if query.class == Shared::IntelligenceQuery
+            ip_address?(query.friendly_resource_ip)
+            collect_format?(query.collect_format)
+            return
+          end
+          error_message = "#{self.class.name} - #{__method__} - #{query}"
+          error_message += " must be an instance of #{Shared::IntelligenceQuery.name}."
+          throw StandardError.new(error_message)
         end
 
         def ip_address?(value)
           return if value.class == Integer && value.positive?
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{value} must be\
-            a positive #{Integer.name}.")
+          error_message = "#{self.class.name} - #{__method__} - #{value} must be a positive #{Integer.name}."
+          throw StandardError.new(error_message)
         end
 
         def collect_format?(value)
           return if Shared::IntelligenceFormat.formats.include?(value)
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{type} must be\
-            of one of #{Shared::IntelligenceFormat.name} formats.")
+          error_message = "#{self.class.name} - #{__method__} - #{value}"
+          error_message += "must be one of #{Shared::IntelligenceFormat.name} formats."
+          throw StandardError.new(error_message)
         end
       end
     end

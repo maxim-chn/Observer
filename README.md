@@ -131,5 +131,5 @@ Go to the root directory of the project(it contains *.rubocop.yml*) and run:
 `rubocop -c .rubocop.yml --rails`
 
 # Known issues
-  1. Add SQL injection identification.
+  1. Continue Intelligence Api. Test rdoc.
   2. Steps for deployment to Heroku.
