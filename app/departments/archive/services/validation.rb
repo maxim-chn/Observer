@@ -13,8 +13,8 @@ module Departments
         def friendly_resource_name?(name)
           return if name.class == String && name.size.positive?
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{name} must be\
-            an instance of #{String.name}.")
+          error_message = "#{self.class.name} - #{__method__} - #{name} must be an instance of #{String.name}."
+          throw StandardError.new(error_message)
         end
 
         def friendly_resource_ip_address?(ip_address)
@@ -26,66 +26,70 @@ module Departments
             return if ip_address.match?(/^[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*$/)
           end
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{ip_address} \
-            does not match expected format.")
+          error_message = "#{self.class.name} - #{__method__} - #{ip_address} does not match expected format."
+          throw StandardError.new(error_message)
         end
 
         def integer?(value)
           return if value.class == Integer
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{value} must be\
-            an instance of #{Integer.name}.")
+          error_message = "#{self.class.name} - #{__method__} - #{value} must be an instance of #{Integer.name}."
+          throw StandardError.new(error_message)
         end
 
         def cyber_report?(report)
           return if report.class < CyberReport
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{report} must be\
-            an instance of #{CyberReport.name}.")
+          error_message = "#{self.class.name} - #{__method__} - #{report} must be an instance of #{CyberReport.name}."
+          throw StandardError.new(error_message)
         end
 
         def page?(value)
           integer?(value)
           return if value.positive?
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{value} must be\
-            an instance of #{Integer.name} greater than 0.")
+          error_message = "#{self.class.name} - #{__method__} - #{value}"
+          error_message += " must be an instance of #{Integer.name} greater than 0."
+          throw StandardError.new(error_message)
         end
 
         def page_size?(value)
           integer?(value)
           return if value.positive?
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{value} must be\
-            an instance of #{Integer.name} greater than 0.")
+          error_message = "#{self.class.name} - #{__method__} - #{value}"
+          error_message += " must be an instance of #{Integer.name} greater than 0."
+          throw StandardError.new(error_message)
         end
 
         def hash?(value)
           return if value.class == Hash
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{value} must be\
-            an instance of #{Hash.name}.")
+          error_message = "#{self.class.name} - #{__method__} - #{value} must be an instance of #{Hash.name}."
+          throw StandardError.new(error_message)
         end
 
         def friendly_resource?(friendly_resource)
           return if friendly_resource.class == FriendlyResource
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{friendly_resource} must be\
-            an instance of #{FriendlyResource.name}.")
+          error_message = "#{self.class.name} - #{__method__} - #{friendly_resource}"
+          error_message += " must be an instance of #{FriendlyResource.name}."
+          throw StandardError.new(error_message)
         end
 
         def cyper_report_type?(type)
           return if Shared::AnalysisType.formats.include?(type)
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{type} must be\
-            of one of #{Shared::AnalysisType.name} formats.")
+          error_message = "#{self.class.name} - #{__method__} - #{type}"
+          error_message += " must be of one of #{Shared::AnalysisType.name} formats."
+          throw StandardError.new(error_message)
         end
 
         def seasonal_index_in_opts?(opts)
           return if opts.key?('seasonal_index')
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{opts} must contain the key\
-            seasonal_index.")
+          error_message = "#{self.class.name} - #{__method__} - #{opts} must contain the key seasonal_index."
+          throw StandardError.new(error_message)
         end
 
         def seasonal_index?(value)
@@ -96,16 +100,17 @@ module Departments
             return if value >= min && value <= max
           end
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - seasonal_index must be an\
-            #{Integer.class} in range [#{min},#{max}].")
+          error_message = "#{self.class.name} - #{__method__} - seasonal_index"
+          error_message += " must be an #{Integer.class} in range [#{min},#{max}]."
+          throw StandardError.new(error_message)
         end
 
         def id?(value)
           integer?(value)
           return if value >= 0
 
-          throw StandardError.new("#{self.class.name} - #{__method__} - #{value} must be\
-            a non-negative #{Integer.name}.")
+          error_message = "#{self.class.name} - #{__method__} - #{value} must be a non-negative #{Integer.name}."
+          throw StandardError.new(error_message)
         end
       end
     end

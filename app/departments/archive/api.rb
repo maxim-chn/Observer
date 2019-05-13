@@ -11,17 +11,18 @@ module Departments
   # A module that has direct access to models, i.e. {FriendlyResource}.
   module Archive
     ##
-    # Methods for operating models, i.e. {FriendlyResource}.
+    # Methods that are consumed by the other modules, i.e.
+    # {Workers::Analysis::CodeInjection::Sql::CyberReportProducer}.
     class Api
       include Singleton
 
-      # @param [Integer] page First page starts at 1.
-      # @param [Integer] page_size Size of a page.
+      # @param [Integer] page
+      # @param [Integer] page_size
       # @return [Array<FriendlyResource>]
       def friendly_resources(page, page_size)
         Services::Validation.instance.page?(page)
         Services::Validation.instance.page_size?(page_size)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{page}, #{page_size}.")
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{page}, #{page_size}.") if Rails.env.development?
         records_to_skip = Services::QueryHelper.instance.records_to_skip(page, page_size)
         FriendlyResource.order('created_at desc').limit(page_size).offset(records_to_skip).to_a
       end
@@ -29,7 +30,7 @@ module Departments
       # Total amount of {FriendlyResource} records in the database.
       # @return [Integer]
       def friendly_resources_count
-        Rails.logger.info("#{self.class.name} - #{__method__}.")
+        Rails.logger.info("#{self.class.name} - #{__method__}.") if Rails.env.development?
         FriendlyResource.count
       end
 
@@ -37,7 +38,7 @@ module Departments
       # @return [FriendlyResource]
       def friendly_resource_by_cyber_report(cyber_report)
         Services::Validation.instance.cyber_report?(cyber_report)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{cyber_report.inspect}.")
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{cyber_report.inspect}.") if Rails.env.development?
         cyber_report.friendly_resource
       end
 
@@ -45,7 +46,7 @@ module Departments
       # @return [FriendlyResource]
       def friendly_resource_by_id(id)
         Services::Validation.instance.id?(id)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{id}.")
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{id}.") if Rails.env.development?
         FriendlyResource.find(id)
       end
 
@@ -54,18 +55,18 @@ module Departments
       def friendly_resource_by_ip(ip_address)
         Services::Validation.instance.friendly_resource_ip_address?(ip_address)
         Services::Validation.instance.integer?(ip_address)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip_address}.")
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip_address}.") if Rails.env.development?
         FriendlyResource.find_by(ip_address: ip_address)
       end
 
       # Initiates a new {FriendlyResource} object. It is not persisted in the database yet.
       # @param [String] name {FriendlyResource} name.
-      # @param [Object] ip_address {FriendlyResource} ip address. I can be [String] or [Integer].
+      # @param [Object] ip_address {FriendlyResource} ip address. It can be a [String] or an [Integer].
       # @return [FriendlyResource]
       def new_friendly_resource(name, ip_address)
         Services::Validation.instance.friendly_resource_name?(name)
         Services::Validation.instance.friendly_resource_ip_address?(ip_address)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{name}, #{ip_address}.")
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{name}, #{ip_address}.") if Rails.env.development?
         if ip_address.class == String
           if ip_address.match?(/^[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*$/)
             ip_address = IPAddr.new(ip_address).to_i
@@ -81,14 +82,14 @@ module Departments
       # @return [FriendlyResource]
       def new_friendly_resource_from_hash(friendly_resource)
         Services::Validation.instance.hash?(friendly_resource)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{friendly_resource}.")
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{friendly_resource}.") if Rails.env.development?
         new_friendly_resource(friendly_resource['name'], friendly_resource['ip_address'])
       end
 
       # Initiates a new {FriendlyResource} object. It is not persisted in the database yet.
       # @return [FriendlyResource]
       def new_empty_friendly_resource
-        Rails.logger.info("#{self.class.name} - #{__method__}.")
+        Rails.logger.info("#{self.class.name} - #{__method__}.") if Rails.env.development?
         FriendlyResource.new
       end
 
@@ -97,7 +98,10 @@ module Departments
       # @return [Void]
       def persist_friendly_resource(friendly_resource)
         Services::Validation.instance.friendly_resource?(friendly_resource)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{friendly_resource.inspect}.")
+        if Rails.env.development?
+          debug_message = "#{self.class.name} - #{__method__} - #{friendly_resource.inspect}."
+          Rails.logger.info(debug_message)
+        end
         friendly_resource.save
       end
 
@@ -108,7 +112,7 @@ module Departments
       def cyber_reports_count(ip, type)
         Services::Validation.instance.friendly_resource_ip_address?(ip)
         Services::Validation.instance.cyper_report_type?(type)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}.")
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}.") if Rails.env.development?
         result = 0
         friendly_resource = friendly_resource_by_ip(ip)
         if friendly_resource
@@ -133,7 +137,10 @@ module Departments
         Services::Validation.instance.cyper_report_type?(type)
         Services::Validation.instance.page?(page)
         Services::Validation.instance.page_size?(page_size)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{page}, #{page_size}.")
+        if Rails.env.development?
+          debug_message = "#{self.class.name} - #{__method__} - #{ip}, #{type}, #{page}, #{page_size}."
+          Rails.logger.info(debug_message)
+        end
         result = []
         friendly_resource = friendly_resource_by_ip(ip)
         if friendly_resource
@@ -161,7 +168,7 @@ module Departments
       def cyber_report_by_id_and_type(id, type)
         Services::Validation.instance.integer?(id)
         Services::Validation.instance.cyper_report_type?(type)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{id}, #{type}.")
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{id}, #{type}.") if Rails.env.development?
         cyber_report = nil
         case type
         when Shared::AnalysisType::ICMP_DOS_CYBER_REPORT
@@ -180,7 +187,7 @@ module Departments
       def cyber_report_by_friendly_resource_ip_and_type_and_custom_attr(ip, type, opts)
         Services::Validation.instance.friendly_resource_ip_address?(ip)
         Services::Validation.instance.cyper_report_type?(type)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{opts}.")
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{opts}.") if Rails.env.development?
         friendly_resource = friendly_resource_by_ip(ip)
         if friendly_resource
           result = nil
@@ -194,8 +201,8 @@ module Departments
           end
           return result
         end
-        throw Exception.new("#{self.class.name} - #{__method__} - no friendly resource\
-          for ip : #{ip}.")
+        error_message = "#{self.class.name} - #{__method__} - no friendly resource for ip : #{ip}."
+        throw Exception.new(error_message)
       end
 
       # Initializes a {CyberReport} instance, i.e. {Dos::IcmpFloodReport}.
@@ -207,7 +214,7 @@ module Departments
       def new_cyber_report_object_for_friendly_resource(ip, type, opts = {})
         Services::Validation.instance.friendly_resource_ip_address?(ip)
         Services::Validation.instance.cyper_report_type?(type)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{opts}.")
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{opts}.") if Rails.env.development?
         friendly_resource = friendly_resource_by_ip(ip)
         if friendly_resource
           result = nil
@@ -225,21 +232,21 @@ module Departments
             return result
           end
         end
-        throw Exception.new("#{self.class.name} - #{__method__} - no friendly resource\
-          for ip : #{ip}.")
+        error_message = "#{self.class.name} - #{__method__} - no friendly resource for ip : #{ip}."
+        throw Exception.new(error_message)
       end
 
-      # @param [CyberReport] report One of {CyberReport} instances,
+      # @param [CyberReport] report One of the {CyberReport} instances,
       # i.e. {Dos::IcmpFloodReport}
       def persist_cyber_report(cyber_report)
         Services::Validation.instance.cyber_report?(cyber_report)
-        Rails.logger.info("#{self.class.name} - #{__method__} - #{cyber_report.inspect}.")
+        Rails.logger.info("#{self.class.name} - #{__method__} - #{cyber_report.inspect}.") if Rails.env.development?
         cyber_report.save
       end
 
       # @return [Array<Symbol>]
       def cyber_report_types
-        Rails.logger.info("#{self.class.name} - #{__method__}.")
+        Rails.logger.info("#{self.class.name} - #{__method__}.") if Rails.env.development?
         Shared::AnalysisType.formats
       end
     end

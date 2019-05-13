@@ -18,6 +18,7 @@ module Departments
         # @return [Integer]
         def count_records(id)
           Validation.instance.id?(id)
+          Rails.logger.info("#{self.class.name} - #{__method__} - #{id}.") if Rails.env.development?
           CodeInjection::SqlInjectionReport.where("friendly_resource_id = #{id}").count
         end
 
@@ -30,6 +31,10 @@ module Departments
           Validation.instance.id?(id)
           Validation.instance.page?(page)
           Validation.instance.page_size?(page_size)
+          if Rails.env.development?
+            logger_message = "#{self.class.name} - #{__method__} - #{id}, #{page}, #{page_size}."
+            Rails.logger.info(logger_message)
+          end
           records_to_skip = QueryHelper.instance.records_to_skip(page, page_size)
           CodeInjection::SqlInjectionReport.where(
             'friendly_resource_id = ?',
@@ -41,11 +46,13 @@ module Departments
         # @return [CodeInjection::SqlInjectionReport]
         def report_by_id(id)
           Validation.instance.id?(id)
+          Rails.logger.info("#{self.class.name} - #{__method__} - #{id}.") if Rails.env.development?
           CodeInjection::SqlInjectionReport.find(id)
         end
 
         # @return [CodeInjection::SqlInjectionReport]
         def new_report_object
+          Rails.logger.info("#{self.class.name} - #{__method__}.") if Rails.env.development?
           CodeInjection::SqlInjectionReport.new
         end
       end

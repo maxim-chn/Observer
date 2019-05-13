@@ -44,19 +44,19 @@ RSpec.describe 'ArchiveApi - FriendlyResource model.', type: :feature do
     [nil, '1', 2, {}]
   }
 
-  it 'Throws an error when creating a new friendly resource with illegal name.' do
+  it 'Throws an error when creating a new friendly resource with an illegal name.' do
     illegal_names.each do |name|
       expect {
         archive_api.new_friendly_resource(name, legal_ip_address)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /must be an instance of #{String.name}/)
     end
   end
 
-  it 'Throws an error when creating a new friendly resource with illegal ip address.' do
+  it 'Throws an error when creating a new friendly resource with an illegal ip address.' do
     illegal_ip_addresses.each do |address|
       expect {
         archive_api.new_friendly_resource(legal_name, address)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /#{address} does not match expected format/)
     end
   end
 
@@ -70,7 +70,7 @@ RSpec.describe 'ArchiveApi - FriendlyResource model.', type: :feature do
     illegal_friendly_resources.each do |f|
       expect {
         archive_api.persist_friendly_resource(f)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /must be an instance of #{FriendlyResource.name}/)
     end
   end
 
@@ -80,11 +80,11 @@ RSpec.describe 'ArchiveApi - FriendlyResource model.', type: :feature do
     }.to_not raise_error
   end
 
-  it 'Throws an error when retrieving a persisted friendly resource by illegal ip address.' do
+  it 'Throws an error when retrieving a persisted friendly resource by an illegal ip address.' do
     illegal_ip_addresses.each do |address|
       expect {
         archive_api.friendly_resource_by_ip(address)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /#{address} does not match expected format/)
     end
   end
 
@@ -95,11 +95,14 @@ RSpec.describe 'ArchiveApi - FriendlyResource model.', type: :feature do
     ).to eql(friendly_resource.inspect)
   end
 
-  it 'Throws an error when retrieving a persisted friendly resource by illegal id.' do
+  it 'Throws an error when retrieving a persisted friendly resource by an illegal id.' do
     illegal_ids.each do |id|
       expect {
         archive_api.friendly_resource_by_id(id)
-      }.to raise_error(StandardError)
+      }.to raise_error(
+        StandardError,
+        /(#{id} must be an instance of #{Integer.name}|#{id} must be a non-negative #{Integer.name})/
+      )
     end
   end
 
@@ -111,11 +114,14 @@ RSpec.describe 'ArchiveApi - FriendlyResource model.', type: :feature do
     ).to eql(friendly_resource.inspect)
   end
 
-  it 'Throws an error when create a new friendly resource object from an illegal hash.' do
+  it 'Throws an error when creating a new friendly resource object from an illegal hash.' do
     illegal_friendly_resource_hashes.each do |h|
       expect {
         archive_api.new_friendly_resource_from_hash(h)
-      }.to raise_error(StandardError)
+      }.to raise_error(
+        StandardError,
+        /(must be an instance of #{Hash.name}|must be an instance of #{String.name})/
+      )
     end
   end
 
@@ -129,7 +135,10 @@ RSpec.describe 'ArchiveApi - FriendlyResource model.', type: :feature do
     illegal_pages.each do |page|
       expect {
         archive_api.friendly_resources(page, legal_page_size)
-      }.to raise_error(StandardError)
+      }.to raise_error(
+        StandardError,
+        /(must be an instance of #{Integer.name}|must be an instance of #{Integer.name} greater than 0)/
+      )
     end
   end
 
@@ -137,11 +146,14 @@ RSpec.describe 'ArchiveApi - FriendlyResource model.', type: :feature do
     illegal_page_sizes.each do |size|
       expect {
         archive_api.friendly_resources(legal_page, size)
-      }.to raise_error(StandardError)
+      }.to raise_error(
+        StandardError,
+        /(must be an instance of #{Integer.name}|must be an instance of #{Integer.name} greater than 0)/
+      )
     end
   end
 
-  it 'Paginates over persisted friendly resources.' do
+  it 'Paginates over the persisted friendly resources.' do
     friendly_resources_data = [
       { 'name' => legal_name, 'ip_address' => legal_ip_address },
       { 'name' => 'Demo_2', 'ip_address' => '79.181.31.5' },
@@ -170,7 +182,7 @@ RSpec.describe 'ArchiveApi - FriendlyResource model.', type: :feature do
     ).to eql(0)
   end
 
-  it 'Returns the amount of persisted friendly resources.' do
+  it 'Returns the amount of the persisted friendly resources.' do
     friendly_resources_data = [
       { 'name' => legal_name, 'ip_address' => legal_ip_address },
       { 'name' => 'Demo_2', 'ip_address' => '79.181.31.5' },
@@ -192,7 +204,7 @@ RSpec.describe 'ArchiveApi - FriendlyResource model.', type: :feature do
     illegal_cyber_reports.each do |report|
       expect {
         archive_api.friendly_resource_by_cyber_report(report)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /#{report} must be an instance of #{CyberReport.name}/)
     end
   end
 
