@@ -152,6 +152,9 @@ Go to the root directory of the project(it contains *.rubocop.yml*) and run:
 * `heroku pg:reset -c=<APP_NAME>`
 * `heroku run rake db:migrate`
 
+## Additional tips for Heroku CLI
+* `heroku restart` - restarts the application.
+
 The application is ready! It will be available at the url that you can acquire with `heroku apps`.
 
 # Known issues
