@@ -3,22 +3,22 @@
 module Workers
   module Intelligence
     ##
-    # Removes from {Redis}[https://redis.io/] intelligence data that is no longer necessary.
-    # These formats affect field agent.
+    # Removes the intelligence format that is no longer necessary from the {https://redis.io/ Redis}.
+    # These formats affect the field agent, located at the {FriendlyResource}.
     class RemoveCollectionFormat < Workers::WorkerWithRedis
       include Sidekiq::Worker
       sidekiq_options retry: false, queue: 'field_agent_notifier'
 
-      # Creates a process that updates none-desirable intelligence data in {Redis}[https://redis.io/].
-      # @param [Integer] ip FriendlyResource ip address. Numerical representaion.
-      # @param [Departments::Shared::IntelligenceFormat] collect_format Format of intelligence data to be collected.
+      # Creates a process that updates the none-desirable intelligence data.
+      # @param [Integer] ip FriendlyResource ip address.
+      # @param [Departments::Shared::IntelligenceFormat] collect_format
       # @return [Void]
-      def perform(ip, collect_format)
-        logger.info("#{self.class.name} - #{__method__} - IP : #{ip}, collect_format : #{collect_format}")
+      def perform(ip, collect_format, log: false)
+        logger.info("#{self.class.name} - #{__method__} - #{ip}, #{collect_format}") if log
         begin
           client = redis_client
           raw_cached_data = client.get(ip.to_s)
-          logger.debug("#{self.class.name} - #{__method__} - raw_cached_data: #{raw_cached_data}")
+          logger.debug("#{self.class.name} - #{__method__} - raw_cached_data : #{raw_cached_data}.") if log
           raw_cached_data ||= '{}'
           cached_data = JSON.parse(raw_cached_data)
           dirty_flag = false # Has cached data been changed.
@@ -30,9 +30,9 @@ module Workers
           return unless dirty_flag
 
           client.set(ip, JSON.generate(cached_data))
-          logger.debug("#{self.class.name} - #{__method__} - newly cached data : #{cached_data}")
+          logger.debug("#{self.class.name} - #{__method__} - new cached data : #{cached_data}.") if log
         rescue StandardError => e
-          logger.error("#{self.class.name} - #{__method__} - failed - reason - #{e.inspect}")
+          logger.error("#{self.class.name} - #{__method__} - failed - #{e.inspect}.")
         end
       end
     end

@@ -22,7 +22,8 @@ module Departments
           Workers::Analysis::CodeInjection::Sql::CyberReportProducer.perform_async(
             ip,
             Shared::AnalysisType::SQL_INJECTION_CYBER_REPORT,
-            data
+            data,
+            log: Rails.env.development?
           )
         end
       end

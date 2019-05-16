@@ -3,15 +3,13 @@
 require 'redis'
 
 ##
-# Holds all Worker classes. They represent the {background processes}[https://en.wikipedia.org/wiki/Background_process].
+# Holds all the workers, which are {https://en.wikipedia.org/wiki/Background_process Background Processes}.
 module Workers
   ##
   # {Sidekiq}[https://sidekiq.org/] manages our background processing and it needs
   # {Redis}[https://redis.io/]. Hence, every worker must have a Redis connection.
   class WorkerWithRedis
-    private
-
-    # A {redis client}[https://github.com/redis/redis-rb] with an active connection.
+    # A {https://github.com/redis/redis-rb Redis Client} with an active connection.
     # @return [Redis]
     def redis_client
       client = nil

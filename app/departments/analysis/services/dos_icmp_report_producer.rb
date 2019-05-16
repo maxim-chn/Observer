@@ -24,7 +24,8 @@ module Departments
           Workers::Analysis::Dos::Icmp::CyberReportProducer.perform_async(
             ip,
             Shared::AnalysisType::ICMP_DOS_CYBER_REPORT,
-            data
+            data,
+            log: Rails.env.development?
           )
         end
       end

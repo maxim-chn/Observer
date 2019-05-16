@@ -20,10 +20,11 @@ module Departments
         def mission_dispatch(query)
           Services::Validation.instance.ip_address?(query.friendly_resource_ip)
           Services::Validation.instance.collect_format?(query.collect_format)
-          Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}.")
+          Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}.") if Rails.env.development?
           Workers::Intelligence::AddCollectionFormat.perform_async(
             query.friendly_resource_ip,
-            query.collect_format
+            query.collect_format,
+            log: Rails.env.development?
           )
         end
 
@@ -34,10 +35,11 @@ module Departments
         def mission_abort(query)
           Services::Validation.instance.ip_address?(query.friendly_resource_ip)
           Services::Validation.instance.collect_format?(query.collect_format)
-          Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}.")
+          Rails.logger.info("#{self.class.name} - #{__method__} - #{query.inspect}.") if Rails.env.development?
           Workers::Intelligence::RemoveCollectionFormat.perform_async(
             query.friendly_resource_ip,
-            query.collect_format
+            query.collect_format,
+            log: Rails.env.development?
           )
         end
       end

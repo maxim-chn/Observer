@@ -1730,11 +1730,11 @@ Metrics/ModuleLength:
   Max: 100
 
 Metrics/ParameterLists:
-  Description: 'Avoid parameter lists longer than three or four parameters.'
+  Description: 'Avoid parameter lists longer than five or six parameters.'
   StyleGuide: '#too-many-params'
   Enabled: true
   VersionAdded: '0.25'
-  Max: 5
+  Max: 6
   CountKeywordArgs: true
 
 Metrics/PerceivedComplexity:

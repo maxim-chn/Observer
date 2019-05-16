@@ -17,12 +17,9 @@ RSpec.describe 'Workers - ICMP Flood Report Producer', type: :feature do
         Workers::Analysis::Dos::Icmp::CyberReportProducer.new.perform(
           friendly_resource.ip_address,
           Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT,
-          {
-            'ip' => friendly_resource.ip_address,
-            'incoming_req_count' => rand(100..1000),
-            'seasonal_indices' => seasonal_indices
-          },
-          log: false
+          'ip' => friendly_resource.ip_address,
+          'incoming_req_count' => rand(100..1000),
+          'seasonal_indices' => seasonal_indices
         )
       end
     end
@@ -38,11 +35,8 @@ RSpec.describe 'Workers - ICMP Flood Report Producer', type: :feature do
       Workers::Analysis::Dos::Icmp::CyberReportProducer.new.perform(
         friendly_resource.ip_address,
         Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT,
-        {
-          'ip' => friendly_resource.ip_address,
-          'incoming_req_count' => flood_amount_of_attacks
-        },
-        log: false
+        'ip' => friendly_resource.ip_address,
+        'incoming_req_count' => flood_amount_of_attacks
       )
       cyber_report = archive_api.cyber_reports_by_friendly_resource_ip_and_type(
         friendly_resource.ip_address,
@@ -61,12 +55,9 @@ RSpec.describe 'Workers - ICMP Flood Report Producer', type: :feature do
         Workers::Analysis::Dos::Icmp::CyberReportProducer.new.perform(
           friendly_resource.ip_address,
           Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT,
-          {
-            'ip' => friendly_resource.ip_address,
-            'incoming_req_count' => legal_amount_of_requests,
-            'seasonal_indices' => seasonal_indices
-          },
-          log: false
+          'ip' => friendly_resource.ip_address,
+          'incoming_req_count' => legal_amount_of_requests,
+          'seasonal_indices' => seasonal_indices
         )
         cyber_report = archive_api.cyber_reports_by_friendly_resource_ip_and_type(
           friendly_resource.ip_address,

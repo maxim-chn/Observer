@@ -2,17 +2,21 @@
 
 module Workers
   module Analysis
+    ##
+    # Scopes the workers that interpret the intelligence related to
+    # the {https://en.wikipedia.org/wiki/Code_injection Code Injection} attack.
     module CodeInjection
       ##
-      # Scopes workers that interpret intelligence related to ICMP flood attack.
+      # Scopes the workers that interpret the intelligence related to
+      # the {https://en.wikipedia.org/wiki/SQL_injection SQL injection}.
       module Sql
         ##
-        # Produces {CodeInjection::SqlInjectionReport}.
+        # Produces the {CodeInjection::SqlInjectionReport}.
         class CyberReportProducer < Workers::WorkerWithRedis
           include Sidekiq::Worker
           sidekiq_options retry: false
 
-          # Asynchronously creates {CodeInjection::SqlInjectionReport} if there is an attack.
+          # Asynchronously creates a {CodeInjection::SqlInjectionReport} if there is an attack.
           # Consumes {Departments::Archive::Api} to persist it.
           # @param [Integer] ip {FriendlyResource} ip address.
           # @param [Symbol] type Type of {CyberReport} to be created, i.e.
@@ -20,7 +24,7 @@ module Workers
           # @param [Hash<String, Object>] intelligence_data Contains one or both of the keys:
           #   * 'uris' A [Array<String>] with the uris from GET requests to a {FriendlyResource}.
           # @return [Void]
-          def perform(ip, type, intelligence_data, log: true)
+          def perform(ip, type, intelligence_data, log: false)
             logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{intelligence_data}.") if log
             begin
               reason = ''
@@ -33,7 +37,7 @@ module Workers
                 cyber_report = archive_api.new_cyber_report_object_for_friendly_resource(ip, type)
                 cyber_report.reason = reason
                 archive_api.persist_cyber_report(cyber_report)
-                logger.info("#{self.class.name} - #{__method__} - persisted #{cyber_report.inspect}.")
+                logger.info("#{self.class.name} - #{__method__} - persisted #{cyber_report.inspect}.") if log
               end
             rescue StandardError => e
               logger.error("#{self.class.name} - #{__method__} - failed - reason : #{e.message}.")

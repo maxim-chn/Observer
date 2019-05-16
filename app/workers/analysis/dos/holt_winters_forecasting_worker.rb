@@ -2,16 +2,16 @@
 
 module Workers
   ##
-  # Scopes workers that are invoked from {Departments::Analysis} module.
+  # Scopes the workers that are invoked from {Departments::Analysis} module.
   module Analysis
     ##
-    # Scopes workers that interpret data related to DOS analysis.
+    # Scopes the workers that interpret the data related to the {https://en.wikipedia.org/wiki/DOS DOS} analysis.
     module Dos
       ##
-      # An abstract class that holds necessary methods for any worker performing
+      # An abstract class that holds the necessary methods for any worker performing the
       # {https://ieeexplore.ieee.org/document/4542524 Modified Holt Winters Forecasting} analysis.
       class HoltWintersForecastingWorker < Workers::WorkerWithRedis
-        # Performs calculations for a single step in
+        # Performs the calculations for a single step in the
         # {https://ieeexplore.ieee.org/document/4542524 Modified Holt Winters Forecasting}.
         # M is a duration of a single season.
         # @param [CyberReport] cyber_report_t_minus_m {CyberReport} at the moment (T-M).
@@ -25,19 +25,20 @@ module Workers
           cyber_report_t_plus_one_minus_m,
           cyber_report_t_minus_one,
           cyber_report_t,
-          actual_value
+          actual_value,
+          log: false
         )
           moment_a = {} # Moment (T-M).
           moment_b = {} # Moment (T+1-M).
           moment_c = {} # Moment (T-1).
           moment_d = { actual_value: actual_value } # Moment T.
           data_at_moment_t_minus_m(moment_a, cyber_report_t_minus_m)
-          logger.debug("#{self.class.name} - #{__method__} - Moment (T-M) : #{moment_a}.")
+          logger.info("#{self.class.name} - #{__method__} - Moment (T-M) : #{moment_a}.") if log
           data_at_moment_t_plus_one_minus_m(moment_b, cyber_report_t_plus_one_minus_m)
-          logger.debug("#{self.class.name} - #{__method__} - Moment (T+1-M) : #{moment_b}.")
+          logger.info("#{self.class.name} - #{__method__} - Moment (T+1-M) : #{moment_b}.") if log
           data_at_moment_t_minus_one(moment_c, cyber_report_t_minus_one)
-          logger.debug("#{self.class.name} - #{__method__} - Moment (T-1) : #{moment_c}.")
-          logger.debug("#{self.class.name} - #{__method__} - Moment T, before calculations : #{moment_d}.")
+          logger.info("#{self.class.name} - #{__method__} - Moment (T-1) : #{moment_c}.") if log
+          logger.info("#{self.class.name} - #{__method__} - Moment T, before calculations : #{moment_d}.") if log
           aberrant_behavior_at_moment_t(moment_c, moment_d)
           baseline_at_moment_t(moment_a, moment_c, moment_d)
           linear_trend_at_moment_t(moment_c, moment_d)
@@ -48,9 +49,7 @@ module Workers
           update_cyber_report_with_calculations(cyber_report_t, moment_d)
         end
 
-        private
-
-        # Populates relevant data from {CyberReport} to {Hash} object.
+        # Populates relevant data from {CyberReport} to Hash object.
         # @param [Hash] moment Will hold data for the moment (T-1).
         # @param [CyberReport] cyber_report Cyber report with data for the moment (T-1).
         # @return [Void]
@@ -61,7 +60,7 @@ module Workers
           moment[:confidence_band_upper_value] = confidence_band_upper_value(cyber_report)
         end
 
-        # Populates relevant data from {CyberReport} to {Hash} object.
+        # Populates relevant data from {CyberReport} to Hash object.
         # @param [Hash] moment Will hold data for the moment (T-M).
         # M being a duration of a season.
         # @param [CyberReport] cyber_report Cyber report with data for the moment (T-M).
@@ -71,7 +70,7 @@ module Workers
           moment[:weight_avg_abs_deviation] = weighted_avg_abs_deviation(cyber_report)
         end
 
-        # Populates relevant data from {CyberReport} to {Hash} object.
+        # Populates relevant data from {CyberReport} to Hash object.
         # @param [Hash] moment Will hold data for the moment (T-M+1).
         # M being a duration of a season.
         # @param [CyberReport] cyber_report Cyber report with data for the moment (T-M+1).

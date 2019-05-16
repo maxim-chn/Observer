@@ -29,8 +29,7 @@ RSpec.describe 'Workers - SQL Injection Report Producer', type: :feature do
       Workers::Analysis::CodeInjection::Sql::CyberReportProducer.new.perform(
         friendly_resource.ip_address,
         cyber_report_type,
-        intelligence,
-        log: false
+        intelligence
       )
     end
     expect(
@@ -49,8 +48,7 @@ RSpec.describe 'Workers - SQL Injection Report Producer', type: :feature do
       Workers::Analysis::CodeInjection::Sql::CyberReportProducer.new.perform(
         friendly_resource.ip_address,
         cyber_report_type,
-        intelligence,
-        log: false
+        intelligence
       )
       expect(
         archive_api.cyber_reports_by_friendly_resource_ip_and_type(

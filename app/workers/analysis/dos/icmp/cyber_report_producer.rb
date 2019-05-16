@@ -4,15 +4,16 @@ module Workers
   module Analysis
     module Dos
       ##
-      # Scopes workers that interpret intelligence related to ICMP flood attack.
+      # Scopes the workers that interpret the intelligence related to the
+      # {https://en.wikipedia.org/wiki/Ping_flood ICMP flood} attack.
       module Icmp
         ##
-        # Produces {Dos::IcmpFloodReport}.
+        # Produces the {Dos::IcmpFloodReport}.
         class CyberReportProducer < Workers::Analysis::Dos::HoltWintersForecastingWorker
           include Sidekiq::Worker
           sidekiq_options retry: false
 
-          # Asynchronously creates {CyberReport}, i.e. {Dos::IcmpFloodReport}, object for the moment T.
+          # Asynchronously creates a {CyberReport}, i.e. {Dos::IcmpFloodReport}, object for the moment T.
           # Consumes {Departments::Archive::Api} to persist it.
           # @param [Integer] ip Numerical representation of {FriendlyResource} ip address.
           # @param [Symbol] type Type of {CyberReport} to be created, i.e.
@@ -20,7 +21,7 @@ module Workers
           # @param [Hash<String, Object>] intelligence_data Contains keys:
           #   * 'incoming_req_count' Amount of incoming ICMP requests to a {FriendlyResource}.
           # @return [Void]
-          def perform(ip, type, intelligence_data, log: true)
+          def perform(ip, type, intelligence_data, log: false)
             logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{intelligence_data}.") if log
             begin
               # In production, there should be no :seasonal_indices inside intelligence_data.
@@ -28,24 +29,25 @@ module Workers
               # of anything better :(
               indices = intelligence_data['seasonal_indices'] if intelligence_data['seasonal_indices']
               indices = seasonal_indices_for_holt_winters_calculation_step if indices.nil?
-              logger.debug("#{self.class.name} - #{__method__} - seasonal indices : #{indices}.")
+              logger.info("#{self.class.name} - #{__method__} - seasonal indices : #{indices}.") if log
               reports = cyber_reports_for_holt_winters_calculation_step(
                 ip,
                 type,
                 indices
               )
-              logger.debug("#{self.class.name} - #{__method__} - cyber reports : #{reports}.")
+              logger.info("#{self.class.name} - #{__method__} - cyber reports : #{reports}.") if log
               forecasting_step(
                 reports[:prev_season],
                 reports[:prev_season_next_step],
                 reports[:last],
                 reports[:latest],
-                intelligence_data['incoming_req_count']
+                intelligence_data['incoming_req_count'],
+                log: log
               )
               Departments::Archive::Api.instance.persist_cyber_report(reports[:latest])
-              logger.debug("#{self.class.name} - #{__method__} - persisted #{reports[:latest].inspect}.")
+              logger.log("#{self.class.name} - #{__method__} - persisted #{reports[:latest].inspect}.") if log
             rescue StandardError => e
-              logger.error("#{self.class.name} - #{__method__} - failed - reason : #{e.message}.")
+              logger.error("#{self.class.name} - #{__method__} - failed - #{e.message}.")
             end
           end
 
