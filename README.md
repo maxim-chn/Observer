@@ -133,5 +133,20 @@ Go to the root directory of the project(it contains *.rubocop.yml*) and run:
 
 `rubocop -c .rubocop.yml --rails`
 
+# Pre-requisites for the deployment to Heroku
+* [Heroku CLI](https://git-scm.com/) - a tool for managing the applications hosted on [Heroku](https://devcenter.heroku.com/) in the terminal.
+
+## Heroku CLI installation
+* `cd ~`
+* `curl https://cli-assets.heroku.com/install.sh | sh`
+
+# Deploy the application to Heroku
+* `heroku login`
+* `heroku create`
+* `git push heroku master`
+* `heroku run rake db:migrate`
+
+The application is ready! It will be available at the url that you can acquire with `heroku apps`.
+
 # Known issues
   1. Steps for deployment to Heroku.

@@ -38,9 +38,7 @@ friendly_resources_amount = 1
         'ip' => friendly_resource.ip_address,
         'incoming_req_count' => rand(100..1000),
         'seasonal_indices' => seasonal_indices
-      },
-      log: false
+      }
     )
-    # sleep(1)
   end
 end
