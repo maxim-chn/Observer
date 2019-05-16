@@ -66,6 +66,7 @@ module Departments
         Rails.logger.info("#{self.class.name} - #{__method__} - #{id}.") if Rails.env.development?
         friendly_resource = Archive::Api.instance.friendly_resource_by_id(id)
         Services::Intelligence.instance.gather_dos_intelligence(friendly_resource.ip_address)
+        sleep(1)
         Services::Intelligence.instance.gather_code_injection_intelligence(friendly_resource.ip_address)
       end
 
@@ -77,6 +78,7 @@ module Departments
         Rails.logger.info("#{self.class.name} - #{__method__} - #{id}.") if Rails.env.development?
         friendly_resource = Archive::Api.instance.friendly_resource_by_id(id)
         Services::Intelligence.instance.stop_dos_intelligence_gathering(friendly_resource.ip_address)
+        sleep(1)
         Services::Intelligence.instance.stop_code_injection_intelligence_gathering(friendly_resource.ip_address)
       end
 

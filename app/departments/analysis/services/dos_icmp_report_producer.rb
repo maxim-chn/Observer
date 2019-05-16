@@ -25,7 +25,7 @@ module Departments
             ip,
             Shared::AnalysisType::ICMP_DOS_CYBER_REPORT,
             data,
-            log: Rails.env.development?
+            Rails.env.development?
           )
         end
       end

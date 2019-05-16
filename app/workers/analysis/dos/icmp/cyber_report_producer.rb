@@ -21,7 +21,7 @@ module Workers
           # @param [Hash<String, Object>] intelligence_data Contains keys:
           #   * 'incoming_req_count' Amount of incoming ICMP requests to a {FriendlyResource}.
           # @return [Void]
-          def perform(ip, type, intelligence_data, log: false)
+          def perform(ip, type, intelligence_data, log=false)
             logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{intelligence_data}.") if log
             begin
               # In production, there should be no :seasonal_indices inside intelligence_data.
@@ -42,10 +42,10 @@ module Workers
                 reports[:last],
                 reports[:latest],
                 intelligence_data['incoming_req_count'],
-                log: log
+                log
               )
               Departments::Archive::Api.instance.persist_cyber_report(reports[:latest])
-              logger.log("#{self.class.name} - #{__method__} - persisted #{reports[:latest].inspect}.") if log
+              logger.info("#{self.class.name} - #{__method__} - persisted #{reports[:latest].inspect()}.") if log
             rescue StandardError => e
               logger.error("#{self.class.name} - #{__method__} - failed - #{e.message}.")
             end

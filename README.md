@@ -103,6 +103,9 @@ Start the following processes, whether in the background or with a dedicated ter
 
 The application is ready at *http://localhost:3000*.
 
+**Note!** In case you are starting the application for the first time, you might need to create a database:
+* `rails db:migrate`
+
 # Launch detailed documentation
 * `yard doc`
 * Copy exact location of *./doc/_index.html* and open it in your browser.
@@ -131,5 +134,4 @@ Go to the root directory of the project(it contains *.rubocop.yml*) and run:
 `rubocop -c .rubocop.yml --rails`
 
 # Known issues
-  1. Continue Intelligence Api. Test rdoc.
-  2. Steps for deployment to Heroku.
+  1. Steps for deployment to Heroku.

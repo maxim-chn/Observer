@@ -13,7 +13,7 @@ module Workers
       # @param [Integer] ip FriendlyResource ip address.
       # @param [Departments::Shared::IntelligenceFormat] collect_format
       # @return [Void]
-      def perform(ip, collect_format, log: false)
+      def perform(ip, collect_format, log=false)
         logger.info("#{self.class.name} - #{__method__} - #{ip}, #{collect_format}") if log
         begin
           client = redis_client

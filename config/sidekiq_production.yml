@@ -1,5 +1,5 @@
 ---
-  # :logfile: log/sidekiq.log
+  :logfile: log/sidekiq.log
   :verbose: true
   :concurrency: 3
   :queues:

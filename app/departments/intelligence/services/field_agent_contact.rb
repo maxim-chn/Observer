@@ -24,7 +24,7 @@ module Departments
           Workers::Intelligence::AddCollectionFormat.perform_async(
             query.friendly_resource_ip,
             query.collect_format,
-            log: Rails.env.development?
+            Rails.env.development?
           )
         end
 
@@ -39,7 +39,7 @@ module Departments
           Workers::Intelligence::RemoveCollectionFormat.perform_async(
             query.friendly_resource_ip,
             query.collect_format,
-            log: Rails.env.development?
+            Rails.env.development?
           )
         end
       end

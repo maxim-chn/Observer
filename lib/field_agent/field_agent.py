@@ -82,7 +82,7 @@ else:
   continueIcmpFloodIntelligence = True
   continueSqlInjectionIntelligence = True
   lastModificationTime = None
-  delayInSeconds = 1
+  delayInSeconds = 10
 
   while continueIcmpFloodIntelligence and continueSqlInjectionIntelligence:
     time.sleep(delayInSeconds)

@@ -23,7 +23,7 @@ module Departments
             ip,
             Shared::AnalysisType::SQL_INJECTION_CYBER_REPORT,
             data,
-            log: Rails.env.development?
+            Rails.env.development?
           )
         end
       end
