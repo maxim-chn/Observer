@@ -146,8 +146,7 @@ Go to the root directory of the project(it contains *.rubocop.yml*) and run:
 * `heroku addons:create heroku-redis:hobby-dev`
 * `git push heroku master`
 * `heroku run rake db:migrate`
-* `heroku addons:create redistogo`
-* `heroku config:set REDIS_PROVIDER=REDISTOGO_URL` - do not swap *REDISTOGO_URL* with the actual value!
+* `heroku ps:scale sidekiq=1`
 
 ## Tips for resetting the database
 * `heroku pg:reset -c=<APP_NAME>`
