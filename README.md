@@ -143,6 +143,7 @@ Go to the root directory of the project(it contains *.rubocop.yml*) and run:
 # Deploy the application to Heroku
 * `heroku login`
 * `heroku create`
+* `heroku addons:create heroku-redis:hobby-dev`
 * `git push heroku master`
 * `heroku run rake db:migrate`
 * `heroku addons:create redistogo`

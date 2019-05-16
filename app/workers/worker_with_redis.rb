@@ -15,7 +15,7 @@ module Workers
       client = nil
       begin
         client = Redis.new(host: 'localhost', port: '6379', timeout: 0) if Rails.env.development?
-        client = Redis.new(timeout: 0) if Rails.env.production?
+        client = Redis.new(url: ENV['REDIS_URL'], timeout: 5) if Rails.env.production?
         return client if client
       rescue StandardError => e
         throw StandardError.new("#{self.class.name} - #{__method__} - failed - reason - #{e.inspect}")
