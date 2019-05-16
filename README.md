@@ -155,6 +155,7 @@ Go to the root directory of the project(it contains *.rubocop.yml*) and run:
 ## Additional tips for Heroku CLI
 * `heroku restart` - restarts the application.
 * `heroku apps:destroy` - removes the application.
+* `heroku ps` - list the active processes.
 
 The application is ready! It will be available at the url that you can acquire with `heroku apps`.
 
