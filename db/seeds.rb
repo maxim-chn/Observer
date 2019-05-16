@@ -11,7 +11,7 @@ def clear_all
   FriendlyResource.delete_all
 end
 
-def new_friendly_resource(name = 'demo', ip_address = IPAddr.new('79.181.31.4'))
+def new_friendly_resource(name = 'demo', ip_address = IPAddr.new('79.181.31.1'))
   FriendlyResource.new(name: name, ip_address: ip_address.to_i)
 end
 

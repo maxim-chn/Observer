@@ -145,6 +145,12 @@ Go to the root directory of the project(it contains *.rubocop.yml*) and run:
 * `heroku create`
 * `git push heroku master`
 * `heroku run rake db:migrate`
+* `heroku addons:create redistogo`
+* `heroku config:set REDIS_PROVIDER=REDISTOGO_URL` - do not swap *REDISTOGO_URL* with the actual value!
+
+## Tips for resetting the database
+* `heroku pg:reset -c=<APP_NAME>`
+* `heroku run rake db:migrate`
 
 The application is ready! It will be available at the url that you can acquire with `heroku apps`.
 
