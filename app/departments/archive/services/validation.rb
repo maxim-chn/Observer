@@ -81,7 +81,7 @@ module Departments
           return if Shared::AnalysisType.formats.include?(type)
 
           error_message = "#{self.class.name} - #{__method__} - #{type}"
-          error_message += " must be of one of #{Shared::AnalysisType.name} formats."
+          error_message += " must be one of #{Shared::AnalysisType.name} formats."
           throw StandardError.new(error_message)
         end
 
@@ -100,8 +100,8 @@ module Departments
             return if value >= min && value <= max
           end
 
-          error_message = "#{self.class.name} - #{__method__} - seasonal_index"
-          error_message += " must be an #{Integer.class} in range [#{min},#{max}]."
+          error_message = "#{self.class.name} - #{__method__} - #{value}"
+          error_message += " must be an #{Integer.name} in range [#{min},#{max}]."
           throw StandardError.new(error_message)
         end
 
@@ -111,6 +111,12 @@ module Departments
 
           error_message = "#{self.class.name} - #{__method__} - #{value} must be a non-negative #{Integer.name}."
           throw StandardError.new(error_message)
+        end
+
+        def custom_attributes?(opts)
+          return if opts.class == Hash
+
+          throw StandardError.new("#{self.class.name} - #{__method__} - #{opts} must be of #{Hash.name} type.")
         end
       end
     end

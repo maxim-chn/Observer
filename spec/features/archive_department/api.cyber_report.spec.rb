@@ -40,19 +40,19 @@ RSpec.describe 'ArchiveApi - CyberReport model.', type: :feature do
     [nil, 1, '2']
   }
 
-  it 'Throws an error when calling for persisted cyber reports amount with an illegal ip address.' do
+  it 'Throws an error when calling for the persisted cyber reports amount with an illegal ip address.' do
     illegal_ip_addresses.each do |ip|
       expect {
         archive_api.cyber_reports_count(ip, legal_cyber_report_types[0])
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /does not match expected format/)
     end
   end
 
-  it 'Throws an error when calling for persisted cyber reports amount with an illegal cyber report type.' do
+  it 'Throws an error when calling for the persisted cyber reports amount with an illegal cyber report type.' do
     illegal_cyber_report_types.each do |type|
       expect {
         archive_api.cyber_reports_count(legal_ip_address, type)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /must be one of #{Departments::Shared::AnalysisType.name} formats/)
     end
   end
 
@@ -97,7 +97,7 @@ RSpec.describe 'ArchiveApi - CyberReport model.', type: :feature do
           legal_page,
           legal_page_size
         )
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /does not match expected format/)
     end
   end
 
@@ -110,7 +110,7 @@ RSpec.describe 'ArchiveApi - CyberReport model.', type: :feature do
           legal_page,
           legal_page_size
         )
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /must be one of #{Departments::Shared::AnalysisType.name} formats/)
     end
   end
 
@@ -123,7 +123,10 @@ RSpec.describe 'ArchiveApi - CyberReport model.', type: :feature do
           page,
           legal_page_size
         )
-      }.to raise_error(StandardError)
+      }.to raise_error(
+        StandardError,
+        /(must be an instance of #{Integer.name}|must be an instance of #{Integer.name} greater than 0)/
+      )
     end
   end
 
@@ -136,7 +139,10 @@ RSpec.describe 'ArchiveApi - CyberReport model.', type: :feature do
           legal_page,
           size
         )
-      }.to raise_error(StandardError)
+      }.to raise_error(
+        StandardError,
+        /(must be an instance of #{Integer.name}|must be an instance of #{Integer.name} greater than 0)/
+      )
     end
   end
 
@@ -194,7 +200,10 @@ RSpec.describe 'ArchiveApi - CyberReport model.', type: :feature do
     illegal_cyber_report_ids.each do |id|
       expect {
         archive_api.cyber_report_by_id_and_type(id, legal_cyber_report_types[0])
-      }.to raise_error(StandardError)
+      }.to raise_error(
+        StandardError,
+        /(must be an instance of #{Integer.name}|must be a non-negative #{Integer.name})/
+      )
     end
   end
 
@@ -202,14 +211,14 @@ RSpec.describe 'ArchiveApi - CyberReport model.', type: :feature do
     illegal_cyber_report_types.each do |type|
       expect {
         archive_api.cyber_report_by_id_and_type(legal_cyber_report_id, type)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /must be one of #{Departments::Shared::AnalysisType.name} formats/)
       expect {
         archive_api.cyber_report_by_friendly_resource_ip_and_type_and_custom_attr(
-          legal_ip,
+          legal_ip_address,
           type,
           legal_opts
         )
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /must be one of #{Departments::Shared::AnalysisType.name} formats/)
     end
   end
 
@@ -249,19 +258,27 @@ RSpec.describe 'ArchiveApi - CyberReport model.', type: :feature do
           legal_cyber_report_types[0],
           legal_opts
         )
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /does not match expected format/)
     end
   end
 
   it 'Throws an error when retrieving a persisted cyber report by the illegal custom attributes.' do
+    friendly_resource = Departments::Archive::Api.instance.new_friendly_resource(
+      'demo_1',
+      legal_ip_address
+    )
+    friendly_resource.save
     illegal_opts.each do |opt|
       expect {
         archive_api.cyber_report_by_friendly_resource_ip_and_type_and_custom_attr(
-          legal_ip,
+          legal_ip_address,
           legal_cyber_report_types[0],
           opt
         )
-      }.to raise_error(StandardError)
+      }.to raise_error(
+        StandardError,
+        /(must contain the key seasonal_index|must be of #{Hash.name} type|must be an #{Integer.name} in range \[)/
+      )
     end
   end
 
@@ -294,7 +311,7 @@ RSpec.describe 'ArchiveApi - CyberReport model.', type: :feature do
           legal_cyber_report_types[0],
           legal_opts
         )
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /does not match expected format/)
     end
   end
 
@@ -302,11 +319,11 @@ RSpec.describe 'ArchiveApi - CyberReport model.', type: :feature do
     illegal_cyber_report_types.each do |type|
       expect {
         archive_api.new_cyber_report_object_for_friendly_resource(
-          legal_ip,
+          legal_ip_address,
           type,
           legal_opts
         )
-      }.to raise_error StandardError
+      }.to raise_error(StandardError, /must be one of #{Departments::Shared::AnalysisType.name} formats/)
     end
   end
 
@@ -341,7 +358,7 @@ RSpec.describe 'ArchiveApi - CyberReport model.', type: :feature do
     illegal_cyber_reports.each do |report|
       expect {
         archive_api.persist_cyber_report(report)
-      }.to raise_error(StandardError)
+      }.to raise_error(StandardError, /must be an instance of #{CyberReport.name}/)
     end
   end
 

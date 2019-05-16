@@ -142,6 +142,7 @@ module Departments
           Rails.logger.info(debug_message)
         end
         result = []
+        ip = IPAddr.new(ip).to_i if ip.class == String
         friendly_resource = friendly_resource_by_ip(ip)
         if friendly_resource
           case type
@@ -187,7 +188,9 @@ module Departments
       def cyber_report_by_friendly_resource_ip_and_type_and_custom_attr(ip, type, opts)
         Services::Validation.instance.friendly_resource_ip_address?(ip)
         Services::Validation.instance.cyper_report_type?(type)
+        Services::Validation.instance.custom_attributes?(opts)
         Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{opts}.") if Rails.env.development?
+        ip = IPAddr.new(ip).to_i if ip.class == String
         friendly_resource = friendly_resource_by_ip(ip)
         if friendly_resource
           result = nil
@@ -214,7 +217,9 @@ module Departments
       def new_cyber_report_object_for_friendly_resource(ip, type, opts = {})
         Services::Validation.instance.friendly_resource_ip_address?(ip)
         Services::Validation.instance.cyper_report_type?(type)
+        Services::Validation.instance.custom_attributes?(opts)
         Rails.logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{opts}.") if Rails.env.development?
+        ip = IPAddr.new(ip).to_i if ip.class == String
         friendly_resource = friendly_resource_by_ip(ip)
         if friendly_resource
           result = nil
