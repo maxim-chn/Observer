@@ -106,6 +106,17 @@ The application is ready at *http://localhost:3000*.
 **Note!** In case you are starting the application for the first time, you might need to create a database:
 * `rails db:migrate`
 
+# Backend API for the intelligence reporting
+## ICMP Flood attack
+Send a POST request to the `https://<observer-domain>/backend_api/dos_icmp_intelligence` with the JSON object in the body.
+The JSON object must be of the following format:
+`{"ip": "<number>", "incoming_req_count": <number>}`
+
+## SQL Injection attack
+Send a POST request to the `https://<observer-domain>/backend_api/sql_injection_intelligence` with the JSON object in the body.
+The JSON object must be of the following format:
+`{"ip": "<number>", "uris": ["<uri_1>","<uri_n>"]}`
+
 # Launch detailed documentation
 * `yard doc`
 * Copy exact location of *./doc/_index.html* and open it in your browser.
@@ -140,7 +151,7 @@ Go to the root directory of the project(it contains *.rubocop.yml*) and run:
 * `cd ~`
 * `curl https://cli-assets.heroku.com/install.sh | sh`
 
-# Deploy the application to Heroku
+# Deploy the application to the Heroku
 * `heroku login`
 * `heroku create`
 * `heroku addons:create heroku-redis:hobby-dev`
@@ -152,7 +163,7 @@ Go to the root directory of the project(it contains *.rubocop.yml*) and run:
 * `heroku pg:reset -c=<APP_NAME>`
 * `heroku run rake db:migrate`
 
-## Additional tips for Heroku CLI
+## Additional tips for the Heroku CLI
 * `heroku restart` - restarts the application.
 * `heroku apps:destroy` - removes the application.
 * `heroku ps` - list the active processes.

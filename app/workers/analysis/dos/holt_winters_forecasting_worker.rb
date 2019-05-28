@@ -26,7 +26,7 @@ module Workers
           cyber_report_t_minus_one,
           cyber_report_t,
           actual_value,
-          log=false
+          log = false
         )
           moment_a = {} # Moment (T-M).
           moment_b = {} # Moment (T+1-M).

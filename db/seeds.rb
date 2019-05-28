@@ -34,11 +34,9 @@ friendly_resources_amount = 1
     Workers::Analysis::Dos::Icmp::CyberReportProducer.new.perform(
       friendly_resource.ip_address,
       Departments::Shared::AnalysisType::ICMP_DOS_CYBER_REPORT,
-      {
-        'ip' => friendly_resource.ip_address,
-        'incoming_req_count' => rand(100..1000),
-        'seasonal_indices' => seasonal_indices
-      }
+      'ip' => friendly_resource.ip_address,
+      'incoming_req_count' => rand(100..1000),
+      'seasonal_indices' => seasonal_indices
     )
   end
 end

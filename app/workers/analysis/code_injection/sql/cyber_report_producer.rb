@@ -24,7 +24,7 @@ module Workers
           # @param [Hash<String, Object>] intelligence_data Contains one or both of the keys:
           #   * 'uris' A [Array<String>] with the uris from GET requests to a {FriendlyResource}.
           # @return [Void]
-          def perform(ip, type, intelligence_data, log=false)
+          def perform(ip, type, intelligence_data, log = false)
             logger.info("#{self.class.name} - #{__method__} - #{ip}, #{type}, #{intelligence_data}.") if log
             begin
               reason = ''
