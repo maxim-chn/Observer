@@ -19,8 +19,8 @@ clear_all
 friendly_resources_amount = 1
 (1..friendly_resources_amount).each do |n|
   friendly_resource = new_friendly_resource(
-    "demo_#{n}",
-    IPAddr.new("79.181.31.#{n}")
+    "Liran",
+    IPAddr.new("192.168.43.8")
   )
   friendly_resource.save
   hw_forecasting_api = Algorithms::HoltWintersForecasting::Api.instance
