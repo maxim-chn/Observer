@@ -15,7 +15,7 @@ def printHelp():
   print('\t2. IPv4 address of this machine.')
   print('\t3. The http address of the Observer server.')
   print('An example of a valid command:')
-  print('\tC:\\Users\\ardor\\Desktop\\Observer\\lib\\field_agent dumpfile.pcap 79.181.31.1 http://localhost:3000')
+  print('\tC:\\Users\\ardor\\Desktop\\Observer\\lib\\field_agent 79.181.31.1 http://localhost:3000')
 
 def lastModifiedFilename(dirPath):
   files = [f for f in os.listdir(dirPath) if os.path.isfile(os.path.join(dirPath, f))]
@@ -117,3 +117,4 @@ else:
           sqlInjectionIntelligence,
           backendApiAddressSqlInjectionIntelligence
         )
+  print('The script is finishing, because the monitoring has been stopped')

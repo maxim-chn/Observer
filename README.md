@@ -147,6 +147,10 @@ Go to the root directory of the project(it contains *.rubocop.yml*) and run:
 # Install FieldAgent on the FriendlyResource
 * Download the file `./lib/field_agent/field_agent.py` into the directory with `.pcap` file on the FriendlyResource.
   The `.pcap` file is to contain the network in the FriendlyResource.
+* Install [Python3.x](https://www.python.org/downloads/)
+* Install [Pip](https://pip.pypa.io/en/stable/installing/)
+* Install `pyshark` module with [Pip](https://pip.pypa.io/en/stable/installing/): `pip install "pyshark"`
+* Install `pyshark` module with [Pip](https://pip.pypa.io/en/stable/installing/): `pip install "requests"`
 
 
 # Pre-requisites for the deployment to Heroku

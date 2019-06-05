@@ -54,8 +54,10 @@ module Departments
             message = "#{self.class.name} - #{__method__} - intelligence formats to collect: #{collect_formats}."
             Rails.logger.info(message)
           end
+          redis_client.quit unless redis_client.nil?
           return collect_formats.include?(query.collect_format)
         rescue StandardError => e
+          redis_client.quit unless redis_client.nil?
           Rails.logger.error("#{self.class.name} - #{__method__} - #{e.inspect}")
           false
         end

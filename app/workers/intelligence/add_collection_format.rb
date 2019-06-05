@@ -35,6 +35,8 @@ module Workers
           logger.info("#{self.class.name} - #{__method__} - new cached data : #{cached_data}.") if log
         rescue StandardError => e
           logger.error("#{self.class.name} - #{__method__} - failed - #{e.inspect}.")
+        ensure
+          client.quit unless client.nil?
         end
       end
     end
