@@ -41,8 +41,6 @@ module Workers
               end
             rescue StandardError => e
               logger.error("#{self.class.name} - #{__method__} - failed - reason : #{e.message}.")
-            ensure
-              client.quit unless client.nil?
             end
           end
 
