@@ -11,21 +11,28 @@ def printHelp():
   print('This is a field agent that consumes .pcap file and reports its relevant contents to the Observer.')
   print('Running the program without any arguments or \'help\' will show this message.')
   print('Arguments must be provided in the following order, separated by a single space:')
-  print('\t1. The name of the .pcap file. It must be in the same directory with this program!')
+  print('\t1. The name of the directory where .pcap files are stored. It must be in the same directory with this program!')
   print('\t2. IPv4 address of this machine.')
   print('\t3. The http address of the Observer server.')
   print('An example of a valid command:')
-  print('\tfield_agent.py dumpfile.pcap 79.181.31.1 http://localhost:3000')
+  print('\tC:\\Users\\ardor\\Desktop\\Observer\\lib\\field_agent dumpfile.pcap 79.181.31.1 http://localhost:3000')
 
-def captureFileUpdated(lastTime, filename):
+def lastModifiedFilename(dirPath):
+  files = [f for f in os.listdir(dirPath) if os.path.isfile(os.path.join(dirPath, f))]
+  sortedByLastModificationFiles = sorted(files, key=lambda f: os.path.getmtime(os.path.join(dirPath, f)))
+  return os.path.join(dirPath, sortedByLastModificationFiles[-1])
+
+
+def captureFileUpdated(lastTime, dirPath):
+  latestModifiedFile = lastModifiedFilename(dirPath)
   updated = False
   try:
-    latestTime = os.path.getmtime(filename)
+    latestTime = os.path.getmtime(latestModifiedFile)
     if latestTime > lastTime:
       updated = True
   except TypeError:
     updated = True
-  return updated, latestTime
+  return updated, latestTime, latestModifiedFile
 
 def getCaptureData(filename):
   captureData = None
@@ -73,7 +80,8 @@ if len(sys.argv) == 1:
 elif sys.argv[1] == 'help':
   printHelp()
 else:
-  captureFilename = sys.argv[1]
+  captureFilename = ''
+  captureDir = sys.argv[1]
   currentIp = sys.argv[2]
   observerUrl = sys.argv[3]
   routeBackendApi = '/backend_api'
@@ -86,7 +94,7 @@ else:
 
   while continueIcmpFloodIntelligence and continueSqlInjectionIntelligence:
     time.sleep(delayInSeconds)
-    captureUpdated, lastModificationTime = captureFileUpdated(lastModificationTime, captureFilename)
+    captureUpdated, lastModificationTime, captureFilename = captureFileUpdated(lastModificationTime, captureDir)
     captureData = None
     if captureUpdated:
       captureData, continueReporting = getCaptureData(captureFilename)

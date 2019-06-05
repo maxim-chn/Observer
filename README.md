@@ -144,6 +144,11 @@ Go to the root directory of the project(it contains *.rubocop.yml*) and run:
 
 `rubocop -c .rubocop.yml --rails`
 
+# Install FieldAgent on the FriendlyResource
+* Download the file `./lib/field_agent/field_agent.py` into the directory with `.pcap` file on the FriendlyResource.
+  The `.pcap` file is to contain the network in the FriendlyResource.
+
+
 # Pre-requisites for the deployment to Heroku
 * [Heroku CLI](https://git-scm.com/) - a tool for managing the applications hosted on [Heroku](https://devcenter.heroku.com/) in the terminal.
 
