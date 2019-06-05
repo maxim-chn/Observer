@@ -48,8 +48,6 @@ module Workers
               logger.info("#{self.class.name} - #{__method__} - persisted #{reports[:latest].inspect}.") if log
             rescue StandardError => e
               logger.error("#{self.class.name} - #{__method__} - failed - #{e.message}.")
-            ensure
-              client.quit unless client.nil?
             end
           end
 
