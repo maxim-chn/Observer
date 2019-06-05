@@ -50,7 +50,7 @@ module Workers
 
           # @return [String]
           def malicious_code(text)
-            text[/DROP DATABASE [a-z]+;/] if text
+            text[/\/*DROP DATABASE [a-z]+;/i] if text
           end
         end
       end

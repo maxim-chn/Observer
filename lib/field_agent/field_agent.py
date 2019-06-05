@@ -48,7 +48,8 @@ def getIcmpFloodIntelligence(captureData):
   result = {'ip': int(ipaddress.IPv4Address(currentIp)), 'incoming_req_count': 0}
   for packet in captureData:
     if 'icmp' in [ l.layer_name for l in packet.layers ]:
-      result['incoming_req_count'] += 1
+      if packet['dst'] == currentIp:
+        result['incoming_req_count'] += 1
   return result
 
 def getSqlInjectionIntelligence(captureData):
