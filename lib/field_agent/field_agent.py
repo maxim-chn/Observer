@@ -48,7 +48,7 @@ def getIcmpFloodIntelligence(captureData):
   result = {'ip': int(ipaddress.IPv4Address(currentIp)), 'incoming_req_count': 0}
   for packet in captureData:
     if 'icmp' in [ l.layer_name for l in packet.layers ]:
-      if 'dst' in packet and packet['dst'] == currentIp:
+      if packet.ip.dst == currentIp:
         result['incoming_req_count'] += 1
   return result
 
