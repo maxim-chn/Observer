@@ -48,7 +48,7 @@ module Workers
 
           # @return [String]
           def malicious_code(text)
-            text[/\/*DROP DATABASE [a-z]+;/i] if text
+            text[/\/[a-z|0-9|?|_|-|*|.|%|$|#|@|!|^|&|(|)]*' [AND|OR]+ [a-z|_|-|0-9]+='[a-z|0-9]*'/i] if text
           end
         end
       end

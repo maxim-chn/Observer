@@ -105,10 +105,11 @@ else:
         icmpFloodIntelligence = getIcmpFloodIntelligence(captureData)
         print(icmpFloodIntelligence)
         backendApiAddressIcmpDosIntelligence = observerUrl + routeBackendApi + routeDosIcmpIntelligence
-        continueIcmpFloodIntelligence = reportIntelligence(
-          icmpFloodIntelligence,
-          backendApiAddressIcmpDosIntelligence
-        )
+        if icmpFloodIntelligence['incoming_req_count'] > 0:
+          continueIcmpFloodIntelligence = reportIntelligence(
+            icmpFloodIntelligence,
+            backendApiAddressIcmpDosIntelligence
+          )
       if continueSqlInjectionIntelligence == True:
         sqlInjectionIntelligence = {}
         sqlInjectionIntelligence = getSqlInjectionIntelligence(captureData)
